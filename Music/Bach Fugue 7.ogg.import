@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Bach Fugue 7.ogg-35578631cb10cbf5ed1c5aae8b53aa21.oggstr"
+
+[deps]
+
+source_file="res://Music/Bach Fugue 7.ogg"
+dest_files=[ "res://.import/Bach Fugue 7.ogg-35578631cb10cbf5ed1c5aae8b53aa21.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

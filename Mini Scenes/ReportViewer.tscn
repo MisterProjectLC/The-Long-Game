@@ -1,0 +1,133 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Scripts/ReportViewer.gd" type="Script" id=1]
+[ext_resource path="res://Mini Scenes/BlackBack.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Mini Scenes/PaperBackground.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Fonts/Kayambang.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://Mini Scenes/CloseButton.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Mini Scenes/Portrait.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Mini Scenes/ReportTable.tscn" type="PackedScene" id=7]
+
+[sub_resource type="DynamicFont" id=1]
+size = 48
+font_data = ExtResource( 4 )
+
+[node name="ReportViewer" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -1.05261
+margin_bottom = -1.05261
+script = ExtResource( 1 )
+
+[node name="BlackBack" parent="." instance=ExtResource( 2 )]
+
+[node name="Background" parent="." instance=ExtResource( 3 )]
+margin_left = 184.0
+margin_right = 785.0
+
+[node name="Title" type="Label" parent="."]
+margin_left = 256.0
+margin_top = 140.0
+margin_right = 734.0
+margin_bottom = 184.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Results"
+align = 1
+
+[node name="CloseButton" parent="." instance=ExtResource( 5 )]
+visible = true
+margin_left = 726.576
+margin_top = 135.888
+margin_right = 758.576
+margin_bottom = 165.888
+
+[node name="FirstPort" parent="." instance=ExtResource( 6 )]
+margin_left = 210.44
+margin_top = 195.36
+margin_right = 758.44
+margin_bottom = 802.36
+rect_scale = Vector2( 0.2, 0.2 )
+
+[node name="SecondPort" parent="." instance=ExtResource( 6 )]
+margin_left = 361.982
+margin_top = 195.254
+margin_right = 909.982
+margin_bottom = 802.254
+rect_scale = Vector2( 0.2, 0.2 )
+
+[node name="ThirdPort" parent="." instance=ExtResource( 6 )]
+margin_left = 504.782
+margin_top = 195.21
+margin_right = 1052.78
+margin_bottom = 802.21
+rect_scale = Vector2( 0.2, 0.2 )
+
+[node name="FourthPort" parent="." instance=ExtResource( 6 )]
+margin_left = 648.822
+margin_top = 193.495
+margin_right = 1196.82
+margin_bottom = 800.495
+rect_scale = Vector2( 0.2, 0.2 )
+
+[node name="Report1" parent="." instance=ExtResource( 7 )]
+margin_left = 214.469
+margin_top = 324.839
+margin_right = 284.469
+margin_bottom = 463.839
+
+[node name="Report2" parent="." instance=ExtResource( 7 )]
+margin_left = 374.274
+margin_top = 322.909
+margin_right = 444.274
+margin_bottom = 461.909
+
+[node name="Report3" parent="." instance=ExtResource( 7 )]
+margin_left = 518.815
+margin_top = 324.484
+margin_right = 588.815
+margin_bottom = 463.484
+
+[node name="Report4" parent="." instance=ExtResource( 7 )]
+margin_left = 662.855
+margin_top = 322.77
+margin_right = 732.855
+margin_bottom = 461.77
+
+[node name="Points1" type="Label" parent="."]
+margin_left = 280.396
+margin_top = 349.328
+margin_right = 316.396
+margin_bottom = 393.328
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "+2"
+
+[node name="Points2" type="Label" parent="."]
+margin_left = 432.61
+margin_top = 348.917
+margin_right = 468.61
+margin_bottom = 392.917
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "+2"
+
+[node name="Points3" type="Label" parent="."]
+margin_left = 576.32
+margin_top = 348.663
+margin_right = 612.32
+margin_bottom = 392.663
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "+2"
+
+[node name="Points4" type="Label" parent="."]
+margin_left = 720.36
+margin_top = 346.949
+margin_right = 756.36
+margin_bottom = 390.949
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "+2"
+[connection signal="popup_revealed" from="." to="." method="_on_ReportViewer_popup_revealed"]
+[connection signal="button_up" from="CloseButton" to="." method="_on_CloseButton_button_up"]

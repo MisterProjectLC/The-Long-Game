@@ -1,0 +1,96 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Art/MatchTable2.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/MatchTable.gd" type="Script" id=2]
+[ext_resource path="res://Art/CheckMark.png" type="Texture" id=3]
+[ext_resource path="res://Art/Cross.png" type="Texture" id=4]
+[ext_resource path="res://Art/QuestionMark.png" type="Texture" id=5]
+
+[node name="MatchTable" type="TextureRect"]
+margin_left = 383.041
+margin_top = 155.915
+margin_right = 723.041
+margin_bottom = 360.915
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
+stance_sprites = [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ]
+
+[node name="MyTurn1" type="TextureRect" parent="."]
+visible = false
+margin_left = 3.0
+margin_top = 70.1844
+margin_right = 67.0
+margin_bottom = 134.184
+texture = ExtResource( 3 )
+
+[node name="MyTurn2" type="TextureRect" parent="."]
+visible = false
+margin_left = 69.9714
+margin_top = 70.1045
+margin_right = 133.971
+margin_bottom = 134.105
+texture = ExtResource( 3 )
+
+[node name="MyTurn3" type="TextureRect" parent="."]
+visible = false
+margin_left = 136.541
+margin_top = 70.3503
+margin_right = 200.541
+margin_bottom = 134.35
+texture = ExtResource( 4 )
+
+[node name="MyTurn4" type="TextureRect" parent="."]
+visible = false
+margin_left = 204.134
+margin_top = 70.3503
+margin_right = 268.134
+margin_bottom = 134.35
+texture = ExtResource( 5 )
+
+[node name="MyTurn5" type="TextureRect" parent="."]
+visible = false
+margin_left = 271.295
+margin_top = 69.6779
+margin_right = 335.295
+margin_bottom = 133.678
+texture = ExtResource( 5 )
+
+[node name="EnTurn1" type="TextureRect" parent="."]
+visible = false
+margin_left = 2.76218
+margin_top = 137.621
+margin_right = 66.7622
+margin_bottom = 201.621
+texture = ExtResource( 3 )
+
+[node name="EnTurn2" type="TextureRect" parent="."]
+visible = false
+margin_left = 69.7336
+margin_top = 137.541
+margin_right = 133.734
+margin_bottom = 201.541
+texture = ExtResource( 4 )
+
+[node name="EnTurn3" type="TextureRect" parent="."]
+visible = false
+margin_left = 136.804
+margin_top = 137.787
+margin_right = 200.804
+margin_bottom = 201.787
+texture = ExtResource( 4 )
+
+[node name="EnTurn4" type="TextureRect" parent="."]
+visible = false
+margin_left = 203.896
+margin_top = 137.787
+margin_right = 267.896
+margin_bottom = 201.787
+texture = ExtResource( 5 )
+
+[node name="EnTurn5" type="TextureRect" parent="."]
+visible = false
+margin_left = 271.057
+margin_top = 137.762
+margin_right = 335.057
+margin_bottom = 201.762
+texture = ExtResource( 5 )

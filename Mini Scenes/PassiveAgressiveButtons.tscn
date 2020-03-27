@@ -1,0 +1,67 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scripts/Stance.gd" type="Script" id=1]
+[ext_resource path="res://Fonts/Kayambang.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 55
+outline_color = Color( 0.32549, 0.0784314, 0.0784314, 1 )
+font_data = ExtResource( 2 )
+
+[node name="PassiveAgressiveButtons" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 1.0
+margin_right = -710.0
+margin_bottom = -460.0
+script = ExtResource( 1 )
+
+[node name="Passive" type="Button" parent="."]
+self_modulate = Color( 0.270588, 0.937255, 0.0745098, 1 )
+margin_right = 310.0
+margin_bottom = 62.0
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+
+[node name="Label" type="Label" parent="Passive"]
+margin_left = 68.1371
+margin_top = 2.8479
+margin_right = 243.137
+margin_bottom = 53.8479
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = SubResource( 1 )
+text = "Passive"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Agressive" type="Button" parent="."]
+visible = false
+self_modulate = Color( 0.921569, 0.0980392, 0.0352941, 1 )
+margin_left = 0.205627
+margin_top = 0.293755
+margin_right = 310.206
+margin_bottom = 62.2937
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+
+[node name="Label" type="Label" parent="Agressive"]
+margin_left = 68.1371
+margin_top = 2.8479
+margin_right = 243.137
+margin_bottom = 53.8479
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.843137, 0.741176, 0.741176, 1 )
+text = "Agressive"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_lock_": true
+}
+[connection signal="button_down" from="Passive" to="." method="button_down"]
+[connection signal="button_up" from="Passive" to="." method="_on_Passive_button_up"]
+[connection signal="button_down" from="Agressive" to="." method="button_down"]
+[connection signal="button_up" from="Agressive" to="." method="_on_Agressive_button_up"]

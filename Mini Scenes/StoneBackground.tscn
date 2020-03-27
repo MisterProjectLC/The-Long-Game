@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Art/7ba23260b71d1dd3d98184d26f861a7f.jpg" type="Texture" id=1]
+
+[node name="NinePatchRect" type="NinePatchRect"]
+margin_right = 1023.0
+margin_bottom = 599.0
+texture = ExtResource( 1 )
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+__meta__ = {
+"_edit_lock_": true
+}

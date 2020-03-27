@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scripts/Profile.gd" type="Script" id=1]
+[ext_resource path="res://Mini Scenes/Portrait.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Mini Scenes/PassiveAgressiveButtons.tscn" type="PackedScene" id=3]
+
+[node name="Profile" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -594.0
+margin_bottom = -42.0
+rect_scale = Vector2( 0.5, 0.5 )
+script = ExtResource( 1 )
+color = Color( 1, 0, 0, 1 )
+
+[node name="Button" type="Button" parent="."]
+margin_right = 544.0
+margin_bottom = 600.0
+rect_scale = Vector2( 0.75, 0.75 )
+text = "Max"
+
+[node name="Portrait" parent="Button" instance=ExtResource( 2 )]
+margin_left = -0.000202179
+margin_top = 0.706605
+margin_bottom = 605.707
+
+[node name="PassiveAgressiveButtons" parent="." instance=ExtResource( 3 )]
+margin_left = 46.7079
+margin_top = 469.705
+margin_right = -663.292
+margin_bottom = 8.70483
+[connection signal="button_up" from="Button" to="." method="_on_Button_button_up"]
+[connection signal="stance_change" from="PassiveAgressiveButtons" to="." method="_on_PassiveAgressiveButtons_stance_change"]

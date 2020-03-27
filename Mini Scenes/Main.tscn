@@ -1,0 +1,62 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://Scripts/Main.gd" type="Script" id=1]
+[ext_resource path="res://Mini Scenes/VictoryViewer.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Art/Portraits/Grolk V1.png" type="Texture" id=3]
+[ext_resource path="res://Art/Portraits/Kallysta V3.png" type="Texture" id=4]
+[ext_resource path="res://Art/Portraits/Thoren V1.png" type="Texture" id=5]
+[ext_resource path="res://Art/Portraits/Edraele V2.png" type="Texture" id=6]
+[ext_resource path="res://Art/Portraits/Salem V1.png" type="Texture" id=7]
+[ext_resource path="res://Mini Scenes/StoneBackground.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Mini Scenes/SalemAI.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Mini Scenes/GrolkAI.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Mini Scenes/KallystaAI.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Mini Scenes/ThorenAI.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Mini Scenes/EdraeleAI.tscn" type="PackedScene" id=13]
+
+[node name="Main" type="Node"]
+script = ExtResource( 1 )
+victory_panel = ExtResource( 2 )
+these_players = [ [ "Grolk", ExtResource( 3 ) ], [ "Kallysta", ExtResource( 4 ) ], [ "Thoren", ExtResource( 5 ) ], [ "Edraele", ExtResource( 6 ) ], [ "Salem", ExtResource( 7 ) ] ]
+
+[node name="NinePatchRect" parent="." instance=ExtResource( 8 )]
+
+[node name="SalemAI" parent="." instance=ExtResource( 9 )]
+
+[node name="GrolkAI" parent="." instance=ExtResource( 10 )]
+
+[node name="KallystaAI" parent="." instance=ExtResource( 11 )]
+
+[node name="ThorenAI" parent="." instance=ExtResource( 12 )]
+
+[node name="EdraeleAI" parent="." instance=ExtResource( 13 )]
+
+[node name="Audio" type="AudioStreamPlayer" parent="."]
+[connection signal="advance_turn" from="SalemAI" to="." method="advance_turn"]
+[connection signal="done_setup" from="SalemAI" to="SalemAI" method="_on_SalemAI_done_setup"]
+[connection signal="gain_influence" from="SalemAI" to="." method="gain_influence"]
+[connection signal="lose_influence" from="SalemAI" to="." method="lose_influence"]
+[connection signal="matchtable_info_request" from="SalemAI" to="." method="pass_matchtable_info"]
+[connection signal="point_info_request" from="SalemAI" to="." method="pass_point_info"]
+[connection signal="relation_info_request" from="SalemAI" to="." method="pass_relation_info"]
+[connection signal="send_message" from="SalemAI" to="." method="send_message"]
+[connection signal="advance_turn" from="GrolkAI" to="." method="advance_turn"]
+[connection signal="matchtable_info_request" from="GrolkAI" to="." method="pass_matchtable_info"]
+[connection signal="point_info_request" from="GrolkAI" to="." method="pass_point_info"]
+[connection signal="relation_info_request" from="GrolkAI" to="." method="pass_relation_info"]
+[connection signal="send_message" from="GrolkAI" to="." method="send_message"]
+[connection signal="advance_turn" from="KallystaAI" to="." method="advance_turn"]
+[connection signal="matchtable_info_request" from="KallystaAI" to="." method="pass_matchtable_info"]
+[connection signal="point_info_request" from="KallystaAI" to="." method="pass_point_info"]
+[connection signal="relation_info_request" from="KallystaAI" to="." method="pass_relation_info"]
+[connection signal="send_message" from="KallystaAI" to="." method="send_message"]
+[connection signal="advance_turn" from="ThorenAI" to="." method="advance_turn"]
+[connection signal="matchtable_info_request" from="ThorenAI" to="." method="pass_matchtable_info"]
+[connection signal="point_info_request" from="ThorenAI" to="." method="pass_point_info"]
+[connection signal="relation_info_request" from="ThorenAI" to="." method="pass_relation_info"]
+[connection signal="send_message" from="ThorenAI" to="." method="send_message"]
+[connection signal="advance_turn" from="EdraeleAI" to="." method="advance_turn"]
+[connection signal="matchtable_info_request" from="EdraeleAI" to="." method="pass_matchtable_info"]
+[connection signal="point_info_request" from="EdraeleAI" to="." method="pass_point_info"]
+[connection signal="relation_info_request" from="EdraeleAI" to="." method="pass_relation_info"]
+[connection signal="send_message" from="EdraeleAI" to="." method="send_message"]

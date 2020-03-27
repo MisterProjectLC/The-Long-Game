@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Pencil 5.ogg-94f0f777a75a7a363bb0c0b5c65bab68.oggstr"
+
+[deps]
+
+source_file="res://Sounds/Pencil 5.ogg"
+dest_files=[ "res://.import/Pencil 5.ogg-94f0f777a75a7a363bb0c0b5c65bab68.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

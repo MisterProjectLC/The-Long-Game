@@ -1,0 +1,176 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Scripts/VictoryViewer.gd" type="Script" id=1]
+[ext_resource path="res://Mini Scenes/BlackBack.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Mini Scenes/PaperBackground.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Fonts/Kayambang.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://Mini Scenes/CloseButton.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Art/Back.png" type="Texture" id=6]
+[ext_resource path="res://Art/img_149822.png" type="Texture" id=7]
+[ext_resource path="res://Mini Scenes/Portrait.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Art/img_400022.png" type="Texture" id=9]
+
+[sub_resource type="DynamicFont" id=1]
+size = 48
+font_data = ExtResource( 4 )
+
+[node name="VictoryViewer" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -2.33276
+margin_top = -1.05261
+margin_right = -2.33276
+margin_bottom = -1.05261
+script = ExtResource( 1 )
+
+[node name="BlackBack" parent="." instance=ExtResource( 2 )]
+
+[node name="Background" parent="." instance=ExtResource( 3 )]
+margin_left = 142.0
+margin_top = 86.0
+margin_right = 842.0
+margin_bottom = 506.0
+
+[node name="Title" type="Label" parent="."]
+margin_left = 252.333
+margin_top = 99.0299
+margin_right = 730.333
+margin_bottom = 143.03
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "End of Match"
+align = 1
+
+[node name="BackButton" parent="." instance=ExtResource( 5 )]
+editor/display_folded = true
+visible = true
+modulate = Color( 1, 1, 1, 1 )
+margin_left = 792.333
+margin_top = 101.053
+margin_right = 824.333
+margin_bottom = 131.053
+text = ""
+
+[node name="TextureRect" type="TextureRect" parent="BackButton"]
+margin_left = 4.76953
+margin_top = 2.72461
+margin_right = 896.77
+margin_bottom = 982.725
+rect_scale = Vector2( 0.025, 0.025 )
+texture = ExtResource( 6 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="RestartButton" parent="." instance=ExtResource( 5 )]
+editor/display_folded = true
+visible = true
+modulate = Color( 1, 1, 1, 1 )
+margin_left = 794.036
+margin_top = 142.261
+margin_right = 826.036
+margin_bottom = 172.261
+text = ""
+
+[node name="TextureRect" type="TextureRect" parent="RestartButton"]
+margin_left = 4.76953
+margin_top = 2.72461
+margin_right = 896.77
+margin_bottom = 982.725
+rect_scale = Vector2( 0.025, 0.025 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="FirstLoser" parent="." instance=ExtResource( 8 )]
+margin_left = 152.333
+margin_top = 364.938
+margin_right = 700.333
+margin_bottom = 971.938
+rect_scale = Vector2( 0.2, 0.2 )
+
+[node name="Points1" type="Label" parent="."]
+margin_left = 262.333
+margin_top = 404.938
+margin_right = 298.333
+margin_bottom = 448.938
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "+2"
+
+[node name="SecondLoser" parent="." instance=ExtResource( 8 )]
+margin_left = 332.333
+margin_top = 362.0
+margin_right = 880.333
+margin_bottom = 969.0
+rect_scale = Vector2( 0.2, 0.2 )
+
+[node name="Points2" type="Label" parent="."]
+margin_left = 441.933
+margin_top = 402.0
+margin_right = 477.933
+margin_bottom = 446.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "+2"
+
+[node name="ThirdLoser" parent="." instance=ExtResource( 8 )]
+margin_left = 509.16
+margin_top = 361.053
+margin_right = 1057.16
+margin_bottom = 968.053
+rect_scale = Vector2( 0.2, 0.2 )
+
+[node name="Points3" type="Label" parent="."]
+margin_left = 618.759
+margin_top = 401.053
+margin_right = 654.759
+margin_bottom = 445.053
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "+2"
+
+[node name="FourthLoser" parent="." instance=ExtResource( 8 )]
+margin_left = 682.333
+margin_top = 361.053
+margin_right = 1230.33
+margin_bottom = 968.053
+rect_scale = Vector2( 0.2, 0.2 )
+
+[node name="Points4" type="Label" parent="."]
+margin_left = 792.333
+margin_top = 401.053
+margin_right = 828.333
+margin_bottom = 445.053
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "+2"
+
+[node name="Winner" parent="." instance=ExtResource( 8 )]
+margin_left = 428.307
+margin_top = 200.913
+margin_right = 976.303
+margin_bottom = 807.913
+rect_scale = Vector2( 0.2, 0.2 )
+
+[node name="PointsWinner" type="Label" parent="."]
+margin_left = 545.069
+margin_top = 233.32
+margin_right = 581.069
+margin_bottom = 277.32
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "+2"
+
+[node name="Crown" type="TextureRect" parent="."]
+modulate = Color( 0, 0, 0, 1 )
+margin_left = 444.604
+margin_top = 160.707
+margin_right = 1425.61
+margin_bottom = 894.707
+rect_scale = Vector2( 0.08, 0.08 )
+texture = ExtResource( 9 )
+[connection signal="popup_revealed" from="." to="." method="_on_VictoryViewer_popup_revealed"]
+[connection signal="button_up" from="BackButton" to="." method="_on_BackButton_button_up"]
+[connection signal="button_up" from="RestartButton" to="." method="_on_RestartButton_button_up"]

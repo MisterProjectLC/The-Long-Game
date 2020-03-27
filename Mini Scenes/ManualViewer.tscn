@@ -1,0 +1,137 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://Scripts/ManualViewer.gd" type="Script" id=1]
+[ext_resource path="res://Mini Scenes/Paragraph.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Mini Scenes/ImageManual.tscn" type="PackedScene" id=3]
+[ext_resource path="res://0- SECRET BUNKER/Prisoners Dilemma 2.png" type="Texture" id=4]
+[ext_resource path="res://0- SECRET BUNKER/Screenshot 5.png" type="Texture" id=5]
+[ext_resource path="res://Mini Scenes/BlackBack.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Art/old-brown-vintage-parchment-paper-texture.jpg" type="Texture" id=7]
+[ext_resource path="res://Mini Scenes/Background.gd" type="Script" id=8]
+[ext_resource path="res://Fonts/Kayambang.ttf" type="DynamicFontData" id=9]
+[ext_resource path="res://Art/Back.png" type="Texture" id=10]
+[ext_resource path="res://Art/Eye.png" type="Texture" id=11]
+[ext_resource path="res://Art/Eye closed.png" type="Texture" id=12]
+
+[sub_resource type="DynamicFont" id=1]
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 9 )
+
+[node name="ManualViewer" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -1.05261
+margin_bottom = -1.05261
+script = ExtResource( 1 )
+paragrapher = ExtResource( 2 )
+imager = ExtResource( 3 )
+images = [ ExtResource( 4 ), ExtResource( 5 ) ]
+
+[node name="BlackBack" parent="." instance=ExtResource( 6 )]
+color = Color( 0, 0, 0, 0.180392 )
+
+[node name="Background" type="NinePatchRect" parent="."]
+margin_left = 72.0
+margin_top = 1.0
+margin_right = 938.0
+margin_bottom = 600.0
+mouse_filter = 0
+texture = ExtResource( 7 )
+script = ExtResource( 8 )
+
+[node name="CloseButton" type="Button" parent="."]
+visible = false
+modulate = Color( 1, 0, 0, 1 )
+margin_left = 875.302
+margin_top = 16.6535
+margin_right = 907.302
+margin_bottom = 46.6535
+custom_fonts/font = SubResource( 1 )
+text = "X"
+
+[node name="BackButton" type="Button" parent="."]
+editor/display_folded = true
+visible = false
+margin_left = 874.822
+margin_top = 57.4359
+margin_right = 906.822
+margin_bottom = 87.4359
+custom_fonts/font = SubResource( 1 )
+
+[node name="TextureRect" type="TextureRect" parent="BackButton"]
+margin_left = 4.85547
+margin_top = 3.23511
+margin_right = 896.855
+margin_bottom = 983.235
+rect_scale = Vector2( 0.025, 0.025 )
+texture = ExtResource( 10 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="NextButton" type="Button" parent="."]
+editor/display_folded = true
+visible = false
+margin_left = 874.822
+margin_top = 95.2893
+margin_right = 906.822
+margin_bottom = 125.289
+custom_fonts/font = SubResource( 1 )
+
+[node name="TextureRect" type="TextureRect" parent="NextButton"]
+margin_left = 28.4766
+margin_top = 3.23511
+margin_right = 920.477
+margin_bottom = 983.235
+rect_scale = Vector2( -0.025, 0.025 )
+texture = ExtResource( 10 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="EyeButton" type="Button" parent="."]
+editor/display_folded = true
+visible = false
+margin_left = 874.822
+margin_top = 137.047
+margin_right = 906.822
+margin_bottom = 167.047
+custom_fonts/font = SubResource( 1 )
+
+[node name="TextureRect" type="TextureRect" parent="EyeButton"]
+margin_left = 3.05469
+margin_top = 1.73779
+margin_right = 515.055
+margin_bottom = 513.738
+rect_scale = Vector2( 0.05, 0.05 )
+texture = ExtResource( 11 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ClosedEyeButton" type="Button" parent="."]
+editor/display_folded = true
+visible = false
+margin_left = 874.822
+margin_top = 174.9
+margin_right = 906.822
+margin_bottom = 204.9
+custom_fonts/font = SubResource( 1 )
+
+[node name="TextureRect" type="TextureRect" parent="ClosedEyeButton"]
+margin_left = 3.28711
+margin_top = 2.14624
+margin_right = 515.287
+margin_bottom = 514.146
+rect_scale = Vector2( 0.05, 0.05 )
+texture = ExtResource( 12 )
+__meta__ = {
+"_edit_lock_": true
+}
+[connection signal="popup_revealed" from="." to="." method="open_pages"]
+[connection signal="scrolling" from="Background" to="." method="_on_Background_scrolling"]
+[connection signal="button_up" from="CloseButton" to="." method="_on_CloseButton_button_up"]
+[connection signal="button_up" from="BackButton" to="." method="_on_BackButton_button_up"]
+[connection signal="button_up" from="NextButton" to="." method="_on_NextButton_button_up"]
+[connection signal="button_up" from="EyeButton" to="." method="_on_EyeButton_button_up"]
+[connection signal="button_up" from="ClosedEyeButton" to="." method="_on_ClosedEyeButton_button_up"]

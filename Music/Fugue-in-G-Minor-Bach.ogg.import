@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Fugue-in-G-Minor-Bach.ogg-feee7dbcbbb85d5b0d06305a66345fab.oggstr"
+
+[deps]
+
+source_file="res://Music/Fugue-in-G-Minor-Bach.ogg"
+dest_files=[ "res://.import/Fugue-in-G-Minor-Bach.ogg-feee7dbcbbb85d5b0d06305a66345fab.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

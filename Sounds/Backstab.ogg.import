@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Backstab.ogg-aa9df301ce60595ea829fd2f9e805e99.oggstr"
+
+[deps]
+
+source_file="res://Sounds/Backstab.ogg"
+dest_files=[ "res://.import/Backstab.ogg-aa9df301ce60595ea829fd2f9e805e99.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

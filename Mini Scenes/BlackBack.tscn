@@ -1,0 +1,8 @@
+[gd_scene format=2]
+
+[node name="BlackBack" type="ColorRect"]
+margin_left = 3.0
+margin_top = 1.0
+margin_right = 1021.0
+margin_bottom = 600.0
+color = Color( 0, 0, 0, 0.32549 )

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Bird flap 2.ogg-cd60143bd0642843e6d8cd71a3579fc4.oggstr"
+
+[deps]
+
+source_file="res://Sounds/Bird flap 2.ogg"
+dest_files=[ "res://.import/Bird flap 2.ogg-cd60143bd0642843e6d8cd71a3579fc4.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0
