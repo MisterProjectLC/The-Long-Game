@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scripts/Main.gd" type="Script" id=1]
 [ext_resource path="res://Mini Scenes/VictoryViewer.tscn" type="PackedScene" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://Mini Scenes/KallystaAI.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Mini Scenes/ThorenAI.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Mini Scenes/EdraeleAI.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Mini Scenes/LettersPanel.tscn" type="PackedScene" id=14]
 
 [node name="Main" type="Node"]
 script = ExtResource( 1 )
@@ -22,6 +23,7 @@ these_players = [ [ "Grolk", ExtResource( 3 ) ], [ "Kallysta", ExtResource( 4 ) 
 [node name="NinePatchRect" parent="." instance=ExtResource( 8 )]
 
 [node name="SalemAI" parent="." instance=ExtResource( 9 )]
+letters_panel = ExtResource( 14 )
 
 [node name="GrolkAI" parent="." instance=ExtResource( 10 )]
 

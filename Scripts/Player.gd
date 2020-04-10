@@ -9,6 +9,7 @@ export var intelligences = []
 
 export(PackedScene) var panel
 export(PackedScene) var manual
+export(PackedScene) var letters_panel
 var current_panel
 
 export(PackedScene) var mail_viewer
@@ -113,6 +114,7 @@ func receive_message(sender, roun, message):
 	move_child(mail_v, get_child_count()-1)
 	mail_v.set_text(message_text + ': ' + sender + '\n\n' + message[0] + 
 			' ' + get_dip_phrase(message[1]) + ' ' + message[2])
+	add_to_letter_list(sender, message)
 
 
 func set_profile_visible(_name, _new):
@@ -126,6 +128,7 @@ func _portrait_pressed(enemy):
 	add_child(current_panel)
 	move_child(current_panel, get_child_count()-1)
 	current_panel.connect('info_pressed', self, '_info_pressed')
+	current_panel.connect('letters_pressed', self, '_letters_pressed')
 	current_panel.connect('opponent_pressed', self, '_opponent_pressed')
 	current_panel.connect('update_matchtable', self, 'update_matchtable')
 	current_panel.connect('send_message', self, '_send_message')
@@ -140,12 +143,13 @@ func _portrait_pressed(enemy):
 	update_relation()
 	reveal_points()
 
+
 func closed_manual():
 	emit_signal("closed_manual")
 
 # pressed info button
 func _info_pressed():
-	if get_actions() > 0:
+	if get_actions() > 0 and get_info_til_round(current_panel.get_enemy_name()) != get_current_round():
 		print('info_pressed')
 		spend_action()
 		set_info_til_round(current_panel.get_enemy_name(), get_current_round())
@@ -154,6 +158,17 @@ func _info_pressed():
 		update_relation()
 		reveal_points()
 		emit_signal("pressed_info", current_panel.get_enemy_name())
+
+
+# pressed letters button
+func _letters_pressed(enemy_name):
+	var _new = letters_panel.instance()
+	add_child(_new)
+	move_child(_new, get_child_count()-1)
+	
+	_new.setup_panel(letter_list, enemy_name, get_dip_phrases())
+	_new.connect("send_letter", self, "send_letter")
+	pass
 
 
 # pressed change other opponent button
@@ -165,7 +180,6 @@ func _opponent_pressed():
 # pressed send button
 func _send_message(name1, message_id, name2):
 	send_message(name1, message_id, name2, current_panel.get_enemy_name())
-
 
 # pressed stance button
 func _stance_pressed(_target, _stance):

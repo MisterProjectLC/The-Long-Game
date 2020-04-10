@@ -2,6 +2,7 @@ extends 'res://Scripts/popup.gd'
 
 signal info_pressed
 signal opponent_pressed
+signal letters_pressed
 signal update_matchtable
 signal send_message
 signal closed_manual
@@ -126,7 +127,9 @@ func _on_SendButton_button_up():
 	var name2 = $Mention2.get_item_text($Mention2.get_selected_id())
 	
 	emit_signal('send_message', name1, message_id, name2)
-	
+
+func _on_LetterButton_button_up():
+	emit_signal("letters_pressed", enemy_name)
 
 func item_selected(ID):
 	Audio.play_sound(Audio.writing, 2)
@@ -135,12 +138,12 @@ func item_selected(ID):
 func _on_ManualButton_button_up():
 	var player_translator = {'Grolk':3,'Kallysta':4, 'Thoren':5,'Edraele':6}
 	
-	var manual_panel = manual.instance()
-	manual_panel.manual_setup(player_translator[enemy_name])
-	add_child(manual_panel)
-	move_child(manual_panel, get_child_count()-1)
+	var _new = manual.instance()
+	_new.manual_setup(player_translator[enemy_name])
+	add_child(_new)
+	move_child(_new, get_child_count()-1)
 	
-	manual_panel.connect("closed_manual", self, "closed_manual")
+	_new.connect("closed_manual", self, "closed_manual")
 	
 func closed_manual():
 	emit_signal('closed_manual')
@@ -158,4 +161,3 @@ func get_enemy_name():
 
 func get_opponent():
 	return players[_opponent_index]
-

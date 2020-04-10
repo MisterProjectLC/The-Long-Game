@@ -1,0 +1,132 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Scripts/LettersPanel.gd" type="Script" id=1]
+[ext_resource path="res://Mini Scenes/BlackBack.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Art/Old-Parchment-Textures.jpg" type="Texture" id=3]
+[ext_resource path="res://Fonts/Kayambang.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://Mini Scenes/LetterButton.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Art/LetterContainer.png" type="Texture" id=6]
+[ext_resource path="res://Art/LetterViewer.png" type="Texture" id=7]
+
+[sub_resource type="DynamicFont" id=1]
+size = 60
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 44
+font_data = ExtResource( 4 )
+
+[node name="LettersPanel" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 2.0
+margin_bottom = -2.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+letter_title = ExtResource( 5 )
+
+[node name="BlackBack" parent="." instance=ExtResource( 2 )]
+
+[node name="Background" type="NinePatchRect" parent="."]
+margin_left = 143.0
+margin_top = 71.0
+margin_right = 891.0
+margin_bottom = 515.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CloseButton" type="Button" parent="."]
+visible = false
+margin_left = 684.238
+margin_top = 90.9246
+margin_right = 913.238
+margin_bottom = 150.925
+rect_scale = Vector2( 0.75, 0.75 )
+custom_fonts/font = SubResource( 1 )
+text = "CLOSE"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SendButton" type="Button" parent="."]
+visible = false
+margin_left = 693.449
+margin_top = 429.788
+margin_right = 915.449
+margin_bottom = 493.788
+rect_scale = Vector2( 0.75, 0.75 )
+custom_fonts/font = SubResource( 1 )
+text = "SEND"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LetterText" type="Label" parent="."]
+visible = false
+margin_left = 482.708
+margin_top = 164.0
+margin_right = 889.708
+margin_bottom = 431.0
+rect_scale = Vector2( 0.9, 0.9 )
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Recipient" type="Label" parent="."]
+visible = false
+margin_left = 482.415
+margin_top = 363.123
+margin_right = 889.415
+margin_bottom = 403.123
+rect_scale = Vector2( 0.9, 0.9 )
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LetterContainer" type="TextureRect" parent="."]
+visible = false
+anchor_right = 0.039
+anchor_bottom = 0.067
+margin_left = 187.0
+margin_top = 105.0
+margin_right = 348.986
+margin_bottom = 414.934
+texture = ExtResource( 6 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="LetterViewer" type="TextureRect" parent="."]
+visible = false
+anchor_right = 0.039
+anchor_bottom = 0.067
+margin_left = 485.0
+margin_top = 158.0
+margin_right = 819.986
+margin_bottom = 367.934
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="LetterButtons" type="Control" parent="."]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="button_up" from="CloseButton" to="." method="_on_CloseButton_button_up"]
+[connection signal="button_up" from="SendButton" to="." method="_on_SendButton_button_up"]

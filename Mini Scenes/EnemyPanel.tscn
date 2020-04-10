@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scripts/EnemyPanel.gd" type="Script" id=1]
 [ext_resource path="res://Mini Scenes/BlackBack.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Mini Scenes/Portrait.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Art/VS.png" type="Texture" id=7]
 [ext_resource path="res://Mini Scenes/MatchTable.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Art/new-letter.png" type="Texture" id=9]
 
 [sub_resource type="DynamicFont" id=1]
 size = 48
@@ -143,6 +144,16 @@ texture = ExtResource( 7 )
 [node name="MatchTable" parent="." instance=ExtResource( 8 )]
 visible = false
 
+[node name="PortraitButton" type="Button" parent="."]
+visible = false
+margin_left = 132.0
+margin_top = 233.0
+margin_right = 319.0
+margin_bottom = 439.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Portrait" parent="." instance=ExtResource( 6 )]
 visible = false
 margin_left = 129.77
@@ -153,34 +164,65 @@ rect_scale = Vector2( 0.35, 0.35 )
 
 [node name="Mention1" type="OptionButton" parent="."]
 visible = false
-margin_left = 422.641
+margin_left = 394.108
 margin_top = 383.346
-margin_right = 653.641
+margin_right = 625.108
 margin_bottom = 412.346
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Phrase" type="OptionButton" parent="."]
 visible = false
-margin_left = 424.0
+margin_left = 395.467
 margin_top = 422.0
-margin_right = 653.0
+margin_right = 624.467
 margin_bottom = 451.0
 
 [node name="Mention2" type="OptionButton" parent="."]
 visible = false
-margin_left = 421.825
+margin_left = 393.292
 margin_top = 459.908
-margin_right = 652.825
+margin_right = 624.292
 margin_bottom = 488.908
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="SendButton" type="Button" parent="."]
 visible = false
-margin_left = 677.499
+margin_left = 644.324
 margin_top = 384.845
-margin_right = 829.499
+margin_right = 796.324
 margin_bottom = 519.845
 rect_scale = Vector2( 0.75, 0.75 )
 custom_fonts/font = SubResource( 2 )
 text = "SEND"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LetterButton" type="Button" parent="."]
+visible = false
+margin_left = 772.919
+margin_top = 403.391
+margin_right = 832.919
+margin_bottom = 463.391
+custom_fonts/font = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="LetterButton"]
+margin_left = 9.73047
+margin_top = 9.53418
+margin_right = 521.73
+margin_bottom = 521.534
+rect_scale = Vector2( 0.08, 0.08 )
+texture = ExtResource( 9 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="DiplomacyArea" type="Label" parent="."]
 visible = false
@@ -198,7 +240,9 @@ align = 1
 [connection signal="button_up" from="InfoButton" to="." method="_on_InfoButton_button_up"]
 [connection signal="button_up" from="ManualButton" to="." method="_on_ManualButton_button_up"]
 [connection signal="button_up" from="OtherPortButton" to="." method="_on_OtherPortButton_button_up"]
+[connection signal="button_up" from="PortraitButton" to="." method="_on_InfoButton_button_up"]
 [connection signal="item_selected" from="Mention1" to="." method="item_selected"]
 [connection signal="item_selected" from="Phrase" to="." method="item_selected"]
 [connection signal="item_selected" from="Mention2" to="." method="item_selected"]
 [connection signal="button_up" from="SendButton" to="." method="_on_SendButton_button_up"]
+[connection signal="button_up" from="LetterButton" to="." method="_on_LetterButton_button_up"]

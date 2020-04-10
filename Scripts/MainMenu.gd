@@ -15,7 +15,7 @@ func language(language):
 	$Quit/Label.text = Global.menus[language]['Quit']
 
 func volume():
-	Audio.volume_db = linear2db(Global.get_music_volume())
+	pass
 # ------------------- PRESSING STUFF -------------------
 
 func _on_Play_button_up():

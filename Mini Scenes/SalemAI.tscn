@@ -45,7 +45,6 @@ custom_fonts/font = SubResource( 1 )
 text = "Advance"
 
 [node name="Restart" type="Button" parent="."]
-editor/display_folded = true
 margin_left = 30.0807
 margin_top = 76.4396
 margin_right = 934.081
@@ -65,7 +64,6 @@ __meta__ = {
 }
 
 [node name="Info" type="Button" parent="."]
-editor/display_folded = true
 margin_left = 956.921
 margin_top = 18.6211
 margin_right = 1860.92
@@ -82,7 +80,6 @@ rect_scale = Vector2( 1.45, 1.45 )
 texture = ExtResource( 11 )
 
 [node name="Back" type="Button" parent="."]
-editor/display_folded = true
 margin_left = 30.0807
 margin_top = 15.0404
 margin_right = 934.081
@@ -160,7 +157,6 @@ text = "Points: 0"
 align = 1
 
 [node name="LessInfluence" type="Button" parent="."]
-editor/display_folded = true
 margin_left = 655.041
 margin_top = 506.57
 margin_right = 1559.04
@@ -180,7 +176,6 @@ __meta__ = {
 }
 
 [node name="MoreInfluence" type="Button" parent="."]
-editor/display_folded = true
 margin_left = 230.0
 margin_top = 506.57
 margin_right = 1134.0

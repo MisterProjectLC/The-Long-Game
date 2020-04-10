@@ -36,11 +36,14 @@ var br_relations = {-2:'Amigavel',-1:'Confiante', 0:'Suspeito', 1:'Hostil', 2:'R
 var de_relations = {-2:'Freundlich',-1:'Vertrauend', 0:'Msstrauisch', 1:'Feindlich', 2:'Wütend'}
 
 var en_panel = {'Close':'Close', 'Info':'Info', 'Points':'Points', 'Relations':en_relations,
-	'R':'','Relation':'\'s relation\ntowards', 'Send':'Send', 'Diplomacy':'Diplomacy Area', 'Unknown':'Unknown'}
+	'R':'','Relation':'\'s relation\ntowards', 'Send':'Send', 'Diplomacy':'Diplomacy Area', 
+	'Unknown':'Unknown', 'Recipient':'Recipient'}
 var br_panel = {'Close':'Fechar', 'Info':'Info', 'Points':'Pontos', 'Relations':br_relations,
-	'R':'Relacao de \n','Relation':' com', 'Send':'Enviar', 'Diplomacy':'Area de Diplomacia', 'Unknown':'???'}
+	'R':'Relacao de \n','Relation':' com', 'Send':'Enviar', 'Diplomacy':'Area de Diplomacia', 
+	'Unknown':'???', 'Recipient':'Destinatario'}
 var de_panel = {'Close':'Schlss.', 'Info':'Info', 'Points':'Punktzahl', 'Relations':de_relations,
-	'R':'','Relation':'s Relation\nmit', 'Send':'Senden', 'Diplomacy':'Diplomatiebereich', 'Unknown':'Unbekannt'}
+	'R':'','Relation':'s Relation\nmit', 'Send':'Senden', 'Diplomacy':'Diplomatiebereich', 
+	'Unknown':'Unbekannt', 'Recipient':'Recipient'}
 var panels = [en_panel, br_panel, de_panel]
 
 var en_phrases = ['will co-op with', 'will attack']
@@ -63,12 +66,15 @@ func get_music_volume():
 	return music_volume
 
 func set_music_volume(_new):
+	_new = _new/100 + 0.001
 	music_volume = _new
+	Audio.volume_db = linear2db(_new)
 
 func get_sounds_volume():
 	return sounds_volume
 
 func set_sounds_volume(_new):
+	_new = _new/100 + 0.001
 	sounds_volume = _new
 	
 func get_debug_enabled():

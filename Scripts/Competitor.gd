@@ -34,6 +34,10 @@ var turn_order = []
 var dip_phrases = []
 
 # {[info]:round}
+
+# lists all letters received
+var letter_list = []
+
 # lists all pieces of info competitor believes in
 var info_list = {}
 
@@ -212,14 +216,17 @@ func trait_reactive_relations(enemy_name, relation, opponent_name):
 # ---------------- SEND MESSAGE ----------------------------
 
 func send_message(name1, message, name2, recipient):
-	if name1 == name2 || get_actions() <= 0 || recipient == character_name:
+	send_letter(character_name, name1, message, name2, recipient)
+	
+func send_letter(sender, name1, message, name2, recipient):
+	if name1 == name2 || get_actions() <= 0 || recipient == sender || name1 == recipient:
 		return
 	
 	spend_action()
 	var package = [name1, message, name2]
 	
 	# sender, message, recipient
-	emit_signal('send_message', character_name, package, recipient)
+	emit_signal('send_message', sender, package, recipient)
 
 # ----------------- HELPER FUNCTIONS -------------------
 
@@ -308,6 +315,9 @@ func get_current_round():
 func set_current_round(_new):
 	_current_round = _new
 	emit_signal("alter_round", _new)
+	
+func add_to_letter_list(author, letter):
+	letter_list.append([author, letter[0], letter[1], letter[2]])
 	
 func get_player_character():
 	return player_character
