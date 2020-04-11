@@ -19,6 +19,9 @@ margin_top = 0.463287
 margin_right = -0.463257
 margin_bottom = 0.463257
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="BlackBack" parent="." instance=ExtResource( 2 )]
 
@@ -109,6 +112,7 @@ Randi Ilhamsyah - Kayambang
 Red Hat - Liberation Serif"
 
 [node name="CloseButton" parent="." instance=ExtResource( 5 )]
+visible = false
 margin_left = 911.498
 margin_top = 24.6052
 margin_right = 943.498

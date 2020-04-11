@@ -45,7 +45,7 @@ func game_setup(_new_players, _newer_turn_order):
 			continue
 
 		if players[i][0] != player_character:
-			ai_node(players[i][0]).gain_rep(player_character)
+			ai_node(players[i][0]).improve_relations(player_character)
 
 	# start game
 	start_round()

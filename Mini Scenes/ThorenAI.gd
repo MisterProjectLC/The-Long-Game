@@ -30,8 +30,8 @@ func start_turn():
 func receive_turn_order_info(turn_message):
 	# Vassal
 	if turn_order.size() > 0 and turn_order[0] != turn_message[0]:
-		lose_rep(turn_order[0])
-		gain_rep(turn_message[0])
+		worsen_relations(turn_order[0])
+		improve_relations(turn_message[0])
 	
 	.receive_turn_order_info(turn_message)
 
@@ -99,11 +99,11 @@ func receive_message(sender, roun, message):
 		if relations[info[0]] > 0:
 			# Reactive
 			if info[2] == character_name:
-				set_rep(info[0], 0)
+				set_relations(info[0], 0)
 
 		# from a friend
 		elif relations[info[0]] < 0 and relations[info[2]] >= 0:
-			set_rep(info[2], -1)
+			set_relations(info[2], -1)
 			
 	elif info[1] == 1: # someone attacking friend or himself -> get hostile
 		# Snitching
@@ -137,17 +137,17 @@ func receive_relation(relation, enemy_name, opponent_name):
 	if relation > 0: # negative relation
 		# Brotherhood
 		if relations[enemy_name] != 2 and relations[opponent_name] < 0: # with a friend?
-			set_rep(enemy_name, 1)
+			set_relations(enemy_name, 1)
 			# Snitching
 			snitch_list.append([enemy_name, 1, opponent_name])
 	
 	elif relation < 0: # positive relation
 		# Allegiance
 		if relations[enemy_name] != 2 and relations[opponent_name] == 2: # with a nemesis?
-			 set_rep(enemy_name, 1)
+			 set_relations(enemy_name, 1)
 		# Alliance
 		elif relations[enemy_name] < 0 and relations[opponent_name] != 2: # from a friend?
-			 set_rep(enemy_name, -1)
+			 set_relations(enemy_name, -1)
 
 # ----------------- HELPER REACTIONS -----------------
 
@@ -157,20 +157,9 @@ func alliance_making(friend, candidate):
 			ann_dict[[candidate, 0]].append(friend)
 			if ann_dict[[candidate, 1]].has(friend):
 				ann_dict[[candidate, 1]].erase(friend)
-		set_rep(candidate, -1)
+		set_relations(candidate, -1)
 	elif relations[friend] != 2: # YOU ARE IN CAHOOTS WITH THE ENEMY?!
-		set_rep(friend, 1)
-
-func set_rep(player_name, new_relation):
-	relations[player_name] = new_relation
-
-func gain_rep(player_name):
-	if relations[player_name] > -2:
-		relations[player_name] -= 1
-
-func lose_rep(player_name):
-	if relations[player_name] < 2:
-		relations[player_name] += 1
+		set_relations(friend, 1)
 
 # ----------------- ACTIONS -----------------
 

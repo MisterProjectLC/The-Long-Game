@@ -194,8 +194,8 @@ func en_pages_setup():
 	['text', {'title':'DEDUCTION', 'space':310, 'color':Color.yellow,
 	'text':"""Can deduce the PLAYER CHARACTER's relation with other players based on other players' relation with him. For example, if she discovers that one is ENRAGED with the PLAYER CHARACTER, she will deduce that the PLAYER CHARACTER is ENRAGED with them."""}
 	],
-	['text', {'title':'CHAIN-BREAKER', 'space':140, 'color':Color.darkred,
-	'text':"""Becomes HOSTILE to players who are considered by two or more other players to be TRUSTED."""}
+	['text', {'title':'CHAIN-BREAKER', 'space':170, 'color':Color.darkred,
+	'text':"""Becomes HOSTILE to players who are considered by two or more other players (excluding herself) to be TRUSTED/BEFRIENDED."""}
 	],
 	['text', {'title':'CYNIC', 'space':90, 'color':Color.blueviolet,
 	'text':"""Can never become FRIENDLY."""}
@@ -203,15 +203,15 @@ func en_pages_setup():
 	['text', {'title':'INTRIGUE', 'space':610, 'color':Color.darkcyan,
 	'text':"""When receiving messages, cross-references it to previous data. If there's a contradiction or ilogical conclusion between message and data, believes in the data. If there's a contradiction or ilogical conclusion between messages, gives priority to the one from the most trusted sender.
 	If there's no contradiction and the message comes from a Suspect player, investigates the validity of this information, if possible. If not, dismisses it.
-	In any case, becomes Enraged if she discovers the message is false. Alternatively, if the message is true and doesn't involve the sender, then her relation with them increases."""}
+	In any case, becomes ENRAGED if she discovers the message is false. Alternatively, if the message is true and doesn't involve the sender, then her relation with them increases."""}
 	],
 	['text', {'title':'ACTION PRIORITY', 'space':400, 
 	'text':"""1- Attack an ENRAGING player.
 	2- If it's an odd round (except the first), investigate a SUSPECT player.
-	3/4- First, choose a HOSTILIZED X player. Then, choose two players, Y and Z, who find X to be TRUSTED.
-	3- If Y is ENRAGED with Z, tell Y that X will ally with Z.
-	4- If Y is TRUSTFUL/FRIENDLY both to her and Z, tell Y that X will attack Z.
-	5- If she's the first or second in the Influence track, reduce her Influence.
+	3/4/5- First, choose a HOSTILIZED X player. Then, choose two players, Y and Z, who find X to be TRUSTED/BEFRIENDED.
+	3- Resend a letter to Y she believes is false and written by X. 
+	4- If Y is ENRAGED with Z, tell Y that X will ally with Z.
+	5- If Y is TRUSTFUL/FRIENDLY both to her and Z, tell Y that X will attack Z.
 	6- If she's the last in the Influence track, increase her Influence.
 	7- Attack a HOSTILIZED player.
 	8- Tell a SUSPICIOUS player she will co-op with them.
@@ -514,8 +514,8 @@ func br_pages_setup():
 	['text', {'title':'DEDUCAO', 'space':330, 'color':Color.yellow,
 	'text':"""Pode deduzir a relação do PERSONAGEM DO JOGADOR com outros jogadores baseado na relação de outros jogadores com ele. Por exemplo, se ela descobre que alguém está REVOLTADO com o PERSONAGEM DO JOGADOR, ela irá deduzir que o PERSONAGEM DO JOGADOR está REVOLTADO com ele."""}
 	],
-	['text', {'title':'QUEBRA-CORRENTES', 'space':140, 'color':Color.darkred,
-	'text':"""Torna-se HOSTIL a jogadores que são considerados CONFIAVEIS por dois ou mais outros jogadores."""}
+	['text', {'title':'QUEBRA-CORRENTES', 'space':170, 'color':Color.darkred,
+	'text':"""Torna-se HOSTIL a jogadores que são considerados CONFIAVEIS/AMIGOS por dois ou mais outros jogadores (não contando ela mesma)."""}
 	],
 	['text', {'title':'CINICA', 'space':90, 'color':Color.blueviolet,
 	'text':"""Nunca torna-se AMIGÁVEL."""}
@@ -528,10 +528,10 @@ func br_pages_setup():
 	['text', {'title':'PRIORIDADE DE ACAO', 'space':400, 
 	'text':"""1- Ataca um jogador REVOLTANTE.
 	2- Se for um turno ímpar (exceto o primeiro), investiga um jogador SUSPEITADO.
-	3/4- Primeiro, escolhe um jogador X HOSTILIZADO. Então, escolhe dois jogadores, Y e Z, que acham X CONFIÁVEL.
-	3- Se Y estiver REVOLTADO com  Z, conta para Y que X vai cooperar com Z.
-	4- Se Y estiver CONFIANTE/AMIGÁVEL com ela e Z, conta para Y que X vai atacar Z.
-	5- Se sua Ordem no Trono for 1 ou 2, reduz sua Ordem no Trono.
+	3/4/5- Primeiro, escolhe um jogador X HOSTILIZADO. Então, escolhe dois jogadores, Y e Z, que acham X CONFIÁVEL.
+	3- Re-envia uma carta para Y que ela acredita ser falsa e escrita por X.
+	4- Se Y estiver REVOLTADO com  Z, conta para Y que X vai cooperar com Z.
+	5- Se Y estiver CONFIANTE/AMIGÁVEL com ela e Z, conta para Y que X vai atacar Z.
 	6- Se for a última na Ordem no Trono, aumenta sua Ordem no Trono.
 	7- Ataca um jogador HOSTILIZADO.
 	8- Conta para um jogador SUSPEITADO que ela irá se aliar com ele.
@@ -833,13 +833,13 @@ func de_pages_setup():
 	['text', {'title':'DEDUKTION', 'space':310, 'color':Color.yellow,
 	'text':"""Kann die Relationen des SPIELERCHARAKTERS mit anderen Spielern an die Relationen der anderen Spieler mit ihm herleiten. Zum Beispiel, wenn sie entdeckt, dass ein Spieler WÜTEND mit dem SPIELERCHARAKTER ist, leitet sie her, dass der SPIELERCHARAKTER WÜTEND mit diesem Spieler ist."""}
 	],
-	['text', {'title':'KETTEBRECHER', 'space':140, 'color':Color.darkred,
-	'text':"""Wird FEINDLICH gegen Spieler, die von mindestens zwei Spielern als VERTRAUT/FREUND betrachtet werden."""}
+	['text', {'title':'KETTEBRECHER', 'space':170, 'color':Color.darkred,
+	'text':"""Wird FEINDLICH gegen Spieler, die von mindestens zwei Spielern (außer Kallysta selbst) als VERTRAUT/FREUND betrachtet werden."""}
 	],
 	['text', {'title':'ZYNISCH', 'space':90, 'color':Color.blueviolet,
 	'text':"""Wird niemals FREUNDLICH."""}
 	],
-	['text', {'title':'INTRIGE', 'space':610, 'color':Color.darkcyan,
+	['text', {'title':'INTRIGE', 'space':640, 'color':Color.darkcyan,
 	'text':"""Wenn sie Briefe erhaltet, vergleicht sie die Information mit früheren Daten. Wenn es einen Widerspruch zwischen Nachricht und Daten gibt, glaubt sie an die Daten. Wenn der Widerspruch zwischen Briefe ist, gibt sie den Vorrang dem Brief des vertrauenswürdiger Absenders.
 	Falls es keinen Widerspruch gibt und der Brief von einem Verdächtigen Spieler kommt, forscht sie die Gültigkeit dieser Information nach, wenn möglich. Wenn nicht, lehnt sie ab.
 	Auf jeden Fall wird sie WÜTEND, wenn sie entdeckt, dass die Information falsch ist. Auf der anderen Seite, wenn die Information echt ist und den Absender nicht erwähnt, verbessert sie seine Relation zu ihm."""}
@@ -847,10 +847,10 @@ func de_pages_setup():
 	['text', {'title':'AKTIONPRIORITAET', 'space':400, 
 	'text':"""1- Attackiert einen ÄRGERLICHEN Spieler.
 	2- Wenn es eine ungerade Runde ist (außer die erste), forscht einen VERDÄCHTIGEN Spieler nach.
-	3/4- Zuerst wählt einen FEINDSELIGEN X Spielen. Dann wählt zwei Spieler, Y und Z, die X VERTRAUT finden.
-	3- Falls Y WÜTEND mit Z ist, erzählt Y, dass X mit Z kooperieren wird.
-	4- Falls Y VERTRAUEND/FREUNDLICH mit ihr und Z ist, erzählt Y, dass X Z attackieren wird.
-	5- Falls sie die erste oder zweite in der Einfluss-Reihenfolge ist, reduziert ihre Einfluss.
+	3/4/5- Zuerst wählt einen FEINDSELIGEN X Spielen. Dann wählt zwei Spieler, Y und Z, die X VERTRAUT finden.
+	3- Sendet nochmal eine Briefe an Y, die sie glaubt, falsch ist und von X geschrieben wurde.
+	4- Falls Y WÜTEND mit Z ist, erzählt Y, dass X mit Z kooperieren wird.
+	5- Falls Y VERTRAUEND/FREUNDLICH mit ihr und Z ist, erzählt Y, dass X Z attackieren wird.
 	6- Falls sie die letzte in der Einfluss-Reihenfolge ist, erhöht ihre Einfluss.
 	7- Attackiert einen FEINDSELIGEN Spieler.
 	8- Forscht einen VERDÄCHTIGEN Spieler nach.

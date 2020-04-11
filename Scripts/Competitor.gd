@@ -11,9 +11,9 @@ signal alter_round
 signal send_message
 signal advance_turn
 
-signal gain_rep
-signal lose_rep
-signal set_rep
+signal improve_relations
+signal worsen_relations
+signal set_relations
 
 signal done_setup
 
@@ -35,9 +35,11 @@ var dip_phrases = []
 
 # {[info]:round}
 
+# [[sender, actor, action, receiver]]
 # lists all letters received
 var letter_list = []
 
+# {[info]]:roun}
 # lists all pieces of info competitor believes in
 var info_list = {}
 
@@ -138,12 +140,12 @@ func manage_ann(_order, _recipient, _target):
 	return false
 
 func gain_influence():
-	if get_actions() > 0:
+	if get_actions() > 0 and turn_order.front() != character_name:
 		spend_action()
 		emit_signal('gain_influence', character_name)
 
 func lose_influence():
-	if get_actions() > 0:
+	if get_actions() > 0 and turn_order.back() != character_name:
 		spend_action()
 		emit_signal('lose_influence', character_name)
 
@@ -158,11 +160,11 @@ func trait_general(memory_list, roun, info):
 #		print('Mem: ' + str(memory[0]) + ' ' + str(memory[1]) + ' ' + str(memory[2]) + ' ' + str(memory_list[memory][0]))
 		# memory is true
 		if info == memory and roun == memory_list[memory][0] and relations[memory_list[memory][1]] > -2:
-			emit_signal('gain_rep', memory_list[memory][1])
+			emit_signal('improve_relations', memory_list[memory][1])
 			memory_list.erase(memory)
 		# memory is false
 		elif info[0] == memory[0] and info[2] == memory[2] and info[1] != memory[1] and roun == memory_list[memory][0] and relations[memory_list[memory][1]] < 2:
-			emit_signal('lose_rep', memory_list[memory][1])
+			emit_signal('worsen_relations', memory_list[memory][1])
 			memory_list.erase(memory)
 
 func trait_intuition(en_stances, op_stances):
@@ -179,34 +181,34 @@ func trait_intuition(en_stances, op_stances):
 
 func trait_justice(report, player_name):
 	if report[1] == 1 and report[0] == 0: # Justice: backstab -> furious
-		emit_signal('set_rep', player_name, 2)
+		emit_signal('set_relations', player_name, 2)
 		return true
 	return false
 
 func trait_brotherhood(info, relations):
 	# Alliance - my friend likes someone
 	if relations[info[0]] < 0 and info[1] == 0 and relations[info[2]] != 2 and relations[info[2]] != -2:
-		emit_signal('set_rep', info[2], -1)
+		emit_signal('set_relations', info[2], -1)
 	
 	# Brotherhood - someone hates my friend
 	elif relations[info[0]] != 2 and info[1] == 1 and relations[info[2]] < 0:
-		emit_signal('set_rep', info[0], 1)
+		emit_signal('set_relations', info[0], 1)
 
 func trait_allegiances(info, relations):
 	if info[1] == 0: # positive interaction
 		# Allegiances
 		if relations[info[2]] == 2 and relations[info[0]] != 2:
-			emit_signal('set_rep', info[0], 1)
+			emit_signal('set_relations', info[0], 1)
 		elif relations[info[0]] == 2 and relations[info[2]] != 2 and info[2] != character_name: 
-			emit_signal('set_rep', info[2], 1)
+			emit_signal('set_relations', info[2], 1)
 
 func trait_reactive(info, relations):
 	# Reactive - becoming suspicious
 	if relations[info[0]] > 0 and info[1] == 0 and info[2] == character_name:
-		emit_signal('set_rep', info[0], 0)
+		emit_signal('set_relations', info[0], 0)
 	# Reactive - becoming hostile
 	elif info[1] == 1 and info[2] == character_name:
-		emit_signal('set_rep', info[0], 1)
+		emit_signal('set_relations', info[0], 1)
 
 func trait_reactive_relations(enemy_name, relation, opponent_name):
 	# Reactive pt. 2
@@ -265,10 +267,15 @@ func get_stances_against(_character, _round):
 	return stances_vs
 
 func improve_relations(_character):
-	relations[_character] += 1
+	if relations[_character] > -2:
+		relations[_character] -= 1
 
 func worsen_relations(_character):
-	relations[_character] -= 1
+	if relations[_character] < 2:
+		relations[_character] += 1
+		
+func set_relations(_character, _new):
+	relations[_character] = _new
 	
 func get_relation(_character):
 	return relations[_character]

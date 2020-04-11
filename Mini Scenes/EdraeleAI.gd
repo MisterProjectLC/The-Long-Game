@@ -51,7 +51,7 @@ func receive_report_info(reports): #report = {'player':[stance1, stance2, points
 		
 		# Treachery
 		if !just and report[0] == 1 and report[1] == 0:
-			emit_signal('set_rep', player_name, 1)
+			emit_signal('set_relations', player_name, 1)
 			
 		
 		receive_fact(get_current_round(), [player_name, report[1], character_name])
@@ -90,7 +90,7 @@ func receive_message(sender, roun, message):
 	# check with facts
 	for info in info_list:
 		if info[0] == message[0] and info[1] != message[1] and info[2] == message[2] and info_list[info] == roun:
-			emit_signal('set_rep', sender, 2)
+			emit_signal('set_relations', sender, 2)
 			return
 
 	# check with testimony
@@ -100,10 +100,10 @@ func receive_message(sender, roun, message):
 			memory_list[memory][0] == roun):
 				# testimony contest
 				if relations[memory_list[memory][1]] > relations[sender]:
-					emit_signal('set_rep', sender, 2)
+					emit_signal('set_relations', sender, 2)
 					return
 				elif relations[memory_list[memory][1]] < relations[sender]:
-					emit_signal('set_rep', memory_list[memory][1], 2)
+					emit_signal('set_relations', memory_list[memory][1], 2)
 					break
 	
 	# check with myself
@@ -115,7 +115,7 @@ func receive_message(sender, roun, message):
 	
 	# Intrigue - Well, thanks for the info
 	if message[0] != sender and message[2] != sender:
-		emit_signal('gain_rep', sender)
+		emit_signal('improve_relations', sender)
 	
 	trait_allegiances(message, relations)
 	trait_reactive(message, relations)
@@ -123,7 +123,7 @@ func receive_message(sender, roun, message):
 	if message[1] == 1: # negative interaction
 		# Queen - trust people that punch her enemies
 		if relations[message[2]] == 2 and relations[message[0]] != -2: 
-			set_rep(message[0], -1)
+			set_relations(message[0], -1)
 			
 		# Snitching
 		else:
@@ -139,13 +139,13 @@ func receive_fact(roun, fact):
 	for tactical in tactical_list.keys():
 		#[info]:[round, sender]
 		if tactical == fact and roun == tactical_list[tactical][0]-1:
-			emit_signal('gain_rep', tactical_list[tactical][1])
+			emit_signal('improve_relations', tactical_list[tactical][1])
 			tactical_list.erase(tactical)
 	
 	# Intrigue - wait, this memory is false
 	for memory in memory_list.keys(): 
 		if fact[0] == memory[0] and fact[1] != memory[1] and fact[2] == memory[2] and roun == memory_list[memory][0] and relations[memory_list[memory][1]] < 2:
-			emit_signal('set_rep', memory_list[memory][1], 2)
+			emit_signal('set_relations', memory_list[memory][1], 2)
 			memory_list.erase(memory)
 	
 	# since facts are always true, look for and override previous false info
@@ -180,14 +180,6 @@ func receive_relation(relation, enemy_name, opponent_name):
 
 # ----------------- HELPER REACTIONS -----------------
 
-func set_rep(player_name, new_relation):
-	relations[player_name] = new_relation
-
-func gain_rep(player_name):
-	relations[player_name] -= 1
-		
-func lose_rep(player_name):
-	relations[player_name] += 1
 
 # ----------------- ACTIONS -----------------
 

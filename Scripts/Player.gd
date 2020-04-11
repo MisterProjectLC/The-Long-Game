@@ -20,6 +20,8 @@ var points_text = 'Points'
 var round_text = 'Round'
 var message_text = 'Message from'
 
+var _delta_influence = 0
+
 # ------------------ SETUP --------------------------
 
 # other players-dependant setup
@@ -52,6 +54,7 @@ func _ready():
 # -------------------- SIGNAL HANDLING -----------------
 
 func start_turn():
+	print_turn()
 	pass
 	
 # process turn order info
@@ -109,6 +112,8 @@ func receive_relation_info(relation, enemy_requested_name, opponent_requested_na
 
 # receive message
 func receive_message(sender, roun, message):
+	print_mail(sender, message)
+	
 	var mail_v = mail_viewer.instance()
 	add_child(mail_v)
 	move_child(mail_v, get_child_count()-1)
@@ -191,6 +196,14 @@ func _stance_pressed(_target, _stance):
 
 # pressed advance button
 func _on_AdvanceTurn_button_up():
+	if _delta_influence < 0:
+		for i in range(-_delta_influence):
+			emit_signal('gain_influence', character_name)
+	elif _delta_influence > 0:
+		for i in range(_delta_influence):
+			emit_signal('lose_influence', character_name)
+	_delta_influence = 0
+	
 	emit_signal('advance_turn', character_name)
 	
 # pressed restart button
@@ -209,6 +222,17 @@ func _on_MoreInfluence_button_up():
 func _on_LessInfluence_button_up():
 	lose_influence()
 
+# pressed any button
+func button_down():
+	Audio.play_sound(Audio.button_press, 1)
+
+# pressed info button
+func _on_Info_button_up():
+	var manual_panel = manual.instance()
+	manual_panel.manual_setup(0)
+	add_child(manual_panel)
+	move_child(manual_panel, get_child_count()-1)
+
 # ----------------- ALTER TEXT -----------------------------
 
 # alter action UI when action count changes
@@ -225,13 +249,22 @@ func _on_SalemAI_alter_round(_round):
 	$CurrentRound.text = round_text + ":" + str(_round)
 
 
+# ------------- MISC ---------------------------
 
-func button_down():
-	Audio.play_sound(Audio.button_press, 1)
+func gain_influence():
+	if _delta_influence > 0:
+		gain_action()
+		_delta_influence -= 1
+	elif get_actions() > 0 and get_influence() + _delta_influence != 0:
+		spend_action()
+		_delta_influence -= 1
 
 
-func _on_Info_button_up():
-	var manual_panel = manual.instance()
-	manual_panel.manual_setup(0)
-	add_child(manual_panel)
-	move_child(manual_panel, get_child_count()-1)
+func lose_influence():
+	if _delta_influence < 0:
+		gain_action()
+		_delta_influence += 1
+	elif get_actions() > 0 and get_influence() + _delta_influence != len(turn_order)-1:
+		spend_action()
+		_delta_influence += 1
+

@@ -32,15 +32,15 @@ func receive_report_info(reports): #report = {'player':[stance1, stance2, points
 		match (relations[player_name]):
 			-2: # Warm (Bitter)
 				if report[0] == 0 and report[1] == 1: # Hatred: backstab -> furious
-					set_rep(player_name, 2)
+					set_relations(player_name, 2)
 			-1: # Trusting
 				if report[0] == 0 and report[1] == 1: # Hatred: backstab -> furious
-					set_rep(player_name, 2)
+					set_relations(player_name, 2)
 			0: # Suspicious
 				if report[0] == 0 and report[1] == 1: # Hatred: backstab -> hostile
-					set_rep(player_name, 1)
+					set_relations(player_name, 1)
 				elif report[0] == 1 and report[1] == 0: # Warlord: slaughter -> hostile
-					set_rep(player_name, 1)
+					set_relations(player_name, 1)
 		
 		# General # sender/message_list
 		trait_general(memory_list, get_current_round(), [player_name, report[1], character_name])
@@ -70,17 +70,13 @@ func receive_message(sender, roun, message):
 
 
 # Bitter
-func set_rep(player_name, _new):
+func set_relations(player_name, _new):
 	if relations[player_name] != 2:
 		relations[player_name] = _new
 
-func gain_rep(player_name):
+func improve_relations(player_name):
 	if relations[player_name] != 2 and relations[player_name] != -2:
 		relations[player_name] -= 1
-		
-func lose_rep(player_name):
-	if relations[player_name] != 2:
-		relations[player_name] += 1
 
 # ----------------- ACTIONS -----------------
 

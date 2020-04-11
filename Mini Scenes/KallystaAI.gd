@@ -10,6 +10,7 @@ var just_invest = ''
 # lists all pieces of info (messages) competitor wants to investigate
 var tactical_list = {}
 
+# lists friends
 var popularity_list = {'Grolk':[],'Kallysta':[],'Thoren':[],'Salem':[],'Edraele':[]}
 
 # lists relations between players she obtained in investigations
@@ -84,7 +85,7 @@ func receive_message(sender, roun, message):
 	# check with facts
 	for info in info_list:
 		if info[0] == message[0] and info[1] != message[1] and info[2] == message[2] and info_list[info] == roun:
-			emit_signal('set_rep', sender, 2)
+			emit_signal('set_relations', sender, 2)
 			return
 
 	# check with testimony
@@ -94,10 +95,10 @@ func receive_message(sender, roun, message):
 			memory_list[memory][0] == roun):
 				# testimony contest
 				if relations[memory_list[memory][1]] > relations[sender]:
-					emit_signal('set_rep', sender, 2)
+					emit_signal('set_relations', sender, 2)
 					return
 				elif relations[memory_list[memory][1]] < relations[sender]:
-					emit_signal('set_rep', memory_list[memory][1], 2)
+					emit_signal('set_relations', memory_list[memory][1], 2)
 					break
 	
 	# check with myself
@@ -109,11 +110,11 @@ func receive_message(sender, roun, message):
 
 	# Intrigue - Well, thanks for the info
 	if message[0] != sender and message[2] != sender:
-		emit_signal('gain_rep', sender)
+		emit_signal('improve_relations', sender)
 
 	if message[1] == 1: # negative interaction
 		# Paranoid
-		set_rep(message[2], 2)
+		set_relations(message[2], 2)
 	
 		# Snitching 
 		snitch_list.append(message)
@@ -128,13 +129,13 @@ func receive_fact(roun, fact):
 	for tactical in tactical_list.keys():
 		#[info]:[round, sender]
 		if tactical == fact and roun == tactical_list[tactical][0]:
-			emit_signal('gain_rep', tactical_list[tactical][1])
+			emit_signal('improve_relations', tactical_list[tactical][1])
 			tactical_list.erase(tactical)
 	
 	# Intrigue - wait, this memory is false
 	for memory in memory_list.keys(): 
 		if fact[0] == memory[0] and fact[1] != memory[1] and fact[2] == memory[2] and roun == memory_list[memory][0] and relations[memory_list[memory][1]] < 2:
-			emit_signal('set_rep', memory_list[memory][1], 2)
+			emit_signal('set_relations', memory_list[memory][1], 2)
 			memory_list.erase(memory)
 	
 	# since facts are always true, look for and override previous false info
@@ -160,7 +161,7 @@ func receive_relation(relation, enemy_name, opponent_name):
 		relations[enemy_name] = 2
 		
 	# Chainbreaker
-	if relation < 0 and !popularity_list[opponent_name].has(enemy_name):
+	if relation < 0 and !popularity_list[opponent_name].has(enemy_name) and enemy_name != character_name:
 		popularity_list[opponent_name].append(enemy_name)
 		if popularity_list[opponent_name].size() >= 2 and opponent_name != character_name:
 			relations[opponent_name] = 1
@@ -175,14 +176,6 @@ func receive_relation(relation, enemy_name, opponent_name):
 
 # ----------------- HELPER REACTIONS -----------------
 
-func set_rep(player_name, new_relation):
-	relations[player_name] = new_relation
-
-func gain_rep(player_name):
-	relations[player_name] -= 1
-		
-func lose_rep(player_name):
-	relations[player_name] += 1
 
 # ----------------- ACTIONS -----------------
 
@@ -196,15 +189,15 @@ func execute_action():
 				for enemy_name in turn_order:
 					if relations[enemy_name] == 0:
 						_investigate(enemy_name)
-		3: # break alliance type 1
+		
+		3: # break alliance type 0
+			_letter()
+		
+		4: # break alliance type 1
 			_break('_denounce')
 			
-		4: # break alliance type 2
+		5: # break alliance type 2
 			_break('_lie')
-		
-		5: # reduce turn order
-			if get_influence() < 3:
-				lose_influence()
 		
 		6: # increase turn order
 			if get_influence() > 3:
@@ -245,20 +238,33 @@ func execute_action():
 # first, choose a hostile X player. Then, choose Y and Z, friends of X.
 func _break(last_check):
 	for player_x in turn_order:
-		if relations[player_x] == 1 and popularity_list[player_x].size() >= 2:
+		if relations[player_x] == 1:
 			for player_y in popularity_list[player_x]:
 				for player_z in popularity_list[player_x]:
 					if player_y != player_z:
 						for relation in relation_list:
-							call(last_check, relation, player_x, player_y, player_z)
+							if relation[0] == player_y and relation[2] == player_z:
+								call(last_check, relation, player_x, player_y, player_z)
+
+# first, choose a hostile X player. Then, choose Y, friend of X. Send a false letter from X to Y.
+func _letter():
+	for player_x in turn_order:
+		if relations[player_x] == 1:
+			for player_y in popularity_list[player_x]:
+				for letter in letter_list:
+					print("letter: " + letter[0])
+					for info in info_list.keys(): #info_list[info] >= get_current_round()-1 and 
+						if letter[0] == player_x and letter[1] == info[0] and letter[2] != info[1] and letter[3] == info[2]:
+							send_letter(letter[0], letter[1], letter[2], letter[3], player_y)
+							print("woop")
 
 # If Y is furious with Z, tell Y that X allies w/ Z.
 func _denounce(relation, player_x, player_y, player_z):
-	if relation[0] == player_y and relation[1] == 2 and relation[0] == player_z:
+	if relation[1] == 2:
 		send(0, player_y, player_x, player_z)
 # If Y is friends with both kallysta and Z, tell Y that X attacks Z.
 func _lie(relation, player_x, player_y, player_z):
-	if relation[0] == player_y and relation[2] == player_z and relation[1] < 0 and relations[player_y] < 0:
+	if relation[1] < 0 and relations[player_y] < 0:
 		send(1, player_y, player_x, player_z)
 		
 # tell them that she'll ally with them

@@ -17,7 +17,7 @@ var stance_changes = 0
 # setup
 func _ready():
 	game_setup(these_players, this_turn_order)
-	ai_node('Grolk').set_rep(player_character, -1)
+	ai_node('Grolk').set_relations(player_character, -1)
 	
 	setup_texts()
 	next_popup(false)
@@ -120,3 +120,4 @@ func _on_SalemAI_advance_turn(character_name):
 	print(str(current_text))
 	if current_text == 15:
 		get_tree().change_scene("res://Mini Scenes/Tutorial_2.tscn")
+
