@@ -16,8 +16,9 @@ _global_script_class_icons={
 [application]
 
 config/name="The Long Game"
-run/main_scene="res://Mini Scenes/MainMenu.tscn"
-config/icon="res://Art/Icon2.png"
+run/main_scene="res://Mini Scenes/Scenes/MainMenu.tscn"
+config/icon="res://0- SECRET BUNKER/Logo/192.png"
+config/windows_native_icon="res://0- SECRET BUNKER/Icon3.ico"
 
 [autoload]
 
@@ -26,6 +27,7 @@ Audio="*res://Mini Scenes/Audio.tscn"
 
 [display]
 
+window/size/resizable=false
 window/stretch/mode="2d"
 window/stretch/aspect="expand"
 

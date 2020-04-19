@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Art/MatchReport.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/MatchTable.gd" type="Script" id=2]
+[ext_resource path="res://Art/CheckMark.png" type="Texture" id=3]
+[ext_resource path="res://Art/Cross.png" type="Texture" id=4]
+[ext_resource path="res://Art/QuestionMark.png" type="Texture" id=5]
+
+[node name="ReportTable" type="TextureRect"]
+margin_left = 271.605
+margin_top = 326.199
+margin_right = 341.605
+margin_bottom = 465.199
+rect_scale = Vector2( 0.75, 0.75 )
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+square_count = 1
+stance_sprites = [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ]
+
+[node name="MyTurn1" type="TextureRect" parent="."]
+margin_left = 3.2583
+margin_top = 2.90672
+margin_right = 67.2583
+margin_bottom = 66.9067
+texture = ExtResource( 3 )
+
+[node name="EnTurn1" type="TextureRect" parent="."]
+margin_left = 2.52906
+margin_top = 71.0763
+margin_right = 66.5291
+margin_bottom = 135.076
+texture = ExtResource( 3 )

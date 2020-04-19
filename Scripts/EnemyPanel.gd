@@ -136,12 +136,12 @@ func item_selected(ID):
 
 
 func _on_ManualButton_button_up():
-	var player_translator = {'Grolk':3,'Kallysta':4, 'Thoren':5,'Edraele':6}
-	
 	var _new = manual.instance()
-	_new.manual_setup(player_translator[enemy_name])
 	add_child(_new)
 	move_child(_new, get_child_count()-1)
+	
+	var player_translator = _new.get_player_translator()
+	_new.manual_setup(player_translator[enemy_name])
 	
 	_new.connect("closed_manual", self, "closed_manual")
 	

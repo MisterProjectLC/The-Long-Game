@@ -50,7 +50,7 @@ func setup_texts():
 			['Investigue GROLK, O ORC.', true],
 			['Grolk confia em você, mas é possível saber sua opinião em relação à outros jogadores também. Clique no retrato no lado direito do painel para mudar o outro jogador.', false],
 			['Muito bem. Então, Grolk confia em você, mas não confia em Daint. Isso pode ser usado como arma... Veremos como fazer isso a seguir.', false],
-			['Cada NPC tem uma personalidade distinta, que pode ser examinada clicando no botão ao lado direito de INFO. Preste atenção especial nas seções IRMANDADE e IMBECIL.', true],
+			['Cada NPC tem uma personalidade distinta, que pode ser examinada clicando no botão ao lado direito de INFO. Preste atenção especial nas seções IRMANDADE e SIMPLES.', true],
 			['Grolk sempre confia em seus aliados, e fica Hostil a qualquer um que atacá-los. Com essas características, é possível influenciá-lo a atacar outra pessoa.', false],
 			['A mensagem que queremos passar é de que outra pessoa está nos atacando. Para isso, utilizaremos a mecânica de Diplomacia, enviando uma carta para Grolk.', true],
 			['Para fazer isso, selecione as opções desejadas na Área de Diplomacia de Grolk e clique Enviar.', true],

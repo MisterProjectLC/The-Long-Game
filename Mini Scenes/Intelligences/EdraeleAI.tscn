@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/Intelligences/EdraeleAI.gd" type="Script" id=1]
+
+
+[node name="EdraeleAI" type="Node"]
+script = ExtResource( 1 )
+[connection signal="gain_rep" from="." to="." method="gain_rep"]
+[connection signal="lose_rep" from="." to="." method="lose_rep"]
+[connection signal="set_rep" from="." to="." method="set_rep"]

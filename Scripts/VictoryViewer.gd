@@ -30,11 +30,11 @@ func set_text(text):
 	$Label.text = text
 
 func _on_BackButton_button_up():
-	get_tree().change_scene("res://Mini Scenes/MainMenu.tscn")
+	get_tree().change_scene("res://Mini Scenes/Scenes/MainMenu.tscn")
 
 
 func _on_RestartButton_button_up():
-	get_tree().change_scene("res://Mini Scenes/Main.tscn")
+	get_tree().change_scene("res://Mini Scenes/Scenes/Main.tscn")
 
 
 func _on_VictoryViewer_popup_revealed():

@@ -7,6 +7,7 @@ signal pressed_opponent
 
 export var intelligences = []
 
+export(PackedScene) var profile
 export(PackedScene) var panel
 export(PackedScene) var manual
 export(PackedScene) var letters_panel
@@ -26,11 +27,22 @@ var _delta_influence = 0
 
 # other players-dependant setup
 func _on_SalemAI_done_setup():
+	for i in range(len(players)):
+		if players[i][0] != character_name:
+			# profile creation
+			var _new = profile.instance()
+			add_child(_new)
+			move_child(_new, get_child_count()-1)
+			
+			# profile setup
+			_new.rect_position = Vector2(45+(244*i),136)
+			_new.connect("portrait_click", self, "_portrait_pressed")
+			_new.connect("stance_change", self, "_stance_pressed")
+			_new.name = players[i][0]
+			_new.add_to_group("Profiles")
+			_new.setup(players[i])
+		
 	language(Global.get_language())
-	
-	for player in players:
-		if player[0] != character_name:
-			find_node(player[0]).setup(player)
 	
 func language(language):
 	turn_order_text = Global.mains[language]['Turn Order']
@@ -41,15 +53,16 @@ func language(language):
 	message_text = Global.mains[language]['Message']
 	
 	# Each Passive/Agressive Button
-	for player in players:
-		if player[0] != character_name:
-			find_node(player[0]).language(language)
+	for profile in get_tree().get_nodes_in_group("Profiles"):
+		if profile.name != character_name:
+			profile.language(language)
 
 func _ready():
 	character_name = 'Salem'
+	traits_list = ["Player Character", "Seer", "Charismatic"]
 	
-	relations = {'Grolk':0,'Kallysta':0,'Thoren':0,'Edraele':0,'Salem':-2, 'Daint': 0}
-	_info_til_round = {'Grolk':0,'Kallysta':0,'Thoren':0,'Edraele':0, 'Daint': 0}
+	relations = {'Grolk':0,'Kallysta':0,'Obrulena':0,'Thoren':0,'Edraele':0,'Salem':-2, 'Daint': 0}
+	_info_til_round = {'Grolk':0,'Kallysta':0,'Obrulena':0,'Thoren':0,'Edraele':0, 'Daint': 0}
 
 # -------------------- SIGNAL HANDLING -----------------
 
@@ -112,18 +125,17 @@ func receive_relation_info(relation, enemy_requested_name, opponent_requested_na
 
 # receive message
 func receive_message(sender, roun, message):
-	print_mail(sender, message)
+	.receive_message(sender, roun, message)
 	
 	var mail_v = mail_viewer.instance()
 	add_child(mail_v)
 	move_child(mail_v, get_child_count()-1)
 	mail_v.set_text(message_text + ': ' + sender + '\n\n' + message[0] + 
 			' ' + get_dip_phrase(message[1]) + ' ' + message[2])
-	add_to_letter_list(sender, message)
 
 
 func set_profile_visible(_name, _new):
-	find_node(_name).visible = _new
+	Global.find_in_group(self, "Profiles", _name).visible = _new
 
 # ------------------ PRESSING STUFF ---------------------
 
@@ -190,7 +202,8 @@ func _send_message(name1, message_id, name2):
 func _stance_pressed(_target, _stance):
 	if get_actions() > 0 || get_stance(_target[0], get_current_round()) == 1:
 		change_stance(_target[0], get_current_round(), _stance)
-		find_node(_target[0]).new_stance(_stance)
+		Global.find_in_group(self, "Profiles", _target[0]).new_stance(_stance)
+		
 		emit_signal('changed_stance')
 
 
@@ -208,11 +221,11 @@ func _on_AdvanceTurn_button_up():
 	
 # pressed restart button
 func _on_Restart_button_up():
-	get_tree().change_scene("res://Mini Scenes/Main.tscn")
+	get_tree().change_scene("res://Mini Scenes/Scenes/Main.tscn")
 	
 # pressed back button
 func _on_Back_button_up():
-	get_tree().change_scene("res://Mini Scenes/MainMenu.tscn")
+	get_tree().change_scene("res://Mini Scenes/Scenes/MainMenu.tscn")
 
 # pressed more influence button
 func _on_MoreInfluence_button_up():
