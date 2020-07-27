@@ -61,8 +61,8 @@ func _ready():
 	character_name = 'Salem'
 	traits_list = ["Player Character", "Seer", "Charismatic"]
 	
-	relations = {'Grolk':0,'Kallysta':0,'Obrulena':0,'Thoren':0,'Edraele':0,'Salem':-2, 'Daint': 0}
-	_info_til_round = {'Grolk':0,'Kallysta':0,'Obrulena':0,'Thoren':0,'Edraele':0, 'Daint': 0}
+	relations = {'Grolk':0,'Zardri':0 ,'Kallysta':0,'Obrulena':0,'Thoren':0,'Edraele':0,'Salem':-2, 'Daint': 0}
+	_info_til_round = {'Grolk':0,'Zardri':0 ,'Kallysta':0,'Obrulena':0,'Thoren':0,'Edraele':0, 'Daint': 0}
 
 # -------------------- SIGNAL HANDLING -----------------
 

@@ -18,7 +18,8 @@ func _ready():
 	traits_list = ["Agenda", "Treachery", "Justice", "Reactive", "Jealousy", "Deduction",
 					"Allegiances", "Queen", "Facade", "Intrigue"]
 	
-	relations = {'Grolk':1,'Kallysta':0,'Obrulena':0,'Thoren':-1,'Salem':0,'Edraele':-2}
+	relations = {'Grolk':1,'Zardri':0, 'Kallysta':0,'Obrulena':0,
+	'Thoren':-1,'Salem':0,'Edraele':-2}
 
 #-------------- REACTIONS AND SETUP --------------------
 
@@ -351,9 +352,7 @@ func _investigate(_target):
 		return false
 		
 	spend_action()
-		
 	set_info_til_round(_target, get_current_round())
-			
 	print_invest(_target)
 	# look for their relation/historic with all others
 	

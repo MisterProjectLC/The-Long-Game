@@ -11,7 +11,8 @@ var just_invest = ''
 var tactical_list = {}
 
 # lists friends
-var popularity_list = {'Grolk':[],'Kallysta':[],'Obrulena':[],'Thoren':[],'Salem':[],'Edraele':[]}
+var popularity_list = {'Grolk':[],'Zardri':[],'Kallysta':[],'Obrulena':[],
+'Thoren':[],'Salem':[],'Edraele':[]}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -19,7 +20,8 @@ func _ready():
 	memory_time = 6
 	traits_list = ["Paranoid", "Justice", "Deduction", "Chain-Breaker", "Cynic", "Intrigue"]
 	
-	relations = {'Grolk':0,'Kallysta':-2,'Obrulena':0,'Thoren':0,'Salem':0,'Edraele':0}
+	relations = {'Grolk':0, 'Zardri':0,'Kallysta':-2,'Obrulena':0,
+	'Thoren':0,'Salem':0,'Edraele':0}
 
 #-------------- REACTIONS AND SETUP --------------------
 
@@ -85,8 +87,7 @@ func receive_message(sender, roun, message):
 		emit_signal('improve_relations', sender)
 
 	if message[1] == 1: # negative interaction
-		# Paranoid
-		set_relations(message[2], 2)
+		trait_paranoid(message)
 	
 		# Snitching 
 		snitch_list.append(message)
@@ -94,6 +95,7 @@ func receive_message(sender, roun, message):
 		snitch_list.append([message[2], message[1], message[0]])
 		
 	receive_information(roun, message)
+
 
 # process fact
 func receive_fact(roun, fact):
@@ -125,15 +127,14 @@ func receive_relation(relation, enemy_name, opponent_name):
 		receive_relation(relation, opponent_name, enemy_name)
 		
 	# Paranoid pt. 2
-	if relation > 0 and opponent_name == character_name:
-		relations[enemy_name] = 2
+	trait_paranoid_relation(relation, enemy_name, opponent_name)
 		
 	# Chainbreaker
 	if relation < 0 and !popularity_list[opponent_name].has(enemy_name) and enemy_name != character_name:
 		popularity_list[opponent_name].append(enemy_name)
 		if popularity_list[opponent_name].size() >= 2 and opponent_name != character_name:
 			relations[opponent_name] = 1
-			
+	
 	elif relation >= 0 and popularity_list[opponent_name].has(enemy_name):
 		popularity_list[opponent_name].erase(enemy_name)
 
@@ -213,9 +214,7 @@ func _investigate(_target):
 		return false
 		
 	spend_action()
-		
 	set_info_til_round(_target, get_current_round())
-			
 	print_invest(_target)
 	# look for their relation/historic with all others
 	
@@ -229,11 +228,13 @@ func _investigate(_target):
 			emit_signal('matchtable_info_request', self, _target, opponent)
 	return true
 
+
 func _set_target(_new):
 	if _new == null:
 		target = ''
 	else:
 		target = _new
+
 
 func _set_target_inform(_new):
 	if _new == null:

@@ -14,7 +14,8 @@ func _ready():
 	memory_time = 2
 	traits_list = ["Serene", "Pacifist", "Alliance", "Intuition", "Simple-Minded", "Vassal"]
 
-	relations = {'Grolk':0,'Kallysta':-1, 'Obrulena':-2, 'Thoren':-1, 'Salem':0, 'Edraele':0}
+	relations = {'Grolk':0,'Zardri':0, 'Kallysta':-1, 'Obrulena':-2, 
+	'Thoren':-1, 'Salem':0, 'Edraele':0}
 
 # -------------- REACTIONS AND SETUP --------------------
 
@@ -56,6 +57,7 @@ func receive_matchtable_info(en_stances, op_stances, enemy_requested_name, oppon
 		trait_pacifist(i, enemy_requested_name, en_stances[i], opponent_requested_name, op_stances[i])
 		
 	.receive_matchtable_info(en_stances, op_stances, enemy_requested_name, opponent_requested_name)
+
 
 func receive_relation_info(relation, enemy_requested_name, opponent_requested_name):
 	.receive_relation_info(relation, enemy_requested_name, opponent_requested_name)
@@ -192,21 +194,3 @@ func execute_action():
 			spend_action()
 			return
 	priority_lister += 1
-	
-# ----------------- HELPER ACTIONS --------------------
-
-func _investigate(_target):
-	if get_actions() <= 0 || _target == character_name:
-		return
-		
-	spend_action()
-		
-	set_info_til_round(_target, get_current_round())
-			
-	print_invest(_target)
-	# look for their relation/history with all others
-	for opponent in turn_order:
-		if opponent != _target:
-			if _target != get_player_character():
-				emit_signal('relation_info_request', self, _target, opponent)
-			emit_signal('matchtable_info_request', self, _target, opponent)

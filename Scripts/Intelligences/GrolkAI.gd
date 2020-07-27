@@ -9,7 +9,8 @@ func _ready():
 	memory_time = 1
 	traits_list = ["Warlord", "Hatred", "Brotherhood", "Alliance", "General", "Simple-Minded", "Bitter"]
 	
-	relations = {'Grolk':-2,'Kallysta':0,'Obrulena':0,'Thoren':1, 'Salem':1, 'Edraele':1, 'Daint': 0}
+	relations = {'Grolk':-2, 'Zardri':-1, 'Kallysta':0,'Obrulena':0,
+	'Thoren':1, 'Salem':1, 'Edraele':1, 'Daint': 0}
 
 # -------------- REACTIONS AND SETUP --------------------
 
@@ -23,6 +24,7 @@ func start_turn():
 	
 	emit_signal("advance_turn", character_name)
 
+
 # process report info
 func receive_report_info(reports): #report = {'player':[stance1, stance2, points]}
 	for player_name in reports.keys():
@@ -30,22 +32,15 @@ func receive_report_info(reports): #report = {'player':[stance1, stance2, points
 		
 		info_list[[player_name, report[1], character_name]] = get_current_round()
 		
-		match (relations[player_name]):
-			-2: # Warm (Bitter)
-				if report[0] == 0 and report[1] == 1: # Hatred: backstab -> furious
-					set_relations(player_name, 2)
-			-1: # Trusting
-				if report[0] == 0 and report[1] == 1: # Hatred: backstab -> furious
-					set_relations(player_name, 2)
-			0: # Suspicious
-				if report[0] == 0 and report[1] == 1: # Hatred: backstab -> hostile
-					set_relations(player_name, 1)
-				elif report[0] == 1 and report[1] == 0: # Warlord: slaughter -> hostile
-					set_relations(player_name, 1)
+		trait_hatred(report, player_name)
+		
+		if relations[player_name] == 0 and report[0] == 1 and report[1] == 0: # Warlord: slaughter -> hostile
+			set_relations(player_name, 1)
 		
 		# General # sender/message_list
 		trait_general(memory_list, get_current_round(), [player_name, report[1], character_name])
 	forget_info()
+
 
 # receive message
 func receive_message(sender, roun, message):
