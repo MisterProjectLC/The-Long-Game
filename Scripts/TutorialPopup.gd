@@ -31,3 +31,8 @@ func _process(delta):
 func _on_CloseButton_button_up():
 	emit_signal('closed_box', false)
 	close()
+
+
+func _receive_input(event):
+	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed:
+		_on_CloseButton_button_up()

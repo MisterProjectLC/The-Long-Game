@@ -1,0 +1,49 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Scripts/Tutorial.gd" type="Script" id=1]
+[ext_resource path="res://Mini Scenes/Popups/VictoryViewer.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Mini Scenes/Popups/TutorialPopup.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Art/Portraits/Grolk V1.png" type="Texture" id=4]
+[ext_resource path="res://Art/Portraits/Thoren V1.png" type="Texture" id=5]
+[ext_resource path="res://Art/Portraits/Salem V1.png" type="Texture" id=6]
+[ext_resource path="res://Mini Scenes/Pieces/StoneBackground.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Mini Scenes/Scenes/SalemTutorial.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scripts/Intelligences/GrolkAI.gd" type="Script" id=9]
+[ext_resource path="res://Scripts/Intelligences/DaintAI.gd" type="Script" id=10]
+
+[node name="Tutorial" type="Node"]
+script = ExtResource( 1 )
+victory_panel = ExtResource( 2 )
+popupbox = ExtResource( 3 )
+these_players = [ [ "Grolk", ExtResource( 4 ) ], [ "Daint", ExtResource( 5 ) ], [ "Salem", ExtResource( 6 ) ] ]
+
+[node name="NinePatchRect" parent="." instance=ExtResource( 7 )]
+
+[node name="SalemAI" parent="." instance=ExtResource( 8 )]
+
+[node name="GrolkAI" type="Node" parent="."]
+script = ExtResource( 9 )
+
+[node name="DaintAI" type="Node" parent="."]
+script = ExtResource( 10 )
+
+[node name="Audio" type="AudioStreamPlayer" parent="."]
+[connection signal="advance_turn" from="SalemAI" to="." method="_on_SalemAI_advance_turn"]
+[connection signal="changed_stance" from="SalemAI" to="." method="_on_SalemAI_changed_stance"]
+[connection signal="closed_manual" from="SalemAI" to="." method="closed_manual"]
+[connection signal="done_setup" from="SalemAI" to="SalemAI" method="_on_SalemAI_done_setup"]
+[connection signal="improve_relations" from="SalemAI" to="SalemAI" method="improve_relations"]
+[connection signal="matchtable_info_request" from="SalemAI" to="." method="matchtable_info_request"]
+[connection signal="point_info_request" from="SalemAI" to="." method="point_info_request"]
+[connection signal="pressed_info" from="SalemAI" to="." method="_on_SalemAI_pressed_info"]
+[connection signal="pressed_opponent" from="SalemAI" to="." method="_on_SalemAI_pressed_opponent"]
+[connection signal="relation_info_request" from="SalemAI" to="." method="relation_info_request"]
+[connection signal="send_message" from="SalemAI" to="." method="_on_SalemAI_send_message"]
+[connection signal="set_relations" from="SalemAI" to="SalemAI" method="set_relations"]
+[connection signal="worsen_relations" from="SalemAI" to="SalemAI" method="worsen_relations"]
+[connection signal="improve_relations" from="GrolkAI" to="GrolkAI" method="improve_relations"]
+[connection signal="set_relations" from="GrolkAI" to="GrolkAI" method="set_relations"]
+[connection signal="worsen_relations" from="GrolkAI" to="GrolkAI" method="worsen_relations"]
+[connection signal="improve_relations" from="DaintAI" to="DaintAI" method="improve_relations"]
+[connection signal="set_relations" from="DaintAI" to="DaintAI" method="set_relations"]
+[connection signal="worsen_relations" from="DaintAI" to="DaintAI" method="worsen_relations"]

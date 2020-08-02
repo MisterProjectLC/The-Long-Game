@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/Intelligences/ObrulenaAI.gd" type="Script" id=1]
+
+[node name="ObrulenaAI" type="Node"]
+script = ExtResource( 1 )
+[connection signal="improve_relations" from="." to="." method="improve_relations"]
+[connection signal="set_relations" from="." to="." method="set_relations"]
+[connection signal="worsen_relations" from="." to="." method="worsen_relations"]

@@ -36,11 +36,14 @@ var br_relations = {-2:'Amigavel',-1:'Confiante', 0:'Suspeito', 1:'Hostil', 2:'R
 var de_relations = {-2:'Freundlich',-1:'Vertrauend', 0:'Msstrauisch', 1:'Feindlich', 2:'Wütend'}
 
 var en_panel = {'Close':'Close', 'Info':'Info', 'Points':'Points', 'Relations':en_relations,
-	'R':'','Relation':'\'s relation\ntowards', 'Send':'Send', 'Diplomacy':'Diplomacy Area', 'Unknown':'Unknown'}
+	'R':'','Relation':'\'s relation\ntowards', 'Send':'Send', 'Diplomacy':'Diplomacy Area', 
+	'Unknown':'Unknown', 'Recipient':'Recipient'}
 var br_panel = {'Close':'Fechar', 'Info':'Info', 'Points':'Pontos', 'Relations':br_relations,
-	'R':'Relacao de \n','Relation':' com', 'Send':'Enviar', 'Diplomacy':'Area de Diplomacia', 'Unknown':'???'}
+	'R':'Relacao de \n','Relation':' com', 'Send':'Enviar', 'Diplomacy':'Area de Diplomacia', 
+	'Unknown':'???', 'Recipient':'Destinatario'}
 var de_panel = {'Close':'Schlss.', 'Info':'Info', 'Points':'Punktzahl', 'Relations':de_relations,
-	'R':'','Relation':'s Relation\nmit', 'Send':'Senden', 'Diplomacy':'Diplomatiebereich', 'Unknown':'Unbekannt'}
+	'R':'','Relation':'s Relation\nmit', 'Send':'Senden', 'Diplomacy':'Diplomatiebereich', 
+	'Unknown':'Unbekannt', 'Recipient':'Recipient'}
 var panels = [en_panel, br_panel, de_panel]
 
 var en_phrases = ['will co-op with', 'will attack']
@@ -79,3 +82,9 @@ func get_debug_enabled():
 	
 func set_debug_enabled(_new):
 	debug_enabled = _new
+
+	
+func find_in_group(requester, group, target_name):
+	for node in requester.get_tree().get_nodes_in_group(group):
+		if target_name == node.name:
+			return node

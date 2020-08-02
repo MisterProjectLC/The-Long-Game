@@ -11,16 +11,19 @@ signal alter_round
 signal send_message
 signal advance_turn
 
-signal gain_rep
-signal lose_rep
-signal set_rep
-
-signal done_setup
+signal improve_relations
+signal worsen_relations
+signal set_relations
 
 signal gain_influence
 signal lose_influence
 
+signal gain_rep
+signal lose_rep
+signal set_rep
+
 var character_name = ''
+var traits_list = []
 var _points = 0
 var _actions = 3
 var stances = [{}, {}, {}, {}, {}, {}]
@@ -34,8 +37,20 @@ var turn_order = []
 var dip_phrases = []
 
 # {[info]:round}
+
+# {player:["","",...]}
+var opponent_trait_list = {}
+
+# [[sender, actor, action, receiver]]
+# lists all letters received
+var letter_list = []
+
+# {[info]]:roun}
 # lists all pieces of info competitor believes in
 var info_list = {}
+
+# lists relations between players they obtained in investigations
+var relation_list = []
 
 # {['', x]:['','']} a list of (names associated w/ a list of names)
 # the lists therein say who knows about the names associated with such lists
@@ -49,33 +64,47 @@ var snitch_list = []
 var memory_list = {}
 var memory_time
 
-func _ready():
-	pass # Replace with function body.
-
 # ------------------------- SETUP ------------------------
 
-func setup(player_character, players, turn_order, dip_phrases):
-	self.player_character = player_character
-	self.players = players
-	self.turn_order = turn_order
-	self.dip_phrases = dip_phrases
+func setup(_player_character, _players, _turn_order, _dip_phrases, _opponent_trait_list):
+	self.player_character = _player_character
+	self.players = _players
+	self.turn_order = _turn_order
+	self.dip_phrases = _dip_phrases
+	self.opponent_trait_list = _opponent_trait_list
 	
-	for player in players:
+	for player in relations.keys():
 		_info_til_round[player] = 1
 		
 	for player in relations.keys():
 		ann_dict[[player, 0]] = []
 		ann_dict[[player, 1]] = []
-		
-	emit_signal('done_setup')
 
 
 # ---------------------- ACTIONS -----------------------
+
+func _investigate(_target):
+	if get_actions() <= 0 || _target == character_name:
+		return
+		
+	spend_action()
+	set_info_til_round(_target, get_current_round())
+	print_invest(_target)
+	
+	# look for their relation/history with all others
+	for opponent in turn_order:
+		if opponent != _target:
+			if _target != get_player_character():
+				emit_signal('relation_info_request', self, _target, opponent)
+			emit_signal('matchtable_info_request', self, _target, opponent)
+	return true
+
 
 func forget_info():
 	for memory in memory_list:
 		if memory_list[memory][0] <= get_current_round() - memory_time:
 			memory_list.erase(memory)
+
 
 func attack(_target_relation):
 	var return_list = []
@@ -85,7 +114,8 @@ func attack(_target_relation):
 			return_list.append(target_order)
 	return return_list
 
-func say_to_list(_order, _informed_relation_list, _target_relation_list, type):
+
+func say_to_list(_target_relation_list, _order, _informed_relation_list, type):
 	# look for players that fit the target relation
 	for target in turn_order:
 		if _target_relation_list.has(relations[target]) and target != character_name:
@@ -94,37 +124,47 @@ func say_to_list(_order, _informed_relation_list, _target_relation_list, type):
 				if _informed_relation_list.has(relations[sally]) and sally != character_name and sally != target and target != character_name:
 					match(type):
 						'warn':
-							warn(_order, sally, target)
+							warn(target, _order, sally)
 						'tell':
-							tell(_order, sally, target)
+							tell(target, _order, sally)
 						'threat':
-							threat(_order, sally, target)
+							threat(target, _order, sally)
 
-func tell(_order, _recipient, _target):
-	if manage_ann(_order, _recipient, _target):
-		send_message(_target, _order, character_name, _recipient)
-		
-func warn(_order, _recipient, _target):
-	if manage_ann(_order, _recipient, _target):
-		send_message(_target, _order, _recipient, _recipient)
-		
-func threat(_order, _recipient, _target):
-	if manage_ann(_order, _recipient, _target):
-		send_message(character_name, _order, _target, _recipient)
-		
+func tell(_target, _order, _recipient):
+	if manage_ann(_target, _order, _recipient):
+		return send_message(_target, _order, character_name, _recipient)
+	return false
+
+func warn(_target, _order, _recipient):
+	if manage_ann(_target, _order, _recipient):
+		return send_message(_target, _order, _recipient, _recipient)
+	return false
+
+func threat(_target, _order, _recipient):
+	if manage_ann(_target, _order, _recipient):
+		return send_message(character_name, _order, _target, _recipient)
+	return false
+
+func denounce(_target, _order, _object, _recipient):
+	if manage_ann(_target, _order, _recipient):
+		return send_message(_target, _order, _object, _recipient)
+	return false
+
 func send(_order, _recipient, _actor, _receiver):
-	send_message(_actor, _order, _receiver, _recipient)
+	return send_message(_actor, _order, _receiver, _recipient)
 
-func snitch(snitch_list, recipient_relation_list):
+
+func snitch(_snitch_list, recipient_relation_list):
 	var already_snitched = []
 	# Snitching
-	for info in snitch_list:
+	for info in _snitch_list:
 		if recipient_relation_list.has(relations[info[2]]) and !already_snitched.has(info[2]):
-			warn(info[1], info[2], info[0])
+			warn(info[0], info[1], info[2])
 			already_snitched.append(info[2])
-			snitch_list.erase(info)
-			
-func manage_ann(_order, _recipient, _target):
+			_snitch_list.erase(info)
+
+
+func manage_ann(_target, _order, _recipient):
 	if !ann_dict[[_target, _order]].has(_recipient):
 		# give info about ann to sally
 		ann_dict[[_target, _order]].append(_recipient)
@@ -133,93 +173,225 @@ func manage_ann(_order, _recipient, _target):
 		return true
 	return false
 
+
 func gain_influence():
-	if get_actions() > 0:
+	if get_actions() > 0 and turn_order.front() != character_name:
 		spend_action()
 		emit_signal('gain_influence', character_name)
 
 func lose_influence():
-	if get_actions() > 0:
+	if get_actions() > 0 and turn_order.back() != character_name:
 		spend_action()
 		emit_signal('lose_influence', character_name)
 
 
-# ------------------- TRAITS ---------------------------
+# ----------------------------- TRAITS -------------------------------------------------
+# --- TRAITS: DIRECT INTERACTION (REPORT) REACTIONS --------------------
 
-func trait_general(memory_list, roun, info):
-	# General
-	for memory in memory_list.keys(): 
-#		print('general ' + str(memory_list.keys().size()))
-#		print('Info: ' + str(info[0]) + ' ' + str(info[1]) + ' ' + str(info[2]) + ' ' + str(roun))
-#		print('Mem: ' + str(memory[0]) + ' ' + str(memory[1]) + ' ' + str(memory[2]) + ' ' + str(memory_list[memory][0]))
-		# memory is true
-		if info == memory and roun == memory_list[memory][0] and relations[memory_list[memory][1]] > -2:
-			emit_signal('gain_rep', memory_list[memory][1])
-			memory_list.erase(memory)
-		# memory is false
-		elif info[0] == memory[0] and info[2] == memory[2] and info[1] != memory[1] and roun == memory_list[memory][0] and relations[memory_list[memory][1]] < 2:
-			emit_signal('lose_rep', memory_list[memory][1])
-			memory_list.erase(memory)
+func trait_hatred(report, player_name):
+	match (relations[player_name]):
+		-2: # Warm
+			if report[0] == 0 and report[1] == 1: # Hatred: backstab -> furious
+				set_relations(player_name, 2)
+		-1: # Trusting
+			if report[0] == 0 and report[1] == 1: # Hatred: backstab -> furious
+				set_relations(player_name, 2)
+		0: # Suspicious
+			if report[0] == 0 and report[1] == 1: # Hatred: backstab -> hostile
+				set_relations(player_name, 1)
 
-func trait_intuition(en_stances, op_stances):
-	var _previous_round = get_current_round()-1
-	
-	if _previous_round == 0:
-		return 0
-	if (en_stances[_previous_round-1] == 1 and op_stances[_previous_round-1] == 0) or (en_stances[_previous_round-1] == 0 and op_stances[_previous_round-1] == 1):
-		return 2
-	elif en_stances[_previous_round-1] == 1 and op_stances[_previous_round-1] == 1:
-		return 1
-	else:
-		return -1
 
 func trait_justice(report, player_name):
 	if report[1] == 1 and report[0] == 0: # Justice: backstab -> furious
-		emit_signal('set_rep', player_name, 2)
+		emit_signal('set_relations', player_name, 2)
 		return true
 	return false
 
-func trait_brotherhood(info, relations):
-	# Alliance - my friend likes someone
-	if relations[info[0]] < 0 and info[1] == 0 and relations[info[2]] != 2 and relations[info[2]] != -2:
-		emit_signal('set_rep', info[2], -1)
-	
-	# Brotherhood - someone hates my friend
-	elif relations[info[0]] != 2 and info[1] == 1 and relations[info[2]] < 0:
-		emit_signal('set_rep', info[0], 1)
 
-func trait_allegiances(info, relations):
-	if info[1] == 0: # positive interaction
-		# Allegiances
-		if relations[info[2]] == 2 and relations[info[0]] != 2:
-			emit_signal('set_rep', info[0], 1)
-		elif relations[info[0]] == 2 and relations[info[2]] != 2 and info[2] != character_name: 
-			emit_signal('set_rep', info[2], 1)
-
-func trait_reactive(info, relations):
+func trait_reactive(info, _relations):
 	# Reactive - becoming suspicious
-	if relations[info[0]] > 0 and info[1] == 0 and info[2] == character_name:
-		emit_signal('set_rep', info[0], 0)
+	if _relations[info[0]] > 0 and info[1] == 0 and info[2] == character_name:
+		emit_signal('set_relations', info[0], 0)
 	# Reactive - becoming hostile
 	elif info[1] == 1 and info[2] == character_name:
-		emit_signal('set_rep', info[0], 1)
+		emit_signal('set_relations', info[0], 1)
+
+
+func trait_paranoid(info):
+	# Paranoid
+	if info[1] == 1: # negative interaction
+		emit_signal('set_relations', info[2], 2)
+
+# --- TRAITS: INDIRECT INTERACTION REACTIONS --------------
+
+func trait_alliance(info, _relations):
+	# Alliance - someone coops with my friend or my friend coops with someone
+	if _relations[info[2]] < 0 and info[1] == 0 and _relations[info[0]] != 2 and _relations[info[0]] != -2:
+		emit_signal('set_relations', info[0], -1)
+	elif _relations[info[0]] < 0 and info[1] == 0 and _relations[info[2]] != 2 and _relations[info[2]] != -2:
+		emit_signal('set_relations', info[2], -1)
+
+
+func trait_brotherhood(info, _relations):
+	# Brotherhood - someone hates my friend
+	if _relations[info[0]] != 2 and info[1] == 1 and _relations[info[2]] < 0:
+		emit_signal('set_relations', info[0], 1)
+
+
+func trait_allegiances(info, _relations):
+	if info[1] == 0: # positive interaction
+		# Allegiances
+		if _relations[info[2]] == 2 and _relations[info[0]] != 2:
+			emit_signal('set_relations', info[0], 1)
+		elif _relations[info[0]] == 2 and _relations[info[2]] != 2 and info[2] != character_name: 
+			emit_signal('set_relations', info[2], 1)
+
+# --- TRAITS: RELATIONSHIP REACTIONS --------------
+
+func trait_paranoid_relation(relation, enemy_name, opponent_name):
+	if relation > 0 and opponent_name == character_name:
+		relations[enemy_name] = 2
+
+
+func trait_alliance_relation(relation, enemy_name, opponent_name):
+	if relations[enemy_name] < 0 and relation < 0 and relations[opponent_name] != 2: # a friend likes this person
+		set_relations(opponent_name, -1)
+
 
 func trait_reactive_relations(enemy_name, relation, opponent_name):
 	# Reactive pt. 2
 	if relation > 0 and opponent_name == character_name and relations[enemy_name] < 2:
 		relations[enemy_name] = 1
 
-# ---------------- SEND MESSAGE ----------------------------
+
+func trait_vassal(turn_message):
+	if turn_order.size() > 0 and turn_order[0] != turn_message[0]:
+		worsen_relations(turn_order[0])
+		improve_relations(turn_message[0])
+
+
+# --- TRAITS: DEDUCE PLAYER ---------------------
+
+func trait_intuition(en_stances, op_stances, enemy_requested_name, opponent_requested_name):
+	var _relation
+	# Intuition
+	if enemy_requested_name == get_player_character():
+		var _previous_round = get_current_round()-1
+		if _previous_round == 0:
+			_relation = 0
+		elif (en_stances[_previous_round-1] == 1 and op_stances[_previous_round-1] == 0) or (en_stances[_previous_round-1] == 0 and op_stances[_previous_round-1] == 1):
+			_relation = 2
+		elif en_stances[_previous_round-1] == 1 and op_stances[_previous_round-1] == 1:
+			_relation = 1
+		else:
+			_relation = -1
+		receive_relation_info(_relation, enemy_requested_name, opponent_requested_name)
+
+
+# -- TRAITS: INFORMATION REACTION -----------------------
+
+func trait_simpleminded_check(sender):
+	if relations[sender] >= 0: # ignores suspicious or worse people
+		return false
+	return true
+
+
+func trait_general(_memory_list, roun, info):
+	# General
+	for memory in _memory_list.keys(): 
+#		print('general ' + str(memory_list.keys().size()))
+#		print('Info: ' + str(info[0]) + ' ' + str(info[1]) + ' ' + str(info[2]) + ' ' + str(roun))
+#		print('Mem: ' + str(memory[0]) + ' ' + str(memory[1]) + ' ' + str(memory[2]) + ' ' + str(memory_list[memory][0]))
+		# memory is true
+		if info == memory and roun == _memory_list[memory][0] and relations[_memory_list[memory][1]] > -2:
+			emit_signal('improve_relations', _memory_list[memory][1])
+			_memory_list.erase(memory)
+		# memory is false
+		elif info[0] == memory[0] and info[2] == memory[2] and info[1] != memory[1] and roun == _memory_list[memory][0] and relations[_memory_list[memory][1]] < 2:
+			emit_signal('worsen_relations', _memory_list[memory][1])
+			_memory_list.erase(memory)
+
+
+func trait_intrigue_check(sender, roun, message, me):
+	# check with facts
+	for info in info_list:
+		if info[0] == message[0] and info[1] != message[1] and info[2] == message[2] and info_list[info] == roun:
+			emit_signal('set_relations', sender, 2)
+			return false
+
+	# check with testimony
+	for memory in memory_list:
+		# contradiction?
+		if (memory[0] == message[0] and memory[2] == message[0] and memory[1] != message[1] and 
+			memory_list[memory][0] == roun):
+				# testimony contest
+				if relations[memory_list[memory][1]] > relations[sender]:
+					emit_signal('set_relations', sender, 2)
+					return false
+				elif relations[memory_list[memory][1]] < relations[sender]:
+					emit_signal('set_relations', memory_list[memory][1], 2)
+					break
+	
+	# check with myself
+	if relations[sender] == 0:
+		me.tactical_list[message] = [roun, sender]
+		return false
+	return true
+
+# ---------------- BASE FUNCTIONS ----------------------------
+
+func receive_message(sender, _roun, message):
+	print_mail(sender, message)
+	add_to_letter_list(sender, message)
+
+
+func receive_fact(roun, fact): # fact = [enemy_requested_name, stance, opponent_requested_name]
+	# since facts are always true, look for and override previous false info
+	for info in info_list.keys():
+		if info[0] == fact[0] and info[2] == fact[2] and info[1] != fact[1] and info_list[info] == roun:
+			info_list.erase(info)
+	
+	receive_information(roun, fact)
+
+
+func receive_information(roun, info):
+	# add to info list
+	info_list[info] = roun
+
+
+func receive_matchtable_info(en_stances, op_stances, enemy_requested_name, opponent_requested_name):
+	# Download entire matchtable as info
+	for i in range(en_stances.size()):
+		receive_fact(i, [enemy_requested_name, en_stances[i], opponent_requested_name])
+		receive_fact(i, [opponent_requested_name, op_stances[i], enemy_requested_name])
+
+
+func receive_relation_info(relation, enemy_requested_name, opponent_requested_name):
+	receive_relation(relation, enemy_requested_name, opponent_requested_name)
+
+
+func receive_relation(relation, enemy_name, opponent_name):
+	for this_relation in relation_list:
+		if this_relation[0] == enemy_name and this_relation[1] != relation and this_relation[2] == opponent_name:
+			relation_list.erase(this_relation)
+	relation_list.append([enemy_name, relation, opponent_name])
+
 
 func send_message(name1, message, name2, recipient):
-	if name1 == name2 || get_actions() <= 0 || recipient == character_name:
-		return
+	return send_letter(character_name, name1, message, name2, recipient)
+
+
+func send_letter(sender, name1, message, name2, recipient):
+	if name1 == name2 || get_actions() <= 0 || recipient == sender || name1 == recipient:
+		return false
 	
 	spend_action()
 	var package = [name1, message, name2]
 	
 	# sender, message, recipient
-	emit_signal('send_message', character_name, package, recipient)
+	emit_signal('send_message', sender, package, recipient)
+	return true
+	
 
 # ----------------- HELPER FUNCTIONS -------------------
 
@@ -239,6 +411,7 @@ func change_stance(_character, _round, stance):
 	elif get_actions() > 0:
 		spend_action()
 		set_stance(_character, _round, stance)
+		print_attack(_character)
 		return true
 	return false
 
@@ -247,7 +420,7 @@ func set_stance(_character, _round, stance):
 
 func get_stance(_character, _round):
 	return stances[_round-1][_character]
-	
+
 func get_stances_against(_character, _round):
 	if _round == 0:
 		return []
@@ -258,11 +431,16 @@ func get_stances_against(_character, _round):
 	return stances_vs
 
 func improve_relations(_character):
-	relations[_character] += 1
+	if relations[_character] > -2:
+		relations[_character] -= 1
 
 func worsen_relations(_character):
-	relations[_character] -= 1
-	
+	if relations[_character] < 2:
+		relations[_character] += 1
+
+func set_relations(_character, _new):
+	relations[_character] = _new
+
 func get_relation(_character):
 	return relations[_character]
 
@@ -294,7 +472,7 @@ func receive_turn_order_info(turn_message):
 func get_influence():
 	for i in range(turn_order.size()):
 		if turn_order[i] == character_name:
-			return i
+			return i+1
 	
 func get_info_til_round(_character):
 	return _info_til_round[_character]
@@ -308,6 +486,9 @@ func get_current_round():
 func set_current_round(_new):
 	_current_round = _new
 	emit_signal("alter_round", _new)
+	
+func add_to_letter_list(author, letter):
+	letter_list.append([author, letter[0], letter[1], letter[2]])
 	
 func get_player_character():
 	return player_character
@@ -323,18 +504,25 @@ func get_dip_phrases():
 	
 func get_dip_phrase(i):
 	return dip_phrases[i]
-	
+
+func get_traits_list():
+	return traits_list
+
 # --------------- DEBUG -------------
 
 func print_turn():
 	if Global.get_debug_enabled():
 		print(character_name.to_upper() + ' TURN')
-		
+
 func print_mail(sender, message):
 	if Global.get_debug_enabled():
 		print(character_name + " mail. Sender: "+ sender + ", Message: " + 
 			message[0] + ' ' + get_dip_phrase(message[1]) + ' ' + message[2])
-			
+
+func print_attack(_target):
+	if Global.get_debug_enabled():
+		print(character_name + ' attacking ' + _target)
+
 func print_invest(_target):
 	if Global.get_debug_enabled():
 		print(character_name + ' investigating ' + _target)

@@ -1,5 +1,0 @@
-[gd_scene format=2]
-
-[node name="ImageManual" type="NinePatchRect"]
-margin_right = 481.0
-margin_bottom = 324.0

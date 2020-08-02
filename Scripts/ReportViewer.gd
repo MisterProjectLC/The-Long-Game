@@ -15,8 +15,8 @@ func language(language):
 	var dictionary = ['Results', 'Resultados']
 	$Title.text = dictionary[language]
 	
-func report_setup(player, opponents, reports):
-	self.opponents = opponents
+func report_setup(player, _opponents, reports):
+	self.opponents = _opponents
 	
 	language(Global.get_language())
 	

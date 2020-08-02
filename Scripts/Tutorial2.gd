@@ -50,7 +50,7 @@ func next_popup(override):
 		$SalemAI.set_profile_visible('Thoren', true)
 	
 	if current_text < texts.size() and (texts[current_text][1] || override):
-		open_popupbox(Vector2(825, 184), Vector2(102.578, 412), 1.6, texts[current_text][0])
+		open_popupbox(Vector2(825, 184), Vector2(0, 0), 1.6, texts[current_text][0])
 		current_text += 1
 	
 

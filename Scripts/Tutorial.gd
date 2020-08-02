@@ -17,7 +17,7 @@ var stance_changes = 0
 # setup
 func _ready():
 	game_setup(these_players, this_turn_order)
-	ai_node('Grolk').set_rep(player_character, -1)
+	ai_node('Grolk').set_relations(player_character, -1)
 	
 	setup_texts()
 	next_popup(false)
@@ -50,7 +50,7 @@ func setup_texts():
 			['Investigue GROLK, O ORC.', true],
 			['Grolk confia em você, mas é possível saber sua opinião em relação à outros jogadores também. Clique no retrato no lado direito do painel para mudar o outro jogador.', false],
 			['Muito bem. Então, Grolk confia em você, mas não confia em Daint. Isso pode ser usado como arma... Veremos como fazer isso a seguir.', false],
-			['Cada NPC tem uma personalidade distinta, que pode ser examinada clicando no botão ao lado direito de INFO. Preste atenção especial nas seções IRMANDADE e IMBECIL.', true],
+			['Cada NPC tem uma personalidade distinta, que pode ser examinada clicando no botão ao lado direito de INFO. Preste atenção especial nas seções IRMANDADE e SIMPLES.', true],
 			['Grolk sempre confia em seus aliados, e fica Hostil a qualquer um que atacá-los. Com essas características, é possível influenciá-lo a atacar outra pessoa.', false],
 			['A mensagem que queremos passar é de que outra pessoa está nos atacando. Para isso, utilizaremos a mecânica de Diplomacia, enviando uma carta para Grolk.', true],
 			['Para fazer isso, selecione as opções desejadas na Área de Diplomacia de Grolk e clique Enviar.', true],
@@ -61,7 +61,7 @@ func setup_texts():
 
 func next_popup(override):
 	if current_text < texts.size() and (texts[current_text][1] || override):
-		open_popupbox(Vector2(825, 184), Vector2(102.578, 412), 1.6, texts[current_text][0])
+		open_popupbox(Vector2(825, 184), Vector2(0, 0), 1.6, texts[current_text][0])
 		current_text += 1
 	
 
@@ -120,3 +120,4 @@ func _on_SalemAI_advance_turn(character_name):
 	print(str(current_text))
 	if current_text == 15:
 		get_tree().change_scene("res://Mini Scenes/Tutorial_2.tscn")
+

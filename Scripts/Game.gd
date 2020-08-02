@@ -27,28 +27,34 @@ func game_setup(_new_players, _newer_turn_order):
 	# language
 	language(Global.get_language())
 	Audio.play_music(Audio.game_theme)
-
+	
 	# player setup
 	turn_order = _newer_turn_order.duplicate(true)
 	newer_turn_order = _newer_turn_order.duplicate(true)
 	players = _new_players
+	
+	var opponent_trait_list = {}
 	for player in players:
-		ai_node(player[0]).setup(player_character, players, turn_order, dip_phrases)
-
+		opponent_trait_list[player[0]] = ai_node(player[0]).get_traits_list()
+	opponent_trait_list = opponent_trait_list.duplicate(true)
+	
+	for player in players:
+		ai_node(player[0]).setup(player_character, players, turn_order, dip_phrases, opponent_trait_list)
+	
 	# Charismatic
 	randomize()
-
 	var opponent_count = players.size()-1
 	var a = randi() % opponent_count
 	for i in range(players.size()):
 		if i != a:
 			continue
-
+	
 		if players[i][0] != player_character:
-			ai_node(players[i][0]).gain_rep(player_character)
-
+			ai_node(players[i][0]).improve_relations(player_character)
+	
 	# start game
 	start_round()
+
 
 # at beginning of round
 func start_round():
@@ -70,7 +76,7 @@ func start_round():
 			if player[0] != player2[0]:
 				ai_node(player[0]).set_stance(player2[0], roun, 0)
 				if player[0] == 'Salem':
-					find_node(player2[0]).new_stance(0)
+					find_node(player2[0], true, false).new_stance(0)
 
 	# start turn
 	if ai_node(turn_order[0]).has_method('start_turn'):

@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Fonts/Kayambang.ttf" type="DynamicFontData" id=1]
+
+[sub_resource type="DynamicFont" id=1]
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
+
+[node name="CloseButton" type="Button"]
+modulate = Color( 1, 0, 0, 1 )
+margin_left = 699.566
+margin_top = 142.027
+margin_right = 731.566
+margin_bottom = 172.027
+custom_fonts/font = SubResource( 1 )
+text = "X"
+__meta__ = {
+"_edit_use_anchors_": false
+}

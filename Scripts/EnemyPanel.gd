@@ -2,6 +2,7 @@ extends 'res://Scripts/popup.gd'
 
 signal info_pressed
 signal opponent_pressed
+signal letters_pressed
 signal update_matchtable
 signal send_message
 signal closed_manual
@@ -45,13 +46,13 @@ func language(language):
 	relation_dict = Global.panels[language]['Relations']
 
 # panel setup/initialization
-func setup_panel(enemy, manual, info_turn, players, dip_phrases):
+func setup_panel(enemy, _manual, _info_turn, _players, dip_phrases):
 	language(Global.get_language())
 	
 	# variables setup
 	self.enemy_name = enemy[0]
-	self.players = players
-	self.manual = manual
+	self.players = _players
+	self.manual = _manual
 	self._opponent_index = players.size()-1
 	
 	# portraits
@@ -80,10 +81,10 @@ func update_matchtable(my_stances, en_stances):
 		$MatchTable.activate(i, my_stances[i], en_stances[i])
 
 # ---------------- SET TEXT ----------------------
-		
+
 func reveal_points(_points):
 	$Points.text = points_text + ":\n" + str(_points)
-	
+
 
 func update_relation(_relation):
 	if (_relation == 0 or _relation == 2) and enemy_name == 'Edraele' and Global.br_relations == relation_dict:
@@ -92,11 +93,6 @@ func update_relation(_relation):
 	$Relation.text = relation_dict[_relation]
 
 # ------------------- PRESSING STUFF -----------------
-
-# pressed the close button
-func _on_CloseButton_button_up():
-	close()
-
 
 # pressed the info button
 func _on_InfoButton_button_up():
@@ -115,7 +111,7 @@ func _on_OtherPortButton_button_up():
 	
 	$OtherPort.readdy(players[_opponent_index])
 	emit_signal("opponent_pressed")
-	
+
 
 # pressed the Send button
 func _on_SendButton_button_up():
@@ -126,21 +122,23 @@ func _on_SendButton_button_up():
 	var name2 = $Mention2.get_item_text($Mention2.get_selected_id())
 	
 	emit_signal('send_message', name1, message_id, name2)
-	
 
-func item_selected(ID):
+func _on_LetterButton_button_up():
+	emit_signal("letters_pressed", enemy_name)
+
+func item_selected(_ID):
 	Audio.play_sound(Audio.writing, 2)
 
 
 func _on_ManualButton_button_up():
-	var player_translator = {'Grolk':3,'Kallysta':4, 'Thoren':5,'Edraele':6}
+	var _new = manual.instance()
+	add_child(_new)
+	move_child(_new, get_child_count()-1)
 	
-	var manual_panel = manual.instance()
-	manual_panel.manual_setup(player_translator[enemy_name])
-	add_child(manual_panel)
-	move_child(manual_panel, get_child_count()-1)
+	var player_page = _new.get_player_page(enemy_name)
+	_new.manual_setup(player_page)
 	
-	manual_panel.connect("closed_manual", self, "closed_manual")
+	_new.connect("closed_manual", self, "closed_manual")
 	
 func closed_manual():
 	emit_signal('closed_manual')
@@ -158,4 +156,3 @@ func get_enemy_name():
 
 func get_opponent():
 	return players[_opponent_index]
-
