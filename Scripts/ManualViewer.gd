@@ -1056,10 +1056,10 @@ func set_text_revealed(revealed, id):
 func _input(event):
 	if event is InputEventMouseButton:
 		if event.is_pressed():
-	        # zoom in
+			# zoom in
 			if event.button_index == BUTTON_WHEEL_UP and instances[0].get_position().y <= 14:
 				scroll(scroll_speed)
-	        # zoom out
+			# zoom out
 			if event.button_index == BUTTON_WHEEL_DOWN:
 				scroll(-scroll_speed)
 					

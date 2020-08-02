@@ -47,11 +47,11 @@ func _on_LanguageButton_item_selected(ID):
 	emit_signal("changed_language", Global.get_language())
 
 func _on_MusicSlider_value_changed(value):
-	Global.set_music_volume(value/100 + 0.001)
+	Global.set_music_volume(value)
 	emit_signal("changed_volume")
 
 func _on_SoundsSlider_value_changed(value):
-	Global.set_sounds_volume(value/100 + 0.001)
+	Global.set_sounds_volume(value)
 	emit_signal("changed_volume")
 
 

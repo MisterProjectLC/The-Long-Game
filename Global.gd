@@ -63,12 +63,15 @@ func get_music_volume():
 	return music_volume
 
 func set_music_volume(_new):
+	_new = _new/100 + 0.001
 	music_volume = _new
+	Audio.volume_db = linear2db(_new)
 
 func get_sounds_volume():
 	return sounds_volume
 
 func set_sounds_volume(_new):
+	_new = _new/100 + 0.001
 	sounds_volume = _new
 	
 func get_debug_enabled():
