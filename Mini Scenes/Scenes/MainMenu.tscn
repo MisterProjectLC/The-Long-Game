@@ -46,12 +46,6 @@ __meta__ = {
 }
 
 [node name="Play" type="Button" parent="."]
-<<<<<<< HEAD:Mini Scenes/MainMenu.tscn
-margin_left = 327.988
-margin_top = 334.643
-margin_right = 634.988
-margin_bottom = 445.643
-=======
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -60,7 +54,6 @@ margin_left = -150.0
 margin_top = 25.0
 margin_right = 150.0
 margin_bottom = 135.0
->>>>>>> 68f734e7621ff9de5f0dd4f6ecedc8afb4cdbf54:Mini Scenes/Scenes/MainMenu.tscn
 grow_horizontal = 2
 grow_vertical = 2
 __meta__ = {
@@ -83,12 +76,6 @@ __meta__ = {
 }
 
 [node name="Manual" type="Button" parent="."]
-<<<<<<< HEAD:Mini Scenes/MainMenu.tscn
-margin_left = 31.0401
-margin_top = 475.702
-margin_right = 335.04
-margin_bottom = 575.702
-=======
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -97,7 +84,6 @@ margin_left = -475.0
 margin_top = 165.0
 margin_right = -175.0
 margin_bottom = 265.0
->>>>>>> 68f734e7621ff9de5f0dd4f6ecedc8afb4cdbf54:Mini Scenes/Scenes/MainMenu.tscn
 grow_horizontal = 2
 grow_vertical = 2
 rect_scale = Vector2( 0.72, 0.72 )
@@ -150,12 +136,6 @@ __meta__ = {
 }
 
 [node name="Options" type="Button" parent="."]
-<<<<<<< HEAD:Mini Scenes/MainMenu.tscn
-margin_left = 522.43
-margin_top = 475.702
-margin_right = 826.43
-margin_bottom = 575.702
-=======
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -164,7 +144,6 @@ margin_left = 25.0
 margin_top = 165.0
 margin_right = 325.0
 margin_bottom = 265.0
->>>>>>> 68f734e7621ff9de5f0dd4f6ecedc8afb4cdbf54:Mini Scenes/Scenes/MainMenu.tscn
 grow_horizontal = 2
 grow_vertical = 2
 rect_scale = Vector2( 0.72, 0.72 )
@@ -187,12 +166,6 @@ __meta__ = {
 }
 
 [node name="Quit" type="Button" parent="."]
-<<<<<<< HEAD:Mini Scenes/MainMenu.tscn
-margin_left = 772.43
-margin_top = 475.702
-margin_right = 1076.43
-margin_bottom = 575.702
-=======
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -201,7 +174,6 @@ margin_left = 265.0
 margin_top = 165.0
 margin_right = 565.0
 margin_bottom = 265.0
->>>>>>> 68f734e7621ff9de5f0dd4f6ecedc8afb4cdbf54:Mini Scenes/Scenes/MainMenu.tscn
 grow_horizontal = 2
 grow_vertical = 2
 rect_scale = Vector2( 0.72, 0.72 )

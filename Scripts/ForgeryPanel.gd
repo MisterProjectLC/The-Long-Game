@@ -3,11 +3,7 @@ extends 'res://Scripts/LettersList.gd'
 
 # ---------------- INITIAL ANIMATION ------------------
 func _ready():
-	_sizer = Vector2(12, 4)
-	_target_sizer = Vector2(824, 479)
-	_position = Vector2(520, 302)
-	_target_position = Vector2(93, 61)
-	setup()
+	setup(374, 222)
 
 # ------------------ SETUP/INIT --------------------
 

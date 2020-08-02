@@ -4,12 +4,8 @@ var portraits = ['FirstPort', 'SecondPort', 'ThirdPort', 'FourthPort']
 var opponents
 
 func _ready():
-	_sizer = Vector2(12, 4)
-	_target_sizer = Vector2(601, 335)
-	_position = Vector2(520, 302)
-	_target_position = Vector2(184, 120)
 	_speed = 2
-	setup()
+	setup(300, 167)
 	
 func language(language):
 	var dictionary = ['Results', 'Resultados']

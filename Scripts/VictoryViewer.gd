@@ -4,12 +4,8 @@ var portraits = ['Winner', 'FirstLoser', 'SecondLoser', 'ThirdLoser', 'FourthLos
 var point_nodes = ['PointsWinner', 'Points1', 'Points2', 'Points3', 'Points4']
 
 func _ready():
-	_sizer = Vector2(12, 4)
-	_target_sizer = Vector2(700, 420)
-	_position = Vector2(520, 302)
-	_target_position = Vector2(142, 86)
 	_speed = 2
-	setup()
+	setup(350, 210)
 	
 func language(language):
 	var dictionary = ['End of Match', 'Fim da Partida', 'Spiel-Ende']

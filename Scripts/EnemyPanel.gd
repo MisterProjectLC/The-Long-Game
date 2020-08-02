@@ -21,12 +21,9 @@ var manual
 
 # ---------------- INITIAL ANIMATION ------------------
 func _ready():
-	_sizer = Vector2(12, 4)
-	_target_sizer = Vector2(824, 479)
-	_position = Vector2(520, 302)
-	_target_position = Vector2(93, 61)
-	setup()
-	
+	setup(412, 240)
+
+
 func _process(delta):
 	processing(delta)
 
@@ -156,3 +153,7 @@ func get_enemy_name():
 
 func get_opponent():
 	return players[_opponent_index]
+
+
+func _on_CloseButton_button_up():
+	close()

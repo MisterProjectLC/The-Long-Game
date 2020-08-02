@@ -34,10 +34,14 @@ images = [ ExtResource( 4 ), ExtResource( 5 ) ]
 color = Color( 0, 0, 0, 0.180392 )
 
 [node name="Background" type="NinePatchRect" parent="."]
-margin_left = 72.0
-margin_top = 1.0
-margin_right = 938.0
-margin_bottom = 600.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -433.0
+margin_top = -300.0
+margin_right = 433.0
+margin_bottom = 300.0
 mouse_filter = 0
 texture = ExtResource( 7 )
 script = ExtResource( 8 )

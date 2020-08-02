@@ -200,8 +200,3 @@ func _investigate(_target):
 			if _target != get_player_character():
 				emit_signal('relation_info_request', self, _target, opponent)
 			emit_signal('matchtable_info_request', self, _target, opponent)
-<<<<<<< HEAD:Mini Scenes/ThorenAI.gd
-=======
-
-
->>>>>>> 68f734e7621ff9de5f0dd4f6ecedc8afb4cdbf54:Scripts/Intelligences/DaintAI.gd

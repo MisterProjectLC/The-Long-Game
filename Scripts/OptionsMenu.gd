@@ -6,12 +6,8 @@ signal changed_volume
 export(PackedScene) var credits
 
 func _ready():
-	_sizer = Vector2(12, 4)
-	_target_sizer = Vector2(517, 377)
-	_position = Vector2(520, 302)
-	_target_position = Vector2(239, 108)
 	_speed = 2
-	setup()
+	setup(258, 188)
 	options_setup()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

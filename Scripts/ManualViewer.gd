@@ -24,12 +24,8 @@ var instances = []
 # ----------------- ANIMATION -----------------
 
 func _ready():
-	_sizer = Vector2(12, 4)
-	_target_sizer = Vector2(866, 599)
-	_position = Vector2(520, 302)
-	_target_position = Vector2(72, 1)
 	_speed = 2
-	setup()
+	setup(433, 300)
 	
 func _process(delta):
 	processing(delta)
