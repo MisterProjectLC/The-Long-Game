@@ -1,10 +1,9 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Scripts/Main.gd" type="Script" id=1]
 [ext_resource path="res://Mini Scenes/Popups/VictoryViewer.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Mini Scenes/Intelligences/ThorenAI.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Mini Scenes/Intelligences/EdraeleAI.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Mini Scenes/Popups/LettersPanel.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Mini Scenes/Intelligences/GrolkAI.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Mini Scenes/Intelligences/KallystaAI.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Mini Scenes/Intelligences/SalemAI.tscn" type="PackedScene" id=8]
@@ -15,7 +14,6 @@
 [ext_resource path="res://Art/Portraits/Thoren V1.png" type="Texture" id=13]
 [ext_resource path="res://Art/Portraits/Salem V1.png" type="Texture" id=14]
 [ext_resource path="res://Mini Scenes/Intelligences/ObrulenaAI.tscn" type="PackedScene" id=15]
-[ext_resource path="res://Mini Scenes/Profile.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Art/Portraits/Obrulena Alpha.png" type="Texture" id=17]
 [ext_resource path="res://Mini Scenes/Intelligences/ZardriAI.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Art/Portraits/Zardri.png" type="Texture" id=19]
@@ -26,10 +24,12 @@ victory_panel = ExtResource( 2 )
 these_players = [ [ "Grolk", ExtResource( 11 ) ], [ "Zardri", ExtResource( 19 ) ], [ "Kallysta", ExtResource( 12 ) ], [ "Obrulena", ExtResource( 17 ) ], [ "Thoren", ExtResource( 13 ) ], [ "Edraele", ExtResource( 10 ) ], [ "Salem", ExtResource( 14 ) ] ]
 
 [node name="NinePatchRect" parent="." instance=ExtResource( 9 )]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 0.0
+margin_bottom = 0.0
 
 [node name="SalemAI" parent="." instance=ExtResource( 8 )]
-profile = ExtResource( 16 )
-letters_panel = ExtResource( 5 )
 
 [node name="GrolkAI" parent="." instance=ExtResource( 6 )]
 
@@ -45,7 +45,6 @@ letters_panel = ExtResource( 5 )
 
 [node name="Audio" type="AudioStreamPlayer" parent="."]
 [connection signal="advance_turn" from="SalemAI" to="." method="advance_turn"]
-[connection signal="done_setup" from="SalemAI" to="SalemAI" method="_on_SalemAI_done_setup"]
 [connection signal="gain_influence" from="SalemAI" to="." method="gain_influence"]
 [connection signal="improve_relations" from="SalemAI" to="SalemAI" method="improve_relations"]
 [connection signal="lose_influence" from="SalemAI" to="." method="lose_influence"]

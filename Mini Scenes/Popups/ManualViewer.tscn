@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Scripts/ManualViewer.gd" type="Script" id=1]
 [ext_resource path="res://Mini Scenes/Pieces/Paragraph.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Mini Scenes/ImageManual.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Mini Scenes/Pieces/ImageManual.tscn" type="PackedScene" id=3]
 [ext_resource path="res://0- SECRET BUNKER/Prisoners Dilemma 2.png" type="Texture" id=4]
 [ext_resource path="res://0- SECRET BUNKER/Screenshot 5.png" type="Texture" id=5]
 [ext_resource path="res://Mini Scenes/Pieces/BlackBack.tscn" type="PackedScene" id=6]
@@ -23,6 +23,9 @@ anchor_bottom = 1.0
 margin_top = -1.05261
 margin_bottom = -1.05261
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 paragrapher = ExtResource( 2 )
 imager = ExtResource( 3 )
 images = [ ExtResource( 4 ), ExtResource( 5 ) ]

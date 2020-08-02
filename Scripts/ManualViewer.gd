@@ -7,6 +7,7 @@ export(PackedScene) var imager
 
 var scroll_speed = 80
 var min_height = 40
+var offset = 40
 
 var current_page = 0
 
@@ -14,7 +15,7 @@ var en_pages = []
 var br_pages = []
 var de_pages = []
 
-var player_translator = {'Grolk':3,'Kallysta':4, 'Obrulena':5, 'Thoren':6,'Edraele':7}
+var player_pages = ['Grolk', 'Zardri','Kallysta', 'Obrulena', 'Thoren','Edraele']
 var pages = []
 export var images = []
 
@@ -48,25 +49,25 @@ func manual_setup(_new):
 
 func en_pages_setup():
 	en_pages = [   # Manual
-	[['text', {'title':'THE LONG GAME', 'space':260,
+	[['text', {'title':'THE LONG GAME', 
 	'text':"""THE LONG GAME is a singleplayer medieval diplomacy game.
 	Play the Prisoner\'s Dilemma over the course of 6 rounds, investigate opponents\' previous matches and influence them by sharing information and telling lies."""}
 	],
-	['text', {'title':'ACTIONS', 'space':440, 
+	['text', {'title':'ACTIONS', 
 	'text':"""Every player has 3 ACTIONS per round. They may be spent on:
 	-BATTLE: take the Agressive stance against another character.
 	-INVESTIGATION: get more information on another character.
 	-INFLUENCE: change their position on the Throne Track.
 	-DIPLOMACY: send messages to other players."""}
 	], 
-	['text', {'title':'BATTLE - THE PRISONER\'S DILEMMA', 'space':440, 
+	['text', {'title':'BATTLE - THE PRISONER\'S DILEMMA',
 	'text':"""The Prisoner's Dilemma is a game theory-related thought experiment. In it, each player chooses between a Passive Stance and an Agressive Stance.
 	Being PASSIVE is overall better for the two players, but it opens the individual up to getting betrayed. It is also better diplomatically.
 	Going AGRESSIVE, on the other hand, is way better for the individual, but it costs an Action and makes the enemy resentful."""}
 	],
 	['image', {'image':images[0], 'space':350}
 	],
-	['text', {'title':'INVESTIGATION', 'space':500, 
+	['text', {'title':'INVESTIGATION',
 	'text':"""Investigating a player can be really helpful to get a clue on what the enemy will play for the Prisoner's Dilemma. 
 	It reveals three pieces of information:
 	1- Their POINT COUNT.
@@ -76,11 +77,11 @@ func en_pages_setup():
 	],
 	['image', {'image':images[1], 'space':350}
 	],
-	['text', {'title':'INFLUENCE', 'space':380,
+	['text', {'title':'INFLUENCE',
 	'text':"""Influence is a measure of power and notoriety in the land. Players with greater Influence play ahead in the turn order and are more likely to receive messages and get attacked.
 	A player can change their placing in the Influence track using the buttons on the lower part of the screen. Be aware that the track only updates at the end of each round."""}
 	],
-	['text', {'title':'DIPLOMACY', 'space':940,
+	['text', {'title':'DIPLOMACY', 
 	'text':"""Finally, there's DIPLOMACY. Using the DIPLOMACY AREA menu shown above, the player can send messages to other characters. Likewise, other characters may send messages to the player from time to time.
 	Sending a message costs 1 ACTION, and it is, in essence, the crux of the game. This system is what allows the player to truly manipulate other characters in powerful ways.
 	There are two ways to do that:
@@ -88,7 +89,7 @@ func en_pages_setup():
 	-RESENDING: you may also resend a message written by another player using the Envelope icon, making the receiver think that the original author sent it to them. This is a really powerful move, and can cause lots of havoc between would-be allies.
 	In order to manipulate NPCs effectively, the player also has complete access to every character's behaviors and traits."""}
 	],
-	['text', {'title':'TRAITS AND CHARACTERS', 'space':320,
+	['text', {'title':'TRAITS AND CHARACTERS',
 	'text':"""This game comes with a document detailing each character's profile. They are divided in three parts:
 	-INITIAL RELATIONS: their initial relations with other characters.
 	-TRAITS: pieces of personality that govern, among other things, how they react to events and information.
@@ -96,13 +97,13 @@ func en_pages_setup():
 	That's all you need to know to play THE LONG GAME. Good luck!"""}
 	]],
 	# Characters
-	[['text', {'title':'CHARACTERS - BEFORE READING', 'space':220,
+	[['text', {'title':'CHARACTERS - BEFORE READING',
 	'text':"""Don't be intimidated by the size of this document. Skim it over first, experiment for a few games and come back later once you become more familiarized with the game."""}
 	],
-	['text', {'title':'TURN ORDER', 'space':120, 
+	['text', {'title':'TURN ORDER', 
 	'text':"""Edraele/Salem/Thoren/Grolk"""}
 	], 
-	['text', {'title':'COMMON TERMS', 'space':440, 
+	['text', {'title':'COMMON TERMS', 
 	'text':"""INFORMATION/MESSAGES
 	Made up of three parts, in order: Subject/Action/Object
 
@@ -118,48 +119,47 @@ func en_pages_setup():
 	Fight: Agressive vs Agressive"""}
 	]],
 	# Salem
-	[['text', {'title':'SALEM', 'space':140,
+	[['text', {'title':'SALEM', 
 	'text':"""It's you. 
 	Race: Human"""}
 	],
-	['text', {'title':'TRAITS', 'space':120, 
+	['text', {'title':'TRAITS', 
 	'text':"""-PLAYER CHARACTER.
 	-CHARISMATIC: at the start of the game, a random character is chosen to have their relation with Salem improved by one."""}
 	]],
 	# Grolk
-	[['text', {'title':'GROLK', 'space':180,
+	[['text', {'title':'GROLK',
 	'text':"""Hates weak and/or traitorous players. Acts agressively and recklessly.
-	Race: Orc
-	"""}
+	Race: Orc"""}
 	],
-	['text', {'title':'INITIAL RELATIONS', 'space':260, 
+	['text', {'title':'INITIAL RELATIONS',
 	'text':"""-HOSTILE to Salem.
 	-SUSPICIOUS of Kallysta.
 	-SUSPICIOUS of Obrulena.
 	-HOSTILE to Thoren.
 	-HOSTILE to Edraele."""}
 	],
-	['text', {'title':'TRAITS - TL;DR', 'space':380, 
+	['text', {'title':'TRAITS - TL;DR',
 	'text':"""Grolk doesn't get angry with battles, but does get angry with players who betray him or get slaughtered by him.
 	He also hates players that attack his friends, and befriends players that like his friends. He also always believes his friends and ignore his enemies.
 	He appreciates receiving true information, dislikes receiving lies, and once he's enraged with someone, will never forgive them."""}
 	],
-	['text', {'title':'WARLORD', 'space':220, 'color':Color.red,
+	['text', {'title':'WARLORD', 'color':Color.red,
 	'text':"""One doesn't degrade relation with him when FIGHTING (Agressive vs Agressive) him. Becomes HOSTILE to players that are SLAUGHTERED (Passive vs Agressive) by him."""}
 	],
-	['text', {'title':'HATRED', 'space':220, 'color':Color.darkslategray,
+	['text', {'title':'HATRED', 'color':Color.darkslategray,
 	'text':"""Becomes ENRAGED when a TRUSTED/BEFRIENDED player slaughters (Agressive vs Passive) him. Also becomes HOSTILE when a SUSPECTED player slaughters him."""}
 	],
-	['text', {'title':'BROTHERHOOD', 'space':260, 'color':Color.darkblue,
+	['text', {'title':'BROTHERHOOD',  'color':Color.darkblue,
 	'text':"""Becomes HOSTILE (unless already ENRAGED) to a player when he either discovers that this player will attack a TRUSTED/BEFRIENDED player, or that this player is HOSTILE/ENRAGED against a TRUSTED/BEFRIENDED player."""}
 	],
-	['text', {'title':'ALLIANCE', 'space':260, 'color':Color.blue,
+	['text', {'title':'ALLIANCE', 'color':Color.blue,
 	'text':"""Becomes TRUSTFUL (unless already ENRAGED or FRIENDLY) of a player when he either discovers that this player will ally with a TRUSTED/BEFRIENDED player, or that a TRUSTED/BEFRIENDED player is TRUSTFUL/FRIENDLY towards this player."""}
 	],
-	['text', {'title':'GENERAL', 'space':180, 'color':Color.cyan,
+	['text', {'title':'GENERAL', 'color':Color.cyan,
 	'text':"""His relation can be improved by telling him information he discovers is true. The opposite happens with information he discovers is false."""}
 	],
-	['text', {'title':'SIMPLE-MINDED', 'space':210, 'color':Color.darkgreen,
+	['text', {'title':'SIMPLE-MINDED', 'color':Color.darkgreen,
 	'text':"""Always believes info from a TRUSTED/BEFRIENDED player. Never believes info from others, though he remembers of what they said (for the purposes of General)."""}
 	],
 	['text', {'title':'BITTER', 'space':180, 'color':Color.brown,
@@ -172,11 +172,55 @@ func en_pages_setup():
 	4- Tell a BEFRIENDED player about information he has.
 	5- Attack a SUSPECTED player."""}
 	]],
+	# Zardri
+	[['text', {'title':'ZARDRI',
+	'text':"""Born in the dark woods of Ecnar, Zardri stealthly searches for quick ambushes on downed enemies.
+	Race: Goblin"""}
+	],
+	['text', {'title':'INITIAL RELATIONS',
+	'text':"""-SUSPICIOUS to Salem.
+	-SUSPICIOUS of Kallysta.
+	-SUSPICIOUS of Obrulena.
+	-HOSTILE to Thoren.
+	-SUSPICIOUS to Edraele."""}
+	],
+	['text', {'title':'TRAITS - TL;DR',
+	'text':"""Zardri's main strategy is betrayal. When someone is being overwhelmed by attacks, Zardri takes this opportunity to
+	backstab them in their most vulnerable state. He's also quite wary of getting backstabbed himself, and as such always disbelieves
+	information from others and becomes enraged at the first sign of danger.'"""}
+	],
+	['text', {'title':'AMBUSHER', 'color':Color.mediumvioletred,
+	'text':"""Becomes HOSTILE against Suspected players who are already HOSTILE/ENRAGED against two or more other players."""}
+	],
+	['text', {'title':'HATRED', 'color':Color.darkslategray,
+	'text':"""Becomes ENRAGED when a TRUSTED/BEFRIENDED player slaughters (Agressive vs Passive) him. Also becomes HOSTILE when a SUSPECTED player slaughters him."""}
+	],
+	['text', {'title':'PARANOID', 'color':Color.darkgray,
+	'text':"""Becomes ENRAGED to a player she discovers is planning to attack him."""}
+	],
+	['text', {'title':'TREACHERY', 'color':Color.darkred,
+	'text':"""Becomes HOSTILE to players that get slaughtered (Passive vs Aggressive) by him."""}
+	],
+	['text', {'title':'INTUITION', 'color':Color.gold,
+	'text':"""When investigating the PLAYER CHARACTER, judges their Relation with other players based on their last match. 
+	If there was a Slaughter on any side: ENRAGED
+	If there was a Fight: HOSTILE 
+	If there was Cooperation: TRUSTFUL 
+	If there wasn't a match (Round 1): SUSPICIOUS"""}
+	],
+	['text', {'title':'DIM-WITTED', 'color':Color.palegreen ,
+	'text':"""Always believes the opposite of received messages."""}
+	],
+	['text', {'title':'ACTION PRIORITY',
+	'text':"""1- Attack an ENRAGING player.
+	2- Attack a HOSTILIZED player.
+	3- If it's an even round,  tell a lie to a HOSTILIZED player.
+	4- Investigate a SUSPECTED player."""}
+	]],
 	# Kallysta
-	[['text', {'title':'KALLYSTA', 'space':210,
+	[['text', {'title':'KALLYSTA',
 	'text':"""An individualistic and cunning leader. Kallysta distrusts almost everyone and is great at breaking strong alliances.
-	Race: Tiefling
-	"""}
+	Race: Tiefling	"""}
 	],
 	['text', {'title':'INITIAL RELATIONS', 'space':260, 
 	'text':"""-SUSPICIOUS of Salem.
@@ -220,9 +264,7 @@ func en_pages_setup():
 	5- Attack a HOSTILIZED player.
 	6- Tell a SUSPECTED player she will co-op with them.
 	7- Investigate a HOSTILIZED player.
-	8- Investigate a TRUSTED player.
-
-	"""}
+	8- Investigate a TRUSTED player."""}
 	]],
 	# Obrulena
 	[['text', {'title':'OBRULENA', 'space':260,
@@ -495,8 +537,7 @@ func br_pages_setup():
 	Cooperação: Passiva vs Passiva
 	Massacre: Agressiva vs Passiva
 	Ser massacrado: Passiva vs Agressiva
-	Batalha/Luta: Agressiva vs Agressiva
-	"""}
+	Batalha/Luta: Agressiva vs Agressiva"""}
 	]],
 	# Salem
 	[['text', {'title':'SALEM', 'space':140,
@@ -510,8 +551,7 @@ func br_pages_setup():
 	# Grolk
 	[['text', {'title':'GROLK', 'space':180,
 	'text':"""Odeia fracos e traidores. Age de forma agressiva e impulsiva.
-	Raça: Orc
-	"""}
+	Raça: Orc"""}
 	],
 	['text', {'title':'RELACOES INICIAIS', 'space':260, 
 	'text':"""-HOSTIL para Salem.
@@ -553,19 +593,64 @@ func br_pages_setup():
 	4- Conta para um jogador AMIGO sobre informações que ele tem.
 	5- Ataca um jogador SUSPEITADO."""}
 	]],
+	# Zardri
+	[['text', {'title':'ZARDRI',
+	'text':"""Nascido na escura floresta de Ecnar, Zardri move-se discretamente procurando por emboscadas rápidas em inimigos
+	enfraquecidos.
+	Raça: Goblin"""}
+	],
+	['text', {'title':'RELACOES INICIAIS',
+	'text':"""-SUSPEITO de Salem.
+	-SUSPEITO de Kallysta.
+	-SUSPEITO de Obrulena.
+	-HOSTIL para Thoren.
+	-SUSPEITO de Edraele."""}
+	],
+	['text', {'title':'CARACTERISTICAS - TL;DR',
+	'text':"""A estratégia principal de Zardri é traição. Quando alguém está sendo atacado por múltiplos jogadores, Zardri toma
+	essa oportunidade para apunhalá-lo em seu estado mais vulnerável. Ele, porém, também evita ser traído, e dessa forma
+	sempre descredita informações de outros e torna-se revoltado no primeiro sinal de perigo.'"""}
+	],
+	['text', {'title':'EMBOSCADOR', 'color':Color.mediumvioletred,
+	'text':"""Torna-se HOSTIL contra jogadores SUSPEITADOS que já estão HOSTIS/REVOLTADOS contra dois ou mais outros jogadores."""}
+	],
+	['text', {'title':'ODIO', 'space':220, 'color':Color.darkslategray,
+	'text':"""Fica REVOLTADO com jogadores CONFIÁVEIS/AMIGOS que MASSACRAM (Agressiva vs Passiva) ele. Também fica HOSTIL com jogadores Suspeitados que MASSACRAM ele."""}
+	],
+	['text', {'title':'PARANOIA', 'space':170, 'color':Color.darkgray,
+	'text':"""Torna-se REVOLTADO a um jogador quando ele descobre que este está planejando atacá-lo ou é 
+	REVOLTADO/HOSTIL contra ele."""}
+	],
+	['text', {'title':'PERFIDO', 'space':140, 'color':Color.darkred,
+	'text':"""Torna-se HOSTIL a jogadores que são MASSACRADOS (Passiva vs Agressiva) por ele."""}
+	],
+	['text', {'title':'INTUICAO', 'space':350, 'color':Color.gold,
+	'text':"""ao investigar o PERSONAGEM DO JOGADOR, julga sua relação com outros jogadores baseado em sua última partida.
+	Se houve Massacre em qualquer lado: REVOLTADO
+	Se houve uma Batalha: HOSTIL
+	Se houve Cooperação: CONFIANTE 
+	Se não houve partida (Turno 1): SUSPEITO """}
+	],
+	['text', {'title':'ESTUPIDO', 'color':Color.palegreen ,
+	'text':"""Sempre acredita no oposto de mensagens recebidas."""}
+	],
+	['text', {'title':'PRIORIDADE DE ACAO',
+	'text':"""1- Ataca um jogador REVOLTANTE.
+	2- Ataca um jogador HOSTILIZADO.
+	3- Se for um turno par, conta uma mentira para um jogador HOSTILIZADO.
+	4- Investiga um jogador SUSPEITADO."""}
+	]],
 	# Kallysta
 	[['text', {'title':'KALLYSTA', 'space':210,
 	'text':"""Uma líder individualista e perspicaz. Kallysta se desconfia de quase todos e é excelente em quebrar alianças fortes.
-	Raça: Tiefling
-	"""}
+	Raça: Tiefling"""}
 	],
 	['text', {'title':'RELACOES INICIAIS', 'space':260, 
 	'text':"""-SUSPEITA de Salem.
 	-SUSPEITA de Grolk.
 	-SUSPEITA de Obrulena.
 	-SUSPEITA de Thoren.
-	-SUSPEITA de Edraele.
-	"""}
+	-SUSPEITA de Edraele."""}
 	],
 	['text', {'title':'CARACTERISTICAS - TL;DR', 'space':550, 
 	'text':"""A natureza individualista de Kallysta faz ela impossível de tornar-se Amigável com alguém. Ela é excelente em encontrar e interpretar informação, e usa essa habilidade para prever o comportamento de outros jogadores.
@@ -602,9 +687,7 @@ func br_pages_setup():
 	5- Ataca um jogador HOSTILIZADO.
 	6- Conta para um jogador SUSPEITADO que ela irá se aliar com ele.
 	7- Investiga um jogador HOSTILIZADO.
-	8- Investiga um jogador CONFIÁVEL.
-
-	"""}
+	8- Investiga um jogador CONFIÁVEL."""}
 	]],
 	# Obrulena
 	[['text', {'title':'OBRULENA', 'space':180,
@@ -806,7 +889,7 @@ func br_pages_setup():
 	7- Investiga o jogador REVOLTANTE mencionado em (2)."""}
 	]]
 	]
-	
+
 func de_pages_setup():
 	de_pages = [[ # Manual
 	['text', {'title':'THE LONG GAME', 'space':300,
@@ -876,8 +959,7 @@ func de_pages_setup():
 	Kooperation: Passiv vs Passiv
 	Massaker: Agressiv vs Passiv
 	massakriert werden: Passiv vs Agressiv
-	Kampf: Agressiv vs Agressiv
-	"""}
+	Kampf: Agressiv vs Agressiv"""}
 	]],
 	# Salem
 	[['text', {'title':'SALEM', 'space':140,
@@ -891,8 +973,7 @@ func de_pages_setup():
 	# Grolk
 	[['text', {'title':'GROLK', 'space':180,
 	'text':"""Hasst schwache Spieler und Verräter. Handelt in agressiver und fahrlässiger Weise.
-	Rasse: Orc
-	"""}
+	Rasse: Orc"""}
 	],
 	['text', {'title':'ANFANGSRELATIONEN', 'space':260, 
 	'text':"""-FEINDLICH gegenüber Salem.
@@ -934,11 +1015,55 @@ func de_pages_setup():
 	4- Erzählt einem BEFREUNDETEN Spielern Informationen, die er hat.
 	5- Attackiert einen VERDÄCHTIGEN Spieler."""}
 	]],
+	# Zardri
+	[['text', {'title':'ZARDRI',
+	'text':"""Geboren in den dunklen Wäldern von Ecnar, Zardri sucht diskret nach schnelle Hinterhalte gegen angreifbare Feinde.
+	Rasse: Goblin"""}
+	],
+	['text', {'title':'ANFANGSRELATIONEN',
+	'text':"""-MISSTRAUISCH gegenüber Salem.
+	-MISSTRAUISCH gegenüber Kallysta.
+	-MISSTRAUISCH gegenüber Obrulena.
+	-FEINDLICH gegenüber Thoren.
+	-MISSTRAUISCH gegenüber Edraele."""}
+	],
+	['text', {'title':'EIGENSCHAFTEN - TL;DR',
+	'text':"""Die Hauptstrategie von Zardri ist Verrat. Wenn jemand von mehreren Spielern attackiert wird, nimmt Zardri
+	diese Gelegenheit, um ihn in seinem angreifbarsten Zustand zu verraten. Jedoch vermeidet er, verraten zu werden, und deswegen
+	glaubt er nie Informationen von anderen Spielern und wird wütend im ersten Anzeichen von Gefähr.'"""}
+	],
+	['text', {'title':'EMBOSCADOR', 'color':Color.mediumvioletred,
+	'text':"""Wird FEINDLICH gegenüber VERDÄCHTIGEN Spieler, die schon FEINDLICH/WÜTEND gegenüber zwei oder mehr andere Spieler sind."""}
+	],
+	['text', {'title':'HASS', 'space':220, 'color':Color.darkslategray,
+	'text':"""Wird WÜTEND gegen VERTRAUTE/BEFREUNDETE Spieler, die ihm MASSAKRIEREN (Agressiv vs Passiv). Ausserdem wird er FEINDLICH gegen vermutete Spieler, die ihm MASSAKRIEREN."""}
+	],
+	['text', {'title':'PARANOID', 'space':170, 'color':Color.darkgray,
+	'text':"""Wird WÜTEND gegen Spieler, die entweder beabsichtigen, er zu angreifen, oder gegen sie FEINDLICH/WÜTEND sind."""}
+	],
+	['text', {'title':'VERRAT', 'space':180, 'color':Color.darkred,
+	'text':"""Wird FEINDLICH (sofern er nicht schon WÜTEND ist) gegen Spieler, die von ihm massakriert werden (Passiv vs Agressiv)."""}
+	],
+	['text', {'title':'INTUITION', 'space':360, 'color':Color.gold,
+	'text':"""Wenn er forscht den SPIELERCHARAKTER nach, betrachtet seine Relation mit anderen Spielern auf Grund ihren letzen Matchs. 
+	Falls eine Massaker auf irgendeiner Seite es gab: WÜTEND
+	Falls es Kämpf gab: FEINDLICH 
+	Falls es Kooperation gab: VERTRAUEND 
+	Falls es kein Match gab (Runde 1): MISSTRAUISCH"""}
+	],
+	['text', {'title':'BLOD', 'color':Color.palegreen ,
+	'text':"""Glaubt immer das Gegenteil von den erhaltenen Nachrichten."""}
+	],
+	['text', {'title':'AKTION-PRIORITAET',
+	'text':"""1- Attackiert einen ÄRGERLICHEN Spieler.
+	2- Attackiert einen FEINDSELIGEN Spieler.
+	3- Wenn es eine gerade Runde ist, erzählt eine Lüge einem FEINDSELIGEN Spieler.
+	4- Forscht einen VERDÄCHTIGEN Spieler nach."""}
+	]],
 	# Kallysta
 	[['text', {'title':'KALLYSTA', 'space':210,
 	'text':"""Ein individualistischer und clever Führer. Kallysta misstraut fast jeder und ist großartig darin, starke Allianzen zu brechen.
-	Rasse: Tiefling
-	"""}
+	Rasse: Tiefling"""}
 	],
 	['text', {'title':'ANFANGSRELATIONEN', 'space':260, 
 	'text':"""-MISSTRAUISCH gegenüber Salem.
@@ -982,8 +1107,7 @@ func de_pages_setup():
 	5- Attackiert einen FEINDSELIGEN Spieler.
 	6- Erzählt einen VERDÄCHTIGEN Spieler, dass sie mit ihm kooperieren wird.
 	7- Forscht einen FEINDSELIGEN Spieler nach.
-	8- Forscht einen VERTRAUTEN Spieler nach.
-	"""}
+	8- Forscht einen VERTRAUTEN Spieler nach."""}
 	]],
 	# Obrulena
 	[['text', {'title':'OBRULENA', 'space':260,
@@ -1122,7 +1246,7 @@ func de_pages_setup():
 	['text', {'title':'AGENDA', 'space':180, 'color':Color.pink,
 	'text':"""Am Anfang jeder Runde verändert ihre Aktionpriorität auf Grund ihrer Relation mit dem SPIELERCHARAKTER."""}
 	],
-		['text', {'title':'VERRAT', 'space':180, 'color':Color.darkred,
+	['text', {'title':'VERRAT', 'space':180, 'color':Color.darkred,
 	'text':"""Wird FEINDLICH (sofern er nicht schon WÜTEND ist) gegen Spieler, die von ihr massakriert werden (Passiv vs Agressiv)."""}
 	],
 	['text', {'title':'REAKTIV', 'space':250, 'color':Color.aqua,
@@ -1200,7 +1324,7 @@ func open_pages():
 			var color = Color.black if !paragraph[1].has('color') else paragraph[1]['color']
 			instance.setup(paragraph[1]['title'], paragraph[1]['text'], id, color)
 			instance.connect("spoiler_pressed", self, "set_text_revealed")
-				
+		
 		elif paragraph[0] == 'image':
 			instance = imager.instance()
 			instance.texture = paragraph[1]['image']
@@ -1209,13 +1333,14 @@ func open_pages():
 		add_child(instance)
 		instances.append(instance)
 		instance.set_position(Vector2(90, current_y))
-		current_y += 14 + paragraph[1]['space']
+		current_y += 14 + offset + instance.get_size()
 
 # ------------ SETTING STUFF -------------------------
 
 func reveal_all_instances(revealed):
 	for i in range(instances.size()):
 		set_text_revealed(revealed, i)
+
 
 func set_text_revealed(revealed, id):
 	if !instances[id].has_method('set_revealed'):
@@ -1224,7 +1349,7 @@ func set_text_revealed(revealed, id):
 	if instances[id].get_revealed() == revealed:
 		return
 	
-	var page = pages[current_page]
+	var _page = pages[current_page]
 	instances[id].set_revealed(revealed)
 	
 	# sobe (negativo) se escondendo
@@ -1232,11 +1357,11 @@ func set_text_revealed(revealed, id):
 	
 	for i in range(id+1, instances.size()):
 		var instance = instances[i]
-		instance.set_position(instance.get_position() + Vector2(0, minus*(page[id][1]['space']-40)))
-	pass
-	
-func get_player_translator():
-	return player_translator
+		instance.set_position(instance.get_position() + Vector2( 0, minus*(instances[id].get_size()) ))
+
+
+func get_player_page(player):
+	return 3+player_pages.find(player)
 
 # -------------------- INPUT --------------------
 
@@ -1288,5 +1413,5 @@ func _on_ClosedEyeButton_button_up():
 	reveal_all_instances(false)
 
 
-func _on_Background_scrolling(scroll_amount, speed):
+func _on_Background_scrolling(scroll_amount, _speed):
 	scroll(scroll_amount)

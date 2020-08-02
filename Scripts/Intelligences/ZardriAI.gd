@@ -3,8 +3,7 @@ extends "res://Scripts/Competitor.gd"
 var priority_lister = 1
 
 # lists enemies
-var war_list = {'Grolk':[],'Zardri':[],'Kallysta':[],'Obrulena':[],
-'Thoren':[],'Salem':[],'Edraele':[]}
+var war_list = {}
 
 func _ready():
 	character_name = 'Zardri'
@@ -13,6 +12,9 @@ func _ready():
 	
 	relations = {'Grolk':-1,'Zardri':-2, 'Kallysta':0,'Obrulena':0,
 	'Thoren':1, 'Salem':0, 'Edraele':0, 'Daint': 0}
+	
+	for player_name in relations.keys():
+		war_list[player_name] = []
 
 # -------------- REACTIONS AND SETUP --------------------
 
@@ -97,11 +99,12 @@ func execute_action():
 		2: # attack hostile
 			attack(1)
 		3: # tell lies to hostiles
-			for enemy_name in turn_order:
-				if relations[enemy_name] == 1:
-					for memory in memory_list:
-						if memory_list[memory][1] != enemy_name:
-							denounce(memory[0], memory[1], memory[2], enemy_name)
+			if get_current_round() % 2 == 0:
+				for enemy_name in turn_order:
+					if relations[enemy_name] == 1:
+						for memory in memory_list:
+							if memory_list[memory][1] != enemy_name:
+								denounce(memory[0], memory[1], memory[2], enemy_name)
 		4: # investigate suspect
 			for enemy_name in turn_order:
 				if relations[enemy_name] == 0:

@@ -11,8 +11,7 @@ var just_invest = ''
 var tactical_list = {}
 
 # lists friends
-var popularity_list = {'Grolk':[],'Zardri':[],'Kallysta':[],'Obrulena':[],
-'Thoren':[],'Salem':[],'Edraele':[]}
+var popularity_list = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -22,6 +21,9 @@ func _ready():
 	
 	relations = {'Grolk':0, 'Zardri':0,'Kallysta':-2,'Obrulena':0,
 	'Thoren':0,'Salem':0,'Edraele':0}
+	
+	for player_name in relations.keys():
+		popularity_list[player_name] = []
 
 #-------------- REACTIONS AND SETUP --------------------
 
@@ -45,7 +47,6 @@ func receive_report_info(reports): #report = {'player':[stance1, stance2, points
 		
 		# Justice
 		trait_justice(report, player_name)
-		
 		receive_fact(get_current_round(), [player_name, report[1], character_name])
 		
 	forget_info()

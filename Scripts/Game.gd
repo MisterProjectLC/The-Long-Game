@@ -43,7 +43,6 @@ func game_setup(_new_players, _newer_turn_order):
 	
 	# Charismatic
 	randomize()
-	
 	var opponent_count = players.size()-1
 	var a = randi() % opponent_count
 	for i in range(players.size()):

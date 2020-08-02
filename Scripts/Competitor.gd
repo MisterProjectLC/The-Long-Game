@@ -15,8 +15,6 @@ signal improve_relations
 signal worsen_relations
 signal set_relations
 
-signal done_setup
-
 signal gain_influence
 signal lose_influence
 
@@ -68,21 +66,19 @@ var memory_time
 
 # ------------------------- SETUP ------------------------
 
-func setup(player_character, players, turn_order, dip_phrases, opponent_trait_list):
-	self.player_character = player_character
-	self.players = players
-	self.turn_order = turn_order
-	self.dip_phrases = dip_phrases
-	self.opponent_trait_list = opponent_trait_list
+func setup(_player_character, _players, _turn_order, _dip_phrases, _opponent_trait_list):
+	self.player_character = _player_character
+	self.players = _players
+	self.turn_order = _turn_order
+	self.dip_phrases = _dip_phrases
+	self.opponent_trait_list = _opponent_trait_list
 	
-	for player in players:
+	for player in relations.keys():
 		_info_til_round[player] = 1
 		
 	for player in relations.keys():
 		ann_dict[[player, 0]] = []
 		ann_dict[[player, 1]] = []
-		
-	emit_signal('done_setup')
 
 
 # ---------------------- ACTIONS -----------------------
@@ -158,14 +154,14 @@ func send(_order, _recipient, _actor, _receiver):
 	return send_message(_actor, _order, _receiver, _recipient)
 
 
-func snitch(snitch_list, recipient_relation_list):
+func snitch(_snitch_list, recipient_relation_list):
 	var already_snitched = []
 	# Snitching
-	for info in snitch_list:
+	for info in _snitch_list:
 		if recipient_relation_list.has(relations[info[2]]) and !already_snitched.has(info[2]):
 			warn(info[0], info[1], info[2])
 			already_snitched.append(info[2])
-			snitch_list.erase(info)
+			_snitch_list.erase(info)
 
 
 func manage_ann(_target, _order, _recipient):
@@ -212,9 +208,9 @@ func trait_justice(report, player_name):
 	return false
 
 
-func trait_reactive(info, relations):
+func trait_reactive(info, _relations):
 	# Reactive - becoming suspicious
-	if relations[info[0]] > 0 and info[1] == 0 and info[2] == character_name:
+	if _relations[info[0]] > 0 and info[1] == 0 and info[2] == character_name:
 		emit_signal('set_relations', info[0], 0)
 	# Reactive - becoming hostile
 	elif info[1] == 1 and info[2] == character_name:
@@ -228,26 +224,26 @@ func trait_paranoid(info):
 
 # --- TRAITS: INDIRECT INTERACTION REACTIONS --------------
 
-func trait_alliance(info, relations):
+func trait_alliance(info, _relations):
 	# Alliance - someone coops with my friend or my friend coops with someone
-	if relations[info[2]] < 0 and info[1] == 0 and relations[info[0]] != 2 and relations[info[0]] != -2:
+	if _relations[info[2]] < 0 and info[1] == 0 and _relations[info[0]] != 2 and _relations[info[0]] != -2:
 		emit_signal('set_relations', info[0], -1)
-	elif relations[info[0]] < 0 and info[1] == 0 and relations[info[2]] != 2 and relations[info[2]] != -2:
+	elif _relations[info[0]] < 0 and info[1] == 0 and _relations[info[2]] != 2 and _relations[info[2]] != -2:
 		emit_signal('set_relations', info[2], -1)
 
 
-func trait_brotherhood(info, relations):
+func trait_brotherhood(info, _relations):
 	# Brotherhood - someone hates my friend
-	if relations[info[0]] != 2 and info[1] == 1 and relations[info[2]] < 0:
+	if _relations[info[0]] != 2 and info[1] == 1 and _relations[info[2]] < 0:
 		emit_signal('set_relations', info[0], 1)
 
 
-func trait_allegiances(info, relations):
+func trait_allegiances(info, _relations):
 	if info[1] == 0: # positive interaction
 		# Allegiances
-		if relations[info[2]] == 2 and relations[info[0]] != 2:
+		if _relations[info[2]] == 2 and _relations[info[0]] != 2:
 			emit_signal('set_relations', info[0], 1)
-		elif relations[info[0]] == 2 and relations[info[2]] != 2 and info[2] != character_name: 
+		elif _relations[info[0]] == 2 and _relations[info[2]] != 2 and info[2] != character_name: 
 			emit_signal('set_relations', info[2], 1)
 
 # --- TRAITS: RELATIONSHIP REACTIONS --------------
@@ -300,20 +296,20 @@ func trait_simpleminded_check(sender):
 	return true
 
 
-func trait_general(memory_list, roun, info):
+func trait_general(_memory_list, roun, info):
 	# General
-	for memory in memory_list.keys(): 
+	for memory in _memory_list.keys(): 
 #		print('general ' + str(memory_list.keys().size()))
 #		print('Info: ' + str(info[0]) + ' ' + str(info[1]) + ' ' + str(info[2]) + ' ' + str(roun))
 #		print('Mem: ' + str(memory[0]) + ' ' + str(memory[1]) + ' ' + str(memory[2]) + ' ' + str(memory_list[memory][0]))
 		# memory is true
-		if info == memory and roun == memory_list[memory][0] and relations[memory_list[memory][1]] > -2:
-			emit_signal('improve_relations', memory_list[memory][1])
-			memory_list.erase(memory)
+		if info == memory and roun == _memory_list[memory][0] and relations[_memory_list[memory][1]] > -2:
+			emit_signal('improve_relations', _memory_list[memory][1])
+			_memory_list.erase(memory)
 		# memory is false
-		elif info[0] == memory[0] and info[2] == memory[2] and info[1] != memory[1] and roun == memory_list[memory][0] and relations[memory_list[memory][1]] < 2:
-			emit_signal('worsen_relations', memory_list[memory][1])
-			memory_list.erase(memory)
+		elif info[0] == memory[0] and info[2] == memory[2] and info[1] != memory[1] and roun == _memory_list[memory][0] and relations[_memory_list[memory][1]] < 2:
+			emit_signal('worsen_relations', _memory_list[memory][1])
+			_memory_list.erase(memory)
 
 
 func trait_intrigue_check(sender, roun, message, me):
@@ -344,7 +340,7 @@ func trait_intrigue_check(sender, roun, message, me):
 
 # ---------------- BASE FUNCTIONS ----------------------------
 
-func receive_message(sender, roun, message):
+func receive_message(sender, _roun, message):
 	print_mail(sender, message)
 	add_to_letter_list(sender, message)
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://Mini Scenes/Intelligences/GrolkAI.tscn" type="PackedScene" id=2]
@@ -14,100 +14,138 @@
 [ext_resource path="res://Art/Back.png" type="Texture" id=12]
 [ext_resource path="res://Art/img_400022.png" type="Texture" id=13]
 [ext_resource path="res://Art/ManualArrow1.png" type="Texture" id=14]
+[ext_resource path="res://Mini Scenes/Profile.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Mini Scenes/Popups/LettersPanel.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Mini Scenes/Popups/ForgeryPanel.tscn" type="PackedScene" id=17]
 
 [sub_resource type="DynamicFont" id=1]
 size = 50
-font_data = ExtResource( 9 )
-
-[sub_resource type="DynamicFont" id=2]
-size = 45
 font_data = ExtResource( 9 )
 
 [sub_resource type="DynamicFont" id=3]
 size = 120
 font_data = ExtResource( 9 )
 
+[sub_resource type="DynamicFont" id=2]
+size = 45
+font_data = ExtResource( 9 )
+
 [node name="SalemAI" type="Node"]
 script = ExtResource( 1 )
 intelligences = [ ExtResource( 2 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ) ]
+profile = ExtResource( 15 )
 panel = ExtResource( 5 )
 manual = ExtResource( 6 )
+letters_panel = ExtResource( 16 )
+forgery_panel = ExtResource( 17 )
 mail_viewer = ExtResource( 7 )
 report_viewer = ExtResource( 8 )
 
-[node name="AdvanceTurn" type="Button" parent="."]
-margin_left = 744.0
-margin_top = 536.886
-margin_right = 994.0
-margin_bottom = 590.886
+[node name="Back" type="Button" parent="."]
+margin_left = 25.0
+margin_top = 25.0
+margin_right = 75.0
+margin_bottom = 75.0
 custom_fonts/font = SubResource( 1 )
-text = "Advance"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Restart" type="Button" parent="."]
-margin_left = 30.0807
-margin_top = 76.4396
-margin_right = 934.081
-margin_bottom = 1062.44
+[node name="TextureRect" type="TextureRect" parent="Back"]
+margin_left = 2.18176
+margin_top = 1.12207
+margin_right = 894.182
+margin_bottom = 981.122
 rect_scale = Vector2( 0.05, 0.05 )
+texture = ExtResource( 12 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Restart" type="Button" parent="."]
+margin_left = 90.0
+margin_top = 25.0
+margin_right = 140.0
+margin_bottom = 75.0
 custom_fonts/font = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="TextureRect" type="TextureRect" parent="Restart"]
-margin_left = 83.217
-margin_top = 88.7647
-margin_right = 975.217
-margin_bottom = 1068.76
-rect_scale = Vector2( 0.8, 0.8 )
+margin_left = 6.38452
+margin_top = 5.74463
+margin_right = 898.385
+margin_bottom = 985.745
+rect_scale = Vector2( 0.04, 0.04 )
 texture = ExtResource( 10 )
 __meta__ = {
-"_edit_lock_": true
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="PointSpace" type="ColorRect" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -150.0
+margin_top = 25.0
+margin_right = 150.0
+margin_bottom = 75.0
+color = Color( 0.188235, 0.180392, 0.180392, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Points" type="Label" parent="PointSpace"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -150.0
+margin_right = 476.0
+margin_bottom = 108.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_scale = Vector2( 0.48, 0.48 )
+custom_fonts/font = SubResource( 3 )
+text = "Points: 0"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
 }
 
 [node name="Info" type="Button" parent="."]
-margin_left = 956.921
-margin_top = 18.6211
-margin_right = 1860.92
-margin_bottom = 1004.62
-rect_scale = Vector2( 0.05, 0.05 )
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -75.0
+margin_top = 25.0
+margin_right = -25.0
+margin_bottom = 75.0
 custom_fonts/font = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="TextureRect" type="TextureRect" parent="Info"]
-margin_left = 83.0
-margin_top = 96.7485
-margin_right = 595.0
-margin_bottom = 608.749
-rect_scale = Vector2( 1.45, 1.45 )
+margin_left = 3.52734
+margin_top = 5.45769
+margin_right = 515.527
+margin_bottom = 517.458
+rect_scale = Vector2( 0.08, 0.08 )
 texture = ExtResource( 11 )
-
-[node name="Back" type="Button" parent="."]
-margin_left = 30.0807
-margin_top = 15.0404
-margin_right = 934.081
-margin_bottom = 1001.04
-rect_scale = Vector2( 0.05, 0.05 )
-custom_fonts/font = SubResource( 1 )
-
-[node name="TextureRect" type="TextureRect" parent="Back"]
-margin_left = 77.0966
-margin_top = 80.9225
-margin_right = 969.097
-margin_bottom = 1060.92
-rect_scale = Vector2( 0.8, 0.8 )
-texture = ExtResource( 12 )
 __meta__ = {
-"_edit_lock_": true
+"_edit_lock_": true,
+"_edit_use_anchors_": false
 }
 
 [node name="CurrentRound" type="Label" parent="."]
-margin_left = 807.305
-margin_top = 492.06
-margin_right = 937.305
-margin_bottom = 533.06
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -209.419
+margin_top = -130.643
+margin_right = -95.4192
+margin_bottom = -89.6431
 custom_fonts/font = SubResource( 2 )
 text = "Round: 1"
 align = 1
@@ -115,81 +153,76 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CrownSpace" type="ColorRect" parent="."]
-margin_left = 20.0
-margin_top = 465.002
-margin_right = 205.0
-margin_bottom = 585.002
-color = Color( 0.188235, 0.180392, 0.180392, 1 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Crowns" type="TextureRect" parent="."]
-margin_left = 91.6066
-margin_top = 485.595
-margin_right = 1072.61
-margin_bottom = 1219.59
-rect_scale = Vector2( 0.1, 0.1 )
-texture = ExtResource( 13 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Actions" type="Label" parent="."]
-margin_left = 37.8111
-margin_top = 471.286
-margin_right = 101.811
-margin_bottom = 579.286
-custom_fonts/font = SubResource( 3 )
-text = "3"
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Point Space" type="ColorRect" parent="."]
-margin_left = 343.451
-margin_top = 21.8228
-margin_right = 665.451
-margin_bottom = 69.8228
-color = Color( 0.188235, 0.180392, 0.180392, 1 )
-
-[node name="Points" type="Label" parent="."]
-margin_left = 428.734
-margin_top = 19.0
-margin_right = 747.734
-margin_bottom = 127.0
-rect_scale = Vector2( 0.48, 0.48 )
-custom_fonts/font = SubResource( 3 )
-text = "Points: 0"
-align = 1
-
-[node name="LessInfluence" type="Button" parent="."]
-margin_left = 655.041
-margin_top = 506.57
-margin_right = 1559.04
-margin_bottom = 1492.57
-rect_scale = Vector2( 0.05, 0.05 )
+[node name="AdvanceTurn" type="Button" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -270.0
+margin_top = -82.1903
+margin_right = -31.0
+margin_bottom = -30.1903
 custom_fonts/font = SubResource( 1 )
-
-[node name="TextureRect" type="TextureRect" parent="LessInfluence"]
-margin_left = 27.4043
-margin_top = 78.4678
-margin_right = 627.404
-margin_bottom = 678.468
-rect_scale = Vector2( 1.45, 1.45 )
-texture = ExtResource( 14 )
+text = "Advance"
 __meta__ = {
-"_edit_lock_": true
+"_edit_use_anchors_": false
+}
+
+[node name="Forgery" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -139.776
+margin_top = -196.094
+margin_right = 57.2241
+margin_bottom = -144.094
+custom_fonts/font = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect2" type="TextureRect" parent="Forgery"]
+margin_left = 149.123
+margin_top = 5.80078
+margin_right = 661.123
+margin_bottom = 517.801
+rect_scale = Vector2( 0.08, 0.08 )
+texture = ExtResource( 11 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Forgery" type="Label" parent="Forgery"]
+anchor_top = -0.02
+anchor_bottom = -0.02
+margin_left = 8.54387
+margin_top = 5.2075
+margin_right = 138.544
+margin_bottom = 46.2075
+custom_fonts/font = SubResource( 2 )
+text = "Forgery"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
 }
 
 [node name="MoreInfluence" type="Button" parent="."]
-margin_left = 230.0
-margin_top = 506.57
-margin_right = 1134.0
-margin_bottom = 1492.57
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -275.0
+margin_top = -105.0
+margin_right = 730.0
+margin_bottom = 895.119
 rect_scale = Vector2( 0.05, 0.05 )
 custom_fonts/font = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="TextureRect" type="TextureRect" parent="MoreInfluence"]
 margin_left = 890.083
@@ -203,36 +236,102 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="TurnSpace" type="ColorRect" parent="."]
-margin_left = 290.0
-margin_top = 474.0
-margin_right = 641.0
-margin_bottom = 587.0
-color = Color( 0.188235, 0.180392, 0.180392, 1 )
+[node name="LessInfluence" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 155.0
+margin_top = -105.0
+margin_right = 1160.0
+margin_bottom = 895.119
+rect_scale = Vector2( 0.05, 0.05 )
+custom_fonts/font = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="TurnOrder" type="Label" parent="."]
-margin_left = 300.41
-margin_top = 478.907
-margin_right = 1353.41
-margin_bottom = 808.907
+[node name="TextureRect" type="TextureRect" parent="LessInfluence"]
+margin_left = 27.4043
+margin_top = 78.4678
+margin_right = 627.404
+margin_bottom = 678.468
+rect_scale = Vector2( 1.45, 1.45 )
+texture = ExtResource( 14 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="TurnSpace" type="ColorRect" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -208.0
+margin_top = -132.0
+margin_right = 140.0
+margin_bottom = -16.0
+color = Color( 0.188235, 0.180392, 0.180392, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TurnOrder" type="Label" parent="TurnSpace"]
+margin_left = 10.41
+margin_top = 4.90701
+margin_right = 1063.41
+margin_bottom = 334.907
 rect_scale = Vector2( 0.315, 0.315 )
 custom_fonts/font = SubResource( 3 )
 text = "Turn Order:
 Salem-Grolk-Kallysta-
 Thoren-Edriele"
 align = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CrownSpace" type="ColorRect" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = -133.0
+margin_right = 205.0
+margin_bottom = -16.0
+color = Color( 0.188235, 0.180392, 0.180392, 1 )
+
+[node name="Crowns" type="TextureRect" parent="CrownSpace"]
+margin_left = 71.6066
+margin_top = 20.593
+margin_right = 1052.61
+margin_bottom = 754.593
+rect_scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 13 )
+
+[node name="Actions" type="Label" parent="CrownSpace"]
+margin_left = 17.8111
+margin_top = 6.284
+margin_right = 81.811
+margin_bottom = 114.284
+custom_fonts/font = SubResource( 3 )
+text = "3"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="alter_actions" from="." to="." method="_on_SalemAI_alter_actions"]
 [connection signal="alter_points" from="." to="." method="_on_SalemAI_alter_points"]
 [connection signal="alter_round" from="." to="." method="_on_SalemAI_alter_round"]
-[connection signal="button_down" from="AdvanceTurn" to="." method="button_down"]
-[connection signal="button_up" from="AdvanceTurn" to="." method="_on_AdvanceTurn_button_up"]
+[connection signal="button_down" from="Back" to="." method="button_down"]
+[connection signal="button_up" from="Back" to="." method="_on_Back_button_up"]
 [connection signal="button_down" from="Restart" to="." method="button_down"]
 [connection signal="button_up" from="Restart" to="." method="_on_Restart_button_up"]
 [connection signal="button_down" from="Info" to="." method="button_down"]
 [connection signal="button_up" from="Info" to="." method="_on_Info_button_up"]
-[connection signal="button_down" from="Back" to="." method="button_down"]
-[connection signal="button_up" from="Back" to="." method="_on_Back_button_up"]
-[connection signal="button_down" from="LessInfluence" to="." method="button_down"]
-[connection signal="button_up" from="LessInfluence" to="." method="_on_LessInfluence_button_up"]
+[connection signal="button_down" from="AdvanceTurn" to="." method="button_down"]
+[connection signal="button_up" from="AdvanceTurn" to="." method="_on_AdvanceTurn_button_up"]
+[connection signal="button_down" from="Forgery" to="." method="button_down"]
+[connection signal="button_up" from="Forgery" to="." method="_on_Forgery_button_up"]
 [connection signal="button_down" from="MoreInfluence" to="." method="button_down"]
 [connection signal="button_up" from="MoreInfluence" to="." method="_on_MoreInfluence_button_up"]
+[connection signal="button_down" from="LessInfluence" to="." method="button_down"]
+[connection signal="button_up" from="LessInfluence" to="." method="_on_LessInfluence_button_up"]

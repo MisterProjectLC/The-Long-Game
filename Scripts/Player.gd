@@ -11,6 +11,7 @@ export(PackedScene) var profile
 export(PackedScene) var panel
 export(PackedScene) var manual
 export(PackedScene) var letters_panel
+export(PackedScene) var forgery_panel
 var current_panel
 
 export(PackedScene) var mail_viewer
@@ -25,30 +26,51 @@ var _delta_influence = 0
 
 # ------------------ SETUP --------------------------
 
+func _ready():
+	character_name = 'Salem'
+	traits_list = ["Player Character", "Seer", "Charismatic"]
+	
+	relations = {'Grolk':0,'Zardri':0 ,'Kallysta':0,'Obrulena':0,
+	'Thoren':0,'Edraele':0,'Salem':-2, 'Daint': 0}
+
 # other players-dependant setup
-func _on_SalemAI_done_setup():
+func setup(_player_character, _players, _turn_order, _dip_phrases, _opponent_trait_list):
+	.setup(_player_character, _players, _turn_order, _dip_phrases, _opponent_trait_list)
+	
 	for i in range(len(players)):
-		if players[i][0] != character_name:
+		var player = players[i]
+		
+		if player[0] != character_name:
+			_info_til_round[player] = 0
+			
 			# profile creation
 			var _new = profile.instance()
 			add_child(_new)
 			move_child(_new, get_child_count()-1)
 			
 			# profile setup
-			_new.rect_position = Vector2(45+(244*i),136)
+			_new.rect_position = Vector2(45+(244*i),100)
+			_new.anchor_left = 0.5
+			_new.anchor_right = 0.5
+			_new.anchor_top = 0.5
+			_new.anchor_bottom = 0.5
+			_new.margin_top = -195
+			_new.margin_left = -460 + 244*i
+			
 			_new.connect("portrait_click", self, "_portrait_pressed")
 			_new.connect("stance_change", self, "_stance_pressed")
-			_new.name = players[i][0]
+			_new.name = player[0]
 			_new.add_to_group("Profiles")
-			_new.setup(players[i])
+			_new.setup(player)
 		
 	language(Global.get_language())
-	
+
+
 func language(language):
 	turn_order_text = Global.mains[language]['Turn Order']
 	$AdvanceTurn.text = Global.mains[language]['Advance']
 	points_text = Global.mains[language]['Points']
-	$Points.text = Global.mains[language]['Points'] + ': 0'
+	$PointSpace/Points.text = Global.mains[language]['Points'] + ': 0'
 	round_text = Global.mains[language]['Round']
 	message_text = Global.mains[language]['Message']
 	
@@ -57,19 +79,14 @@ func language(language):
 		if profile.name != character_name:
 			profile.language(language)
 
-func _ready():
-	character_name = 'Salem'
-	traits_list = ["Player Character", "Seer", "Charismatic"]
-	
-	relations = {'Grolk':0,'Zardri':0 ,'Kallysta':0,'Obrulena':0,'Thoren':0,'Edraele':0,'Salem':-2, 'Daint': 0}
-	_info_til_round = {'Grolk':0,'Zardri':0 ,'Kallysta':0,'Obrulena':0,'Thoren':0,'Edraele':0, 'Daint': 0}
 
 # -------------------- SIGNAL HANDLING -----------------
 
 func start_turn():
 	print_turn()
 	pass
-	
+
+
 # process turn order info
 func receive_turn_order_info(turn_message):
 	var _new = turn_order_text + ':\n'
@@ -80,7 +97,7 @@ func receive_turn_order_info(turn_message):
 		
 	_new = _new + turn_message[turn_message.size()-1]
 	
-	$TurnOrder.text = _new
+	$TurnSpace/TurnOrder.text = _new
 
 
 # process report info
@@ -110,7 +127,7 @@ func update_matchtable():
 	emit_signal('matchtable_info_request', self, current_panel.get_enemy_name(), current_panel.get_opponent()[0])
 
 # process matchtable info
-func receive_matchtable_info(en_stances, op_stances, enemy_requested_name, opponent_requested_name):
+func receive_matchtable_info(en_stances, op_stances, _enemy_requested_name, _opponent_requested_name):
 	current_panel.update_matchtable(en_stances, op_stances)
 
 
@@ -119,7 +136,7 @@ func update_relation():
 	emit_signal('relation_info_request', self, current_panel.get_enemy_name(), current_panel.get_opponent()[0])
 	
 # process relation info
-func receive_relation_info(relation, enemy_requested_name, opponent_requested_name):
+func receive_relation_info(relation, _enemy_requested_name, _opponent_requested_name):
 	current_panel.update_relation(relation)
 
 
@@ -185,7 +202,6 @@ func _letters_pressed(enemy_name):
 	
 	_new.setup_panel(letter_list, enemy_name, get_dip_phrases())
 	_new.connect("send_letter", self, "send_letter")
-	pass
 
 
 # pressed change other opponent button
@@ -210,15 +226,24 @@ func _stance_pressed(_target, _stance):
 # pressed advance button
 func _on_AdvanceTurn_button_up():
 	if _delta_influence < 0:
-		for i in range(-_delta_influence):
+		for _i in range(-_delta_influence):
 			emit_signal('gain_influence', character_name)
 	elif _delta_influence > 0:
-		for i in range(_delta_influence):
+		for _i in range(_delta_influence):
 			emit_signal('lose_influence', character_name)
 	_delta_influence = 0
 	
 	emit_signal('advance_turn', character_name)
+
+func _on_Forgery_button_up():
+	var _new = letters_panel.instance()
+	add_child(_new)
+	move_child(_new, get_child_count()-1)
 	
+	_new.setup_panel(letter_list, get_dip_phrases())
+	_new.connect("send_letter", self, "send_letter")
+
+
 # pressed restart button
 func _on_Restart_button_up():
 	get_tree().change_scene("res://Mini Scenes/Scenes/Main.tscn")
@@ -250,12 +275,12 @@ func _on_Info_button_up():
 
 # alter action UI when action count changes
 func _on_SalemAI_alter_actions(_new):
-	$Actions.text = str(_new)
+	$CrownSpace/Actions.text = str(_new)
 
 
 # alter points UI when point count changes
 func _on_SalemAI_alter_points(_new):
-	$Points.text = str(points_text + ": " + str(_new))
+	$PointSpace/Points.text = str(points_text + ": " + str(_new))
 
 
 func _on_SalemAI_alter_round(_round):

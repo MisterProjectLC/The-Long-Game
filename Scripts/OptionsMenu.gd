@@ -41,7 +41,7 @@ func language(language):
 func _on_CloseButton_button_up():
 	queue_free()
 
-func _on_LanguageButton_item_selected(ID):
+func _on_LanguageButton_item_selected(_ID):
 	Audio.play_sound(Audio.small_press, 2)
 	Global.set_language($LanguageButton.get_selected_id())
 	emit_signal("changed_language", Global.get_language())
@@ -55,7 +55,7 @@ func _on_SoundsSlider_value_changed(value):
 	emit_signal("changed_volume")
 
 
-func _on_CheckBox_toggled(button_pressed):
+func _on_CheckBox_toggled(_button_pressed):
 	Global.set_debug_enabled(!Global.get_debug_enabled())
 
 

@@ -41,7 +41,7 @@ func close():
 		
 # --------------- MISC -------------------
 
-func _vector2_lerp(vector1, vector2, t):
-	var x = vector1.x + (vector2.x - vector1.x)*t
-	var y = vector1.y + (vector2.y - vector1.y)*t
+func _vector2_lerp(vector1, vector2, _t):
+	var x = vector1.x + (vector2.x - vector1.x)*_t
+	var y = vector1.y + (vector2.y - vector1.y)*_t
 	return Vector2(x, y)

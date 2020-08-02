@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://Scripts/LettersPanel.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/ForgeryPanel.gd" type="Script" id=1]
 [ext_resource path="res://Mini Scenes/Pieces/BlackBack.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Art/Old-Parchment-Textures.jpg" type="Texture" id=3]
 [ext_resource path="res://Fonts/Kayambang.ttf" type="DynamicFontData" id=4]
@@ -16,7 +16,7 @@ font_data = ExtResource( 4 )
 size = 44
 font_data = ExtResource( 4 )
 
-[node name="LettersPanel" type="Control"]
+[node name="ForgeryPanel" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = 2.0
@@ -38,11 +38,11 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource( 3 )
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
 [node name="CloseButton" type="Button" parent="."]
-visible = false
 margin_left = 684.238
 margin_top = 90.9246
 margin_right = 913.238
@@ -54,49 +54,61 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SendButton" type="Button" parent="."]
-visible = false
+[node name="FinishButton" type="Button" parent="."]
 margin_left = 693.449
 margin_top = 429.788
 margin_right = 915.449
 margin_bottom = 493.788
 rect_scale = Vector2( 0.75, 0.75 )
 custom_fonts/font = SubResource( 1 )
-text = "SEND"
+text = "FINISH"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LetterText" type="Label" parent="."]
-visible = false
-margin_left = 482.708
-margin_top = 164.0
-margin_right = 889.708
-margin_bottom = 431.0
+[node name="Subject" type="Label" parent="."]
+margin_left = 719.717
+margin_top = 180.376
+margin_right = 856.717
+margin_bottom = 220.376
 rect_scale = Vector2( 0.9, 0.9 )
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-align = 2
+text = "OBRULENA"
+align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Recipient" type="Label" parent="."]
-visible = false
-margin_left = 482.415
-margin_top = 363.123
-margin_right = 889.415
-margin_bottom = 403.123
+[node name="Action" type="Label" parent="."]
+margin_left = 682.06
+margin_top = 255.7
+margin_right = 866.06
+margin_bottom = 295.7
 rect_scale = Vector2( 0.9, 0.9 )
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-align = 2
+text = "WILL ATTACK"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Object" type="Label" parent="."]
+margin_left = 736.962
+margin_top = 330.45
+margin_right = 854.962
+margin_bottom = 370.45
+rect_scale = Vector2( 0.9, 0.9 )
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "EDRAELE"
+align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="LetterContainer" type="TextureRect" parent="."]
-visible = false
 anchor_right = 0.039
 anchor_bottom = 0.067
 margin_left = 187.0
@@ -109,7 +121,6 @@ __meta__ = {
 }
 
 [node name="LetterViewer" type="TextureRect" parent="."]
-visible = false
 anchor_right = 0.039
 anchor_bottom = 0.067
 margin_left = 485.0
@@ -122,11 +133,10 @@ __meta__ = {
 }
 
 [node name="LetterButtons" type="Control" parent="."]
-visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 [connection signal="button_up" from="CloseButton" to="." method="_on_CloseButton_button_up"]
-[connection signal="button_up" from="SendButton" to="." method="_on_SendButton_button_up"]
+[connection signal="button_up" from="FinishButton" to="." method="_on_SendButton_button_up"]

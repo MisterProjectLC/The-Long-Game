@@ -8,8 +8,8 @@ var enemy
 func language(language):
 	$PassiveAgressiveButtons.language(language)
 
-func setup(enemy):
-	self.enemy = enemy
+func setup(_enemy):
+	self.enemy = _enemy
 	$Button/Portrait.readdy(enemy)
 
 func new_stance(_stance):

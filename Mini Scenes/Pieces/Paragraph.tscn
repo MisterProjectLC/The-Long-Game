@@ -41,13 +41,14 @@ autowrap = true
 margin_left = 1.0
 margin_top = 47.0
 margin_right = 947.0
-margin_bottom = 228.0
+margin_bottom = 95.0
 rect_scale = Vector2( 0.82, 0.82 )
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Ástro
-Ástro"
 autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="SpoilerButton" type="Button" parent="."]
 margin_left = 12.4365
