@@ -33,10 +33,14 @@ margin_bottom = 167.0
 
 [node name="Title" type="Label" parent="."]
 visible = false
-margin_left = 256.0
-margin_top = 140.0
-margin_right = 734.0
-margin_bottom = 184.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -223.31
+margin_top = -146.846
+margin_right = 254.69
+margin_bottom = -102.846
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Results"
@@ -47,107 +51,159 @@ __meta__ = {
 
 [node name="CloseButton" parent="." instance=ExtResource( 5 )]
 visible = false
-margin_left = 726.576
-margin_top = 135.888
-margin_right = 758.576
-margin_bottom = 165.888
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 247.266
+margin_top = -150.958
+margin_right = 279.266
+margin_bottom = -120.958
 
 [node name="FirstPort" parent="." instance=ExtResource( 6 )]
 visible = false
-margin_left = 210.44
-margin_top = 195.36
-margin_right = 758.44
-margin_bottom = 802.36
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -268.87
+margin_top = -91.4858
+margin_right = 279.13
+margin_bottom = 515.514
 rect_scale = Vector2( 0.2, 0.2 )
 
 [node name="SecondPort" parent="." instance=ExtResource( 6 )]
 visible = false
-margin_left = 361.982
-margin_top = 195.254
-margin_right = 909.982
-margin_bottom = 802.254
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -117.328
+margin_top = -91.5918
+margin_right = 430.672
+margin_bottom = 515.408
 rect_scale = Vector2( 0.2, 0.2 )
 
 [node name="ThirdPort" parent="." instance=ExtResource( 6 )]
 visible = false
-margin_left = 504.782
-margin_top = 195.21
-margin_right = 1052.78
-margin_bottom = 802.21
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 25.4719
+margin_top = -91.6358
+margin_right = 573.47
+margin_bottom = 515.364
 rect_scale = Vector2( 0.2, 0.2 )
 
 [node name="FourthPort" parent="." instance=ExtResource( 6 )]
 visible = false
-margin_left = 648.822
-margin_top = 193.495
-margin_right = 1196.82
-margin_bottom = 800.495
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 169.512
+margin_top = -93.3508
+margin_right = 717.51
+margin_bottom = 513.649
 rect_scale = Vector2( 0.2, 0.2 )
 
 [node name="Report1" parent="." instance=ExtResource( 7 )]
 visible = false
-margin_left = 214.469
-margin_top = 324.839
-margin_right = 284.469
-margin_bottom = 463.839
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -264.841
+margin_top = 37.9932
+margin_right = -194.841
+margin_bottom = 176.993
 
 [node name="Report2" parent="." instance=ExtResource( 7 )]
 visible = false
-margin_left = 374.274
-margin_top = 322.909
-margin_right = 444.274
-margin_bottom = 461.909
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -105.036
+margin_top = 36.0632
+margin_right = -35.0361
+margin_bottom = 175.063
 
 [node name="Report3" parent="." instance=ExtResource( 7 )]
 visible = false
-margin_left = 518.815
-margin_top = 324.484
-margin_right = 588.815
-margin_bottom = 463.484
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 39.5048
+margin_top = 37.6382
+margin_right = 109.505
+margin_bottom = 176.638
 
 [node name="Report4" parent="." instance=ExtResource( 7 )]
 visible = false
-margin_left = 662.855
-margin_top = 322.77
-margin_right = 732.855
-margin_bottom = 461.77
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 183.545
+margin_top = 35.9242
+margin_right = 253.545
+margin_bottom = 174.924
 
 [node name="Points1" type="Label" parent="."]
 visible = false
-margin_left = 280.396
-margin_top = 349.328
-margin_right = 316.396
-margin_bottom = 393.328
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -198.914
+margin_top = 62.4822
+margin_right = -162.914
+margin_bottom = 106.482
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "+2"
 
 [node name="Points2" type="Label" parent="."]
 visible = false
-margin_left = 432.61
-margin_top = 348.917
-margin_right = 468.61
-margin_bottom = 392.917
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -46.7001
+margin_top = 62.0712
+margin_right = -10.7001
+margin_bottom = 106.071
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "+2"
 
 [node name="Points3" type="Label" parent="."]
 visible = false
-margin_left = 576.32
-margin_top = 348.663
-margin_right = 612.32
-margin_bottom = 392.663
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 97.0099
+margin_top = 61.8171
+margin_right = 133.01
+margin_bottom = 105.817
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "+2"
 
 [node name="Points4" type="Label" parent="."]
 visible = false
-margin_left = 720.36
-margin_top = 346.949
-margin_right = 756.36
-margin_bottom = 390.949
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 241.05
+margin_top = 60.1031
+margin_right = 277.05
+margin_bottom = 104.103
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "+2"

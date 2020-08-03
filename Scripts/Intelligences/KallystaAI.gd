@@ -40,6 +40,7 @@ func start_turn():
 	snitch_list.clear()
 	emit_signal("advance_turn", character_name)
 
+
 # process report info
 func receive_report_info(reports): #report = {'player':[stance1, stance2, points]}
 	for player_name in reports.keys():

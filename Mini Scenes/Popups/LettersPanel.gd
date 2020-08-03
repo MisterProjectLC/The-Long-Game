@@ -1,14 +1,21 @@
-extends 'res://Scripts/LettersList.gd'
+extends 'res://Scripts/popup.gd'
 
 var enemy_name = ''
 var recipient
 var messagefrom
+var letter_list = []
+var dip_phrases
+var selected_letter = ['Teste', '', 0, '']
 
 signal send_letter
 
 # ---------------- INITIAL ANIMATION ------------------
 func _ready():
 	setup(374, 222)
+
+
+func _process(delta):
+	processing(delta)
 
 # ------------------ SETUP/INIT --------------------
 
@@ -18,38 +25,18 @@ func language(language):
 	recipient = Global.panels[language]['Recipient']
 	messagefrom = Global.mains[language]['Message']
 
+
 # panel setup/initialization
-func setup_panel(letter_list, enemy_name, dip_phrases):
+func setup_panel(_letter_list, _enemy_name, _dip_phrases):
 	language(Global.get_language())
 	
 	# variables setup
-	self.enemy_name = enemy_name
-	self.letter_list = letter_list
-	self.dip_phrases = dip_phrases
+	self.enemy_name = _enemy_name
+	self.letter_list = _letter_list
+	self.dip_phrases = _dip_phrases
 	
 	# setup letter list
-	var letters_amount = {}
-	var total_amount = 0
-	for letter in letter_list:
-		var _new = letter_title.instance()
-		$LetterButtons.add_child(_new)
-		move_child(_new, get_child_count()-1)
-		_new.rect_position = Vector2(187, 106 + 36*total_amount)
-		_new.connect("letter_button_up", self, "_on_LetterButton_button_up")
-		_new.set_index(total_amount)
-		
-		if letters_amount.keys().has(letter[0]):
-			letters_amount[letter[0]] += 1
-		else:
-			letters_amount[letter[0]] = 1
-			
-		_new.text = letter[0] + " #" + str(letters_amount[letter[0]])
-		total_amount += 1
-
-
-func update_matchtable(my_stances, en_stances):
-	for i in range(my_stances.size()):
-		$MatchTable.activate(i, my_stances[i], en_stances[i])
+	$LetterList.setup(letter_list)
 
 
 # ------------------- PRESSING STUFF -----------------

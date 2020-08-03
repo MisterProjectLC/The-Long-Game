@@ -22,11 +22,11 @@
 size = 50
 font_data = ExtResource( 9 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=4]
 size = 120
 font_data = ExtResource( 9 )
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=3]
 size = 45
 font_data = ExtResource( 9 )
 
@@ -106,7 +106,7 @@ margin_bottom = 108.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_scale = Vector2( 0.48, 0.48 )
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 text = "Points: 0"
 align = 1
 __meta__ = {
@@ -146,7 +146,7 @@ margin_left = -209.419
 margin_top = -130.643
 margin_right = -95.4192
 margin_bottom = -89.6431
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 text = "Round: 1"
 align = 1
 __meta__ = {
@@ -201,7 +201,7 @@ margin_left = 8.54387
 margin_top = 5.2075
 margin_right = 138.544
 margin_bottom = 46.2075
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 text = "Forgery"
 align = 1
 __meta__ = {
@@ -282,7 +282,7 @@ margin_top = 4.90701
 margin_right = 1063.41
 margin_bottom = 334.907
 rect_scale = Vector2( 0.315, 0.315 )
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 text = "Turn Order:
 Salem-Grolk-Kallysta-
 Thoren-Edriele"
@@ -313,7 +313,7 @@ margin_left = 17.8111
 margin_top = 6.284
 margin_right = 81.811
 margin_bottom = 114.284
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 text = "3"
 __meta__ = {
 "_edit_use_anchors_": false

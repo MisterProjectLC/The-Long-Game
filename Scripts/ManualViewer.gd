@@ -205,7 +205,7 @@ func en_pages_setup():
 	If there wasn't a match (Round 1): SUSPICIOUS"""}
 	],
 	['text', {'title':'DIM-WITTED', 'color':Color.palegreen ,
-	'text':"""Always believes the opposite of received messages."""}
+	'text':"""Always believes the opposite of received messages. His relation with a player degrades by 1 every time they send a message to him."""}
 	],
 	['text', {'title':'ACTION PRIORITY',
 	'text':"""1- Attack an ENRAGING player.
@@ -628,7 +628,7 @@ func br_pages_setup():
 	Se não houve partida (Turno 1): SUSPEITO """}
 	],
 	['text', {'title':'ESTUPIDO', 'color':Color.palegreen ,
-	'text':"""Sempre acredita no oposto de mensagens recebidas."""}
+	'text':"""Sempre acredita no oposto de mensagens recebidas. Sua relação com um jogador se degrade em 1 toda vez que esse jogador enviar uma mensagem para ele."""}
 	],
 	['text', {'title':'PRIORIDADE DE ACAO',
 	'text':"""1- Ataca um jogador REVOLTANTE.
@@ -1048,7 +1048,7 @@ func de_pages_setup():
 	Falls es kein Match gab (Runde 1): MISSTRAUISCH"""}
 	],
 	['text', {'title':'BLOD', 'color':Color.palegreen ,
-	'text':"""Glaubt immer das Gegenteil von den erhaltenen Nachrichten."""}
+	'text':"""Glaubt immer das Gegenteil von den erhaltenen Nachrichten. Seine Relation mit einem Spieler verschlechtert sich jedes Mal, wenn dieses Spieler ihm eine Nachricht sendet."""}
 	],
 	['text', {'title':'AKTION-PRIORITAET',
 	'text':"""1- Attackiert einen ÄRGERLICHEN Spieler.

@@ -61,6 +61,7 @@ func receive_message(sender, roun, message):
 	
 	# Dim-Witted
 	message = [message[0], stance_inverse(message[1]), message[2]]
+	emit_signal("worsen_relations", sender)
 	
 	# Paranoid
 	trait_paranoid(message)

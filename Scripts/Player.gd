@@ -41,7 +41,6 @@ func setup(_player_character, _players, _turn_order, _dip_phrases, _opponent_tra
 		var player = players[i]
 		
 		if player[0] != character_name:
-			_info_til_round[player] = 0
 			
 			# profile creation
 			var _new = profile.instance()
@@ -63,6 +62,9 @@ func setup(_player_character, _players, _turn_order, _dip_phrases, _opponent_tra
 			_new.add_to_group("Profiles")
 			_new.setup(player)
 		
+	for player in relations.keys():
+		_info_til_round[player] = 0
+	
 	language(Global.get_language())
 
 
@@ -84,7 +86,6 @@ func language(language):
 
 func start_turn():
 	print_turn()
-	pass
 
 
 # process turn order info
@@ -181,6 +182,7 @@ func _portrait_pressed(enemy):
 func closed_manual():
 	emit_signal("closed_manual")
 
+
 # pressed info button
 func _info_pressed():
 	if get_actions() > 0 and get_info_til_round(current_panel.get_enemy_name()) != get_current_round():
@@ -210,9 +212,11 @@ func _opponent_pressed():
 	update_relation()
 	emit_signal("pressed_opponent")
 
+
 # pressed send button
 func _send_message(name1, message_id, name2):
 	send_message(name1, message_id, name2, current_panel.get_enemy_name())
+
 
 # pressed stance button
 func _stance_pressed(_target, _stance):
@@ -235,13 +239,14 @@ func _on_AdvanceTurn_button_up():
 	
 	emit_signal('advance_turn', character_name)
 
+
 func _on_Forgery_button_up():
-	var _new = letters_panel.instance()
+	var _new = forgery_panel.instance()
 	add_child(_new)
 	move_child(_new, get_child_count()-1)
 	
-	_new.setup_panel(letter_list, get_dip_phrases())
-	_new.connect("send_letter", self, "send_letter")
+	_new.setup_panel(letter_list, players, get_dip_phrases())
+	_new.connect("forged_letter", self, "forge_letter")
 
 
 # pressed restart button

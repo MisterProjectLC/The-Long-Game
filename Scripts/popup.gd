@@ -4,8 +4,6 @@ extends Control
 var _visibler = false
 var _margin_top = 412
 var _margin_left = 240
-var _position = Vector2(0, 0)
-var _target_position = Vector2(0, 0)
 var _speed = 4
 var t = 0
 
@@ -21,15 +19,18 @@ func setup(left, top):
 
 func processing(delta):
 	# growing phase
-	if $Background.margin_bottom < _margin_top:
-		# lerp
-		t += _speed*delta
+	if t != 1:
+		if t < 1:
+			t += 2*_speed*delta
+		else:
+			t = 1
+		
 		$Background.margin_top = (1-t) - t*_margin_top
 		$Background.margin_left = (1-t) - t*_margin_left
 		$Background.margin_bottom = (1-t) + t*_margin_top
 		$Background.margin_right = (1-t) + t*_margin_left
 		#$BlackBack.modulate.a = 0 + (46 - 0)*t
-		
+	
 	# reveal phase
 	elif _visibler == false:
 		for child in get_children():

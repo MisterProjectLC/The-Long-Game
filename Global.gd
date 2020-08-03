@@ -35,15 +35,18 @@ var en_relations = {-2:'Friendly',-1:'Trusting', 0:'Suspicious', 1:'Hostile', 2:
 var br_relations = {-2:'Amigavel',-1:'Confiante', 0:'Suspeito', 1:'Hostil', 2:'Revoltado', 100:'Suspeita', 102:'Revoltada'}
 var de_relations = {-2:'Freundlich',-1:'Vertrauend', 0:'Msstrauisch', 1:'Feindlich', 2:'Wütend'}
 
-var en_panel = {'Close':'Close', 'Info':'Info', 'Points':'Points', 'Relations':en_relations,
+var en_panel = {'Close':'Close','Finish':'Finish', 'Info':'Info', 'Points':'Points', 'Relations':en_relations,
 	'R':'','Relation':'\'s relation\ntowards', 'Send':'Send', 'Diplomacy':'Diplomacy Area', 
-	'Unknown':'Unknown', 'Recipient':'Recipient'}
-var br_panel = {'Close':'Fechar', 'Info':'Info', 'Points':'Pontos', 'Relations':br_relations,
+	'Unknown':'Unknown', 'Recipient':'Recipient', 
+	'Subject':'Subject', 'Action':'Action', 'Object':'Object', 'Author':'Author'}
+var br_panel = {'Close':'Fechar','Finish':'Finalizar', 'Info':'Info', 'Points':'Pontos', 'Relations':br_relations,
 	'R':'Relacao de \n','Relation':' com', 'Send':'Enviar', 'Diplomacy':'Area de Diplomacia', 
-	'Unknown':'???', 'Recipient':'Destinatario'}
-var de_panel = {'Close':'Schlss.', 'Info':'Info', 'Points':'Punktzahl', 'Relations':de_relations,
+	'Unknown':'???', 'Recipient':'Destinatario', 
+	'Subject':'Sujeito', 'Action':'Acao', 'Object':'Objeto', 'Author':'Autor'}
+var de_panel = {'Close':'Schlss.','Finish':'Abschliessen', 'Info':'Info', 'Points':'Punktzahl', 'Relations':de_relations,
 	'R':'','Relation':'s Relation\nmit', 'Send':'Senden', 'Diplomacy':'Diplomatiebereich', 
-	'Unknown':'Unbekannt', 'Recipient':'Recipient'}
+	'Unknown':'Unbekannt', 'Recipient':'Recipient', 
+	'Subject':'Subjekt', 'Action':'Aktion', 'Object':'Objekt', 'Author':'Autor'}
 var panels = [en_panel, br_panel, de_panel]
 
 var en_phrases = ['will co-op with', 'will attack']

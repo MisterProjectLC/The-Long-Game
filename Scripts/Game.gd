@@ -146,6 +146,7 @@ class MyCustomSorter:
 			return true
 		return false
 
+
 # end the game
 func endgame():
 	var point_list = []
@@ -172,6 +173,7 @@ func pass_point_info(requester, enemy_requested_name):
 	if requester.get_info_til_round(enemy_requested_name) == roun:
 		requester.receive_points_info(ai_node(enemy_requested_name).get_points())
 
+
 # answering matchtable info requests
 func pass_matchtable_info(requester, enemy_requested_name, opponent_requested_name):
 	# get variables
@@ -190,10 +192,12 @@ func pass_matchtable_info(requester, enemy_requested_name, opponent_requested_na
 	# send
 	requester.receive_matchtable_info(en_stances, op_stances, enemy_requested_name, opponent_requested_name)
 
+
 # answering relation info requests
 func pass_relation_info(requester, enemy_requested_name, opponent_requested_name):
 	if requester.get_info_til_round(enemy_requested_name) == roun:
 		requester.receive_relation_info(ai_node(enemy_requested_name).get_relation(opponent_requested_name), enemy_requested_name, opponent_requested_name)
+
 
 # passing messages along
 func send_message(sender, package, recipient):

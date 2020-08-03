@@ -35,13 +35,20 @@ margin_top = -167.0
 margin_right = 258.0
 margin_bottom = 167.0
 texture = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Label" type="Label" parent="."]
 visible = false
-margin_left = 256.0
-margin_top = 140.0
-margin_right = 734.0
-margin_bottom = 429.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -238.347
+margin_top = -155.61
+margin_right = 239.653
+margin_bottom = 133.39
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Message from: Edraele
@@ -54,10 +61,14 @@ Take it as you will."
 [node name="CloseButton" type="Button" parent="."]
 visible = false
 modulate = Color( 1, 0, 0, 1 )
-margin_left = 699.566
-margin_top = 142.027
-margin_right = 731.566
-margin_bottom = 172.027
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 205.219
+margin_top = -153.583
+margin_right = 237.219
+margin_bottom = -123.583
 custom_fonts/font = SubResource( 2 )
 text = "X"
 [connection signal="button_up" from="CloseButton" to="." method="_on_CloseButton_button_up"]

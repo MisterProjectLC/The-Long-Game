@@ -164,6 +164,18 @@ func snitch(_snitch_list, recipient_relation_list):
 			_snitch_list.erase(info)
 
 
+func send_letter(sender, name1, message, name2, recipient):
+	if name1 == name2 || get_actions() <= 0 || recipient == sender || name1 == recipient:
+		return false
+	
+	spend_action()
+	var package = [name1, message, name2]
+	
+	# sender, message, recipient
+	emit_signal('send_message', sender, package, recipient)
+	return true
+
+
 func manage_ann(_target, _order, _recipient):
 	if !ann_dict[[_target, _order]].has(_recipient):
 		# give info about ann to sally
@@ -183,6 +195,17 @@ func lose_influence():
 	if get_actions() > 0 and turn_order.back() != character_name:
 		spend_action()
 		emit_signal('lose_influence', character_name)
+
+
+func forge_letter(letter, index, change_count):
+	if letter[1] == letter[3] || get_actions() < change_count:
+		return false
+	
+	for _i in range(change_count):
+		spend_action()
+	
+	letter_list[index] = letter
+	return true
 
 
 # ----------------------------- TRAITS -------------------------------------------------
@@ -219,8 +242,8 @@ func trait_reactive(info, _relations):
 
 func trait_paranoid(info):
 	# Paranoid
-	if info[1] == 1: # negative interaction
-		emit_signal('set_relations', info[2], 2)
+	if info[2] == character_name and info[1] == 1: # negative interaction
+		emit_signal('set_relations', info[0], 2)
 
 # --- TRAITS: INDIRECT INTERACTION REACTIONS --------------
 
@@ -380,18 +403,6 @@ func receive_relation(relation, enemy_name, opponent_name):
 func send_message(name1, message, name2, recipient):
 	return send_letter(character_name, name1, message, name2, recipient)
 
-
-func send_letter(sender, name1, message, name2, recipient):
-	if name1 == name2 || get_actions() <= 0 || recipient == sender || name1 == recipient:
-		return false
-	
-	spend_action()
-	var package = [name1, message, name2]
-	
-	# sender, message, recipient
-	emit_signal('send_message', sender, package, recipient)
-	return true
-	
 
 # ----------------- HELPER FUNCTIONS -------------------
 

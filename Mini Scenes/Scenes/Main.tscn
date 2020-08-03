@@ -95,6 +95,7 @@ margin_bottom = 0.0
 [connection signal="gain_influence" from="ThorenAI" to="." method="gain_influence"]
 [connection signal="improve_relations" from="ThorenAI" to="ThorenAI" method="improve_relations"]
 [connection signal="lose_influence" from="ThorenAI" to="." method="lose_influence"]
+[connection signal="lose_rep" from="ThorenAI" to="ThorenAI" method="lose_rep"]
 [connection signal="matchtable_info_request" from="ThorenAI" to="." method="pass_matchtable_info"]
 [connection signal="point_info_request" from="ThorenAI" to="." method="pass_point_info"]
 [connection signal="relation_info_request" from="ThorenAI" to="." method="pass_relation_info"]

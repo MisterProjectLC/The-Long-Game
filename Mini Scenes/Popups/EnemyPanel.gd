@@ -21,6 +21,7 @@ var manual
 
 # ---------------- INITIAL ANIMATION ------------------
 func _ready():
+	_speed = 2
 	setup(412, 240)
 
 
@@ -41,6 +42,7 @@ func language(language):
 	$Points.text = points_text + ":\n?"
 	
 	relation_dict = Global.panels[language]['Relations']
+
 
 # panel setup/initialization
 func setup_panel(enemy, _manual, _info_turn, _players, dip_phrases):
@@ -120,8 +122,10 @@ func _on_SendButton_button_up():
 	
 	emit_signal('send_message', name1, message_id, name2)
 
+
 func _on_LetterButton_button_up():
 	emit_signal("letters_pressed", enemy_name)
+
 
 func item_selected(_ID):
 	Audio.play_sound(Audio.writing, 2)
@@ -136,7 +140,8 @@ func _on_ManualButton_button_up():
 	_new.manual_setup(player_page)
 	
 	_new.connect("closed_manual", self, "closed_manual")
-	
+
+
 func closed_manual():
 	emit_signal('closed_manual')
 
@@ -148,8 +153,10 @@ func _vector2_lerp(vector1, vector2, t):
 	return Vector2(x, y)
 	
 # --------- GETTER / SETTER ------------
+
 func get_enemy_name():
 	return enemy_name
+
 
 func get_opponent():
 	return players[_opponent_index]
