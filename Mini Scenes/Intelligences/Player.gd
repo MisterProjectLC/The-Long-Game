@@ -1,4 +1,4 @@
-extends "res://Scripts/Competitor.gd"
+extends "res://Mini Scenes/Intelligences/Competitor.gd"
 
 signal changed_stance
 signal pressed_info

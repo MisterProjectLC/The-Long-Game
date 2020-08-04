@@ -1,4 +1,4 @@
-extends 'res://Scripts/popup.gd'
+extends 'res://Mini Scenes/Popups/popup.gd'
 
 var portraits = ['Winner', 'FirstLoser', 'SecondLoser', 'ThirdLoser', 'FourthLoser']
 var point_nodes = ['PointsWinner', 'Points1', 'Points2', 'Points3', 'Points4']

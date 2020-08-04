@@ -1,4 +1,4 @@
-extends "res://Scripts/Competitor.gd"
+extends "res://Mini Scenes/Intelligences/Competitor.gd"
 
 var priority_lister = 1
 var agenda = 0

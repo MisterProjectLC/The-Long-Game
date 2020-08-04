@@ -1,4 +1,4 @@
-extends 'res://Scripts/popup.gd'
+extends 'res://Mini Scenes/Popups/popup.gd'
 
 var letter_list = []
 var players
@@ -33,7 +33,7 @@ func language(language):
 	$Subject.text = Global.panels[language]['Subject']
 	$Action.text = Global.panels[language]['Action']
 	$Object.text = Global.panels[language]['Object']
-	$Object.text = Global.panels[language]['Author']
+	$Author.text = Global.panels[language]['Author'] + ":"
 
 
 # panel setup/initialization

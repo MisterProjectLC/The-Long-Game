@@ -1,4 +1,4 @@
-extends 'res://Scripts/popup.gd'
+extends 'res://Mini Scenes/Popups/popup.gd'
 
 func _ready():
 	_speed = 2

@@ -1,6 +1,6 @@
 [gd_scene load_steps=21 format=2]
 
-[ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
+[ext_resource path="res://Mini Scenes/Intelligences/Player.gd" type="Script" id=1]
 [ext_resource path="res://Mini Scenes/Intelligences/GrolkAI.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Mini Scenes/Intelligences/ThorenAI.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Mini Scenes/Intelligences/EdraeleAI.tscn" type="PackedScene" id=4]
@@ -18,11 +18,12 @@
 [ext_resource path="res://Mini Scenes/Popups/LettersPanel.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Mini Scenes/Popups/ForgeryPanel.tscn" type="PackedScene" id=17]
 
+
 [sub_resource type="DynamicFont" id=1]
 size = 50
 font_data = ExtResource( 9 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=2]
 size = 120
 font_data = ExtResource( 9 )
 
@@ -106,7 +107,7 @@ margin_bottom = 108.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_scale = Vector2( 0.48, 0.48 )
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 2 )
 text = "Points: 0"
 align = 1
 __meta__ = {
@@ -282,7 +283,7 @@ margin_top = 4.90701
 margin_right = 1063.41
 margin_bottom = 334.907
 rect_scale = Vector2( 0.315, 0.315 )
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 2 )
 text = "Turn Order:
 Salem-Grolk-Kallysta-
 Thoren-Edriele"
@@ -313,7 +314,7 @@ margin_left = 17.8111
 margin_top = 6.284
 margin_right = 81.811
 margin_bottom = 114.284
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 2 )
 text = "3"
 __meta__ = {
 "_edit_use_anchors_": false

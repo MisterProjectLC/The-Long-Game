@@ -16,7 +16,7 @@ func setup(_title, _text, _id, color):
 
 
 func get_size():
-	return $Texto.get_line_count()*$Texto.get_line_height()
+	return 12 + $Texto.get_line_count()*($Texto.get_line_height()-6)
 
 
 func set_revealed(_new):

@@ -1,4 +1,4 @@
-extends 'res://Scripts/popup.gd'
+extends 'res://Mini Scenes/Popups/popup.gd'
 
 signal info_pressed
 signal opponent_pressed

@@ -1,6 +1,6 @@
 [gd_scene load_steps=18 format=2]
 
-[ext_resource path="res://Scripts/Main.gd" type="Script" id=1]
+[ext_resource path="res://Mini Scenes/Scenes/Main.gd" type="Script" id=1]
 [ext_resource path="res://Mini Scenes/Popups/VictoryViewer.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Mini Scenes/Intelligences/ThorenAI.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Mini Scenes/Intelligences/EdraeleAI.tscn" type="PackedScene" id=4]
@@ -17,6 +17,7 @@
 [ext_resource path="res://Art/Portraits/Obrulena Alpha.png" type="Texture" id=17]
 [ext_resource path="res://Mini Scenes/Intelligences/ZardriAI.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Art/Portraits/Zardri.png" type="Texture" id=19]
+
 
 [node name="Main" type="Node"]
 script = ExtResource( 1 )

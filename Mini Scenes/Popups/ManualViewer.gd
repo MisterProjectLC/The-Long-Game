@@ -1,4 +1,4 @@
-extends 'res://Scripts/popup.gd'
+extends 'res://Mini Scenes/Popups/popup.gd'
 
 signal closed_manual
 
@@ -43,6 +43,7 @@ func manual_setup(_new):
 	de_pages_setup()
 	language(Global.language)
 
+
 func en_pages_setup():
 	en_pages = [   # Manual
 	[['text', {'title':'THE LONG GAME', 
@@ -79,11 +80,14 @@ func en_pages_setup():
 	],
 	['text', {'title':'DIPLOMACY', 
 	'text':"""Finally, there's DIPLOMACY. Using the DIPLOMACY AREA menu shown above, the player can send messages to other characters. Likewise, other characters may send messages to the player from time to time.
-	Sending a message costs 1 ACTION, and it is, in essence, the crux of the game. This system is what allows the player to truly manipulate other characters in powerful ways.
-	There are two ways to do that:
+	Sending a message costs 1 ACTION, and it is, in essence, the crux of the game. This system is what allows the player to truly manipulate other characters in powerful ways. There are two ways to do that:
 	-WRITING: to write a message, select the three options (Subject, Action, Object) in the Diplomacy Area that you want to write. When you're done, click on Send.
 	-RESENDING: you may also resend a message written by another player using the Envelope icon, making the receiver think that the original author sent it to them. This is a really powerful move, and can cause lots of havoc between would-be allies.
 	In order to manipulate NPCs effectively, the player also has complete access to every character's behaviors and traits."""}
+	],
+	['text', {'title':'FORGERY',
+	'text':"""Forgery opens even more avenues for deception. With it, players may create fake letters using messages 
+	written by other players, altering their contents to eventually resend them. Each alteration costs 1 ACTION."""}
 	],
 	['text', {'title':'TRAITS AND CHARACTERS',
 	'text':"""This game comes with a document detailing each character's profile. They are divided in three parts:
@@ -503,7 +507,12 @@ func br_pages_setup():
 	Existem duas formas de fazer isso:
 	-ESCRITA: para escrever uma carta, escolha as três opções (Sujeito, Ação, Objeto) na Área de Diplomacia as quais você quer escrever. Quando tudo estiver pronto, clique em Enviar.
 	-RE-ENVIO: você também pode re-enviar uma carta escrita por outro jogador usando o ícone de Envelope, fazendo com que o remetente pense que o autor original enviou a carta para ele. Isso pode ter tremendas consequências, causando caos e ódio entre aliados.
+	AAdicionalmente, jogadores podem forjar cartas falsas usando mensagens de outros jogadores, alterando seu conteúdo para se ajustar aos planos do forjador. Cada alteração custa 1 AÇÃO.
 	Para poder controlar NPCs com eficácia, o jogador tem completo acesso ao comportamento e sistema de IA de cada jogador."""}
+	],
+	['text', {'title':'FALSIFICACAO',
+	'text':"""Falsificação abre ainda mais possibilidades para enganação. Com ela, jogadores podem 
+	forjar cartas falsas usando mensagens de outros jogadores, alterando seu conteúdo para depois re-enviá-las. Cada alteração custa 1 AÇÃO."""}
 	],
 	['text', {'title':'CARACTERISTICAS E PERSONAGENS', 'space':350,
 	'text':"""Este jogo também vem com um documento detalhando o perfil de cada jogador. Eles estão divididos em três partes:
@@ -926,6 +935,10 @@ func de_pages_setup():
 	-SCHREIBEN: um eine Briefe zu schreiben, wählt die drei Optionen (Subjekt, Aktion, Objekt) im Diplomatiebereich, die du schreiben willst. Wenn alles bereit ist, klick auf Senden.
 	-WIEDER SENDEN: man kann auch eine Briefe, die ein anderer Spieler geschrieben hat, mit dem Umschlag-Icon senden. Damit wird der Absender denken, dass der Original-Author ihm die Briefe geschickt hat, was riesige Konsequenzen verursachen kann.
 	Um sie effizient zu kontrollieren, hat der Spieler komplett Zugriff auf das Verhalten und KI-System von alle Charakter."""}
+	],
+	['text', {'title':'FAELSCHUNG',
+	'text':"""Fälschung eröffnet noch mehr Möglichkeiten für Täuschung. Damit kann man Briefe von anderen Spieler fälschen, um sie später wieder zu senden. 
+	Jede Änderung verbringt 1 AKTION."""}
 	],
 	['text', {'title':'EIGENSCHAFTEN UND CHARAKTER', 'space':350,
 	'text':"""Dieses Spiel hat auch ein Dokument, das das Profil jedes Charakters detaliert. Sie sind in drei Teile gegliedert:
