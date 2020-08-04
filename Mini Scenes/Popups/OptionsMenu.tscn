@@ -44,10 +44,14 @@ margin_bottom = 188.0
 
 [node name="Options" type="Label" parent="."]
 visible = false
-margin_left = 402.274
-margin_top = 115.133
-margin_right = 600.274
-margin_bottom = 173.133
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -100.451
+margin_top = -178.819
+margin_right = 97.549
+margin_bottom = -120.819
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Options"
@@ -55,10 +59,14 @@ align = 1
 
 [node name="Volume" type="Label" parent="."]
 visible = false
-margin_left = 273.416
-margin_top = 161.732
-margin_right = 471.416
-margin_bottom = 219.732
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -229.309
+margin_top = -132.22
+margin_right = -31.3089
+margin_bottom = -74.2202
 rect_scale = Vector2( 0.95, 0.95 )
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
@@ -66,10 +74,14 @@ text = "Volume"
 
 [node name="Music" type="Label" parent="."]
 visible = false
-margin_left = 279.395
-margin_top = 215.133
-margin_right = 478.395
-margin_bottom = 273.133
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -223.33
+margin_top = -78.8192
+margin_right = -24.3298
+margin_bottom = -20.8192
 rect_scale = Vector2( 0.6, 0.6 )
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
@@ -78,18 +90,26 @@ align = 2
 
 [node name="MusicSlider" type="HSlider" parent="."]
 visible = false
-margin_left = 407.89
-margin_top = 223.575
-margin_right = 520.89
-margin_bottom = 239.575
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -94.835
+margin_top = -70.3772
+margin_right = 18.165
+margin_bottom = -54.3772
 ticks_on_borders = true
 
 [node name="Sounds" type="Label" parent="."]
 visible = false
-margin_left = 274.0
-margin_top = 249.133
-margin_right = 482.0
-margin_bottom = 307.133
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -228.725
+margin_top = -44.8192
+margin_right = -20.7249
+margin_bottom = 13.1808
 rect_scale = Vector2( 0.6, 0.6 )
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
@@ -98,18 +118,26 @@ align = 2
 
 [node name="SoundsSlider" type="HSlider" parent="."]
 visible = false
-margin_left = 407.389
-margin_top = 258.777
-margin_right = 520.389
-margin_bottom = 274.777
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -95.3359
+margin_top = -35.1751
+margin_right = 17.6639
+margin_bottom = -19.1751
 ticks_on_borders = true
 
 [node name="Language" type="Label" parent="."]
 visible = false
-margin_left = 275.3
-margin_top = 298.583
-margin_right = 473.3
-margin_bottom = 356.583
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -227.425
+margin_top = 4.63083
+margin_right = -29.4249
+margin_bottom = 62.6308
 rect_scale = Vector2( 0.95, 0.95 )
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
@@ -117,17 +145,25 @@ text = "Language"
 
 [node name="LanguageButton" type="OptionButton" parent="."]
 visible = false
-margin_left = 277.144
-margin_top = 362.43
-margin_right = 418.144
-margin_bottom = 382.43
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -225.581
+margin_top = 68.4778
+margin_right = -84.5808
+margin_bottom = 88.4778
 
 [node name="CheatLogs" type="Label" parent="."]
 visible = false
-margin_left = 273.62
-margin_top = 405.711
-margin_right = 521.62
-margin_bottom = 463.711
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -229.105
+margin_top = 111.759
+margin_right = 18.8951
+margin_bottom = 169.759
 rect_scale = Vector2( 0.95, 0.95 )
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
@@ -135,23 +171,37 @@ text = "Cheat Logs"
 
 [node name="CheatButton" type="CheckBox" parent="."]
 visible = false
-margin_left = 486.546
-margin_top = 419.666
-margin_right = 510.546
-margin_bottom = 443.666
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -16.1788
+margin_top = 125.714
+margin_right = 7.82117
+margin_bottom = 149.714
 rect_scale = Vector2( 1.5, 1.5 )
 
 [node name="CloseButton" parent="." instance=ExtResource( 6 )]
 visible = false
-margin_top = 126.16
-margin_bottom = 156.16
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 196.841
+margin_top = -167.792
+margin_right = 228.841
+margin_bottom = -137.792
 
 [node name="CreditsButton" type="Button" parent="."]
 visible = false
-margin_left = 639.269
-margin_top = 168.876
-margin_right = 733.269
-margin_bottom = 203.876
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 136.544
+margin_top = -125.076
+margin_right = 230.544
+margin_bottom = -90.0761
 custom_fonts/font = SubResource( 2 )
 text = "Credits"
 [connection signal="changed_language" from="." to="." method="language"]

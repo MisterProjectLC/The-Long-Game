@@ -2,18 +2,11 @@ extends 'res://Mini Scenes/Popups/popup.gd'
 
 signal closed_box
 
-func tutorial_setup(_new_sizer, _new_position, _new_speed, _new_text):
+func tutorial_setup(_new_sizer, _new_text):
+	_speed = 1.5
 	setup(_new_sizer.x, _new_sizer.y)
-	_position = _new_position + (_new_sizer/2)
-	_target_position = _new_position
-	_speed = _new_speed
 	
 	$Label.text = _new_text
-	$Label.set_position(_new_position + Vector2(15, 10))
-	$CloseButton.set_position($CloseButton.get_position() + _new_position - $Background.get_position())
-
-func position_sizer(_new_sizer, _new_position, _new_speed):
-	setup(_new_sizer.x, _new_sizer.y)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

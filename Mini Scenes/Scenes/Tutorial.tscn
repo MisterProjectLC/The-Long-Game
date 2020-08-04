@@ -7,11 +7,9 @@
 [ext_resource path="res://Art/Portraits/Thoren V1.png" type="Texture" id=5]
 [ext_resource path="res://Art/Portraits/Salem V1.png" type="Texture" id=6]
 [ext_resource path="res://Mini Scenes/Pieces/StoneBackground.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Mini Scenes/Scenes/SalemTutorial.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Mini Scenes/Intelligences/GrolkAI.gd" type="Script" id=9]
 [ext_resource path="res://Mini Scenes/Intelligences/DaintAI.gd" type="Script" id=10]
-
-
+[ext_resource path="res://Mini Scenes/Intelligences/SalemAI.tscn" type="PackedScene" id=11]
 
 [node name="Tutorial" type="Node"]
 script = ExtResource( 1 )
@@ -21,7 +19,7 @@ these_players = [ [ "Grolk", ExtResource( 4 ) ], [ "Daint", ExtResource( 5 ) ], 
 
 [node name="NinePatchRect" parent="." instance=ExtResource( 7 )]
 
-[node name="SalemAI" parent="." instance=ExtResource( 8 )]
+[node name="SalemAI" parent="." instance=ExtResource( 11 )]
 
 [node name="GrolkAI" type="Node" parent="."]
 script = ExtResource( 9 )
@@ -32,11 +30,11 @@ script = ExtResource( 10 )
 [node name="Audio" type="AudioStreamPlayer" parent="."]
 [connection signal="advance_turn" from="SalemAI" to="." method="_on_SalemAI_advance_turn"]
 [connection signal="changed_stance" from="SalemAI" to="." method="_on_SalemAI_changed_stance"]
-[connection signal="closed_manual" from="SalemAI" to="." method="closed_manual"]
-[connection signal="done_setup" from="SalemAI" to="SalemAI" method="_on_SalemAI_done_setup"]
+[connection signal="closed_manual" from="SalemAI" to="." method="_on_SalemAI_closed_manual"]
+[connection signal="gain_influence" from="SalemAI" to="SalemAI" method="gain_influence"]
 [connection signal="improve_relations" from="SalemAI" to="SalemAI" method="improve_relations"]
-[connection signal="matchtable_info_request" from="SalemAI" to="." method="matchtable_info_request"]
-[connection signal="point_info_request" from="SalemAI" to="." method="point_info_request"]
+[connection signal="matchtable_info_request" from="SalemAI" to="." method="pass_matchtable_info"]
+[connection signal="point_info_request" from="SalemAI" to="." method="pass_point_info"]
 [connection signal="pressed_info" from="SalemAI" to="." method="_on_SalemAI_pressed_info"]
 [connection signal="pressed_opponent" from="SalemAI" to="." method="_on_SalemAI_pressed_opponent"]
 [connection signal="relation_info_request" from="SalemAI" to="." method="relation_info_request"]

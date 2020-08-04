@@ -49,19 +49,27 @@ script = ExtResource( 8 )
 [node name="CloseButton" type="Button" parent="."]
 visible = false
 modulate = Color( 1, 0, 0, 1 )
-margin_left = 875.302
-margin_top = 16.6535
-margin_right = 907.302
-margin_bottom = 46.6535
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 376.373
+margin_top = -280.292
+margin_right = 408.373
+margin_bottom = -250.292
 custom_fonts/font = SubResource( 1 )
 text = "X"
 
 [node name="BackButton" type="Button" parent="."]
 visible = false
-margin_left = 874.822
-margin_top = 57.4359
-margin_right = 906.822
-margin_bottom = 87.4359
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 375.893
+margin_top = -239.51
+margin_right = 407.893
+margin_bottom = -209.51
 custom_fonts/font = SubResource( 1 )
 
 [node name="TextureRect" type="TextureRect" parent="BackButton"]
@@ -77,10 +85,14 @@ __meta__ = {
 
 [node name="NextButton" type="Button" parent="."]
 visible = false
-margin_left = 874.822
-margin_top = 95.2893
-margin_right = 906.822
-margin_bottom = 125.289
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 375.893
+margin_top = -201.657
+margin_right = 407.893
+margin_bottom = -171.657
 custom_fonts/font = SubResource( 1 )
 
 [node name="TextureRect" type="TextureRect" parent="NextButton"]
@@ -96,10 +108,14 @@ __meta__ = {
 
 [node name="EyeButton" type="Button" parent="."]
 visible = false
-margin_left = 874.822
-margin_top = 137.047
-margin_right = 906.822
-margin_bottom = 167.047
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 375.893
+margin_top = -159.899
+margin_right = 407.893
+margin_bottom = -129.899
 custom_fonts/font = SubResource( 1 )
 
 [node name="TextureRect" type="TextureRect" parent="EyeButton"]
@@ -115,10 +131,14 @@ __meta__ = {
 
 [node name="ClosedEyeButton" type="Button" parent="."]
 visible = false
-margin_left = 874.822
-margin_top = 174.9
-margin_right = 906.822
-margin_bottom = 204.9
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 375.893
+margin_top = -122.046
+margin_right = 407.893
+margin_bottom = -92.0459
 custom_fonts/font = SubResource( 1 )
 
 [node name="TextureRect" type="TextureRect" parent="ClosedEyeButton"]

@@ -29,7 +29,6 @@ func processing(delta):
 		$Background.margin_left = (1-t) - t*_margin_left
 		$Background.margin_bottom = (1-t) + t*_margin_top
 		$Background.margin_right = (1-t) + t*_margin_left
-		#$BlackBack.modulate.a = 0 + (46 - 0)*t
 	
 	# reveal phase
 	elif _visibler == false:

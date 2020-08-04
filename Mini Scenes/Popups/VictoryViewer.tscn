@@ -68,6 +68,10 @@ margin_bottom = -165.973
 text = ""
 
 [node name="TextureRect" type="TextureRect" parent="BackButton"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 margin_left = 4.76953
 margin_top = 2.72461
 margin_right = 896.77
@@ -92,6 +96,10 @@ margin_bottom = -124.667
 text = ""
 
 [node name="TextureRect" type="TextureRect" parent="RestartButton"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 margin_left = 4.76953
 margin_top = 2.72461
 margin_right = 896.77

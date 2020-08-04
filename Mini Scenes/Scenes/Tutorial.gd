@@ -36,7 +36,7 @@ func setup_texts():
 			['Good. So, Grolk trusts you, but doesn\'t trust Daint. That could be used as a weapon... We\'ll see how to do that up ahead.', false],
 			['Each NPC has a distinct personality, which can be examined by clicking on the button to the right of INFO. Pay extra attention to the sections BROTHERHOOD and SIMPLE-MINDED.', true],
 			['Grolk always trusts his allies, and becomes Hostile to anyone that attacks them. With these traits, it is possible to influence him to attack another person.', false],
-			['The message that we want to give is that another person is attacking us. To do that, we\'ll use Diplomacy to send a letter to Grolk.', true],
+			['The message that we want to give is that Daint will attack us. To do that, we\'ll use Diplomacy to send a letter to Grolk.', true],
 			['Select the appropriate options on Grolk\'s Diplomacy Area and click Send.', true],
 			['Grolk:\nMiserable traitorous dwarf! Brother, do not worry. My men will kill, cut and skin every little one they can find!', false],
 			['Good! Now, advance your turn.', true]]
@@ -61,17 +61,17 @@ func setup_texts():
 
 func next_popup(override):
 	if current_text < texts.size() and (texts[current_text][1] || override):
-		open_popupbox(Vector2(825, 184), Vector2(0, 0), 1.6, texts[current_text][0])
+		open_popupbox(Vector2(415, 95), texts[current_text][0])
 		current_text += 1
 	
 
-func open_popupbox(_new_sizer, _new_position, _new_speed, _new_text):
+func open_popupbox(_new_sizer,  _new_text):
 	var popup = popupbox.instance()
 	add_child(popup)
 	move_child(add_child(popup), get_child_count()-1)
 	popup.connect('closed_box', self, 'next_popup')
 	
-	popup.tutorial_setup(_new_sizer, _new_position, _new_speed, _new_text)
+	popup.tutorial_setup(_new_sizer, _new_text)
 
 
 # ------------- SIGNAL STUFF -------------------------------
@@ -100,7 +100,7 @@ func matchtable_info_request(requester, enemy_requested_name, opponent_requested
 	pass_matchtable_info(requester, enemy_requested_name, opponent_requested_name)
 
 
-func closed_manual():
+func _on_SalemAI_closed_manual():
 	print('closed manual ' + str(current_text))
 	if current_text == 10:
 		next_popup(true)
@@ -111,13 +111,12 @@ func _on_SalemAI_pressed_opponent():
 		next_popup(true)
 
 
-func _on_SalemAI_send_message(character_name, package, recipient):
+func _on_SalemAI_send_message(_character_name, package, recipient):
 	if package == ['Daint',1,'Salem'] and recipient == 'Grolk':
 		next_popup(true)
 
 
-func _on_SalemAI_advance_turn(character_name):
+func _on_SalemAI_advance_turn(_character_name):
 	print(str(current_text))
 	if current_text == 15:
 		get_tree().change_scene("res://Mini Scenes/Tutorial_2.tscn")
-

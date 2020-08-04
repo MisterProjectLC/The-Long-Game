@@ -10,35 +10,36 @@ size = 36
 font_data = ExtResource( 3 )
 
 [node name="TutorialPopup" type="Control"]
-anchor_left = 0.084
-anchor_top = 0.692
-anchor_right = 0.889
+anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 3.02843
-margin_top = 1.24051
-margin_right = 3.70837
-margin_bottom = -39.5595
 mouse_filter = 1
 script = ExtResource( 1 )
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
 [node name="Background" parent="." instance=ExtResource( 2 )]
-anchor_right = 0.998
-anchor_bottom = 1.257
-margin_left = 2.0
-margin_top = 2.0
-margin_right = -0.350037
-margin_bottom = -0.00801086
+anchor_left = 0.5
+anchor_top = 0.8
+anchor_right = 0.5
+anchor_bottom = 0.8
+margin_left = -410.0
+margin_top = -90.0
+margin_right = 410.0
+margin_bottom = 90.0
 mouse_filter = 0
 
 [node name="Label" type="Label" parent="."]
 visible = false
-margin_left = 9.0
-margin_top = 6.0
-margin_right = 769.0
-margin_bottom = 135.0
+anchor_left = 0.5
+anchor_top = 0.8
+anchor_right = 0.5
+anchor_bottom = 0.8
+margin_left = -400.617
+margin_top = -86.1266
+margin_right = 359.383
+margin_bottom = 86.8736
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "T
@@ -47,15 +48,19 @@ T
 T"
 autowrap = true
 __meta__ = {
-"_edit_lock_": true
+"_edit_use_anchors_": false
 }
 
 [node name="CloseButton" parent="." instance=ExtResource( 4 )]
 visible = false
-margin_left = 778.468
-margin_top = 7.34975
-margin_right = 810.468
-margin_bottom = 37.3497
+anchor_left = 0.5
+anchor_top = 0.8
+anchor_right = 0.5
+anchor_bottom = 0.8
+margin_left = 369.111
+margin_top = -84.2766
+margin_right = 401.111
+margin_bottom = -54.2766
 [connection signal="gui_input" from="Background" to="." method="_receive_input"]
 [connection signal="gui_input" from="Label" to="." method="_receive_input"]
 [connection signal="button_up" from="CloseButton" to="." method="_on_CloseButton_button_up"]

@@ -37,20 +37,28 @@ margin_bottom = 285.0
 
 [node name="Credits" type="Label" parent="."]
 visible = false
-margin_left = 83.0464
-margin_top = 23.547
-margin_right = 229.046
-margin_bottom = 81.547
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -423.019
+margin_top = -273.745
+margin_right = -277.019
+margin_bottom = -215.745
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Credits"
 
 [node name="Text" type="Label" parent="."]
 visible = false
-margin_left = 76.5518
-margin_top = 83.5975
-margin_right = 676.552
-margin_bottom = 324.598
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -429.513
+margin_top = -213.695
+margin_right = 170.487
+margin_bottom = 27.3055
 rect_scale = Vector2( 0.65, 0.65 )
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
@@ -61,10 +69,14 @@ MasterProject
 
 [node name="Text2" type="Label" parent="."]
 visible = false
-margin_left = 513.552
-margin_top = 82.5975
-margin_right = 1101.55
-margin_bottom = 262.598
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 7.48676
+margin_top = -214.695
+margin_right = 595.485
+margin_bottom = -34.6945
 rect_scale = Vector2( 0.65, 0.65 )
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
@@ -74,10 +86,14 @@ bhaskar655 (background)"
 
 [node name="Text3" type="Label" parent="."]
 visible = false
-margin_left = 76.3554
-margin_top = 193.747
-margin_right = 1410.36
-margin_bottom = 556.747
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -429.71
+margin_top = -103.545
+margin_right = 904.295
+margin_bottom = 259.455
 rect_scale = Vector2( 0.65, 0.65 )
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
@@ -90,10 +106,14 @@ Archive.org
 
 [node name="Text4" type="Label" parent="."]
 visible = false
-margin_left = 522.942
-margin_top = 400.384
-margin_right = 1122.94
-margin_bottom = 654.384
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 16.8766
+margin_top = 103.092
+margin_right = 616.875
+margin_bottom = 357.091
 rect_scale = Vector2( 0.65, 0.65 )
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
@@ -104,10 +124,14 @@ Lucas de Melo e Machado"
 
 [node name="Text5" type="Label" parent="."]
 visible = false
-margin_left = 79.6901
-margin_top = 408.124
-margin_right = 667.69
-margin_bottom = 588.124
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -426.375
+margin_top = 110.832
+margin_right = 161.625
+margin_bottom = 290.832
 rect_scale = Vector2( 0.65, 0.65 )
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
@@ -117,8 +141,12 @@ Red Hat - Liberation Serif"
 
 [node name="CloseButton" parent="." instance=ExtResource( 4 )]
 visible = false
-margin_left = 911.498
-margin_top = 24.6052
-margin_right = 943.498
-margin_bottom = 54.6052
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 405.433
+margin_top = -272.687
+margin_right = 437.433
+margin_bottom = -242.687
 [connection signal="button_up" from="CloseButton" to="." method="_on_CloseButton_button_up"]

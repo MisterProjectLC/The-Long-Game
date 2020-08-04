@@ -18,7 +18,6 @@
 [ext_resource path="res://Mini Scenes/Popups/LettersPanel.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Mini Scenes/Popups/ForgeryPanel.tscn" type="PackedScene" id=17]
 
-
 [sub_resource type="DynamicFont" id=1]
 size = 50
 font_data = ExtResource( 9 )
