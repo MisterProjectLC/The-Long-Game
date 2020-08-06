@@ -6,7 +6,6 @@
 [ext_resource path="res://Art/ManualArrow2.png" type="Texture" id=4]
 [ext_resource path="res://Mini Scenes/Pieces/Paragraph.gd" type="Script" id=5]
 
-
 [sub_resource type="DynamicFont" id=1]
 size = 48
 font_data = ExtResource( 1 )

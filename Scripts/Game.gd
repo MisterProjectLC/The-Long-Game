@@ -5,6 +5,7 @@ var roun = 1
 
 var winner
 export(PackedScene) var victory_panel
+export var address = ""
 
 var player_character = 'Salem'
 
@@ -140,6 +141,7 @@ func advance_round():
 	# prepare for sending
 	start_round()
 
+
 class MyCustomSorter:
 	static func sort(a, b):
 		if a[1] > b[1]:
@@ -238,3 +240,7 @@ func prisoner_dilemma(_my_stance, _enemy_stance):
 
 func ai_node(namer):
 	return find_node(namer + 'AI')
+
+
+func get_address():
+	return address

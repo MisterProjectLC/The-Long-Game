@@ -28,7 +28,7 @@ func _on_Manual_button_up():
 	move_child(manual_panel, get_child_count()-1)
 	
 func _on_Tutorial_button_up():
-	get_tree().change_scene("res://Mini Scenes/Scenes/Tutorial.tscn")
+	get_tree().change_scene("res://Mini Scenes/Scenes/Tutorial1.tscn")
 
 func _on_Options_button_up():
 	var option_panel = options.instance()

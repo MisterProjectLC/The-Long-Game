@@ -33,6 +33,7 @@ func _ready():
 	relations = {'Grolk':0,'Zardri':0 ,'Kallysta':0,'Obrulena':0,
 	'Thoren':0,'Edraele':0,'Salem':-2, 'Daint': 0}
 
+
 # other players-dependant setup
 func setup(_player_character, _players, _turn_order, _dip_phrases, _opponent_trait_list):
 	.setup(_player_character, _players, _turn_order, _dip_phrases, _opponent_trait_list)
@@ -251,7 +252,7 @@ func _on_Forgery_button_up():
 
 # pressed restart button
 func _on_Restart_button_up():
-	get_tree().change_scene("res://Mini Scenes/Scenes/Main.tscn")
+	get_tree().change_scene(get_parent().get_address())
 	
 # pressed back button
 func _on_Back_button_up():
@@ -311,3 +312,8 @@ func lose_influence():
 		spend_action()
 		_delta_influence += 1
 
+
+func set_portrait_visibility(_name, _visibility):
+	var _node = get_node(_name)
+	if _node:
+		_node.visible = _visibility

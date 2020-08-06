@@ -66,6 +66,20 @@ var memory_time
 
 # ------------------------- SETUP ------------------------
 
+func _ready():
+	signal_setup()
+
+
+func signal_setup():
+	# signal setup
+	connect("advance_turn", get_parent(), "advance_turn")
+	connect("gain_influence", get_parent(), "gain_influence")
+	connect("lose_influence", get_parent(), "lose_influence")
+	connect("point_info_request", get_parent(), "pass_point_info")
+	connect("matchtable_info_request", get_parent(), "pass_matchtable_info")
+	connect("relation_info_request", get_parent(), "pass_relation_info")
+
+
 func setup(_player_character, _players, _turn_order, _dip_phrases, _opponent_trait_list):
 	self.player_character = _player_character
 	self.players = _players
