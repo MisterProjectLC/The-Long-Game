@@ -36,6 +36,7 @@ func language(language):
 	var dictionary = [en_pages, br_pages, de_pages]
 	pages = dictionary[language]
 
+
 func manual_setup(_new):
 	current_page = _new
 	en_pages_setup()
@@ -600,8 +601,7 @@ func br_pages_setup():
 	]],
 	# Zardri
 	[['text', {'title':'ZARDRI',
-	'text':"""Nascido na escura floresta de Ecnar, Zardri move-se discretamente procurando por emboscadas rápidas em inimigos
-	enfraquecidos.
+	'text':"""Nascido na escura floresta de Ecnar, Zardri move-se discretamente procurando por emboscadas rápidas em inimigos enfraquecidos.
 	Raça: Goblin"""}
 	],
 	['text', {'title':'RELACOES INICIAIS',
@@ -612,9 +612,9 @@ func br_pages_setup():
 	-SUSPEITO de Edraele."""}
 	],
 	['text', {'title':'CARACTERISTICAS - TL;DR',
-	'text':"""A estratégia principal de Zardri é traição. Quando alguém está sendo atacado por múltiplos jogadores, Zardri toma
-	essa oportunidade para apunhalá-lo em seu estado mais vulnerável. Ele, porém, também evita ser traído, e dessa forma
-	sempre descredita informações de outros e torna-se revoltado no primeiro sinal de perigo.'"""}
+	'text':("A estratégia principal de Zardri é traição. Quando alguém está sendo atacado por múltiplos jogadores, Zardri toma " +
+	"essa oportunidade para apunhalá-lo em seu estado mais vulnerável. Ele, porém, também evita ser traído, e dessa forma " +
+	"sempre descredita informações de outros e torna-se revoltado no primeiro sinal de perigo.")}
 	],
 	['text', {'title':'EMBOSCADOR', 'color':Color.mediumvioletred,
 	'text':"""Torna-se HOSTIL contra jogadores SUSPEITADOS que já estão HOSTIS/REVOLTADOS contra dois ou mais outros jogadores."""}
@@ -911,7 +911,7 @@ func de_pages_setup():
 	'text':"""Der GEFANGENENDILEMMA ist ein Gedankenexperiment mit Bezug zur Spieltheorie.
 	Darin entscheidet jeder Spieler zwischen eine Passiv- oder Agressiv-Position.
 	PASSIV sein ist besser für die zwei Spieler, aber es setzt den Einzelne der Verrat aus. Außerdem ist diese Option diplomatisch besser.
-	AGRESSIV sein ist andererseits besser für den Einzelne, aber es verbringt eine Aktion und steigt Abneigung gegen den Spieler."""}
+	AGRESSIV sein ist andererseits besser für den Einzelne, aber es verbringt eine Aktion und erzeugt Ressentiment zwischen den Spielern."""}
 	],
 	['image', {'image':images[0], 'space':350}
 	],

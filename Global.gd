@@ -24,11 +24,11 @@ var de_options = {'Options':'Optionen', 'Volume':'Lautstaerke', 'Music':'Musik',
 var options = [en_options, br_options, de_options]
 
 var en_main = {'Turn Order':'Throne Order', 'Advance':'Advance', 'Points':'Points',
-				'Round':'Round', 'Message':'Message from'}
+				'Round':'Round', 'Message':'Message from', 'Forgery':'Forgery'}
 var br_main = {'Turn Order':'Ordem do Trono', 'Advance':'Avancar', 'Points':'Pontos',
-				'Round':'Round', 'Message':'Mensagem de'}
+				'Round':'Round', 'Message':'Mensagem de', 'Forgery':'Falsific.'}
 var de_main = {'Turn Order':'Reihenfolge', 'Advance':'Vordringen', 'Points':'Punktzahl',
-				'Round':'Runde', 'Message':'Brief von'}
+				'Round':'Runde', 'Message':'Brief von', 'Forgery':'Faelschung'}
 var mains = [en_main, br_main, de_main]
 
 var en_relations = {-2:'Friendly',-1:'Trusting', 0:'Suspicious', 1:'Hostile', 2:'Rageful'}
@@ -58,6 +58,11 @@ var en_stances = {'Agressive':'Agressive', 'Passive':'Passive'}
 var br_stances = {'Agressive':'Agressiva', 'Passive':'Passiva'}
 var de_stances = {'Agressive':'Agressiv', 'Passive':'Passiv'}
 var stances = [en_stances, br_stances, de_stances]
+
+var en_tutorials = {'Part1':"Part #1: An Orc's Axe", 'Part2':"Part #2: A Monk's Letter"}
+var br_tutorials = {'Part1':'Parte #1: O Machado', 'Part2':'Parte #2: A Carta'}
+var de_tutorials = {'Part1':'Teil 1: Die Axt des Orks', 'Part2':'Teil 2: Die Brief der Monchin'}
+var tutorials = [en_tutorials, br_tutorials, de_tutorials]
 
 func get_language():
 	return language

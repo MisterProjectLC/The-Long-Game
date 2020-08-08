@@ -10,10 +10,12 @@ func _ready():
 	setup(258, 188)
 	options_setup()
 
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	processing(delta)
-	
+
+
 func options_setup():
 	# setup dropdowns
 	$LanguageButton.add_item('English')
@@ -26,6 +28,8 @@ func options_setup():
 	$LanguageButton.select(Global.get_language())
 	
 	$CheatButton.pressed = Global.get_debug_enabled()
+	language(Global.get_language())
+
 
 func language(language):
 	$Options.text = Global.options[language]['Options']
@@ -34,17 +38,21 @@ func language(language):
 	$Sounds.text = Global.options[language]['Sounds']
 	$Language.text = Global.options[language]['Language']
 
+
 func _on_CloseButton_button_up():
 	queue_free()
+
 
 func _on_LanguageButton_item_selected(_ID):
 	Audio.play_sound(Audio.small_press, 2)
 	Global.set_language($LanguageButton.get_selected_id())
 	emit_signal("changed_language", Global.get_language())
 
+
 func _on_MusicSlider_value_changed(value):
 	Global.set_music_volume(value)
 	emit_signal("changed_volume")
+
 
 func _on_SoundsSlider_value_changed(value):
 	Global.set_sounds_volume(value)

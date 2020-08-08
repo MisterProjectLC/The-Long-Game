@@ -58,7 +58,7 @@ func setup_texts():
 			[('The Long Game é um jogo de diplomacia e intriga. Sua principal mecânica gira em torno do Dilema do Prisioneiro - ' +
 			 'um experimento mental sobre teoria de jogos.')],
 			[('A todo turno, cada jogador escolhe uma Postura (Passiva/Agressiva) em relação a outro jogador. ' +
-			 'Para trocar de Postura, clique no botão abaixo do perfil de um jogador.'), ('Trocando de Postura, ' + 
+			 'Para trocar de Postura, clique no botão abaixo do perfil de um jogador.'), ('Troque de Postura, ' + 
 			'clicando no botão abaixo do perfil de um jogador.')],
 			[('Muito bem. No geral, a postura Passiva é mais diplomática e melhor para o grupo, ' + 
 			'mas abre o jogador à possibilidade de ser traído.')],
@@ -87,14 +87,47 @@ func setup_texts():
 			[('Grolk:\nAnão traidor miserável! Irmão, não se preocupe. Meus homens vão matar, cortar ' +
 			'e desfiar todo pequeno que verem pela frente!')],
 			['Muito bem! Agora, avance o turno.', 'Avance o turno.']]
+		2:
+			texts = [[''],
+			[('The Long Game ist ein Spiel über Diplomatie und Intrigue. Seine Hauptmechanik dreht sich um den Gefangendilemma - ' +
+			 'ein Gedankenexperiment mit Bezug zur Spieltheorie.')],
+			[('In jeder Runde wählt jeder Spieler eine Position (Passiv/Aggressiv) gegenüber einem anderen Spieler. ' +
+			'Um eine Position zu ändern, klicke auf den Button unter dem Porträt eines Spielers.'), ('Ändere deine Position, ' +
+			'indem den Button unter dem Porträt eines Spielers klicken.')],
+			[('Gut. Allgemein ist die passive Position diplomatischer und besser für die zwei Spieler, aber lässt den ' +
+			'Einzelne ungeschützt, wenn der andere Spieler ihn attackiert.')],
+			[('Auf der anderen Seite, ist die agressive Position besser für den Einzelne, jedoch kostet sie eine Aktion' +
+			'und erzeugt Abneigung zwischen den Spielern.')],
+			[('Das Spiel dauert 6 Runde und jeder Spieler hat 3 Aktionen pro Runde. Neben Angriff können Aktionen auch' +
+			'mit NACHFORSCHUNGEN und DIPLOMATIE verbracht werden.')],
+			[('Nachforschungen können entscheidende Information über andere Spieler enthüllen. Um jemand nachzuforschen, ' +
+			'klicke auf sein Porträt und dann auf INFO.')],
+			['Forsche GROLK, DER ORC nach.', 'Forsche GROLK, DER ORC nach, indem auf sein Porträt und dann auf INFO klicken.'],
+			[('Grolk vertraut dir, aber es ist möglich, seine Meinung über andere Spieler auch zu entdecken. ' +
+			'Klicke auf das Porträt in der rechten Seite des Bildschirms, um den anderen Spieler zu ändern.'), 
+			('Klicke auf das Porträt in der rechten Seite des Bildschirms, um den anderen Spieler zu ändern.')],
+			[('Gut. Also vertraut Grolk dir, aber nicht Daint. Wir können das gebrauchen... ' +
+			'Wir werden gleich sehen, wie man das tun kann.')],
+			[('Jeder NPC hat eine einzigartige Persönlichkeit, die geprüft werden kann, indem den Button rechts von ' +
+			'Info klicken. Pass besonders auf die BRUDERSCHAFT und SIMPEL Sektionen auf.'), ('Klicke den Button rechts von ' +
+			'Info. Pass besonders auf die BRUDERSCHAFT und SIMPEL Sektionen auf.')],
+			[('Grolk glaubt immer seinen Verbündete, und wird feindlich gegen jeden, der einen von ihnen attackiert. Mit ' +
+			'diesen Eigenschaften kann man ihn beeinflussen, eine andere Person anzugreifen.')],
+			[('Die Botschaft, die wir senden wöllen, ist, dass Daint uns attackieren wird. Dafür werden wir Diplomatie ' +
+			'gebrauchen, indem eine Nachricht an Grolk senden.')],
+			['Um das zu tun, wähle die angemessene Optionen im Grolks Diplomatie-Bereich und klicke Senden.', 
+			('Sende eine Nachricht, die sagt, dass Daint uns attackieren wird. Wähle die angemessene Optionen im' + 
+			'Grolks Diplomatie-Bereich und klicke Senden.')],
+			[('Grolk:\nKümmerlicher verräterischer Zwerg! Bruder, mach dir keine Sorgen. Meine Männer werden jeden ' +
+			'Kleinen töten und abschlachten, den sie finden kann!')],
+			['Gut! Jetzt dringe bis nächste Runde vor.', 'Dringe bis nächste Runde vor.']]
 
 
 # ------------- SIGNAL STUFF -------------------------------
 
 # Clicking on stance
 func _on_SalemAI_changed_stance():
-	stance_changes += 1
-	if stance_changes >= 1:
+	if current_text == 2:
 		advance_popup(true)
 
 # Investigating Grolk
@@ -124,3 +157,6 @@ func _on_SalemAI_advance_turn(_character_name):
 	print(str(current_text))
 	if current_text == 15:
 		get_tree().change_scene("res://Mini Scenes/Scenes/Tutorial2.tscn")
+
+func advance_turn(_char):
+	pass

@@ -21,14 +21,17 @@ func volume():
 func _on_Play_button_up():
 	get_tree().change_scene("res://Mini Scenes/Scenes/Main.tscn")
 
+
 func _on_Manual_button_up():
 	var manual_panel = manual.instance()
 	manual_panel.manual_setup(0)
 	add_child(manual_panel)
 	move_child(manual_panel, get_child_count()-1)
-	
+
+
 func _on_Tutorial_button_up():
-	get_tree().change_scene("res://Mini Scenes/Scenes/Tutorial1.tscn")
+	get_tree().change_scene("res://Mini Scenes/Scenes/TutorialMenu.tscn")
+
 
 func _on_Options_button_up():
 	var option_panel = options.instance()
@@ -36,6 +39,7 @@ func _on_Options_button_up():
 	move_child(option_panel, get_child_count()-1)
 	option_panel.connect('changed_language', self, 'language')
 	option_panel.connect('changed_volume', self, 'volume')
+
 
 func _on_Quit_button_up():
 	get_tree().quit()

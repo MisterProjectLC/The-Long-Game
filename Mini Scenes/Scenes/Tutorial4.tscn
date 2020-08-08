@@ -1,18 +1,20 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
-[ext_resource path="res://Mini Scenes/Scenes/Tutorial2.gd" type="Script" id=1]
-[ext_resource path="res://Mini Scenes/Popups/VictoryViewer.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Mini Scenes/Popups/TutorialPopup.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Mini Scenes/Scenes/Tutorial4.gd" type="Script" id=1]
+[ext_resource path="res://Mini Scenes/Intelligences/EdraeleAI.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Mini Scenes/Intelligences/KallystaAI.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Art/Portraits/Salem V1.png" type="Texture" id=4]
-[ext_resource path="res://Art/Portraits/Grolk V1.png" type="Texture" id=5]
-[ext_resource path="res://Art/Portraits/Thoren V1.png" type="Texture" id=6]
+[ext_resource path="res://Art/Portraits/Edraele V2.png" type="Texture" id=5]
+[ext_resource path="res://Art/Portraits/Kallysta V3.png" type="Texture" id=6]
 [ext_resource path="res://Mini Scenes/Pieces/StoneBackground.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Mini Scenes/Pieces/PaperBackground.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Mini Scenes/Intelligences/GrolkAI.gd" type="Script" id=9]
-[ext_resource path="res://Mini Scenes/Intelligences/ThorenAI.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Art/Portraits/Obrulena Alpha.png" type="Texture" id=9]
+[ext_resource path="res://Mini Scenes/Popups/VictoryViewer.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Mini Scenes/Intelligences/SalemAI.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Fonts/LiberationSerif-Bold.ttf" type="DynamicFontData" id=12]
 [ext_resource path="res://Fonts/Kayambang.ttf" type="DynamicFontData" id=13]
+[ext_resource path="res://Mini Scenes/Popups/TutorialPopup.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Mini Scenes/Intelligences/ObrulenaAI.tscn" type="PackedScene" id=15]
 
 [sub_resource type="DynamicFont" id=1]
 size = 30
@@ -22,12 +24,12 @@ font_data = ExtResource( 12 )
 size = 45
 font_data = ExtResource( 13 )
 
-[node name="Tutorial2" type="Node"]
+[node name="Tutorial4" type="Node"]
 script = ExtResource( 1 )
-victory_panel = ExtResource( 2 )
-address = "res://Mini Scenes/Scenes/Tutorial2.tscn"
-popupbox = ExtResource( 3 )
-these_players = [ [ "Grolk", ExtResource( 5 ) ], [ "Thoren", ExtResource( 6 ) ], [ "Salem", ExtResource( 4 ) ] ]
+victory_panel = ExtResource( 10 )
+address = "res://Mini Scenes/Scenes/Tutorial4.tscn"
+popupbox = ExtResource( 14 )
+these_players = [ [ "Obrulena", ExtResource( 9 ) ], [ "Kallysta", ExtResource( 6 ) ], [ "Edraele", ExtResource( 5 ) ], [ "Salem", ExtResource( 4 ) ] ]
 
 [node name="NinePatchRect" parent="." instance=ExtResource( 7 )]
 anchor_right = 1.0
@@ -88,16 +90,13 @@ __meta__ = {
 
 [node name="SalemAI" parent="." instance=ExtResource( 11 )]
 
-[node name="GrolkAI" type="Node" parent="."]
-script = ExtResource( 9 )
+[node name="KallystaAI" parent="." instance=ExtResource( 3 )]
 
-[node name="ThorenAI" parent="." instance=ExtResource( 10 )]
+[node name="ObrulenaAI" parent="." instance=ExtResource( 15 )]
+
+[node name="EdraeleAI" parent="." instance=ExtResource( 2 )]
 
 [node name="Audio" type="AudioStreamPlayer" parent="."]
-[connection signal="advanced_popup" from="." to="." method="_on_Tutorial2_advanced_popup"]
 [connection signal="improve_relations" from="SalemAI" to="SalemAI" method="improve_relations"]
 [connection signal="set_relations" from="SalemAI" to="SalemAI" method="set_relations"]
 [connection signal="worsen_relations" from="SalemAI" to="SalemAI" method="worsen_relations"]
-[connection signal="improve_relations" from="GrolkAI" to="GrolkAI" method="improve_relations"]
-[connection signal="set_relations" from="GrolkAI" to="GrolkAI" method="set_relations"]
-[connection signal="worsen_relations" from="GrolkAI" to="GrolkAI" method="worsen_relations"]

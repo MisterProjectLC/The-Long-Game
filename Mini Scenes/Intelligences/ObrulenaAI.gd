@@ -136,9 +136,10 @@ func execute_action():
 				for player in turn_order:
 					if relations[player] < 0:
 						for player2 in turn_order:
-							if relations[player2] < 0 and player != player2 and (relation_list.has([player, 0, player2]) or relation_list.has([player, 1, player2]) or relation_list.has([player,2, player2])):
-								if ( (opponent_trait_list[player2].has("Alliance") and !opponent_trait_list[player2].has("Allegiances") and tell(player, 0, player2)) 
-								or warn(player, 0, player2) ):
+							if (relations[player2] < 0 and player != player2 and (relation_list.has([player, 0, player2]) 
+								or relation_list.has([player, 1, player2]) or relation_list.has([player,2, player2])) and
+								( (opponent_trait_list[player2].has("Alliance") and !opponent_trait_list[player2].has("Allegiances") 
+								and tell(player, 0, player2)) or warn(player, 0, player2) )):
 									sent_letter = [character_name, player, 0, player2, player2] # sender, message, recipient
 									emit_signal('improve_relations', player2) # Serene
 									priority_lister += 1
@@ -146,7 +147,8 @@ func execute_action():
 
 		2: # make sure the alliance goes through
 			if sent_letter != null:
-				if opponent_trait_list[sent_letter[1]].has("Alliance") and !opponent_trait_list[sent_letter[1]].has("Allegiances"):
+				if (opponent_trait_list[sent_letter[1]].has("Alliance") and 
+					!opponent_trait_list[sent_letter[1]].has("Allegiances")):
 					tell(sent_letter[4], 0, sent_letter[1])
 					emit_signal('improve_relations', sent_letter[1]) # Serene
 					print("Match made!!!!")

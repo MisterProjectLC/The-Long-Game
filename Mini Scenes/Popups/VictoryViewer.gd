@@ -30,7 +30,7 @@ func _on_BackButton_button_up():
 
 
 func _on_RestartButton_button_up():
-	get_tree().change_scene(get_parent().get_address())
+	get_tree().change_scene(get_parent().get_parent().get_address())
 
 
 func _on_VictoryViewer_popup_revealed():

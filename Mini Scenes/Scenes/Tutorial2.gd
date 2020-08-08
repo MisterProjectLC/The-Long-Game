@@ -43,6 +43,15 @@ func setup_texts():
 			['Enquanto isso, estranhos mensageiros altos e de cabelos longos vieram com mentiras sobre os ouvidos de Grolk, o Orc. Uma irmandade acabou se tornando hostil...'],
 			['Grolk:\nEntão foi você quem matou Bugrash da Colina?! Como tomei você como irmão? Saia daqui, pele-lisa!'],
 			['Tente vencer o jogo. Agora, você não terá mais ajuda.']]
+		2:
+			texts = [[''],
+			['Mit Bösartigkeit und Hass massakrierten die grüne Armeen von Grolk alle die schwache Truppen des alten Prinzen des Berges, Daint Steinschild.'],
+			['Die Nachricht von seinem Tod verbreitete sich wie Lauffeuer. Es dauert nicht lang bis Thoren, sein Cousin, tauchte auf der Suche nach Rache auf.'],
+			['Thoren:\nMensch! Ich bin Thoren Steinschild, Sohn von Thrarg, Cousin von Daint und Held von Varlenda.'],
+			['Thoren:\nIch komme auf der Suche nach Gerechtigkeit. Ich vertraue weder Ihnen noch ihrer Rasse, aber ich garantiere Ihnen: wenn Sie mir aus dem Weg gehen, werden wir keine Probleme haben.'],
+			['Unterdessen seltsame und große Boten mit langen Haaren und helle Haut kamen mit Lügen für Grolk. Eine Bruderschaft wurde feindlich...'],
+			['Grolk:\nAlso warst du derjenige, der Bugrash des Hügels ermodet?! Wie habe ich dich als einen Bruder betrachtet? Verdufte, Glatthäutiger!'],
+			['Versuche, das Spiel zu gewinnen. Jetzt wirst du keine Hilfe mehr haben.']]
 
 
 # ------------- SIGNAL STUFF -------------------------------

@@ -1,4 +1,4 @@
-extends "res://Scripts/Game.gd"
+extends "res://Mini Scenes/Scenes/Game.gd"
 
 export(PackedScene) var popupbox
 

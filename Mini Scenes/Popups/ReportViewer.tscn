@@ -18,6 +18,9 @@ anchor_bottom = 1.0
 margin_top = -1.05261
 margin_bottom = -1.05261
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="BlackBack" parent="." instance=ExtResource( 2 )]
 

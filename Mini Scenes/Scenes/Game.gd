@@ -83,6 +83,7 @@ func start_round():
 	if ai_node(turn_order[0]).has_method('start_turn'):
 		ai_node(turn_order[0]).start_turn()
 
+
 # advance turn for a player
 func _advance_turn(_char):
 	if _char == turn_order[turn-1]:
@@ -95,6 +96,7 @@ func _advance_turn(_char):
 		var _next = turn_order[turn-1]
 		if ai_node(_next).has_method('start_turn'):
 			ai_node(_next).start_turn()
+
 
 # advance whole round
 func advance_round():
@@ -167,6 +169,7 @@ func endgame():
 		Audio.play_music(Audio.victory_theme)
 	else:
 		Audio.play_music(Audio.defeat_theme)
+
 
 # -------------------- SIGNAL HANDLING -----------------
 

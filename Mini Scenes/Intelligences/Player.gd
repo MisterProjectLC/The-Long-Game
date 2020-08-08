@@ -4,6 +4,10 @@ signal changed_stance
 signal pressed_info
 signal closed_manual
 signal pressed_opponent
+signal closed_report
+signal opened_forgery
+signal forged_letter
+signal pressed_letters
 
 export var intelligences = []
 
@@ -76,6 +80,7 @@ func language(language):
 	$PointSpace/Points.text = Global.mains[language]['Points'] + ': 0'
 	round_text = Global.mains[language]['Round']
 	message_text = Global.mains[language]['Message']
+	$Forgery/Forgery.text = Global.mains[language]['Forgery']
 	
 	# Each Passive/Agressive Button
 	for profile in get_tree().get_nodes_in_group("Profiles"):
@@ -108,6 +113,7 @@ func receive_report_info(report):
 	viewer.report_setup(character_name, get_players(), report)
 	add_child(viewer)
 	move_child(viewer, get_child_count()-1)
+	viewer.connect("tree_exited", self, "closed_report")
 	
 	for reporting in report.values():
 		if reporting[0] == 0 and reporting[1] == 1:
@@ -205,6 +211,7 @@ func _letters_pressed(enemy_name):
 	
 	_new.setup_panel(letter_list, enemy_name, get_dip_phrases())
 	_new.connect("send_letter", self, "send_letter")
+	emit_signal('pressed_letters', enemy_name)
 
 
 # pressed change other opponent button
@@ -228,6 +235,10 @@ func _stance_pressed(_target, _stance):
 		emit_signal('changed_stance')
 
 
+func closed_report():
+	emit_signal('closed_report')
+
+
 # pressed advance button
 func _on_AdvanceTurn_button_up():
 	if _delta_influence < 0:
@@ -248,6 +259,7 @@ func _on_Forgery_button_up():
 	
 	_new.setup_panel(letter_list, players, get_dip_phrases())
 	_new.connect("forged_letter", self, "forge_letter")
+	emit_signal("opened_forgery")
 
 
 # pressed restart button
@@ -294,6 +306,11 @@ func _on_SalemAI_alter_round(_round):
 
 
 # ------------- MISC ---------------------------
+
+func forge_letter(letter, index, change_count):
+	.forge_letter(letter, index, change_count)
+	emit_signal('forged_letter', letter)
+
 
 func gain_influence():
 	if _delta_influence > 0:
