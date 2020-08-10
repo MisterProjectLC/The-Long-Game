@@ -3,12 +3,13 @@ extends "res://Mini Scenes/Scenes/Game.gd"
 export var these_players = [['Grolk', Texture], 
 						['Zardri', Texture], 
 						['Kallysta', Texture], 
+						['Horlin', Texture], 
 						['Obrulena', Texture],
 						['Thoren', Texture], 
 						['Edraele', Texture], 
 						['Salem', Texture]]
 
-var this_turn_order = ['Edraele', 'Salem', 'Obrulena', 
+var this_turn_order = ['Edraele', 'Salem', 'Obrulena', 'Horlin', 
 'Thoren', 'Kallysta', 'Grolk', 'Zardri']
 
 
@@ -23,6 +24,8 @@ func _ready():
 	delete_char(i)
 	
 	# Get two mid-characters
+	i = (randi() % 4)+1
+	delete_char(i)
 	i = (randi() % 3)+1
 	delete_char(i)
 	

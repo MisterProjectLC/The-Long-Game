@@ -1,9 +1,10 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Mini Scenes/Scenes/Main.gd" type="Script" id=1]
 [ext_resource path="res://Mini Scenes/Popups/VictoryViewer.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Mini Scenes/Intelligences/ThorenAI.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Mini Scenes/Intelligences/EdraeleAI.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Mini Scenes/Intelligences/HorlinAI.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Mini Scenes/Intelligences/GrolkAI.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Mini Scenes/Intelligences/KallystaAI.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Mini Scenes/Intelligences/SalemAI.tscn" type="PackedScene" id=8]
@@ -14,6 +15,7 @@
 [ext_resource path="res://Art/Portraits/Thoren V1.png" type="Texture" id=13]
 [ext_resource path="res://Art/Portraits/Salem V1.png" type="Texture" id=14]
 [ext_resource path="res://Mini Scenes/Intelligences/ObrulenaAI.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Art/Portraits/Horlin.png" type="Texture" id=16]
 [ext_resource path="res://Art/Portraits/Obrulena Alpha.png" type="Texture" id=17]
 [ext_resource path="res://Mini Scenes/Intelligences/ZardriAI.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Art/Portraits/Zardri.png" type="Texture" id=19]
@@ -22,7 +24,7 @@
 script = ExtResource( 1 )
 victory_panel = ExtResource( 2 )
 address = "res://Mini Scenes/Scenes/Main.tscn"
-these_players = [ [ "Grolk", ExtResource( 11 ) ], [ "Zardri", ExtResource( 19 ) ], [ "Kallysta", ExtResource( 12 ) ], [ "Obrulena", ExtResource( 17 ) ], [ "Thoren", ExtResource( 13 ) ], [ "Edraele", ExtResource( 10 ) ], [ "Salem", ExtResource( 14 ) ] ]
+these_players = [ [ "Grolk", ExtResource( 11 ) ], [ "Zardri", ExtResource( 19 ) ], [ "Kallysta", ExtResource( 12 ) ], [ "Horlin", ExtResource( 16 ) ], [ "Obrulena", ExtResource( 17 ) ], [ "Thoren", ExtResource( 13 ) ], [ "Edraele", ExtResource( 10 ) ], [ "Salem", ExtResource( 14 ) ] ]
 
 [node name="NinePatchRect" parent="." instance=ExtResource( 9 )]
 anchor_right = 1.0
@@ -37,6 +39,8 @@ margin_bottom = 0.0
 [node name="ZardriAI" parent="." instance=ExtResource( 18 )]
 
 [node name="KallystaAI" parent="." instance=ExtResource( 7 )]
+
+[node name="HorlinAI" parent="." instance=ExtResource( 5 )]
 
 [node name="ObrulenaAI" parent="." instance=ExtResource( 15 )]
 

@@ -15,7 +15,7 @@ var en_pages = []
 var br_pages = []
 var de_pages = []
 
-var player_pages = ['Grolk', 'Zardri','Kallysta', 'Obrulena', 'Thoren','Edraele']
+var player_pages = ['Grolk', 'Zardri','Kallysta','Horlin', 'Obrulena', 'Thoren','Edraele']
 var pages = []
 export var images = []
 
@@ -136,6 +136,7 @@ func en_pages_setup():
 	['text', {'title':'INITIAL RELATIONS',
 	'text':"""-HOSTILE to Salem.
 	-SUSPICIOUS of Kallysta.
+	-SUSPICIOUS of Horlin.
 	-SUSPICIOUS of Obrulena.
 	-HOSTILE to Thoren.
 	-HOSTILE to Edraele."""}
@@ -181,6 +182,7 @@ func en_pages_setup():
 	['text', {'title':'INITIAL RELATIONS',
 	'text':"""-SUSPICIOUS to Salem.
 	-SUSPICIOUS of Kallysta.
+	-TRUSTFUL of Horlin.
 	-SUSPICIOUS of Obrulena.
 	-HOSTILE to Thoren.
 	-SUSPICIOUS to Edraele."""}
@@ -226,6 +228,8 @@ func en_pages_setup():
 	['text', {'title':'INITIAL RELATIONS', 'space':260, 
 	'text':"""-SUSPICIOUS of Salem.
 	-SUSPICIOUS of Grolk.
+	-SUSPICIOUS of Zardri.
+	-SUSPICIOUS of Horlin.
 	-SUSPICIOUS of Obrulena.
 	-SUSPICIOUS of Thoren.
 	-SUSPICIOUS of Edraele."""}
@@ -267,6 +271,52 @@ func en_pages_setup():
 	7- Investigate a HOSTILIZED player.
 	8- Investigate a TRUSTED player."""}
 	]],
+	# Horlin
+	[['text', {'title':'HORLIN', 'space':180,
+	'text':"""Although his military abilities are beyond subpar, the astute High Mayor of Glittergold has proven great talent for both writing and falsification.
+	Race: Gnome"""}
+	],
+	['text', {'title':'INITIAL RELATIONS', 'space':260, 
+	'text':"""-SUSPICIOUS of Salem.
+	-SUSPICIOUS of Grolk.
+	-TRUSTFUL of Zardri.
+	-SUSPICIOUS of Kallysta.
+	-FRIENDLY with Obrulena.
+	-TRUSTFUL of Thoren.
+	-TRUSTFUL of Edraele."""}
+	],
+	['text', {'title':'TRAITS - TL;DR', 'space':480, 
+	'text':"""Thoren believes in his friends and mostly disbelieves his enemies. He tries to investigate suspicious info, but ignores it if he can't.
+	He also hates players that attack his friends, and befriends players that like his friends. However, if someone befriends his enraging enemies, he'll become hostile towards them.
+	Thoren reacts appropriately to information he believes, attacking enemies who attack him and making peace with those that do the same. He hates being betrayed."""}
+	],
+	['text', {'title':'REACTIVE', 'space':250, 'color':Color.aqua,
+	'text':"""Becomes HOSTILE (unless already ENRAGED) to a player he discovers is planning to attack him or is HOSTILE/ENRAGED against him. Becomes SUSPICIOUS of an ENRAGING/HOSTILIZED player that he discovers is planning to ally with him."""}
+	],
+	['text', {'title':'JUSTICE', 'space':140, 'color':Color.darkslategray,
+	'text':"""Becomes ENRAGED to players that SLAUGHTER (Agressive vs Passive) him."""}
+	],
+	['text', {'title':'VASSAL', 'space':170, 'color':Color.bisque,
+	'text':"""His Relation with the player with the most Influence is improved by 1 for as long as they maintain this position."""}
+	],
+	['text', {'title':'DEDUCTION', 'space':310, 'color':Color.yellow,
+	'text':"""Can deduce the PLAYER CHARACTER's relation with other players based on other players' relation with him. For example, if she discovers that one is ENRAGED with the PLAYER CHARACTER, she will deduce that the PLAYER CHARACTER is ENRAGED with them."""}
+	],
+	['text', {'title':'WRITER', 'color':Color.lightsteelblue,
+	'text':('Does not interpret messages as information, but as requests. For example, if someone sends "X will attack Y" to him,' +
+	' he will try to falsify a letter written by X that says “X will attack Y” and send this back to the requester.')}
+	],
+	['text', {'title':'ARCHIVIST', 'space':400, 'color':Color.khaki,
+	'text':('Orders requests based on relation level, and, if tied, by receipt order. Ignores requests that involve himself.' +
+	' Denies requests from Hostilized and Enraging players. After resolving a request, his relation with the requester increases.')}
+	],
+	['text', {'title':'ACTION PRIORITY', 'space':400, 
+	'text':"""1- With his current request, modify a letter from X until it mirrors the request.
+	2- With his current request, resend the modified letter to Y. Advance to next request.
+	3- Investigate a Suspicious player.
+	4- Attack an Enraging player.
+	5- Attack a Hostile player."""}
+	]],
 	# Obrulena
 	[['text', {'title':'OBRULENA', 'space':260,
 	'text':"""The nomadic zealot from the Gigraltar plains hopes to bring peace to the entire region, always
@@ -276,7 +326,9 @@ func en_pages_setup():
 	['text', {'title':'INITIAL RELATIONS', 'space':260, 
 	'text':"""-SUSPICIOUS of Salem.
 	-HOSTILE of Grolk.
+	-SUSPICIOUS of Zardri.
 	-TRUSTFUL of Kallysta.
+	-TRUSTFUL of Horlin.
 	-TRUSTFUL of Thoren.
 	-SUSPICIOUS of Edraele."""}
 	],
@@ -330,7 +382,9 @@ func en_pages_setup():
 	['text', {'title':'INITIAL RELATIONS', 'space':260, 
 	'text':"""-HOSTILE to Salem.
 	-ENRAGED with Grolk.
+	-SUSPICIOUS of Zardri.
 	-SUSPICIOUS of Kallysta.
+	-TRUSTFUL of Horlin.
 	-SUSPICIOUS of Obrulena.
 	-TRUSTFUL of Edraele."""}
 	],
@@ -391,7 +445,9 @@ func en_pages_setup():
 	['text', {'title':'INITIAL RELATIONS', 'space':260, 
 	'text':"""-SUSPICIOUS of Salem.
 	-HOSTILE to Grolk.
+	-SUSPICIOUS of Zardri.
 	-SUSPICIOUS of Kallysta.
+	-TRUSTFUL of Horlin.
 	-SUSPICIOUS of Obrulena.
 	-TRUSTFUL of Thoren."""}
 	],

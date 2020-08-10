@@ -2,7 +2,7 @@ extends "res://Mini Scenes/Intelligences/Competitor.gd"
 
 var priority_lister = 1
 
-# [[requester, message]]
+# [[requester, message, last_turn_tried]]
 # lists all requests Horlin has
 var request_list = []
 var current_request = []
@@ -67,7 +67,7 @@ func receive_message(sender, roun, message):
 	
 	# Writer & Archivist
 	if get_relation(sender) <= 0 and message[0] != character_name and message[2] != character_name:
-		request_list.append([sender, message])
+		request_list.append([sender, message, _current_round])
 		order_requests()
 		update_current()
 
@@ -103,7 +103,7 @@ func order_requests():
 	# Archivist - ordering
 	for i in range(len(request_list)):
 		for j in range(len(request_list)-i):
-			if get_relation(request_list[i][0]) < get_relation(request_list[j][0]):
+			if get_relation(request_list[i][0]) < get_relation(request_list[j][0]) and request_list[j][2] != _current_round:
 				var helper = request_list[i].duplicate()
 				request_list[i] = request_list[j].duplicate()
 				request_list[j] = helper
@@ -111,7 +111,7 @@ func order_requests():
 
 func update_current():
 	if request_list.size() > 0 and (current_request.size() == 0 or 
-	(current_request.size() > 0 and get_relation(current_request[0]) > 0)):
+	(current_request.size() > 0 and get_relation(current_request[0]) > 0)) and request_list[0][2] !=_current_round:
 		current_request = request_list.pop_front()
 
 
@@ -121,7 +121,7 @@ func execute_action():
 	match (priority_lister):
 		1: # Writer
 			# If there's a request currently...
-			if current_request.size() == 0:
+			if current_request.size() != 0:
 				var requested_letter = current_request[1]
 				var letter_to_change = -1
 				var best_match = 0
@@ -140,6 +140,14 @@ func execute_action():
 				if letter_to_change != -1:
 					forge_letter(requested_letter, letter_to_change, 3-best_match)
 					request_done = true
+				
+				# If there's no letter, move this to the end
+				else:
+					current_request[2] = _current_round
+					request_list.append(current_request)
+					current_request.clear()
+					update_current()
+					priority_lister -= 1
 
 		2: # send finished letter (Archivist)
 			if request_done:
