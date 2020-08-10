@@ -14,7 +14,7 @@ func _ready():
 	memory_time = 2
 	traits_list = ["Serene", "Pacifist", "Alliance", "Intuition", "Simple-Minded", "Vassal"]
 
-	relations = {'Grolk':0,'Zardri':0, 'Kallysta':-1, 'Obrulena':-2, 
+	relations = {'Grolk':0,'Zardri':0, 'Kallysta':-1, 'Horlin':-1, 'Obrulena':-2, 
 	'Thoren':-1, 'Salem':0, 'Edraele':0}
 
 # -------------- REACTIONS AND SETUP --------------------

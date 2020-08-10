@@ -10,7 +10,7 @@ func _ready():
 	memory_time = 1
 	traits_list = ["Ambusher", "Hatred", "Paranoid", "Treachery", "Intuition", "Dim-Witted",]
 	
-	relations = {'Grolk':-1,'Zardri':-2, 'Kallysta':0,'Obrulena':0,
+	relations = {'Grolk':-1,'Zardri':-2, 'Kallysta':0, 'Horlin':-1, 'Obrulena':0,
 	'Thoren':1, 'Salem':0, 'Edraele':0, 'Daint': 0}
 	
 	for player_name in relations.keys():

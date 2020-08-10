@@ -13,7 +13,7 @@ func _ready():
 	traits_list = ["Reactive", "Justice","Brotherhood", "Alliance", "Allegiances",
 				"Intuition", "General", "Tactical", "Vassal"]
 
-	relations = {'Grolk':2,'Zardri':0, 'Kallysta':0,'Obrulena':-1, 
+	relations = {'Grolk':2,'Zardri':0, 'Kallysta':0, 'Horlin':-1, 'Obrulena':-1, 
 	'Thoren':-2, 'Salem':1, 'Edraele':-1}
 
 # -------------- REACTIONS AND SETUP --------------------
