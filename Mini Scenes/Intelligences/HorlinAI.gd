@@ -14,7 +14,7 @@ func _ready():
 	memory_time = 2
 	traits_list = ["Vassal", "Reactive","Justice", "Deduction", "Writer", "Archivist",]
 
-	relations = {'Grolk':0,'Zardri':-1, 'Kallysta':0, 'Horlin':-2, 'Obrulena':-2, 
+	relations = {'Grolk':0,'Zardri':0, 'Kallysta':0, 'Horlin':-2, 'Obrulena':-2, 
 	'Thoren':-1, 'Salem':0, 'Edraele':-1}
 
 # -------------- REACTIONS AND SETUP --------------------
@@ -65,11 +65,17 @@ func receive_relation_info(relation, enemy_requested_name, opponent_requested_na
 func receive_message(sender, roun, message):
 	.receive_message(sender, roun, message)
 	
-	# Writer & Archivist
-	if get_relation(sender) <= 0 and message[0] != character_name and message[2] != character_name:
-		request_list.append([sender, message, _current_round])
-		order_requests()
-		update_current()
+	if sender != message[0]:
+		# Writer & Archivist
+		if get_relation(sender) <= 0 and message[0] != character_name and message[2] != character_name:
+			request_list.append([sender, message, -1])
+			order_requests()
+			update_current()
+	
+	else:
+		var info = message
+		trait_reactive(info, relations)
+		receive_information(roun, info)
 
 
 # process fact
@@ -138,14 +144,15 @@ func execute_action():
 				
 				# If found a suitable letter, forge it
 				if letter_to_change != -1:
-					forge_letter(requested_letter, letter_to_change, 3-best_match)
+					forge_letter([requested_letter[0], requested_letter[0], requested_letter[1], requested_letter[2]], 
+								letter_to_change, 3-best_match)
 					request_done = true
 				
-				# If there's no letter, move this to the end
-				else:
+				# If there's no letter, move request to the end
+				elif current_request[2] != _current_round:
 					current_request[2] = _current_round
 					request_list.append(current_request)
-					current_request.clear()
+					current_request = []
 					update_current()
 					priority_lister -= 1
 
@@ -158,18 +165,27 @@ func execute_action():
 				update_current()
 				request_done = false
 
-		3: # investigate suspicious player
+		3: # investigate suspicious/hostile player
 			for enemy in players:
-				if relations[enemy[0]] == 0:
+				if relations[enemy[0]] == 0 or relations[enemy[0]] == 1:
 					_investigate(enemy[0])
 
 		4: # attack furious
 			attack(2)
 
-		5: # attack hostile
+		5: # investigate trustful player
+			for enemy in players:
+				if relations[enemy[0]] == -1:
+					_investigate(enemy[0])
+
+		6: # increase influence
+			if get_influence() > 2:
+				gain_influence()
+
+		7: # attack hostile
 			attack(1)
 
-		6: # do nothing
+		8: # do nothing
 			spend_action()
 			return
 	priority_lister += 1

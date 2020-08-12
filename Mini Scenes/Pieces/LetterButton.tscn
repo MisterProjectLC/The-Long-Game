@@ -3,7 +3,6 @@
 [ext_resource path="res://Fonts/Kayambang.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Mini Scenes/Pieces/LetterButton.gd" type="Script" id=2]
 
-
 [sub_resource type="DynamicFont" id=1]
 size = 32
 outline_color = Color( 0, 0, 0, 1 )

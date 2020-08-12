@@ -2,7 +2,6 @@
 
 [ext_resource path="res://Mini Scenes/Intelligences/EdraeleAI.gd" type="Script" id=1]
 
-
 [node name="EdraeleAI" type="Node"]
 script = ExtResource( 1 )
 [connection signal="gain_rep" from="." to="." method="gain_rep"]

@@ -179,7 +179,7 @@ func execute_action():
 						emit_signal('improve_relations', player) # Serene
 
 		7: # increase influence
-			if get_influence() > 2:
+			if get_influence() > 1:
 				gain_influence()
 		
 		8: # investigate suspicious player

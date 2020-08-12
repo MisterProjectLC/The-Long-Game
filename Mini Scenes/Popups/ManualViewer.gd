@@ -24,8 +24,8 @@ var instances = []
 # ----------------- ANIMATION -----------------
 
 func _ready():
-	_speed = 2
-	setup(433, 300)
+	_speed = 12
+	setup(-80, 0)
 	
 func _process(delta):
 	processing(delta)
@@ -56,7 +56,8 @@ func en_pages_setup():
 	-BATTLE: take the Agressive stance against another character.
 	-INVESTIGATION: get more information on another character.
 	-INFLUENCE: change their position on the Throne Track.
-	-DIPLOMACY: send messages to other players."""}
+	-DIPLOMACY: send messages to other players.
+	-FORGERY: modify letters received from other players."""}
 	], 
 	['text', {'title':'BATTLE - THE PRISONER\'S DILEMMA',
 	'text':"""The Prisoner's Dilemma is a game theory-related thought experiment. In it, each player chooses between a Passive Stance and an Agressive Stance.
@@ -139,7 +140,7 @@ func en_pages_setup():
 	-SUSPICIOUS of Horlin.
 	-SUSPICIOUS of Obrulena.
 	-HOSTILE to Thoren.
-	-HOSTILE to Edraele."""}
+	-SUSPICIOUS to Edraele."""}
 	],
 	['text', {'title':'TRAITS - TL;DR',
 	'text':"""Grolk doesn't get angry with battles, but does get angry with players who betray him or get slaughtered by him.
@@ -286,9 +287,9 @@ func en_pages_setup():
 	-TRUSTFUL of Edraele."""}
 	],
 	['text', {'title':'TRAITS - TL;DR', 'space':480, 
-	'text':"""Thoren believes in his friends and mostly disbelieves his enemies. He tries to investigate suspicious info, but ignores it if he can't.
-	He also hates players that attack his friends, and befriends players that like his friends. However, if someone befriends his enraging enemies, he'll become hostile towards them.
-	Thoren reacts appropriately to information he believes, attacking enemies who attack him and making peace with those that do the same. He hates being betrayed."""}
+	'text':("Horlin is a terrible general, but a great writer. As such, he interprets messages received not as information, but as " +
+	"requests. When someone sends him a request, he tries to falsify one of his letters and send them to the requester, which they can use " +
+	"as they see fit. Apart from that, Horlin has pretty average traits, reacting to other types of information appropriately.")}
 	],
 	['text', {'title':'REACTIVE', 'space':250, 'color':Color.aqua,
 	'text':"""Becomes HOSTILE (unless already ENRAGED) to a player he discovers is planning to attack him or is HOSTILE/ENRAGED against him. Becomes SUSPICIOUS of an ENRAGING/HOSTILIZED player that he discovers is planning to ally with him."""}
@@ -303,19 +304,21 @@ func en_pages_setup():
 	'text':"""Can deduce the PLAYER CHARACTER's relation with other players based on other players' relation with him. For example, if she discovers that one is ENRAGED with the PLAYER CHARACTER, she will deduce that the PLAYER CHARACTER is ENRAGED with them."""}
 	],
 	['text', {'title':'WRITER', 'color':Color.lightsteelblue,
-	'text':('Does not interpret messages as information, but as requests. For example, if someone sends "X will attack Y" to him,' +
-	' he will try to falsify a letter written by X that says “X will attack Y” and send this back to the requester.')}
+	'text':('Messages whose subject isn’t the sender are interpreted as requests, not information. For example, if someone sends ' +
+	'"X will attack Y" to him, he will try to falsify a letter written by X that says “X will attack Y” and send this back to the requester.')}
 	],
 	['text', {'title':'ARCHIVIST', 'space':400, 'color':Color.khaki,
-	'text':('Orders requests based on relation level, and, if tied, by receipt order. Ignores requests that involve himself.' +
-	' Denies requests from Hostilized and Enraging players. After resolving a request, his relation with the requester increases.')}
+	'text':('Orders requests based on relation level with the requester, and, if tied, by receipt order. Ignores requests that involve himself.' +
+	' Denies requests from HOSTILIZED and ENRAGING players. After resolving a request, his relation with the requester increases.')}
 	],
 	['text', {'title':'ACTION PRIORITY', 'space':400, 
 	'text':"""1- With his current request, modify a letter from X until it mirrors the request.
-	2- With his current request, resend the modified letter to Y. Advance to next request.
-	3- Investigate a Suspicious player.
-	4- Attack an Enraging player.
-	5- Attack a Hostile player."""}
+	2- With his current request, resend the modified letter to the requester. Advance to next request.
+	3- Investigate a SUSPECTED/HOSTILIZED player.
+	4- Attack an ENRAGING player.
+	5- Investigate a TRUSTED player.
+	6- If he's not the second in the Influence Track, increase his Influence.
+	7- Attack a HOSTILIZED player."""}
 	]],
 	# Obrulena
 	[['text', {'title':'OBRULENA', 'space':260,
@@ -370,7 +373,7 @@ func en_pages_setup():
 	4- Attack an ENRAGING player.
 	5- Attack a HOSTILIZED player.
 	6- Tell a HOSTILIZED player she will attack them.
-	7- If she's not the first or second in the Influence Track, increase her Influence.
+	7- If she's not the first in the Influence Track, increase her Influence.
 	8- Investigate a SUSPECTED player.
 	9- Investigate a non-SUSPECTED player."""}
 	]],
@@ -444,7 +447,7 @@ func en_pages_setup():
 	],
 	['text', {'title':'INITIAL RELATIONS', 'space':260, 
 	'text':"""-SUSPICIOUS of Salem.
-	-HOSTILE to Grolk.
+	-SUSPICIOUS to Grolk.
 	-SUSPICIOUS of Zardri.
 	-SUSPICIOUS of Kallysta.
 	-TRUSTFUL of Horlin.
@@ -498,8 +501,9 @@ func en_pages_setup():
 	7- Investigate the Subject of a message she received from a SUSPECTED player.
 	8- Share information with a TRUSTED/BEFRIENDED player about an incoming attack towards them.
 	9- If she's not the first in the Influence track, increase her Influence.
-	10- Tell a TRUSTED/BEFRIENDED player that a SUSPECTED/HOSTILIZED/ENRAGING player will attack them.
-	11- Tell a TRUSTED/BEFRIENDED player that a TRUSTED player will attack them."""}
+	10- Tell a TRUSTED/BEFRIENDED player that a HOSTILIZED/ENRAGING player will attack them.
+	11- Tell a TRUSTED/BEFRIENDED player that a SUSPECTED player will attack them. Only once per round.
+	12- Investigate an ENRAGING/HOSTILIZED/SUSPECTED player without Warlord."""}
 	],
 	['text', {'title':'ACTION PRIORITY (SUSPICIOUS)', 'space':680, 'color':Color.black,
 	'text':"""1- If it's Round 6, attack any player.
@@ -535,7 +539,8 @@ func br_pages_setup():
 	-ATAQUE: tomar a postura Agressiva contra outro jogador.
 	-INVESTIGAÇÃO: receber mais informação sobre outro jogador.
 	-INFLUÊNCIA: mudar sua posição na Ordem do Trono.
-	-DIPLOMACIA: enviar mensagens para outros jogadores."""}
+	-DIPLOMACIA: enviar mensagens para outros jogadores.
+	-FALSIFICAÇÃO: modifica mensagens recebidas de outros jogadores."""}
 	], 
 	['text', {'title':'BATALHA - O DILEMA DO PRISIONEIRO', 'space':470, 
 	'text':"""O DILEMA DO PRISIONEIRO é um experimento mental relacionado à teoria dos jogos.
@@ -618,9 +623,10 @@ func br_pages_setup():
 	['text', {'title':'RELACOES INICIAIS', 'space':260, 
 	'text':"""-HOSTIL para Salem.
 	-SUSPEITO de Kallysta.
+	-SUSPEITO de Horlin.
 	-SUSPEITO de Obrulena.
 	-HOSTIL para Thoren.
-	-HOSTIL para Edraele."""}
+	-SUSPEITO de Edraele."""}
 	],
 	['text', {'title':'CARACTERISTICAS - TL;DR', 'space':420, 
 	'text':"""Grolk não se irrita com batalhas, mas odeia jogadores que o traem ou são massacradas por ele.
@@ -663,6 +669,7 @@ func br_pages_setup():
 	['text', {'title':'RELACOES INICIAIS',
 	'text':"""-SUSPEITO de Salem.
 	-SUSPEITO de Kallysta.
+	-SUSPEITO de Horlin.
 	-SUSPEITO de Obrulena.
 	-HOSTIL para Thoren.
 	-SUSPEITO de Edraele."""}
@@ -709,6 +716,7 @@ func br_pages_setup():
 	['text', {'title':'RELACOES INICIAIS', 'space':260, 
 	'text':"""-SUSPEITA de Salem.
 	-SUSPEITA de Grolk.
+	-SUSPEITA de Horlin.
 	-SUSPEITA de Obrulena.
 	-SUSPEITA de Thoren.
 	-SUSPEITA de Edraele."""}
@@ -750,6 +758,56 @@ func br_pages_setup():
 	7- Investiga um jogador HOSTILIZADO.
 	8- Investiga um jogador CONFIÁVEL."""}
 	]],
+	# Horlin
+	[['text', {'title':'HORLIN', 'space':180,
+	'text':"""Apesar de suas habilidades militares serem terríveis, o astuto Alto Prefeito de Brilha-Ouro provou ter grande talento para tanto escrita quanto falsificação.
+	Raça: Gnomo"""}
+	],
+	['text', {'title':'RELACOES INICIAIS', 'space':260, 
+	'text':"""-SUSPEITO de Salem.
+	-SUSPEITO de Grolk.
+	-CONFIANTE of Zardri.
+	-SUSPEITO de Kallysta.
+	-AMIGÁVEL com Obrulena.
+	-CONFIANTE de Thoren.
+	-CONFIANTE de Edraele."""}
+	],
+	['text', {'title':'CARACTERISTICAS - TL;DR', 'space':480, 
+	'text':("Horlin é um péssimo general, mas um grande escritor. Por isso, ele interpreta mensagens recebidas não como informação, " +
+	"mas como pedidos. Quando alguém envia um pedido, ele tenta falsificar uma de suas cartas e enviá-la para o pedinte, o qual ele pode " +
+	"usar como quiser. Tirando isso, Horlin tem características comuns, reagindo a outros tipos de informação de forma apropriada.")}
+	],
+	['text', {'title':'REATIVO', 'space':290, 'color':Color.aqua,
+	'text':"""Torna-se HOSTIL (exceto quando já REVOLTADO) a um jogador quando ele descobre que este está planejando atacá-lo ou é REVOLTADO/HOSTIL contra ele. Torna-se SUSPEITO de um jogador REVOLTANTE/HOSTILIZADO quando ele descobre que este está planejando se aliar com ele."""}
+	],
+	['text', {'title':'JUSTICA', 'space':140, 'color':Color.darkslategray,
+	'text':"""Fica REVOLTADO com jogadores que MASSACRAM (Agressiva vs Passiva) ele."""}
+	],
+	['text', {'title':'VASSALO', 'space':170, 'color':Color.bisque,
+	'text':"""Sua Relação com o jogador com maior Influência melhora em 1 enquanto ele se mantiver nessa posição."""}
+	],
+	['text', {'title':'DEDUCAO', 'space':330, 'color':Color.yellow,
+	'text':("Pode deduzir a relação do PERSONAGEM DO JOGADOR com outros jogadores baseado na relação de outros jogadores com ele. " +
+	"Por exemplo, se ele descobre que alguém está REVOLTADO com o PERSONAGEM DO JOGADOR, ela irá deduzir que o PERSONAGEM DO JOGADOR está " +
+	"REVOLTADO com ele.")}
+	],
+	['text', {'title':'ESCRITOR', 'color':Color.lightsteelblue,
+	'text':('Mensagens cujo sujeito não é o autor são interpretadas como pedidos, não informação. Por exemplo, se alguém enviar ' +
+	'"X vai atacar Y" para ele, ele falsificará uma carta escrita por X que diz "X vai atacar Y" e enviar para o pedinte.')}
+	],
+	['text', {'title':'ARQUIVISTA', 'space':400, 'color':Color.khaki,
+	'text':('Ordena pedidos baseado no nível de relação com o pedinte e, se empatado, por ordem de recebimento. Ignora pedidos que ' +
+	'envolvem ele mesmo. Nega pedidos de jogadores REVOLTANTES e HOSTILIZADOS. Depois de resolver o pedido, sua relação com o pedinte melhora.')}
+	],
+	['text', {'title':'PRIORIDADE DE ACAO', 'space':400, 
+	'text':"""1- Com o pedido atual, modifica uma carta de X até que ela espelhe o pedido.
+	2- Com o pedido atual, envia a carta modificada para o pedinte. Avança para o próximo pedido.
+	3- Investiga um jogador SUSPEITADO/HOSTILIZADO.
+	4- Ataca um jogador REVOLTANTE.
+	5- Investiga um jogador CONFIÁVEL.
+	6- Se não for o segundo na Ordem de Influência, aumenta sua Influência.
+	7- Ataca um jogador HOSTILIZADO."""}
+	]],
 	# Obrulena
 	[['text', {'title':'OBRULENA', 'space':180,
 	'text':"""A monja nomádica das planícies Gigraltar aspira trazer paz e harmonia para toda a região, sempre tentando mediar conflitos entre aliados oponentes. 
@@ -759,6 +817,7 @@ func br_pages_setup():
 	'text':"""-SUSPEITA de Salem.
 	-HOSTIL para Grolk.
 	-CONFIANTE de Kallysta.
+	-CONFIANTE de Horlin.
 	-CONFIANTE de Thoren.
 	-SUSPEITA de Edraele."""}
 	],
@@ -813,6 +872,7 @@ func br_pages_setup():
 	'text':"""-HOSTIL para Salem.
 	-REVOLTADO com Grolk.
 	-SUSPEITO de Kallysta.
+	-CONFIANTE de Horlin.
 	-SUSPEITO de Obrulena.
 	-CONFIANTE de Edraele."""}
 	],
@@ -872,8 +932,10 @@ func br_pages_setup():
 	],
 	['text', {'title':'RELACOES INICIAIS', 'space':260, 
 	'text':"""-SUSPEITA de Salem.
-	-HOSTIL para Grolk.
+	-SUSPEITA de Grolk.
+	-SUSPEITA de Zardri.
 	-SUSPEITA de Kallysta.
+	-CONFIANTE de Horlin.
 	-SUSPEITA de Obrulena.
 	-CONFIANTE de Thoren."""}
 	],
@@ -915,7 +977,7 @@ func br_pages_setup():
 	Em qualquer caso, fica REVOLTADA se descobrir que a mensagem é falsa. Alternativamente, se a mensagem for verdadeira e não envolver o remetente, sua relação com ele melhora."""}
 	],
 	['text', {'title':'PRIORIDADE DE ACAO (CONFIANTE/AMIGAVEL)', 'space':870, 
-	'text':"""1- Se for o Round 6, ataca qualquer jogador.
+	'text':"""1- Se for a Rodada 6, ataca qualquer jogador.
 	2- Investiga um jogador HOSTILIZADO/SUSPEITADO que tenha Guerreiro.
 	3- Ataca um jogador REVOLTANTE.
 	4- Ataca um jogador HOSTILIZADO.
@@ -924,11 +986,12 @@ func br_pages_setup():
 	7- Investiga o Sujeito de uma mensagem que ele recebeu de um jogador Suspeitado.
 	8- Compartilha informação com um jogador CONFIÁVEL/AMIGO sobre um ataque vindo contra ele.
 	9- Se não for a primeira na Ordem no Trono, aumenta sua Influência.
-	10- Conta para um jogador CONFIÁVEL/AMIGO que um jogador SUSPEITADO/HOSTILIZADO/REVOLTANTE irá atacá-lo.
-	11- Conta para um jogador CONFIÁVEL/AMIGO que outro jogador CONFIÁVEL/AMIGO irá atacá-lo."""}
+	10- Conta para um jogador CONFIÁVEL/AMIGO que um jogador HOSTILIZADO/REVOLTANTE irá atacá-lo.
+	11- Conta para um jogador CONFIÁVEL/AMIGO que outro jogador SUSPEITADO irá atacá-lo. Apenas uma vez por rodada.
+	12- Investiga um jogador REVOLTANTE/HOSTILIZADO/SUSPEITADO que não tenha Guerreiro."""}
 	],
 	['text', {'title':'PRIORIDADE DE ACAO (SUSPEITA)', 'space': 670, 'color':Color.black,
-	'text':"""1- Se for o Round 6, ataca qualquer jogador.
+	'text':"""1- Se for a Rodada 6, ataca qualquer jogador.
 	2- Investiga um jogador HOSTILIZADO/SUSPEITADO que tenha Guerreiro.
 	3- Ataca um jogador REVOLTANTE.
 	4- Ataca um jogador HOSTILIZADO.
@@ -961,7 +1024,8 @@ func de_pages_setup():
 	-ANGRIFF: die Agressiv-Position gegen einen andere Spieler nehmen.
 	-NACHFORSCHUNG: mehr Information über einen andere Spieler erhalten.
 	-EINFLUSS: deine Position in der Thron-Reihenfolge ändern.
-	-DIPLOMATIE: Briefe an andere Spieler senden."""}
+	-DIPLOMATIE: Briefe an andere Spieler senden.
+	-FAELSCHUNG: Briefe von anderen Spielern ändern."""}
 	], 
 	['text', {'title':'KAMPF - DER GEFANGENENDILEMMA', 'space':470, 
 	'text':"""Der GEFANGENENDILEMMA ist ein Gedankenexperiment mit Bezug zur Spieltheorie.
@@ -1043,9 +1107,10 @@ func de_pages_setup():
 	['text', {'title':'ANFANGSRELATIONEN', 'space':260, 
 	'text':"""-FEINDLICH gegenüber Salem.
 	-MISSTRAUISCH gegenüber Kallysta.
+	-MISSTRAUISCH gegenüber Horlin.
 	-MISSTRAUISCH gegenüber Obrulena.
 	-FEINDLICH gegenüber Thoren.
-	-FEINDLICH gegenüber Edraele."""}
+	-MISSTRAUISCH gegenüber Edraele."""}
 	],
 	['text', {'title':'EIGENSCHAFTEN - TL;DR', 'space':420, 
 	'text':"""Grolk ärgert sich nicht mit Kämpfen, aber hässt Spieler, die ihn verraten oder von ihm massakriert werden.
@@ -1088,6 +1153,7 @@ func de_pages_setup():
 	['text', {'title':'ANFANGSRELATIONEN',
 	'text':"""-MISSTRAUISCH gegenüber Salem.
 	-MISSTRAUISCH gegenüber Kallysta.
+	-MISSTRAUISCH gegenüber Horlin.
 	-MISSTRAUISCH gegenüber Obrulena.
 	-FEINDLICH gegenüber Thoren.
 	-MISSTRAUISCH gegenüber Edraele."""}
@@ -1133,6 +1199,7 @@ func de_pages_setup():
 	['text', {'title':'ANFANGSRELATIONEN', 'space':260, 
 	'text':"""-MISSTRAUISCH gegenüber Salem.
 	-MISSTRAUISCH gegenüber Grolk.
+	-MISSTRAUISCH gegenüber Horlin.
 	-MISSTRAUISCH gegenüber Obrulena.
 	-MISSTRAUISCH gegenüber Thoren.
 	-MISSTRAUISCH gegenüber Edraele."""}
@@ -1174,6 +1241,57 @@ func de_pages_setup():
 	7- Forscht einen FEINDSELIGEN Spieler nach.
 	8- Forscht einen VERTRAUTEN Spieler nach."""}
 	]],
+	# Horlin
+	[['text', {'title':'HORLIN', 'space':180,
+	'text':"""Obwohl seine militarische Fähigkeiten schrecklich sind, hat der clever Hochbürgermeister von Glitzergold sein Talent für Schreiben und Fälschen bewiesen.
+	Rasse: Gnom"""}
+	],
+	['text', {'title':'ANFANGSRELATIONEN', 'space':260, 
+	'text':"""-MISSTRAUISCH gegenüber Salem.
+	-MISSTRAUISCH gegenüber Grolk.
+	-VERTRAUEND von Zardri.
+	-MISSTRAUISCH gegenüber Kallysta.
+	-FREUNDLICH mit Obrulena.
+	-VERTRAUEND von Thoren.
+	-VERTRAUEND von Edraele."""}
+	],
+	['text', {'title':'EIGENSCHAFTEN - TL;DR', 'space':480, 
+	'text':("Horlin ist ein schrecklicher General, aber ein großer Schriftsteller. Deswegen betracht er erhaltene Nachrichten nicht als" +
+	"Information, sondern als Anträge. Wenn jemand ihm einen Antrag schickt, versucht er einer seiner Briefe fälschen und sie dem " +
+	"Antragsteller senden. Abgesehen davon hat Horlin ordinäre Eigenschaften, da er angemessen auf andere Arten von Information reagiert.")}
+	],
+	['text', {'title':'REAKTIV', 'space':250, 'color':Color.aqua,
+	'text':"""Wird FEINDLICH (sofern er nicht schon WÜTEND ist) gegen Spieler, die entweder beabsichtigen, ihn zu angreifen, oder gegen ihn FEINDLICH/WÜTEND sind. Wird MISSTRAUISCH gegenüber FEINDSELIGEN/ÄRGERLICHEN Spielern, die beabsichtigen, mit ihm zu kooperieren."""}
+	],
+	['text', {'title':'GERECHTIGKEIT', 'space':140, 'color':Color.darkslategray,
+	'text':"""Wird WÜTEND gegen Spieler, die ihm MASSAKRIEREN (Agressiv vs Passiv)."""}
+	],
+	['text', {'title':'VASALL', 'space':170, 'color':Color.bisque,
+	'text':"""Seine Relation mit dem Spieler, der den höchsten Einfluss hat, wird um 1 erhöht, sofern der diese Position behält."""}
+	],
+	['text', {'title':'DEDUKTION', 'space':310, 'color':Color.yellow,
+	'text':("Kann die Relationen des SPIELERCHARAKTERS mit anderen Spielern an die Relationen der anderen Spieler mit ihm herleiten. " + 
+	"Zum Beispiel, wenn er entdeckt, dass ein Spieler WÜTEND mit dem SPIELERCHARAKTER ist, leitet er her, dass der SPIELERCHARAKTER " +
+	"WÜTEND mit diesem Spieler ist.")}
+	],
+	['text', {'title':'SCHRIFTSTELLER', 'color':Color.lightsteelblue,
+	'text':('Nachrichten, dessen Subjekt nicht dessen Autor sind, werden nicht als Information betrachtet, sondern als Anträge. '+ 
+	'Zum Beispiel, wenn jemand "X attackiert Y" ihm schickt, ändert er einen Brief von X geschrieben, um es im Brief "X attackiert Y"'+
+	'zu heißen. Dann schickt er diesen Brief dem Antragsteller.')}
+	],
+	['text', {'title':'ARCHIVAR', 'space':400, 'color':Color.khaki,
+	'text':('Ordnet Anträge nach dem Relationsniveau ihren Antragsteller und, bei einem Gleichstand, nach Erhaltsreihenfolge. Ignoriert' +
+	'Anträge von ÄRGERLICHEN/FEINDSELIGEN Spielern. Nach dem Lösen eines Antrags erhöht er seine Relation mit dem Antragsteller.')}
+	],
+	['text', {'title':'AKTIONPRIORITAET', 'space':400, 
+	'text':"""1- Mit dem aktuellen Antrag ändert er den Brief von X so lange, bis der den Antrag widerspiegeln.
+	2- Mit dem aktuellen Antrag sendet er den geänderten Brief zum Antragsteller. Vorrückt zum nächsten Antrag.
+	3- Forscht einen VERDÄCHTIGEN/FEINDSELIGEN Spieler nach.
+	4- Attackiert einen ÄRGERLICHEN Spieler.
+	5- Forscht einen VERTRAUTEN Spieler nach.
+	6- Falls er nicht der zweite in der Reihenfolge ist, erhöht seinen Einfluss. 
+	7- Attackiert einen FEINDSELIGEN Spieler."""}
+	]],
 	# Obrulena
 	[['text', {'title':'OBRULENA', 'space':260,
 	'text':"""Die nomadische Mönchin aus den Gigraltar-Ebenen hat vor, Friede in die ganzen Region zu bringen. Obrulena versucht es immer, Konflikte zwischen ihren Verbündeten und Gegnern zu schlichten.
@@ -1183,6 +1301,7 @@ func de_pages_setup():
 	'text':"""-MISSTRAUISCH gegenüber Salem.
 	-FEINDLICH gegenüber Grolk.
 	-VERTRAUEND von Kallysta.
+	-VERTRAUEND von Horlin.
 	-VERTRAUEND von Thoren.
 	-MISSTRAUISCH gegenüber Edraele."""}
 	],
@@ -1224,7 +1343,7 @@ func de_pages_setup():
 	4- Attackiert einen ÄRGERLICHEN Spieler.
 	5- Attackiert einen FEINDSELIGEN Spieler.
 	6- Erzählt einen FEINDSELIGEN Spieler, dass sie den attackieren wird.
-	7- Falls sie nicht die erste oder zweite in der Reihenfolge ist, erhöht seinen Einfluss. 
+	7- Falls sie nicht die erste in der Reihenfolge ist, erhöht ihren Einfluss. 
 	8- Forscht einen VERDÄCHTIGEN Spieler nach.
 	9- Forscht einen nicht VERDÄCHTIGEN Spieler nach."""}
 	]],
@@ -1237,6 +1356,7 @@ func de_pages_setup():
 	'text':"""-FEINDLICH gegenüber Salem.
 	-WÜTEND mit Grolk.
 	-MISSTRAUISCH gegenüber Kallysta.
+	-VERTRAUEND gegenüber Horlin.
 	-MISSTRAUISCH gegenüber Obrulena.
 	-VERTRAUEND von Edraele."""}
 	],
@@ -1296,8 +1416,9 @@ func de_pages_setup():
 	],
 	['text', {'title':'ANFANGSRELATIONEN', 'space':260, 
 	'text':"""-MISSTRAUISCH gegenüber Salem.
-	-FEINDLICH gegenüber Grolk.
+	-MISSTRAUISCH gegenüber Grolk.
 	-MISSTRAUISCH gegenüber Kallysta.
+	-VERTRAUEND von Horlin.
 	-MISSTRAUISCH gegenüber Obrulena.
 	-VERTRAUEND von Thoren."""}
 	],
@@ -1350,8 +1471,9 @@ func de_pages_setup():
 	7- Forscht den Subjekt von einer Nachricht, die sie von einem VERDÄCHTIGEN/FEINDSELIGEN Spieler erhalten hat, nach.
 	8- Teilt Information mit einem BEFREUNDETEN/VERTRAUTEN Spieler über einen eingehenden Angriff gegen den.
 	9- Falls sie nicht die Erste in der Reihenfolge ist, erhöht ihren Einfluss.
-	10- Erzählt einem BEFREUDETEN/VERTRAUTEN Spieler, dass ein VERDÄCHTIGER/FEINDSELIGER/ÄRGERLICHER Spieler sie attackieren wird.
-	11- Erzählt einem BEFREUDETEN/VERTRAUTEN Spieler, dass ein VERTRAUTER Spieler sie attackieren wird."""}
+	10- Erzählt einem BEFREUDETEN/VERTRAUTEN Spieler, dass ein FEINDSELIGER/ÄRGERLICHER Spieler sie attackieren wird.
+	11- Erzählt einem BEFREUDETEN/VERTRAUTEN Spieler, dass ein VERDÄCHTIGER Spieler sie attackieren wird. Nur einmal pro Runde.
+	12- Forscht einen ÄRGERLICHEN/FEINDSELIGEN/VERDÄCHTIGEN Spieler, der Krieger nicht hat, nach."""}
 	],
 	['text', {'title':'AKTIONPRIORITAET (MISSTRAUISCH)', 'space':680, 'color':Color.black,
 	'text':"""1- Falls es Runde 6 ist, attackiert jeden Spieler.
@@ -1395,9 +1517,11 @@ func open_pages():
 			instance.texture = paragraph[1]['image']
 		
 		id += 1
-		add_child(instance)
+		$Background.add_child(instance)
 		instances.append(instance)
-		instance.set_position(Vector2(90, current_y))
+		#instance.set_position(Vector2(90, current_y))
+		instance.rect_position = $Background.rect_position + Vector2(-70, current_y)
+		
 		current_y += 14 + offset + instance.get_size()
 
 # ------------ SETTING STUFF -------------------------
@@ -1410,7 +1534,7 @@ func reveal_all_instances(revealed):
 func set_text_revealed(revealed, id):
 	if !instances[id].has_method('set_revealed'):
 		return
-		
+	
 	if instances[id].get_revealed() == revealed:
 		return
 	
@@ -1440,10 +1564,12 @@ func _input(event):
 			# zoom out
 			if event.button_index == BUTTON_WHEEL_DOWN:
 				scroll(-scroll_speed)
-					
+
+
 func scroll(scroll_amount):
 	for instance in instances:
-		instance.set_position(instance.get_position() + Vector2(0, scroll_amount))
+		instance.rect_position = (instance.rect_position + Vector2(0, scroll_amount))
+
 
 func _on_CloseButton_button_up():
 	emit_signal("closed_manual")
@@ -1457,6 +1583,7 @@ func update_page():
 	
 	open_pages()
 
+
 func _on_BackButton_button_up():
 	if current_page == 0:
 		current_page = pages.size()-1
@@ -1464,12 +1591,14 @@ func _on_BackButton_button_up():
 		current_page -= 1
 	update_page()
 
+
 func _on_NextButton_button_up():
 	if current_page == pages.size()-1:
 		current_page = 0
 	else:
 		current_page += 1
 	update_page()
+
 
 func _on_EyeButton_button_up():
 	reveal_all_instances(true)

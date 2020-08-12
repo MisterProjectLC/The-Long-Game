@@ -9,8 +9,7 @@ export var these_players = [['Grolk', Texture],
 						['Edraele', Texture], 
 						['Salem', Texture]]
 
-var this_turn_order = ['Edraele', 'Salem', 'Obrulena', 'Horlin', 
-'Thoren', 'Kallysta', 'Grolk', 'Zardri']
+var this_turn_order = ['Edraele', 'Obrulena', 'Horlin', 'Salem', 'Thoren', 'Kallysta', 'Grolk', 'Zardri']
 
 
 # ------------------ MAIN STUFF, TURN ------------------------

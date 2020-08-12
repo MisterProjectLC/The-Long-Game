@@ -18,7 +18,7 @@ func _ready():
 	traits_list = ["Agenda", "Treachery", "Justice", "Reactive", "Jealousy", "Deduction",
 					"Allegiances", "Queen", "Facade", "Intrigue"]
 	
-	relations = {'Grolk':1,'Zardri':0, 'Kallysta':0, 'Horlin':0,'Obrulena':0,
+	relations = {'Grolk':0,'Zardri':0, 'Kallysta':0, 'Horlin':-1,'Obrulena':0,
 	'Thoren':-1,'Salem':0,'Edraele':-2}
 
 #-------------- REACTIONS AND SETUP --------------------
@@ -156,6 +156,8 @@ func receive_relation(relation, enemy_name, opponent_name):
 		# Snitching
 		snitch_list.append([enemy_name, 1, opponent_name])
 		snitch_list.append([opponent_name, 1, enemy_name])
+	
+	trait_allegiances_relation(relation, enemy_name, opponent_name)
 
 # ----------------- HELPER REACTIONS -----------------
 
@@ -173,7 +175,7 @@ func execute_action():
 
 func trust_action():
 	match (priority_lister):
-		1: # murder if turn 5
+		1: # murder if turn 6
 			if get_current_round() == 6:
 				_murder()
 
@@ -215,15 +217,21 @@ func trust_action():
 				gain_influence()
 
 		10: # tell friends about enemies
-			say_to_list([2, 1, 0], 1, [-2, -1], 'warn')
+			say_to_list([2, 1], 1, [-2, -1], 'warn')
 
-		11: # tell friends about friends
-			say_to_list([-1], 1, [-2, -1], 'warn')
+		11: # tell friends about suspected
+			say_to_list([0], 1, [-2, -1], 'warn', true)
 
-		12: # do nothing
+		12: # investigate enemy/suspected
+			for enemy_name in turn_order:
+				if relations[enemy_name] <= 0 and !opponent_trait_list[enemy_name].has("Warlord"):
+					_investigate(enemy_name)
+
+		13: # do nothing
 			spend_action()
 			return
 	priority_lister += 1
+
 
 func susp_action():
 	match (priority_lister):

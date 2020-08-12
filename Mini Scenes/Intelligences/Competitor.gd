@@ -130,7 +130,7 @@ func attack(_target_relation):
 	return return_list
 
 
-func say_to_list(_target_relation_list, _order, _informed_relation_list, type):
+func say_to_list(_target_relation_list, _order, _informed_relation_list, type, only_once = false):
 	# look for players that fit the target relation
 	for target in turn_order:
 		if _target_relation_list.has(relations[target]) and target != character_name:
@@ -144,6 +144,8 @@ func say_to_list(_target_relation_list, _order, _informed_relation_list, type):
 							tell(target, _order, sally)
 						'threat':
 							threat(target, _order, sally)
+					if only_once:
+						return
 
 func tell(_target, _order, _recipient):
 	if manage_ann(_target, _order, _recipient):
@@ -294,6 +296,16 @@ func trait_paranoid_relation(relation, enemy_name, opponent_name):
 func trait_alliance_relation(relation, enemy_name, opponent_name):
 	if relations[enemy_name] < 0 and relation < 0 and relations[opponent_name] != 2: # a friend likes this person
 		set_relations(opponent_name, -1)
+
+
+func trait_brotherhood_relation(relation, enemy_name, opponent_name):
+	if relations[enemy_name] != 2 and relation > 0 and relations[opponent_name] < 0:
+		set_relations(enemy_name, 1)
+
+
+func trait_allegiances_relation(relation, enemy_name, opponent_name):
+	if relations[enemy_name] != 2 and relation < 0 and relations[opponent_name] == 2:
+		set_relations(enemy_name, 1)
 
 
 func trait_reactive_relations(enemy_name, relation, opponent_name):

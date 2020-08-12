@@ -33,5 +33,4 @@ func get_revealed():
 func _on_SpoilerButton_button_up():
 	#revealed = !revealed
 	Audio.play_sound(Audio.paper_flip, 3)
-	print_debug(str($Texto.get_line_count()) + ", " + str($Texto.get_line_height()))
 	emit_signal("spoiler_pressed", !revealed, id)
