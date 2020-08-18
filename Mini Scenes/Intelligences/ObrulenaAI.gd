@@ -48,6 +48,29 @@ func receive_report_info(reports): #report = {'player':[stance1, stance2, points
 
 	forget_info()
 
+
+# process voting info
+func receive_proposal(leader, action, object, vote = null):
+	if action == 1:
+		if get_relation(leader) == -2 and get_relation(object) > 0:
+			vote = 1
+		else:
+			vote = -1
+	else:
+		vote = 1
+	
+	if vote != null:
+		trait_ignorant_diplomatic(leader, vote)
+	else:
+		vote = -1
+	
+	.receive_proposal(leader,action, object, vote)
+
+# Diplomatic
+func receive_vote(voter, vote):
+	var comparison = int(vote == _current_vote) -int(vote != _current_vote)
+	trait_ignorant_diplomatic(voter, comparison)
+
 # process investigation -------------
 func receive_matchtable_info(en_stances, op_stances, enemy_requested_name, opponent_requested_name):
 	# Intuition

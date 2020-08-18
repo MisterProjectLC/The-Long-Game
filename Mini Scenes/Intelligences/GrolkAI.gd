@@ -63,8 +63,29 @@ func receive_message(sender, roun, message):
 	.receive_information(roun, message)
 
 
-# ----------------- HELPER REACTIONS -----------------
+func receive_proposal(leader, action, object, vote =null):
 
+	if get_relation(object) > 0 and action == 1:
+		vote = 1
+	if (((object == character_name or get_relation(object) == -2) and action == 1) or 
+			(get_relation(object) == 2 and action == 0)):
+		vote = -1
+	elif get_relation(leader) == -2:
+		vote = 1
+	elif ((get_relation(object) == -1 and action == 1) or 
+			(get_relation(object) == 1 and action == 0)):
+		vote = -1
+	elif get_relation(leader) == -1:
+		vote = 1
+	
+	if vote != null:
+		trait_ignorant_diplomatic(leader, vote)
+	else:
+		vote = -1
+	
+	.receive_proposal(leader,action, object, vote)
+
+# ----------------- HELPER REACTIONS -----------------
 
 # Bitter
 func set_relations(player_name, _new):

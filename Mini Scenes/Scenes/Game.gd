@@ -13,6 +13,11 @@ var turn_order = []
 var newer_turn_order = []
 var players
 
+var voters = {}
+var vote_count = 0
+# [action, object]
+var decree = []
+
 var dip_phrases
 
 # ----------------- SETUP ---------------
@@ -59,7 +64,7 @@ func game_setup(_new_players, _newer_turn_order):
 
 # at beginning of round
 func start_round():
-	# prepare for sending
+	# prepare to send
 	var turn_message = []
 	for order in turn_order:
 		turn_message.append(order)
@@ -225,6 +230,29 @@ func _lose_influence(character_name):
 			newer_turn_order[i] = newer_turn_order[i+1]
 			newer_turn_order[i+1] = helper
 			break
+
+
+func send_proposal(leader, action, object):
+	for i in range(1, turn_order.size()):
+		ai_node(turn_order[i]).receive_decree(leader, action, object)
+
+
+func send_decree():
+	var result = false
+	if vote_count > 0:
+		result = true
+	
+	for player in turn_order:
+		ai_node(player).receive_decree(decree[0], decree[1])
+
+
+func receive_vote(voter, vote):
+	# register vote
+	if turn_order[1] == voter: # double vote
+		vote_count += vote
+	vote_count += vote
+	
+	voters[voter] = vote
 
 # --------------- MISC ------------------------
 

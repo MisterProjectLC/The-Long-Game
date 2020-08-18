@@ -52,6 +52,28 @@ func receive_report_info(reports): #report = {'player':[stance1, stance2, points
 		
 	forget_info()
 
+
+# process voting info
+func receive_proposal(leader, action, object, vote = null):
+	
+	if object == character_name and action == 1:
+		vote = -1
+	elif ((get_relation(object) > 0 and action == 1) or 
+	(object == character_name and action == 0)):
+		vote = 1
+
+	
+	if vote != null:
+		trait_ignorant_diplomatic(leader, vote)
+	else:
+		vote = -1
+	.receive_proposal(leader,action, object, vote)
+
+# Diplomatic
+func receive_vote(voter, vote):
+	var comparison = int(vote == _current_vote) -int(vote != _current_vote)
+	trait_ignorant_diplomatic(voter, comparison)
+
 # process investigation -------------
 func receive_points_info(info):
 	# Jealousy
@@ -65,6 +87,7 @@ func receive_matchtable_info(en_stances, op_stances, enemy_requested_name, oppon
 
 func receive_relation_info(relation, enemy_requested_name, opponent_requested_name):
 	.receive_relation_info(relation, enemy_requested_name, opponent_requested_name)
+
 # --------------------------------------
 
 # process message
@@ -116,9 +139,11 @@ func receive_fact(roun, fact):
 	
 	.receive_fact(roun, fact)
 
+
 # process information
 func receive_information(roun, info):
 	.receive_information(roun, info)
+
 
 # process relation
 func receive_relation(relation, enemy_name, opponent_name):
@@ -139,8 +164,6 @@ func receive_relation(relation, enemy_name, opponent_name):
 	
 	elif relation >= 0 and popularity_list[opponent_name].has(enemy_name):
 		popularity_list[opponent_name].erase(enemy_name)
-
-# ----------------- HELPER REACTIONS -----------------
 
 
 # ----------------- ACTIONS -----------------

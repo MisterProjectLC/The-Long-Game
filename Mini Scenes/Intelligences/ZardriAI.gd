@@ -69,6 +69,21 @@ func receive_message(sender, roun, message):
 	.receive_information(roun, message)
 
 
+func receive_proposal(leader, action, object, vote = null):
+	
+	if action == 1 and object == character_name:
+		vote = -1
+	if (action == 1 and object != character_name) or (action == 0 and object == character_name):
+		vote = 1
+	
+	if vote != null:
+		trait_ignorant_diplomatic(leader, vote)
+	else:
+		vote = -1
+	
+	.receive_proposal(leader,action, object, vote)
+
+
 # process relation
 func receive_relation(relation, enemy_name, opponent_name):
 	.receive_relation(relation, enemy_name, opponent_name)

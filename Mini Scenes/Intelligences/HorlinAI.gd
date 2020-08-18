@@ -46,10 +46,30 @@ func receive_report_info(reports): #report = {'player':[stance1, stance2, points
 		
 		# Justice
 		trait_justice(report, player_name)
-		
 		receive_fact(get_current_round(), [player_name, report[1], character_name])
 		
 	forget_info()
+
+
+# process voting info
+func receive_proposal(leader, action, object, vote = null):
+	
+	if object == character_name and action == 1:
+		vote = -1
+	elif ((get_relation(leader) == -2) or 
+	(object == character_name and action == 0)):
+		vote = 1
+	
+	if vote != null:
+		trait_ignorant_diplomatic(leader, vote)
+	else:
+		vote = -1
+	
+	.receive_proposal(leader,action, object, vote)
+
+func receive_vote(voter, vote):
+	trait_ignorant_diplomatic(voter, vote)
+
 
 # process investigation -------------
 func receive_matchtable_info(en_stances, op_stances, enemy_requested_name, opponent_requested_name):

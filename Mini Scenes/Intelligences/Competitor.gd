@@ -22,6 +22,9 @@ signal gain_rep
 signal lose_rep
 signal set_rep
 
+signal decree
+signal vote
+
 var character_name = ''
 var traits_list = []
 var _points = 0
@@ -30,6 +33,7 @@ var stances = [{}, {}, {}, {}, {}, {}]
 var relations = {}
 var _current_round = 1
 var _info_til_round = {}
+var _current_vote = null
 
 var player_character = ''
 var players = []
@@ -79,6 +83,7 @@ func signal_setup():
 	connect("matchtable_info_request", get_parent(), "pass_matchtable_info")
 	connect("relation_info_request", get_parent(), "pass_relation_info")
 	connect("send_message", get_parent(), "send_message")
+	connect("vote", get_parent(), "receive_vote")
 
 
 func setup(_player_character, _players, _turn_order, _dip_phrases, _opponent_trait_list):
@@ -94,6 +99,7 @@ func setup(_player_character, _players, _turn_order, _dip_phrases, _opponent_tra
 	for player in relations.keys():
 		ann_dict[[player, 0]] = []
 		ann_dict[[player, 1]] = []
+
 
 
 # ---------------------- ACTIONS -----------------------
@@ -224,6 +230,20 @@ func forge_letter(letter, index, change_count):
 	letter_list[index] = letter
 	return true
 
+
+func ask_decree():
+	pass
+
+
+func receive_proposal(leader, action, object, vote = null):
+	_current_vote = vote
+	emit_signal("vote", character_name, vote)
+
+func receive_vote(voter, vote):
+	pass
+
+func receive_decree(action, object):
+	pass
 
 # ----------------------------- TRAITS -------------------------------------------------
 # --- TRAITS: DIRECT INTERACTION (REPORT) REACTIONS --------------------
@@ -387,6 +407,15 @@ func trait_intrigue_check(sender, roun, message, me):
 		me.tactical_list[message] = [roun, sender]
 		return false
 	return true
+
+# -- TRAITS: DIPLOMACY/VOTING -------------------------
+
+func trait_ignorant_diplomatic(leader, vote):
+	if vote == 1:
+		improve_relations(leader)
+	else:
+		worsen_relations(leader)
+
 
 # ---------------- BASE FUNCTIONS ----------------------------
 
