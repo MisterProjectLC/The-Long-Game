@@ -1,0 +1,34 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path="res://.import/floral-old-paper-or-parchment-900x702.jpg-362895a2b1c62126f8dc6e98bc70860a.stex"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://Art/Backgrounds/floral-old-paper-or-parchment-900x702.jpg"
+dest_files=[ "res://.import/floral-old-paper-or-parchment-900x702.jpg-362895a2b1c62126f8dc6e98bc70860a.stex" ]
+
+[params]
+
+compress/mode=0
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/bptc_ldr=0
+compress/normal_map=0
+flags/repeat=0
+flags/filter=true
+flags/mipmaps=false
+flags/anisotropic=false
+flags/srgb=2
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+process/invert_color=false
+stream=false
+size_limit=0
+detect_3d=true
+svg/scale=1.0

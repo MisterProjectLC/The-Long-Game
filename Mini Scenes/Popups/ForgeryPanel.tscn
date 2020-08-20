@@ -2,11 +2,12 @@
 
 [ext_resource path="res://Mini Scenes/Popups/ForgeryPanel.gd" type="Script" id=1]
 [ext_resource path="res://Mini Scenes/Pieces/BlackBack.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Art/Old-Parchment-Textures.jpg" type="Texture" id=3]
+[ext_resource path="res://Art/Backgrounds/Old-Parchment-Textures.jpg" type="Texture" id=3]
 [ext_resource path="res://Fonts/Kayambang.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://Mini Scenes/Pieces/LetterButton.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Art/LetterContainer.png" type="Texture" id=6]
 [ext_resource path="res://Mini Scenes/Popups/LetterList.gd" type="Script" id=8]
+
 
 [sub_resource type="DynamicFont" id=1]
 size = 60

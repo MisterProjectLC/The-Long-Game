@@ -16,6 +16,7 @@ export(PackedScene) var panel
 export(PackedScene) var manual
 export(PackedScene) var letters_panel
 export(PackedScene) var forgery_panel
+export(PackedScene) var council_panel
 var current_panel
 
 export(PackedScene) var mail_viewer
@@ -26,6 +27,8 @@ var points_text = 'Points'
 var round_text = 'Round'
 var message_text = 'Message from'
 
+var _old_turn_order = []
+var has_voted = false
 var _delta_influence = 0
 
 # ------------------ SETUP --------------------------
@@ -91,7 +94,11 @@ func language(language):
 # -------------------- SIGNAL HANDLING -----------------
 
 func start_turn():
-	print_turn()
+	.start_turn()
+	
+	# change PassiveAgressive button
+	if council_target[1] == 1 and council_target[0] != character_name and council_target[0] in turn_order:
+		get_node(council_target[0]).new_stance(1)
 
 
 # process turn order info
@@ -105,6 +112,7 @@ func receive_turn_order_info(turn_message):
 	_new = _new + turn_message[turn_message.size()-1]
 	
 	$TurnSpace/TurnOrder.text = _new
+	.receive_turn_order_info(turn_message)
 
 
 # process report info
@@ -120,7 +128,53 @@ func receive_report_info(report):
 			Audio.play_sound(Audio.backstab, 2)
 			return
 
+# DIPLOMACY STUFF ----------
 
+var decree = [0, '', [], [0,0,0]]
+var proposal = []
+
+func receive_decree(action, object, voters, vote_count):
+	decree = [action, object, voters, vote_count]
+	.receive_decree(action, object, voters, vote_count)
+
+
+func receive_proposal(_leader, action, object, _vote = 0):
+	proposal = [action, object]
+	
+	var instance = council_panel.instance()
+	add_child(instance)
+	move_child(instance, get_child_count()-1)
+	instance.connect("vote", self, "vote")
+	instance.connect("toggle_council", self, "toggle_council")
+	instance.setup_panel(decree[0], decree[1], decree[2], decree[3], 
+	_old_turn_order, turn_order, get_players(), proposal)
+
+func vote(vote):
+	has_voted = true
+	emit_signal("send_vote", character_name, vote)
+	proposal = []
+
+
+func choose_proposal():
+	has_voted = true
+	var instance = council_panel.instance()
+	add_child(instance)
+	move_child(instance, get_child_count()-1)
+	instance.connect("propose", self, "propose")
+	instance.connect("toggle_council", self, "toggle_council")
+	instance.setup_panel(decree[0], decree[1], decree[2], decree[3], 
+	_old_turn_order, turn_order, get_players())
+	
+	return null
+
+func propose(_proposal):
+	emit_signal("send_proposal", character_name, _proposal[0], _proposal[1])
+
+func toggle_council(active):
+	$Council.visible = active
+
+
+# INVESTIGATION STUFF ------------
 # request points info
 func reveal_points():
 	emit_signal('point_info_request', self, current_panel.get_enemy_name())
@@ -128,7 +182,6 @@ func reveal_points():
 # process points info
 func receive_points_info(info):
 	current_panel.reveal_points(info)
-
 
 # request matchtable info
 func update_matchtable():
@@ -138,11 +191,10 @@ func update_matchtable():
 func receive_matchtable_info(en_stances, op_stances, _enemy_requested_name, _opponent_requested_name):
 	current_panel.update_matchtable(en_stances, op_stances)
 
-
 # request relation info
 func update_relation():
 	emit_signal('relation_info_request', self, current_panel.get_enemy_name(), current_panel.get_opponent()[0])
-	
+
 # process relation info
 func receive_relation_info(relation, _enemy_requested_name, _opponent_requested_name):
 	current_panel.update_relation(relation)
@@ -229,10 +281,9 @@ func _send_message(name1, message_id, name2):
 # pressed stance button
 func _stance_pressed(_target, _stance):
 	if get_actions() > 0 || get_stance(_target[0], get_current_round()) == 1:
-		change_stance(_target[0], get_current_round(), _stance)
-		Global.find_in_group(self, "Profiles", _target[0]).new_stance(_stance)
-		
-		emit_signal('changed_stance')
+		if change_stance(_target[0], get_current_round(), _stance):
+			Global.find_in_group(self, "Profiles", _target[0]).new_stance(_stance)
+			emit_signal('changed_stance')
 
 
 func closed_report():
@@ -241,6 +292,10 @@ func closed_report():
 
 # pressed advance button
 func _on_AdvanceTurn_button_up():
+	if !has_voted and Global.advanced_enabled:
+		vote(0)
+	has_voted = false
+	
 	if _delta_influence < 0:
 		for _i in range(-_delta_influence):
 			emit_signal('gain_influence', character_name)
@@ -249,6 +304,8 @@ func _on_AdvanceTurn_button_up():
 			emit_signal('lose_influence', character_name)
 	_delta_influence = 0
 	
+	_old_turn_order = turn_order.duplicate()
+	council_target[0] = ''
 	emit_signal('advance_turn', character_name)
 
 
@@ -288,6 +345,13 @@ func _on_Info_button_up():
 	manual_panel.manual_setup(0)
 	add_child(manual_panel)
 	move_child(manual_panel, get_child_count()-1)
+
+# pressed council button
+func _on_Council_button_up():
+	if proposal == []:
+		choose_proposal()
+	else:
+		receive_proposal('', proposal[0], proposal[1])
 
 # ----------------- ALTER TEXT -----------------------------
 

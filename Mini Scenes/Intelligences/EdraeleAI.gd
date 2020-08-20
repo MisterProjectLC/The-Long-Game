@@ -1,6 +1,5 @@
 extends "res://Mini Scenes/Intelligences/Competitor.gd"
 
-var priority_lister = 1
 var agenda = 0
 
 var target = ''
@@ -35,14 +34,10 @@ func start_turn():
 	else:
 		agenda = 2
 	
-	priority_lister = 1
 	target = ''
 	target_inform = ''
-	while get_actions() > 0:
-		execute_action()
 	
-	snitch_list.clear()
-	emit_signal("advance_turn", character_name)
+	.start_turn()
 
 
 # process report info
@@ -56,13 +51,43 @@ func receive_report_info(reports): #report = {'player':[stance1, stance2, points
 		# Treachery
 		if !just and report[0] == 1 and report[1] == 0:
 			emit_signal('set_relations', player_name, 1)
-			
 		
 		receive_fact(get_current_round(), [player_name, report[1], character_name])
 		
 	forget_info()
 
+
+# process voting info
+func receive_proposal(leader, action, object, vote = 0):
+	if (object == character_name or get_relation(object) == -2) and action == 1:
+		vote = -1
+	elif (get_relation(object) > 0 and action == 1) or get_relation(leader) < 0:
+		vote = 1
+	elif get_relation(leader) > 0:
+		vote = -1
+	
+	trait_ignorant_diplomatic(leader)
+	.receive_proposal(leader,action, object, vote)
+
+
+# Diplomatic
+func receive_vote(voter, vote):
+	trait_ignorant_diplomatic(voter, vote)
+
+
+func choose_proposal():
+	for player in turn_order:
+		if get_relation(player) == 2:
+			return [1, player]
+	
+	for player in turn_order:
+		if get_relation(player) == 1:
+			return [1, player]
+	
+	return [0, character_name]
+
 # process investigation -------------
+
 func receive_points_info(info):
 	# Jealousy
 	if info > get_points():
@@ -70,8 +95,10 @@ func receive_points_info(info):
 	elif relations[just_invest] == 2:
 		relations[just_invest] = 1
 
+
 func receive_matchtable_info(en_stances, op_stances, enemy_requested_name, opponent_requested_name):
 		.receive_matchtable_info(en_stances, op_stances, enemy_requested_name, opponent_requested_name)
+
 
 func receive_relation_info(relation, enemy_requested_name, opponent_requested_name):
 	.receive_relation_info(relation, enemy_requested_name, opponent_requested_name)
@@ -158,8 +185,6 @@ func receive_relation(relation, enemy_name, opponent_name):
 		snitch_list.append([opponent_name, 1, enemy_name])
 	
 	trait_allegiances_relation(relation, enemy_name, opponent_name)
-
-# ----------------- HELPER REACTIONS -----------------
 
 
 # ----------------- ACTIONS -----------------

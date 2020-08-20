@@ -1,7 +1,5 @@
 extends "res://Mini Scenes/Intelligences/Competitor.gd"
 
-var priority_lister = 1
-
 # {[info]:[round, sender]}
 # lists all pieces of info (messages) competitor wants to investigate
 var tactical_list = {}
@@ -21,13 +19,8 @@ func _ready():
 # start turn
 func start_turn():
 	print_turn()
-	
-	priority_lister = 1
-	while get_actions() > 0:
-		execute_action()
-	
-	snitch_list.clear()
-	emit_signal("advance_turn", character_name)
+	.start_turn()
+
 
 # process turn order info
 func receive_turn_order_info(turn_message):
@@ -35,6 +28,7 @@ func receive_turn_order_info(turn_message):
 	trait_vassal(turn_message)
 	
 	.receive_turn_order_info(turn_message)
+
 
 # process report info
 func receive_report_info(reports): #report = {'player':[stance1, stance2, points]}
@@ -47,6 +41,39 @@ func receive_report_info(reports): #report = {'player':[stance1, stance2, points
 		receive_fact(get_current_round(), [player_name, report[1], character_name])
 		
 	forget_info()
+
+# process voting info
+func receive_proposal(leader, action, object, vote = 0):
+	
+	if (object == character_name or get_relation(object) == -2) and action == 1:
+		vote = -1
+	elif get_relation(leader) == -2:
+		vote = 1
+	elif get_relation(object) == -1 and action == 1:
+		vote = -1
+	elif (get_relation(object) > 0 and action == 1) or get_relation(leader) == -1:
+		vote = 1
+	elif get_relation(leader) > 0:
+		vote = -1
+	
+	trait_ignorant_diplomatic(leader)
+	.receive_proposal(leader,action, object, vote)
+
+# Diplomatic
+func receive_vote(voter, vote):
+	trait_ignorant_diplomatic(voter, vote)
+
+func choose_proposal():
+	for player in turn_order:
+		if get_relation(player) == 2:
+			return [1, player]
+	
+	for player in turn_order:
+		if get_relation(player) == 1:
+			return [1, player]
+	
+	return [0, character_name]
+
 
 # process investigation -------------
 func receive_matchtable_info(en_stances, op_stances, enemy_requested_name, opponent_requested_name):

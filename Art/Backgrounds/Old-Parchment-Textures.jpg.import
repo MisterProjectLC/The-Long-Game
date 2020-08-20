@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Old-Parchment-Textures.jpg-a5c0768381af22badb1c81353910545f.stex"
+path="res://.import/Old-Parchment-Textures.jpg-6c8d6edbf8c66c02c7b08b23176f4ae2.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Old-Parchment-Textures.jpg"
-dest_files=[ "res://.import/Old-Parchment-Textures.jpg-a5c0768381af22badb1c81353910545f.stex" ]
+source_file="res://Art/Backgrounds/Old-Parchment-Textures.jpg"
+dest_files=[ "res://.import/Old-Parchment-Textures.jpg-6c8d6edbf8c66c02c7b08b23176f4ae2.stex" ]
 
 [params]
 

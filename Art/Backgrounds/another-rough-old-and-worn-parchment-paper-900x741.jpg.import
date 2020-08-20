@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/old-brown-vintage-parchment-paper-texture.jpg-9c4f7c51686fc91ee8e10d93987cfa1a.stex"
+path="res://.import/another-rough-old-and-worn-parchment-paper-900x741.jpg-6a958e322af36529bcddffec3eb4b582.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/old-brown-vintage-parchment-paper-texture.jpg"
-dest_files=[ "res://.import/old-brown-vintage-parchment-paper-texture.jpg-9c4f7c51686fc91ee8e10d93987cfa1a.stex" ]
+source_file="res://Art/Backgrounds/another-rough-old-and-worn-parchment-paper-900x741.jpg"
+dest_files=[ "res://.import/another-rough-old-and-worn-parchment-paper-900x741.jpg-6a958e322af36529bcddffec3eb4b582.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

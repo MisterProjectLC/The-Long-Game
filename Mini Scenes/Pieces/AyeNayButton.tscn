@@ -1,0 +1,98 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Mini Scenes/Pieces/AyeNayButton.gd" type="Script" id=1]
+[ext_resource path="res://Fonts/Kayambang.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 45
+outline_color = Color( 0.32549, 0.0784314, 0.0784314, 1 )
+font_data = ExtResource( 2 )
+
+[node name="AyeNayButton" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 1.0
+margin_right = -931.0
+margin_bottom = -504.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Aye" type="Button" parent="."]
+visible = false
+self_modulate = Color( 0.270588, 0.937255, 0.0745098, 1 )
+margin_right = 89.0
+margin_bottom = 93.0
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Aye"]
+margin_left = 10.19
+margin_top = 17.1734
+margin_right = 78.19
+margin_bottom = 71.1734
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = SubResource( 1 )
+text = "Aye"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Null" type="Button" parent="."]
+margin_right = 90.0
+margin_bottom = 93.0
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Null"]
+margin_left = 18.3877
+margin_top = 19.654
+margin_right = 71.3877
+margin_bottom = 70.654
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.776471, 0.776471, 0.776471, 1 )
+text = "Null"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Nay" type="Button" parent="."]
+visible = false
+self_modulate = Color( 0.921569, 0.0980392, 0.0352941, 1 )
+margin_right = 90.0
+margin_bottom = 93.0
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Nay"]
+margin_left = 18.3877
+margin_top = 19.654
+margin_right = 71.3877
+margin_bottom = 70.654
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.843137, 0.741176, 0.741176, 1 )
+text = "Nay"
+align = 1
+valign = 1
+[connection signal="button_down" from="Aye" to="." method="button_down"]
+[connection signal="button_up" from="Aye" to="." method="_on_Aye_button_up"]
+[connection signal="button_down" from="Null" to="." method="button_down"]
+[connection signal="button_up" from="Null" to="." method="_on_Null_button_up"]
+[connection signal="button_down" from="Nay" to="." method="button_down"]
+[connection signal="button_up" from="Nay" to="." method="_on_Nay_button_up"]

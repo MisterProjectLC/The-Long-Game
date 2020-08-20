@@ -1,0 +1,499 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://Art/Backgrounds/paper59d5-900x1168.jpg" type="Texture" id=1]
+[ext_resource path="res://Mini Scenes/Pieces/BlackBack.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Mini Scenes/Popups/CouncilPanel.gd" type="Script" id=3]
+[ext_resource path="res://Fonts/Kayambang.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://Mini Scenes/Pieces/Portrait.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Mini Scenes/Pieces/AyeNayButton.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Art/IconSeal.png" type="Texture" id=7]
+
+[sub_resource type="DynamicFont" id=1]
+size = 38
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 24
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 45
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 125
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 50
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 60
+font_data = ExtResource( 4 )
+
+[node name="CouncilPanel" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BlackBack" parent="." instance=ExtResource( 2 )]
+margin_bottom = 3.4917
+
+[node name="Background" type="NinePatchRect" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -255.0
+margin_top = -297.0
+margin_right = 255.0
+margin_bottom = 297.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="CurrentDecree" type="Label" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -126.51
+margin_top = -282.969
+margin_right = 139.49
+margin_bottom = -247.969
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Current Decree"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Leader" parent="CurrentDecree" instance=ExtResource( 5 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -215.648
+margin_top = 33.778
+margin_right = 332.352
+margin_bottom = 640.778
+rect_scale = Vector2( 0.16, 0.16 )
+
+[node name="Decree" type="Label" parent="CurrentDecree"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -110.725
+margin_top = 28.11
+margin_right = 30.2747
+margin_bottom = 50.11
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "DECREE APROVED:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CurrentAction" type="Label" parent="CurrentDecree"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -112.95
+margin_top = 48.438
+margin_right = -5.94958
+margin_bottom = 89.438
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "ATTACK"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CurrentObject" type="Label" parent="CurrentDecree"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -112.076
+margin_top = 84.95
+margin_right = 30.924
+margin_bottom = 125.95
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "OBRULENA"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="For" type="Label" parent="CurrentDecree"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 86.0327
+margin_top = 20.874
+margin_right = 138.033
+margin_bottom = 133.874
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "2"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="X" type="Label" parent="CurrentDecree"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 137.932
+margin_top = 55.129
+margin_right = 160.932
+margin_bottom = 101.129
+custom_fonts/font = SubResource( 5 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "X"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Against" type="Label" parent="CurrentDecree"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 161.89
+margin_top = 21.341
+margin_right = 209.89
+margin_bottom = 134.341
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "3"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Voter1" parent="CurrentDecree" instance=ExtResource( 5 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -219.793
+margin_top = 182.893
+margin_right = 328.207
+margin_bottom = 789.893
+rect_scale = Vector2( 0.16, 0.16 )
+
+[node name="Vote1" type="Label" parent="CurrentDecree"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -211.728
+margin_top = 153.327
+margin_right = -139.728
+margin_bottom = 175.327
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "NEIN (2x)"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Voter2" parent="CurrentDecree" instance=ExtResource( 5 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -107.693
+margin_top = 182.893
+margin_right = 440.307
+margin_bottom = 789.893
+rect_scale = Vector2( 0.16, 0.16 )
+
+[node name="Vote2" type="Label" parent="CurrentDecree"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -101.495
+margin_top = 152.787
+margin_right = -29.4949
+margin_bottom = 174.787
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "NEIN (2x)"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Voter3" parent="CurrentDecree" instance=ExtResource( 5 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 5.35742
+margin_top = 181.943
+margin_right = 553.357
+margin_bottom = 788.943
+rect_scale = Vector2( 0.16, 0.16 )
+
+[node name="Vote3" type="Label" parent="CurrentDecree"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 13.2106
+margin_top = 153.417
+margin_right = 85.2106
+margin_bottom = 175.417
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "NEIN (2x)"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Voter4" parent="CurrentDecree" instance=ExtResource( 5 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 122.207
+margin_top = 183.843
+margin_right = 670.208
+margin_bottom = 790.843
+rect_scale = Vector2( 0.16, 0.16 )
+
+[node name="Vote4" type="Label" parent="CurrentDecree"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 131.15
+margin_top = 155.225
+margin_right = 203.15
+margin_bottom = 177.225
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "NEIN (2x)"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NextDecree" type="Label" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -133.0
+margin_top = 50.8165
+margin_right = 133.0
+margin_bottom = 85.8165
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Next Decree Proposal"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NextLeader" parent="." instance=ExtResource( 5 )]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -206.0
+margin_top = 109.361
+margin_right = 342.0
+margin_bottom = 716.361
+rect_scale = Vector2( 0.16, 0.16 )
+
+[node name="DecreeProposal" type="Label" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -106.528
+margin_top = 108.446
+margin_right = 34.4722
+margin_bottom = 130.446
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NextAction" type="Label" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -108.752
+margin_top = 128.774
+margin_right = -1.75208
+margin_bottom = 169.774
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "ATTACK"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NextObject" type="Label" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -107.879
+margin_top = 165.286
+margin_right = 35.1212
+margin_bottom = 206.286
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "OBRULENA"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Action" type="Label" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 152.306
+margin_top = 107.883
+margin_right = 219.306
+margin_bottom = 129.883
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "ACTION"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ActionDD" type="OptionButton" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 98.678
+margin_top = 129.586
+margin_right = 221.616
+margin_bottom = 149.586
+
+[node name="Object" type="Label" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 154.804
+margin_top = 156.691
+margin_right = 221.804
+margin_bottom = 178.691
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "OBJECT"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ObjectDD" type="OptionButton" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 98.158
+margin_top = 179.502
+margin_right = 221.824
+margin_bottom = 199.502
+
+[node name="CloseButton" type="Button" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -193.891
+margin_top = 238.979
+margin_right = 35.1089
+margin_bottom = 298.979
+rect_scale = Vector2( 0.75, 0.75 )
+custom_fonts/font = SubResource( 6 )
+text = "CLOSE"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FinishButton" type="Button" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 7.16162
+margin_top = 238.979
+margin_right = 236.162
+margin_bottom = 298.979
+rect_scale = Vector2( 0.75, 0.75 )
+custom_fonts/font = SubResource( 6 )
+text = "PROPOSE"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AyeNayButton" parent="." instance=ExtResource( 6 )]
+visible = false
+margin_left = 608.654
+margin_top = 410.99
+margin_right = -324.346
+margin_bottom = -100.01
+
+[node name="Seal" type="TextureRect" parent="."]
+visible = false
+modulate = Color( 0.0901961, 0.0901961, 0.0901961, 1 )
+margin_left = 264.837
+margin_top = 11.5681
+margin_right = 564.837
+margin_bottom = 311.568
+rect_scale = Vector2( 0.15, 0.15 )
+texture = ExtResource( 7 )
+[connection signal="item_selected" from="ActionDD" to="." method="_on_ActionDD_item_selected"]
+[connection signal="item_selected" from="ObjectDD" to="." method="_on_ObjectDD_item_selected"]
+[connection signal="button_up" from="CloseButton" to="." method="_on_CloseButton_button_up"]
+[connection signal="button_up" from="FinishButton" to="." method="_on_FinishButton_button_up"]
+[connection signal="stance_change" from="AyeNayButton" to="." method="_on_AyeNayButton_stance_change"]

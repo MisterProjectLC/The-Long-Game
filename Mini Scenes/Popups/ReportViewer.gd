@@ -8,8 +8,7 @@ func _ready():
 	setup(300, 167)
 	
 func language(language):
-	var dictionary = ['Results', 'Resultados']
-	$Title.text = dictionary[language]
+	$Title.text = Global.results[language]
 	
 func report_setup(player, _opponents, reports):
 	self.opponents = _opponents

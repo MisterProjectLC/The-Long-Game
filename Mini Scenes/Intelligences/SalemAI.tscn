@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Mini Scenes/Intelligences/Player.gd" type="Script" id=1]
 [ext_resource path="res://Mini Scenes/Intelligences/GrolkAI.tscn" type="PackedScene" id=2]
@@ -17,6 +17,8 @@
 [ext_resource path="res://Mini Scenes/Profile.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Mini Scenes/Popups/LettersPanel.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Mini Scenes/Popups/ForgeryPanel.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Mini Scenes/Popups/CouncilPanel.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Art/IconSeal.png" type="Texture" id=19]
 
 [sub_resource type="DynamicFont" id=1]
 size = 50
@@ -38,6 +40,7 @@ panel = ExtResource( 5 )
 manual = ExtResource( 6 )
 letters_panel = ExtResource( 16 )
 forgery_panel = ExtResource( 17 )
+council_panel = ExtResource( 18 )
 mail_viewer = ExtResource( 7 )
 report_viewer = ExtResource( 8 )
 
@@ -132,6 +135,48 @@ margin_right = 515.527
 margin_bottom = 517.458
 rect_scale = Vector2( 0.08, 0.08 )
 texture = ExtResource( 11 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Council" type="Button" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 248.0
+margin_top = -575.0
+margin_right = 420.0
+margin_bottom = -523.0
+custom_fonts/font = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Council"]
+margin_left = 122.592
+margin_top = 3.78476
+margin_right = 422.592
+margin_bottom = 303.785
+rect_scale = Vector2( 0.14, 0.14 )
+texture = ExtResource( 19 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Council" type="Label" parent="Council"]
+anchor_top = -0.02
+anchor_bottom = -0.02
+margin_left = 9.0
+margin_top = 6.04
+margin_right = 115.0
+margin_bottom = 47.04
+custom_fonts/font = SubResource( 3 )
+text = "Council"
+align = 1
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
@@ -327,6 +372,8 @@ __meta__ = {
 [connection signal="button_up" from="Restart" to="." method="_on_Restart_button_up"]
 [connection signal="button_down" from="Info" to="." method="button_down"]
 [connection signal="button_up" from="Info" to="." method="_on_Info_button_up"]
+[connection signal="button_down" from="Council" to="." method="button_down"]
+[connection signal="button_up" from="Council" to="." method="_on_Council_button_up"]
 [connection signal="button_down" from="AdvanceTurn" to="." method="button_down"]
 [connection signal="button_up" from="AdvanceTurn" to="." method="_on_AdvanceTurn_button_up"]
 [connection signal="button_down" from="Forgery" to="." method="button_down"]

@@ -1,7 +1,5 @@
 extends "res://Mini Scenes/Intelligences/Competitor.gd"
 
-var priority_lister = 1
-
 # {player: [[round, victim]]}
 # lists all attacks someone made
 var violence_list = {}
@@ -24,12 +22,8 @@ func start_turn():
 	print_turn()
 	sent_letter = null
 	
-	priority_lister = 1
-	while get_actions() > 0:
-		execute_action()
-	
-	snitch_list.clear()
-	emit_signal("advance_turn", character_name)
+	.start_turn()
+
 
 # process turn order info
 func receive_turn_order_info(turn_message):
@@ -50,26 +44,32 @@ func receive_report_info(reports): #report = {'player':[stance1, stance2, points
 
 
 # process voting info
-func receive_proposal(leader, action, object, vote = null):
+func receive_proposal(leader, action, object, vote = 0):
 	if action == 1:
 		if get_relation(leader) == -2 and get_relation(object) > 0:
 			vote = 1
 		else:
 			vote = -1
 	else:
-		vote = 1
+		if get_relation(leader) > 0 and get_relation(object) > 0:
+			vote = -1
+		else:
+			vote = 1
 	
-	if vote != null:
-		trait_ignorant_diplomatic(leader, vote)
-	else:
-		vote = -1
-	
+	trait_ignorant_diplomatic(leader)
 	.receive_proposal(leader,action, object, vote)
 
 # Diplomatic
 func receive_vote(voter, vote):
-	var comparison = int(vote == _current_vote) -int(vote != _current_vote)
-	trait_ignorant_diplomatic(voter, comparison)
+	trait_ignorant_diplomatic(voter, vote)
+
+func choose_proposal():
+	for player in turn_order:
+		if get_relation(player) < 0:
+			return [0, player]
+	
+	return [0, character_name]
+
 
 # process investigation -------------
 func receive_matchtable_info(en_stances, op_stances, enemy_requested_name, opponent_requested_name):

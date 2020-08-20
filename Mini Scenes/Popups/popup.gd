@@ -2,6 +2,8 @@ extends Control
 
 # initial animation
 var _visibler = false
+var invisible_list = []
+
 var _margin_top = 412
 var _margin_left = 240
 var _speed = 4
@@ -33,8 +35,10 @@ func processing(delta):
 	# reveal phase
 	elif _visibler == false:
 		for child in get_children():
-			child.visible = true
+			if not child in invisible_list:
+				child.visible = true
 		_visibler = true
+		
 		emit_signal("popup_revealed")
 
 

@@ -5,6 +5,7 @@ var music_volume = 1
 var sounds_volume = 1
 
 var debug_enabled = false
+var advanced_enabled = true
 
 # Dictionary
 var en_menu = {'Play':'Play', 'Manual':'Manual',
@@ -33,7 +34,7 @@ var mains = [en_main, br_main, de_main]
 
 var en_relations = {-2:'Friendly',-1:'Trusting', 0:'Suspicious', 1:'Hostile', 2:'Rageful'}
 var br_relations = {-2:'Amigavel',-1:'Confiante', 0:'Suspeito', 1:'Hostil', 2:'Revoltado', 100:'Suspeita', 102:'Revoltada'}
-var de_relations = {-2:'Freundlich',-1:'Vertrauend', 0:'Msstrauisch', 1:'Feindlich', 2:'Wütend'}
+var de_relations = {-2:'Freundlich',-1:'Vertrauend', 0:'Msstrauisch', 1:'Feindlich', 2:'Wuetend'}
 
 var en_panel = {'Close':'Close','Finish':'Finish', 'Info':'Info', 'Points':'Points', 'Relations':en_relations,
 	'R':'','Relation':'\'s relation\ntowards', 'Send':'Send', 'Diplomacy':'Diplomacy Area', 
@@ -49,6 +50,20 @@ var de_panel = {'Close':'Schlss.','Finish':'Abschliessen', 'Info':'Info', 'Point
 	'Subject':'Subjekt', 'Action':'Aktion', 'Object':'Objekt', 'Author':'Autor'}
 var panels = [en_panel, br_panel, de_panel]
 
+var en_council = {'Current':'Current Decree','Approved':'Decree Approved',
+				'Rejected':'Decree Rejected', 'Attack':'Attack', 'Co-op':'Co-op with',
+				'Next':'Next Decree Proposal', 'Proposal':'Decree Proposal', 
+				'Aye':'Aye', 'Null':'Null', 'Nay':'Nay', 'Propose':'Propose', 'Vote':'Vote',}
+var br_council = {'Current':'Decreto Atual', 'Approved':'Decreto Aprovado',
+				'Rejected':'Decreto Rejeitado', 'Attack':'Atacar', 'Co-op':'Paz com',
+				'Next':'Proxima Proposta',  'Proposal':'Proposta de Decreto', 
+				'Aye':'Sim', 'Null':'Nulo', 'Nay':'Nao', 'Propose':'Propor', 'Vote':'Votar',}
+var de_council = {'Current':'Aktuelles Dekret', 'Approved':'Genehmigtes Dekret',
+				'Rejected':'Verwerftes Dekret', 'Attack':'Attackiere', 'Co-op':'Friede mit',
+				'Next':'Naechster Dekretvorschlag', 'Proposal':'Dekretvorschlag', 
+				'Aye':'Ja','Null':'Null','Nay':'Nein', 'Propose':'Vorschlagen', 'Vote':'Stimmen',}
+var council = [en_council, br_council, de_council]
+
 var en_phrases = ['will co-op with', 'will attack']
 var br_phrases = ['vai cooperar com', 'vai atacar']
 var de_phrases = ['kooperiert mit', 'attackiert']
@@ -63,6 +78,8 @@ var en_tutorials = {'Part1':"Part #1: An Orc's Axe", 'Part2':"Part #2: A Monk's 
 var br_tutorials = {'Part1':'Parte #1: O Machado', 'Part2':'Parte #2: A Carta'}
 var de_tutorials = {'Part1':'Teil 1: Die Axt des Orks', 'Part2':'Teil 2: Die Brief der Monchin'}
 var tutorials = [en_tutorials, br_tutorials, de_tutorials]
+
+var results = ['Results', 'Resultados', 'Ergebnis']
 
 func get_language():
 	return language

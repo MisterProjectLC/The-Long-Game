@@ -1,7 +1,5 @@
 extends "res://Mini Scenes/Intelligences/Competitor.gd"
 
-var priority_lister = 1
-
 # lists enemies
 var war_list = {}
 
@@ -22,11 +20,7 @@ func _ready():
 func start_turn():
 	print_turn()
 	
-	priority_lister = 1
-	while get_actions() > 0:
-		execute_action()
-	
-	emit_signal("advance_turn", character_name)
+	.start_turn()
 
 
 # process report info
@@ -69,18 +63,13 @@ func receive_message(sender, roun, message):
 	.receive_information(roun, message)
 
 
-func receive_proposal(leader, action, object, vote = null):
-	
+func receive_proposal(leader, action, object, vote = 0):
 	if action == 1 and object == character_name:
 		vote = -1
 	if (action == 1 and object != character_name) or (action == 0 and object == character_name):
 		vote = 1
 	
-	if vote != null:
-		trait_ignorant_diplomatic(leader, vote)
-	else:
-		vote = -1
-	
+	trait_ignorant_diplomatic(leader, vote)
 	.receive_proposal(leader,action, object, vote)
 
 

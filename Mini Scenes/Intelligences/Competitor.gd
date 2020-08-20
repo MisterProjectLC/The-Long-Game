@@ -22,8 +22,8 @@ signal gain_rep
 signal lose_rep
 signal set_rep
 
-signal decree
-signal vote
+signal send_proposal
+signal send_vote
 
 var character_name = ''
 var traits_list = []
@@ -33,7 +33,9 @@ var stances = [{}, {}, {}, {}, {}, {}]
 var relations = {}
 var _current_round = 1
 var _info_til_round = {}
-var _current_vote = null
+var priority_lister = 1
+var _current_vote = 0
+var council_target  = ['', 0]
 
 var player_character = ''
 var players = []
@@ -83,7 +85,8 @@ func signal_setup():
 	connect("matchtable_info_request", get_parent(), "pass_matchtable_info")
 	connect("relation_info_request", get_parent(), "pass_relation_info")
 	connect("send_message", get_parent(), "send_message")
-	connect("vote", get_parent(), "receive_vote")
+	connect("send_proposal", get_parent(), "receive_proposal")
+	connect("send_vote", get_parent(), "receive_vote")
 
 
 func setup(_player_character, _players, _turn_order, _dip_phrases, _opponent_trait_list):
@@ -101,6 +104,32 @@ func setup(_player_character, _players, _turn_order, _dip_phrases, _opponent_tra
 		ann_dict[[player, 1]] = []
 
 
+func start_turn():
+	# enforce decree
+	if Global.advanced_enabled:
+		if council_target[0] in turn_order and council_target[0] != character_name and council_target[1] == 1:
+			change_stance(council_target[0], get_current_round(), 1, true)
+	
+	# main phase
+	priority_lister = 1
+	while get_actions() > 0:
+		if execute_action():
+			break
+	
+	# diplomacy "phase"
+	if Global.advanced_enabled:
+		if turn_order[0] == character_name:
+			send_proposal()
+	
+	# end turn
+	snitch_list.clear()
+	if get_actions() <= 0:
+		council_target[0] = ''
+		emit_signal("advance_turn", character_name)
+
+
+func execute_action():
+	return true
 
 # ---------------------- ACTIONS -----------------------
 
@@ -131,8 +160,8 @@ func attack(_target_relation):
 	var return_list = []
 	for target_order in turn_order:
 		if relations[target_order] == _target_relation:
-			change_stance(target_order, get_current_round(), 1)
-			return_list.append(target_order)
+			if change_stance(target_order, get_current_round(), 1):
+				return_list.append(target_order)
 	return return_list
 
 
@@ -231,19 +260,41 @@ func forge_letter(letter, index, change_count):
 	return true
 
 
-func ask_decree():
-	pass
+func send_proposal():
+	if Global.advanced_enabled == false:
+		return
+	
+	_current_vote = 1
+	var proposal = choose_proposal()
+	if proposal != null:
+		emit_signal("send_proposal", character_name, proposal[0], proposal[1])
 
 
-func receive_proposal(leader, action, object, vote = null):
+func choose_proposal():
+	return null
+
+
+func receive_proposal(_leader, _action, _object, vote = 0):
 	_current_vote = vote
-	emit_signal("vote", character_name, vote)
+	emit_signal("send_vote", character_name, vote)
 
-func receive_vote(voter, vote):
+
+func receive_vote(_voter, _vote):
 	pass
 
-func receive_decree(action, object):
-	pass
+
+func receive_decree(action, object, voters, vote_count):
+	for voter in voters.keys():
+		if voter != character_name:
+			receive_vote(voter, voters[voter])
+	
+	if vote_count[0] >= vote_count[2]:
+		return
+	
+	if action == 1 and get_relation(object) < 1:
+		set_relations(object, 1)
+		
+	council_target = [object, action]
 
 # ----------------------------- TRAITS -------------------------------------------------
 # --- TRAITS: DIRECT INTERACTION (REPORT) REACTIONS --------------------
@@ -410,11 +461,14 @@ func trait_intrigue_check(sender, roun, message, me):
 
 # -- TRAITS: DIPLOMACY/VOTING -------------------------
 
-func trait_ignorant_diplomatic(leader, vote):
-	if vote == 1:
-		improve_relations(leader)
+func trait_ignorant_diplomatic(target, vote = 1):
+	if vote == 0 or _current_vote == 0:
+		return
+	
+	if vote == _current_vote:
+		improve_relations(target)
 	else:
-		worsen_relations(leader)
+		worsen_relations(target)
 
 
 # ---------------- BASE FUNCTIONS ----------------------------
@@ -470,11 +524,17 @@ func stance_inverse(_stance):
 
 # ------------------- GETTER / SETTER --------------------
 
-func change_stance(_character, _round, stance):
+func change_stance(_character, _round, stance, override = false):
+	if council_target[0] == _character and !override:
+		return false
+	
+	# Peace
 	if stance == 0:
 		gain_action()
 		set_stance(_character, _round, stance)
 		return true
+	
+	# War
 	elif get_actions() > 0:
 		spend_action()
 		set_stance(_character, _round, stance)

@@ -3,12 +3,8 @@ extends Control
 signal stance_change
 
 func language(language):
-	var en_dictionary = {'Agressive':'Agressive', 'Passive':'Passive'}
-	var br_dictionary = {'Agressive':'Agressiva', 'Passive':'Passiva'}
-	var de_dictionary = {'Agressive':'Agressiv', 'Passive':'Passiv'}
-	var dictionaries = [en_dictionary, br_dictionary, de_dictionary]
-	$Agressive/Label.text = dictionaries[language]['Agressive']
-	$Passive/Label.text = dictionaries[language]['Passive']
+	$Agressive/Label.text = Global.stances[language]['Agressive']
+	$Passive/Label.text = Global.stances[language]['Passive']
 
 func _on_Passive_button_up():
 	emit_signal("stance_change", 1)

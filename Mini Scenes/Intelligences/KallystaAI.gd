@@ -1,7 +1,5 @@
 extends "res://Mini Scenes/Intelligences/Competitor.gd"
 
-var priority_lister = 1
-
 var target = ''
 var target_inform = ''
 var just_invest = ''
@@ -31,14 +29,9 @@ func _ready():
 func start_turn():
 	print_turn()
 	
-	priority_lister = 1
 	target = ''
 	target_inform = ''
-	while get_actions() > 0:
-		execute_action()
-	
-	snitch_list.clear()
-	emit_signal("advance_turn", character_name)
+	.start_turn()
 
 
 # process report info
@@ -54,25 +47,21 @@ func receive_report_info(reports): #report = {'player':[stance1, stance2, points
 
 
 # process voting info
-func receive_proposal(leader, action, object, vote = null):
-	
+func receive_proposal(leader, action, object, vote = 0):
 	if object == character_name and action == 1:
 		vote = -1
 	elif ((get_relation(object) > 0 and action == 1) or 
 	(object == character_name and action == 0)):
 		vote = 1
-
-	
-	if vote != null:
-		trait_ignorant_diplomatic(leader, vote)
-	else:
+	elif get_relation(leader) > 0:
 		vote = -1
-	.receive_proposal(leader,action, object, vote)
+	
+	trait_ignorant_diplomatic(leader)
+	.receive_proposal(leader, action, object, vote)
 
 # Diplomatic
 func receive_vote(voter, vote):
-	var comparison = int(vote == _current_vote) -int(vote != _current_vote)
-	trait_ignorant_diplomatic(voter, comparison)
+	trait_ignorant_diplomatic(voter, vote)
 
 # process investigation -------------
 func receive_points_info(info):

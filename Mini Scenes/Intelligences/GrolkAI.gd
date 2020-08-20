@@ -1,7 +1,5 @@
 extends "res://Mini Scenes/Intelligences/Competitor.gd"
 
-var priority_lister = 1
-
 # Called when the node enters the scene tree for the first time.
 #'Edraele':1,'Thoren':1,'Salem':1
 func _ready():
@@ -18,11 +16,7 @@ func _ready():
 func start_turn():
 	print_turn()
 	
-	priority_lister = 1
-	while get_actions() > 0:
-		execute_action()
-	
-	emit_signal("advance_turn", character_name)
+	.start_turn()
 
 
 # process report info
@@ -63,7 +57,7 @@ func receive_message(sender, roun, message):
 	.receive_information(roun, message)
 
 
-func receive_proposal(leader, action, object, vote =null):
+func receive_proposal(leader, action, object, vote = 0):
 
 	if get_relation(object) > 0 and action == 1:
 		vote = 1
@@ -77,12 +71,10 @@ func receive_proposal(leader, action, object, vote =null):
 		vote = -1
 	elif get_relation(leader) == -1:
 		vote = 1
-	
-	if vote != null:
-		trait_ignorant_diplomatic(leader, vote)
-	else:
+	elif get_relation(leader) > 0:
 		vote = -1
 	
+	trait_ignorant_diplomatic(leader)
 	.receive_proposal(leader,action, object, vote)
 
 # ----------------- HELPER REACTIONS -----------------
