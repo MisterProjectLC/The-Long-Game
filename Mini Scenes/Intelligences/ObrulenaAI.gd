@@ -65,7 +65,7 @@ func receive_vote(voter, vote):
 
 func choose_proposal():
 	for player in turn_order:
-		if get_relation(player) < 0:
+		if get_relation(player) < 0 and player != character_name:
 			return [0, player]
 	
 	return [0, character_name]

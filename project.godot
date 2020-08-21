@@ -24,6 +24,9 @@ config/windows_native_icon="res://0- SECRET BUNKER/Icon3.ico"
 
 Global="*res://Global.gd"
 Audio="*res://Mini Scenes/Audio.tscn"
+ManualEnglish="*res://Mini Scenes/Popups/ManualEnglish.gd"
+ManualBr="*res://Mini Scenes/Popups/ManualBr.gd"
+ManualDeutsch="*res://Mini Scenes/Popups/ManualDeutsch.gd"
 
 [display]
 

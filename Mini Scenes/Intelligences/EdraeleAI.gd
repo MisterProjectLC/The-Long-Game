@@ -351,9 +351,10 @@ func host_action():
 		5: # tell brotherhood friends about hostile
 			say_to_list([1], 1, [-2, -1], 'tell', false, 'Brotherhood')
 
-		6: # invest target
-			if target != '':
-				_investigate(target)
+		6: # change turn order
+			if get_influence() > 1:
+				gain_influence()
+
 		7: # do nothing
 			spend_action()
 			return
