@@ -56,8 +56,8 @@ func receive_proposal(leader, action, object, vote = 0):
 	elif get_relation(leader) > 0:
 		vote = -1
 	
-	trait_ignorant_diplomatic(leader)
 	.receive_proposal(leader, action, object, vote)
+	trait_ignorant_diplomatic(leader)
 
 # Diplomatic
 func receive_vote(voter, vote):

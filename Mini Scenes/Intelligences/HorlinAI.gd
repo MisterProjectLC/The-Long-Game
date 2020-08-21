@@ -55,8 +55,8 @@ func receive_proposal(leader, action, object, vote = 0):
 	elif get_relation(leader) > 0:
 		vote = -1
 	
-	trait_ignorant_diplomatic(leader)
 	.receive_proposal(leader,action, object, vote)
+	trait_ignorant_diplomatic(leader)
 
 func receive_vote(voter, vote):
 	trait_ignorant_diplomatic(voter, vote)
@@ -140,18 +140,11 @@ func execute_action():
 			# If there's a request currently...
 			if current_request.size() != 0:
 				var requested_letter = current_request[1]
-				var letter_to_change = -1
-				var best_match = 0
 				
 				# Search through letter list to find a suitable letter to modify
-				for i in range(len(letter_list)):
-					var letter = letter_list[i]
-					if letter[0] == requested_letter[0]:
-						var this_match =  (int(letter[1] == requested_letter[0]) + int(letter[2] == requested_letter[1]) + 
-											int(letter[3] == requested_letter[2]))
-						if best_match < this_match:
-							best_match = this_match
-							letter_to_change = i
+				var package = search_letter([requested_letter[0], requested_letter[0], requested_letter[1], requested_letter[2]])
+				var letter_to_change = package[0]
+				var best_match = package[1]
 				
 				# If found a suitable letter, forge it
 				if letter_to_change != -1:

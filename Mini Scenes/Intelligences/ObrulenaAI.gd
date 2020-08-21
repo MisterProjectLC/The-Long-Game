@@ -46,7 +46,7 @@ func receive_report_info(reports): #report = {'player':[stance1, stance2, points
 # process voting info
 func receive_proposal(leader, action, object, vote = 0):
 	if action == 1:
-		if get_relation(leader) == -2 and get_relation(object) > 0:
+		if get_relation(leader) == -2 and get_relation(object) > 0 and object != character_name:
 			vote = 1
 		else:
 			vote = -1
@@ -56,8 +56,8 @@ func receive_proposal(leader, action, object, vote = 0):
 		else:
 			vote = 1
 	
-	trait_ignorant_diplomatic(leader)
 	.receive_proposal(leader,action, object, vote)
+	trait_ignorant_diplomatic(leader)
 
 # Diplomatic
 func receive_vote(voter, vote):

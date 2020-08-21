@@ -69,8 +69,8 @@ func receive_proposal(leader, action, object, vote = 0):
 	if (action == 1 and object != character_name) or (action == 0 and object == character_name):
 		vote = 1
 	
-	trait_ignorant_diplomatic(leader, vote)
 	.receive_proposal(leader,action, object, vote)
+	trait_ignorant_diplomatic(leader)
 
 
 # process relation

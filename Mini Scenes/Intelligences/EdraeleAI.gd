@@ -5,6 +5,7 @@ var agenda = 0
 var target = ''
 var target_inform = ''
 var just_invest = ''
+var letter_to_send = []
 
 # {[info]:[round, sender]}
 # lists all pieces of info (messages) competitor wants to investigate
@@ -66,8 +67,8 @@ func receive_proposal(leader, action, object, vote = 0):
 	elif get_relation(leader) > 0:
 		vote = -1
 	
-	trait_ignorant_diplomatic(leader)
 	.receive_proposal(leader,action, object, vote)
+	trait_ignorant_diplomatic(leader)
 
 
 # Diplomatic
@@ -129,15 +130,10 @@ func receive_message(sender, roun, message):
 	trait_reactive(message, relations)
 
 	if message[1] == 1: # negative interaction
-		# Queen - trust people that punch her enemies
-		if relations[message[2]] == 2 and relations[message[0]] != -2: 
-			set_relations(message[0], -1)
-			
 		# Snitching
-		else:
-			snitch_list.append(message)
-			# (if someone attacks you, logically you would fight back)
-			snitch_list.append([message[2], message[1], message[0]])
+		snitch_list.append(message)
+		# (if someone attacks you, logically you would fight back)
+		snitch_list.append([message[2], message[1], message[0]])
 		
 	receive_information(roun, message)
 
@@ -233,24 +229,27 @@ func trust_action():
 				_investigate(tactical[0])
 				tactical_list.erase(tactical)
 
-		8: # Snitching - snitch stuff to friend
-			if !snitch_list.empty():
-				snitch(snitch_list, [-2, -1])
-
-		9: # change turn order
+		8: # change turn order
 			if get_influence() > 1:
 				gain_influence()
 
-		10: # tell friends about enemies
-			say_to_list([2, 1], 1, [-2, -1], 'warn')
+		9: # tell friends about enemies
+			say_to_list([2, 1], 1, [-2, -1], 'warn', false, 'Brotherhood')
 
-		11: # tell friends about suspected
-			say_to_list([0], 1, [-2, -1], 'warn', true)
+		10: # modify letter
+			for player_x in turn_order:
+				for player_y in turn_order:
+					if search_and_forge([player_x, character_name, 0, player_y], player_x, player_y):
+						break
+
+		11: # resend letter
+			if len(letter_to_send) != 0:
+				send_letter(letter_to_send[0], letter_to_send[1], letter_to_send[2], letter_to_send[3], letter_to_send[3])
+				letter_to_send = []
 
 		12: # investigate enemy/suspected
 			for enemy_name in turn_order:
-				if relations[enemy_name] <= 0 and !opponent_trait_list[enemy_name].has("Warlord"):
-					_investigate(enemy_name)
+				_investigate(enemy_name)
 
 		13: # do nothing
 			spend_action()
@@ -299,16 +298,27 @@ func susp_action():
 					_investigate(target)
 
 		9: # tell friends about suspect
-			say_to_list([0], 1, [-2, -1], 'tell')
+			say_to_list([0], 1, [-2, -1], 'tell', false, 'Brotherhood')
 
-		10: # change turn order
+		10: # modify letter
+			for player_x in turn_order:
+				for player_y in turn_order:
+					if search_and_forge([player_x, player_x, 1, player_y], player_x, player_y):
+						break
+
+		11: # resend letter
+			if len(letter_to_send) != 0:
+				send_letter(letter_to_send[0], letter_to_send[1], letter_to_send[2], letter_to_send[3], letter_to_send[3])
+				letter_to_send = []
+
+		12: # change turn order
 			if get_influence() > 1:
 				gain_influence()
 
-		11:  # attack suspect
+		13:  # attack suspect
 			attack(0)
 
-		12: # do nothing
+		14: # do nothing
 			spend_action()
 			return
 	priority_lister += 1
@@ -337,16 +347,14 @@ func host_action():
 									print("Edraele making target look bad")
 		4: # attack hostile
 			attack(1)
+		
 		5: # tell brotherhood friends about hostile
-			say_to_list([1], 1, [-2, -1], 'tell')
+			say_to_list([1], 1, [-2, -1], 'tell', false, 'Brotherhood')
 
-		6: # Snitching - snitch stuff to warlord
-			if !snitch_list.empty():
-				_warlord_snitch(snitch_list, [0, 1])
-		7: # invest target
+		6: # invest target
 			if target != '':
 				_investigate(target)
-		8: # do nothing
+		7: # do nothing
 			spend_action()
 			return
 			
@@ -401,6 +409,14 @@ func _investigate(_target):
 				emit_signal('relation_info_request', self, _target, opponent)
 			emit_signal('matchtable_info_request', self, _target, opponent)
 	return true
+
+func search_and_forge(target_letter, player_x, player_y):
+	if player_y != character_name and relation_list.has([player_y, -1, player_x]) or relation_list.has([player_y, -2, player_x]):
+		var package = search_letter(target_letter)
+		if package[0] != -1 and forge_letter(target_letter, package[0], 3-package[1]):
+			letter_to_send = letter_list[package[0]]
+			return true
+	return false
 
 func _set_target(_new):
 	if _new == null:

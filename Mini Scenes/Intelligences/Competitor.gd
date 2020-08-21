@@ -165,13 +165,16 @@ func attack(_target_relation):
 	return return_list
 
 
-func say_to_list(_target_relation_list, _order, _informed_relation_list, type, only_once = false):
+func say_to_list(_target_relation_list, _order, _informed_relation_list, type, 
+					only_once = false, _informed_trait = null):
 	# look for players that fit the target relation
 	for target in turn_order:
-		if _target_relation_list.has(relations[target]) and target != character_name:
+		if _target_relation_list.has(get_relation(target)) and target != character_name:
 			# look for players that don't know about my relation with this person
 			for sally in turn_order:
-				if _informed_relation_list.has(relations[sally]) and sally != character_name and sally != target and target != character_name:
+				if (_informed_relation_list.has(relations[sally]) and sally != character_name 
+				and sally != target and (_informed_trait == null or 
+										opponent_trait_list[sally].has(_informed_trait))):
 					match(type):
 						'warn':
 							warn(target, _order, sally)
@@ -260,6 +263,20 @@ func forge_letter(letter, index, change_count):
 	return true
 
 
+func search_letter(requested_letter):
+	var best_match = 0
+	var letter_to_change = -1
+	for i in range(len(letter_list)):
+		var letter = letter_list[i]
+		if letter[0] == requested_letter[0]:
+			var this_match =  (int(letter[1] == requested_letter[1]) + int(letter[2] == requested_letter[2]) + 
+							int(letter[3] == requested_letter[3]))
+			if best_match < this_match:
+				best_match = this_match
+				letter_to_change = i
+	return [letter_to_change, best_match]
+
+
 func send_proposal():
 	if Global.advanced_enabled == false:
 		return
@@ -337,15 +354,15 @@ func trait_paranoid(info):
 
 func trait_alliance(info, _relations):
 	# Alliance - someone coops with my friend or my friend coops with someone
-	if _relations[info[2]] < 0 and info[1] == 0 and _relations[info[0]] != 2 and _relations[info[0]] != -2:
+	if get_relation(info[2]) < 0 and info[1] == 0 and get_relation(info[0]) != 2 and get_relation(info[0]) != -2:
 		emit_signal('set_relations', info[0], -1)
-	elif _relations[info[0]] < 0 and info[1] == 0 and _relations[info[2]] != 2 and _relations[info[2]] != -2:
+	elif get_relation(info[0]) < 0 and info[1] == 0 and get_relation(info[2]) != 2 and get_relation(info[2]) != -2:
 		emit_signal('set_relations', info[2], -1)
 
 
 func trait_brotherhood(info, _relations):
 	# Brotherhood - someone hates my friend
-	if _relations[info[0]] != 2 and info[1] == 1 and _relations[info[2]] < 0:
+	if get_relation(info[0]) != 2 and get_relation(info[0]) != -2 and info[1] == 1 and get_relation(info[2]) < 0:
 		emit_signal('set_relations', info[0], 1)
 
 
@@ -365,17 +382,18 @@ func trait_paranoid_relation(relation, enemy_name, opponent_name):
 
 
 func trait_alliance_relation(relation, enemy_name, opponent_name):
-	if relations[enemy_name] < 0 and relation < 0 and relations[opponent_name] != 2: # a friend likes this person
+	# a friend likes this person
+	if get_relation(enemy_name) < 0 and relation < 0 and get_relation(opponent_name) != 2 and get_relation(opponent_name) != -2:
 		set_relations(opponent_name, -1)
 
 
 func trait_brotherhood_relation(relation, enemy_name, opponent_name):
-	if relations[enemy_name] != 2 and relation > 0 and relations[opponent_name] < 0:
+	if get_relation(enemy_name) != 2 and get_relation(enemy_name) != -2 and relation > 0 and get_relation(opponent_name) < 0:
 		set_relations(enemy_name, 1)
 
 
 func trait_allegiances_relation(relation, enemy_name, opponent_name):
-	if relations[enemy_name] != 2 and relation < 0 and relations[opponent_name] == 2:
+	if get_relation(enemy_name) != 2 and relation < 0 and get_relation(opponent_name) == 2:
 		set_relations(enemy_name, 1)
 
 
@@ -385,10 +403,11 @@ func trait_reactive_relations(enemy_name, relation, opponent_name):
 		relations[enemy_name] = 1
 
 
-func trait_vassal(turn_message):
-	if turn_order.size() > 0 and turn_order[0] != turn_message[0]:
-		worsen_relations(turn_order[0])
-		improve_relations(turn_message[0])
+func trait_vassal(_turn_message):
+	#if turn_order.size() > 0 and turn_order[0] != turn_message[0]:
+	#	worsen_relations(turn_order[0])
+	#	improve_relations(turn_message[0])
+	pass
 
 
 # --- TRAITS: DEDUCE PLAYER ---------------------
