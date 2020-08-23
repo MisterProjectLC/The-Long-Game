@@ -7,9 +7,11 @@ export var these_players = [['Grolk', Texture],
 						['Obrulena', Texture],
 						['Thoren', Texture], 
 						['Edraele', Texture], 
+						['Drakoth', Texture],
 						['Salem', Texture]]
 
-var this_turn_order = ['Edraele', 'Obrulena', 'Horlin', 'Salem', 'Thoren', 'Kallysta', 'Grolk', 'Zardri']
+var this_turn_order = ['Drakoth','Edraele', 'Obrulena', 'Horlin', 
+'Salem', 'Thoren', 'Kallysta', 'Grolk', 'Zardri']
 
 
 # ------------------ MAIN STUFF, TURN ------------------------
@@ -26,6 +28,10 @@ func _ready():
 	i = (randi() % 4)+1
 	delete_char(i)
 	i = (randi() % 3)+1
+	delete_char(i)
+	
+	# Get one nemesis-character
+	i = (randi() % 2)+3
 	delete_char(i)
 	
 	game_setup(these_players, this_turn_order)
@@ -47,3 +53,4 @@ func gain_influence(character_name):
 
 func lose_influence(character_name):
 	_lose_influence(character_name)
+

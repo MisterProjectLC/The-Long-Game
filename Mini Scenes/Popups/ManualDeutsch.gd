@@ -16,7 +16,7 @@ func pages_setup(images):
 	['text', {'title':'KAMPF - DER GEFANGENENDILEMMA', 'space':470, 
 	'text':"""Der GEFANGENENDILEMMA ist ein Gedankenexperiment mit Bezug zur Spieltheorie.
 	Darin entscheidet jeder Spieler zwischen eine Passiv- oder Agressiv-Position.
-	PASSIV sein ist besser für die zwei Spieler, aber es setzt den Einzelne der Verrat aus. Außerdem ist diese Option diplomatisch besser.
+	PASSIV sein ist besser für beide involvierte Spieler, aber es setzt den Einzelne der Verrat aus. Außerdem ist diese Option diplomatisch besser.
 	AGRESSIV sein ist andererseits besser für den Einzelne, aber es verbringt eine Aktion und erzeugt Ressentiment zwischen den Spielern."""}
 	],
 	['image', {'image':images[0], 'space':350}
@@ -45,6 +45,13 @@ func pages_setup(images):
 	['text', {'title':'FAELSCHUNG',
 	'text':"""Fälschung eröffnet noch mehr Möglichkeiten für Täuschung. Damit kann man Briefe von anderen Spieler fälschen, um sie später wieder zu senden. 
 	Jede Änderung verbringt 1 AKTION."""}
+	],
+	['text', {'title':'DER RAT',
+	'text':"""Am Anfang jeder Runde schlagt der Führer der Thron-Reihenfolge ein Dekret dem Rat vor. Ein Dekret besteht von
+	einer Position und einem Ziel, und, wenn genehmigt, zwingt alle Spieler, nächste Runde die entscheidene Position gegen 
+	den entscheidene Ziel zu nehmen.
+	Nachdem ein Vorschlag gemacht wird, stimmt jeder Spieler über den Dekret ab. Der zweite Spieler der Reihenfolge stimmt
+	zweimal. Wenn es mehr 'Ja' als 'Nein' gibt, wird das Dekret genehmigt."""}
 	],
 	['text', {'title':'EIGENSCHAFTEN UND CHARAKTER', 'space':350,
 	'text':"""Dieses Spiel hat auch ein Dokument, das das Profil jedes Charakters detaliert. Sie sind in drei Teile gegliedert:
@@ -110,16 +117,19 @@ func pages_setup(images):
 	'text':"""Wird WÜTEND gegen VERTRAUTE/BEFREUNDETE Spieler, die ihm MASSAKRIEREN (Agressiv vs Passiv). Ausserdem wird er FEINDLICH gegen vermutete Spieler, die ihm MASSAKRIEREN."""}
 	],
 	['text', {'title':'BRUDERSCHAFT', 'space':310, 'color':Color.darkblue,
-	'text':"""Wird FEINDLICH (sofern er nicht schon WÜTEND ist) gegen einen Spieler, entweder wenn er herausfindet, dass dieser Spieler einen VERTRAUTEN/BEFREUNDETEN Spielern angreifen wird, oder wenn er herausfindet, dass dieser Spieler FEINDLICH/WÜTEND gegen einen VERTRAUT/FREUNDE Spielern ist."""}
+	'text':"""Wird FEINDLICH (sofern er nicht schon WÜTEND oder FREUNDLICH ist) gegen einen Spieler, entweder wenn er herausfindet, dass dieser Spieler einen VERTRAUTEN/BEFREUNDETEN Spielern angreifen wird, oder wenn er herausfindet, dass dieser Spieler FEINDLICH/WÜTEND gegen einen VERTRAUT/FREUNDE Spielern ist."""}
 	],
 	['text', {'title':'ALLIANZ', 'space':300, 'color':Color.blue,
-	'text':"""Wird VERTRAUEND (sofern wenn schon WÜTEND oder FREUNDLICH) eines Spielers, entweder wenn er herausfindet, dass dieser Spieler mit einem VERTRAUTEN/BEFREUNDETEN Spieler kooperieren wird, oder wenn er herausfindet, dass ein VERTRAUTER/BEFREUNDETER Spieler diesen Spieler als VERTRAUT/BEFREUNDET betrachtet."""}
+	'text':"""Wird VERTRAUEND (sofern er nicht schon WÜTEND oder FREUNDLICH ist) eines Spielers, entweder wenn er herausfindet, dass dieser Spieler mit einem VERTRAUTEN/BEFREUNDETEN Spieler kooperieren wird, oder wenn er herausfindet, dass ein VERTRAUTER/BEFREUNDETER Spieler diesen Spieler als VERTRAUT/BEFREUNDET betrachtet."""}
 	],
 	['text', {'title':'GENERAL', 'space':180, 'color':Color.cyan,
 	'text':"""Seine Relation verbessert, wenn man ihm Information gibt, die er herausfindet, dass die wahr ist. Das Gegenteil passiert mit Information, die er herausfindet, dass die falsch ist."""}
 	],
 	['text', {'title':'SIMPEL', 'space':220, 'color':Color.darkgreen,
 	'text':"""Glaubt immer an VERTRAUTE/BEFREUNDETE Spieler. Glaubt nie an andere Spieler, aber erinnert sich immer noch an ihre Worte (für General)."""}
+	],
+	['text', {'title':'IGNORANT', 'color':Color.darkolivegreen,
+	'text':"""Seine Relation mit dem Führer verbessert/verschlechtert sich, wenn sie mit ihren Abstimmungspolitik zustimmen/nicht zustimmen. Er ignoriert aber andere Räten."""}
 	],
 	['text', {'title':'VERBITTERT', 'space':180, 'color':Color.brown,
 	'text':"""Wenn er WÜTEND mit jemandem ist, wird nichts ihn dazubringen, seine Relation zu dem zu ändern."""}
@@ -171,6 +181,9 @@ func pages_setup(images):
 	['text', {'title':'BLOD', 'color':Color.palegreen ,
 	'text':"""Glaubt immer das Gegenteil von den erhaltenen Nachrichten. Seine Relation mit einem Spieler verschlechtert sich jedes Mal, wenn dieses Spieler ihm eine Nachricht sendet."""}
 	],
+	['text', {'title':'IGNORANT', 'color':Color.darkolivegreen,
+	'text':"""Seine Relation mit dem Führer verbessert/verschlechtert sich, wenn sie mit ihren Abstimmungspolitik zustimmen/nicht zustimmen. Er ignoriert aber andere Räten."""}
+	],
 	['text', {'title':'AKTION-PRIORITAET',
 	'text':"""1- Attackiert einen ÄRGERLICHEN Spieler.
 	2- Attackiert einen FEINDSELIGEN Spieler.
@@ -215,6 +228,9 @@ func pages_setup(images):
 	Falls es keinen Widerspruch gibt und der Brief von einem Verdächtigen Spieler kommt, forscht sie die Gültigkeit dieser Information nach, wenn möglich. Wenn nicht, lehnt sie ab.
 	Auf jeden Fall wird sie WÜTEND, wenn sie entdeckt, dass die Information falsch ist. Auf der anderen Seite, wenn die Information echt ist und den Absender nicht erwähnt, verbessert sie seine Relation zu ihm."""}
 	],
+	['text', {'title':'DIPLOMATISCH', 'color':Color.darkmagenta,
+	'text':"""Ihre Relation mit anderen Räten und dem Führer verbessert/verschlechtert sich, wenn sie mit ihren Abstimmungspolitik zustimmen/nicht zustimmen."""}
+	],
 	['text', {'title':'AKTIONPRIORITAET', 'space':400, 
 	'text':"""1- Attackiert einen ÄRGERLICHEN Spieler.
 	2- Wenn es eine ungerade Runde ist (außer die erste), forscht einen VERDÄCHTIGEN Spieler nach.
@@ -252,9 +268,6 @@ func pages_setup(images):
 	['text', {'title':'GERECHTIGKEIT', 'space':140, 'color':Color.darkslategray,
 	'text':"""Wird WÜTEND gegen Spieler, die ihm MASSAKRIEREN (Agressiv vs Passiv)."""}
 	],
-	['text', {'title':'VASALL', 'space':170, 'color':Color.bisque,
-	'text':"""Seine Relation mit dem Spieler, der den höchsten Einfluss hat, wird um 1 erhöht, sofern der diese Position behält."""}
-	],
 	['text', {'title':'DEDUKTION', 'space':310, 'color':Color.yellow,
 	'text':("Kann die Relationen des SPIELERCHARAKTERS mit anderen Spielern an die Relationen der anderen Spieler mit ihm herleiten. " + 
 	"Zum Beispiel, wenn er entdeckt, dass ein Spieler WÜTEND mit dem SPIELERCHARAKTER ist, leitet er her, dass der SPIELERCHARAKTER " +
@@ -268,6 +281,9 @@ func pages_setup(images):
 	['text', {'title':'ARCHIVAR', 'space':400, 'color':Color.khaki,
 	'text':('Ordnet Anträge nach dem Relationsniveau ihren Antragsteller und, bei einem Gleichstand, nach Erhaltsreihenfolge. Ignoriert' +
 	'Anträge von ÄRGERLICHEN/FEINDSELIGEN Spielern. Nach dem Lösen eines Antrags erhöht er seine Relation mit dem Antragsteller.')}
+	],
+		['text', {'title':'DIPLOMATISCH', 'color':Color.darkmagenta,
+	'text':"""Seine Relation mit anderen Räten und dem Führer verbessert/verschlechtert sich, wenn sie mit seinen Abstimmungspolitik zustimmen/nicht zustimmen."""}
 	],
 	['text', {'title':'AKTIONPRIORITAET', 'space':400, 
 	'text':"""1- Mit dem aktuellen Antrag ändert er den Brief von X so lange, bis der den Antrag widerspiegeln.
@@ -302,11 +318,11 @@ func pages_setup(images):
 	['text', {'title':'PAZIFIST', 'space':170, 'color':Color.aqua,
 	'text':"""Ihre Relation mit einem Spieler verschlechtert sich zweimal bei jedem MASSAKRE (Agressiv vs Passiv), den sie herausfindet, dieser Spieler begangen hat."""}
 	],
-	['text', {'title':'VASALL', 'space':170, 'color':Color.bisque,
-	'text':"""Ihre Relation mit dem Spieler, der den höchsten Einfluss hat, wird um 1 erhöht, sofern der diese Position behält."""}
+	['text', {'title':'REAKTIV', 'space':250, 'color':Color.aqua,
+	'text':"""Wird FEINDLICH (sofern er nicht schon WÜTEND ist) gegen Spieler, die entweder beabsichtigen, ihn zu angreifen, oder gegen ihn FEINDLICH/WÜTEND sind. Wird MISSTRAUISCH gegenüber FEINDLICHEN/ÄRGERLICHEN Spielern, die beabsichtigen, mit ihm zu kooperieren."""}
 	],
 	['text', {'title':'INTUITION', 'space':360, 'color':Color.gold,
-	'text':"""Wenn sie forscht den SPIELERCHARAKTER nach, betrachtet seine Relation mit anderen Spielern auf Grund ihren letzen Matchs. 
+	'text':"""Wenn sie den SPIELERCHARAKTER nachforscht, betrachtet seine Relation mit anderen Spielern auf Grund ihren letzen Matchs. 
 	Falls eine Massaker auf irgendeiner Seite es gab: WÜTEND
 	Falls es Kämpf gab: FEINDLICH 
 	Falls es Kooperation gab: VERTRAUEND 
@@ -318,6 +334,9 @@ func pages_setup(images):
 	['text', {'title':'SIMPEL', 'space':220, 'color':Color.darkgreen,
 	'text':"""Glaubt immer an VERTRAUTE/BEFREUNDETE Spieler. Glaubt nie an andere Spieler, aber erinnert sich immer noch an ihre Worte."""}
 	],
+	['text', {'title':'DIPLOMATISCH', 'color':Color.darkmagenta,
+	'text':"""Ihre Relation mit anderen Räten und dem Führer verbessert/verschlechtert sich, wenn sie mit ihren Abstimmungspolitik zustimmen/nicht zustimmen."""}
+	],
 	['text', {'title':'AKTIONPRIORITAET', 'space':400, 
 	'text':"""1- Nur einmal pro Runde. Wählt zwei VERTRAUTEN/BEFREUNDETEN Spieler, die nicht beide miteinander VERTRAUEND/FREUNDLICH sind:
 	  1a- Wenn einer von ihnen Allianz, aber nicht Loyalitaeten hat, erzählt diesen Spieler, dass der andere mit Obrulena kooperieren wird.
@@ -326,12 +345,12 @@ func pages_setup(images):
 	  2a- Wenn der Subjekt der Briefe Allianz, aber nicht Loyalitaeten hat, erzählt diesen Spieler, dass der Objekt der Briefe mit Obrulena kooperieren wird.
 	  2b- Andernfalls erzählt ihn, dass der mit ihm kooperieren wird.
 	3- Erzählt einen VERDÄCHTIGEN/VERTRAUTEN Spieler ohne Intrige, dass sie mit dem kooperieren wird.
-	4- Attackiert einen ÄRGERLICHEN Spieler.
-	5- Attackiert einen FEINDSELIGEN Spieler.
-	6- Erzählt einen FEINDSELIGEN Spieler, dass sie den attackieren wird.
-	7- Falls sie nicht die erste in der Reihenfolge ist, erhöht ihren Einfluss. 
-	8- Forscht einen VERDÄCHTIGEN Spieler nach.
-	9- Forscht einen nicht VERDÄCHTIGEN Spieler nach."""}
+	4- Forscht der Subjekt einer Nachricht, an die sie glaubt und die einen Angriff erwähnt, nach.
+	5- Attackiert einen ÄRGERLICHEN Spieler.
+	6- Attackiert einen FEINDSELIGEN Spieler.
+	7- Erzählt einen FEINDSELIGEN Spieler, dass sie den attackieren wird.
+	8- Falls sie nicht die erste in der Reihenfolge ist, erhöht ihren Einfluss. 
+	9- Forscht einen VERDÄCHTIGEN Spieler nach."""}
 	]],
 	# Thoren
 	[['text', {'title':'THOREN', 'space':180,
@@ -357,21 +376,18 @@ func pages_setup(images):
 	['text', {'title':'GERECHTIGKEIT', 'space':140, 'color':Color.darkslategray,
 	'text':"""Wird WÜTEND gegen Spieler, die ihm MASSAKRIEREN (Agressiv vs Passiv)."""}
 	],
-	['text', {'title':'VASALL', 'space':170, 'color':Color.bisque,
-	'text':"""Seine Relation mit dem Spieler, der den höchsten Einfluss hat, wird um 1 erhöht, sofern der diese Position behält."""}
-	],
 	['text', {'title':'INTUITION', 'space':360, 'color':Color.gold,
-	'text':"""Wenn er forscht den SPIELERCHARAKTER nach, betrachtet seine Relation mit anderen Spielern auf Grund ihren letzen Matchs. 
+	'text':"""Wenn er den SPIELERCHARAKTER nachforscht, betrachtet er seine Relation mit anderen Spielern auf Grund ihren letzen Matchs. 
 	Falls eine Massaker auf irgendeiner Seite es gab: WÜTEND
 	Falls es Kämpf gab: FEINDLICH 
 	Falls es Kooperation gab: VERTRAUEND 
 	Falls es kein Match gab (Runde 1): MISSTRAUISCH"""}
 	],
 	['text', {'title':'BRUDERSCHAFT', 'space':310, 'color':Color.darkblue,
-	'text':"""Wird FEINDLICH (sofern er nicht schon WÜTEND ist) gegen einen Spieler, entweder wenn er herausfindet, dass dieser Spieler einen VERTRAUTEN/BEFREUNDETEN Spielern angreifen wird, oder wenn er herausfindet, dass dieser Spieler FEINDLICH/WÜTEND gegen einen VERTRAUTEN/BEFREUNDETEN Spielern ist."""}
+	'text':"""Wird FEINDLICH (sofern er nicht schon WÜTEND oder FREUNDLICH ist) gegen einen Spieler, entweder wenn er herausfindet, dass dieser Spieler einen VERTRAUTEN/BEFREUNDETEN Spielern angreifen wird, oder wenn er herausfindet, dass dieser Spieler FEINDLICH/WÜTEND gegen einen VERTRAUTEN/BEFREUNDETEN Spielern ist."""}
 	],
 	['text', {'title':'ALLIANZ', 'space':300, 'color':Color.blue,
-	'text':"""Wird VERTRAUEND (sofern wenn schon WÜTEND oder FREUNDLICH) eines Spielers, entweder wenn er herausfindet, dass dieser Spieler mit einem VERTRAUTEN/BEFREUNDETEN Spieler kooperieren wird, oder wenn er herausfindet, dass ein VERTRAUTER/BEFREUNDETER Spieler diesen Spieler als VERTRAUT/BEFREUNDET betrachtet."""}
+	'text':"""Wird VERTRAUEND (sofern er nicht schon WÜTEND oder FREUNDLICH ist) eines Spielers, entweder wenn er herausfindet, dass dieser Spieler mit einem VERTRAUTEN/BEFREUNDETEN Spieler kooperieren wird, oder wenn er herausfindet, dass ein VERTRAUTER/BEFREUNDETER Spieler diesen Spieler als VERTRAUT/BEFREUNDET betrachtet."""}
 	],
 	['text', {'title':'LOYALITAETEN', 'space':220, 'color':Color.orange,
 	'text':"""Wird FEINDLICH (sofern er nicht schon WÜTEND ist) gegen einen Spieler, entweder wenn er herausfindet, dass dieser Spieler mit einen ÄRGERLICHEN Spieler kooperieren wird, oder wenn er herausfindet, dass dieser Spieler VERTRAUEND/FREUNDLICH mit einem ÄRGERLICHEN Spieler ist."""}
@@ -382,6 +398,9 @@ func pages_setup(images):
 	['text', {'title':'TAKTISCH', 'space':400, 'color':Color.lightgreen,
 	'text':"""Glaubt immer an Information von VERTRAUTEN/BEFREUDETEN Spielern. Glaubt an das Gegenteil davon, was ein FEINDLICHER/ÄRGERLICHER Spieler ihn über anderen Spielern erzählt hat, und ignoriert was der sagt, wenn der sich selbst erwähnt. 
 	Forscht Info von VERDÄCHTIGEN Spieler nach, oder ignoriert die, falls er das nicht machen kann. Trotzdem erinnert er sich für zwei Runde davon, was sie eigentlich gesagt haben (für General)."""}
+	],
+	['text', {'title':'DIPLOMATISCH', 'color':Color.darkmagenta,
+	'text':"""Seine Relation mit anderen Räten und dem Führer verbessert/verschlechtert sich, wenn sie mit seinen Abstimmungspolitik zustimmen/nicht zustimmen."""}
 	],
 	['text', {'title':'AKTIONPRIORITAET', 'space':400, 
 	'text':"""1- Attackiert einen ÄRGERLICHEN Spieler.
@@ -436,9 +455,6 @@ func pages_setup(images):
 	['text', {'title':'LOYALITAETEN', 'space':220, 'color':Color.orange,
 	'text':"""Wird FEINDLICH (sofern er nicht schon WÜTEND ist) gegen einen Spieler, entweder wenn er herausfindet, dass dieser Spieler mit einen ÄRGERLICHEN Spieler kooperieren wird, oder wenn er herausfindet, dass dieser Spieler VERTRAUEND/FREUNDLICH mit einem ÄRGERLICHEN Spieler ist."""}
 	],
-	['text', {'title':'KOENIGIN', 'space':180, 'color':Color.darkgoldenrod,
-	'text':"""Wird VERTRAUEND (sofern wenn nicht schon FREUNDLICH ist) to a player when she discovers that this player will attack an ENRAGING player."""}
-	],
 	['text', {'title':'FASSADE', 'space':140, 'color':Color.black,
 	'text':"""Wenn nicht WÜTEND mit einem Spieler ist, imitiert seine Relation, nachdem sie ihn nachgeforscht hat."""}
 	],
@@ -446,6 +462,9 @@ func pages_setup(images):
 	'text':"""Wenn sie Briefe erhaltet, vergleicht sie die Information mit früheren Daten. Wenn es einen Widerspruch zwischen Nachricht und Daten gibt, glaubt sie an die Daten. Wenn der Widerspruch zwischen Briefe ist, gibt sie den Vorrang dem Brief des vertrauenswürdiger Absenders.
 	Falls es keinen Widerspruch gibt und der Brief von einem Verdächtigen Spieler kommt, forscht sie die Gültigkeit dieser Information nach, wenn möglich. Wenn nicht, lehnt sie ab.
 	Auf jeden Fall wird sie WÜTEND, wenn sie entdeckt, dass die Information falsch ist. Auf der anderen Seite, wenn die Information echt ist und den Absender nicht erwähnt, verbessert sie seine Relation zu ihm."""}
+	],
+	['text', {'title':'DIPLOMATISCH', 'color':Color.darkmagenta,
+	'text':"""Ihre Relation mit anderen Räten und dem Führer verbessert/verschlechtert sich, wenn sie mit ihren Abstimmungspolitik zustimmen/nicht zustimmen."""}
 	],
 	['text', {'title':'AKTIONPRIORITAET (FREUNDLICH/VERTRAUEND)', 'space':800, 
 	'text':"""1- Falls es Runde 6 ist, attackiert jeden Spieler.
@@ -476,13 +495,105 @@ func pages_setup(images):
 	],
 	['text', {'title':'AKTIONPRIORITAET (FEINDLICH/WÜTEND)', 'space':280, 'color':Color.black,
 	'text':"""1- Attackiert einen ÄRGERLICHEN Spieler.
-	2- Erzählt einem BEFREUNDETEN/VERTRAUTEN Spieler, der Brudenschaft hat, dass ein ÄRGERLICHER Spieler, den in (1) erwähnt wurde, sie attackieren wird.
+	2- Erzählt einem VERTRAUTEN/BEFREUNDETEN Spieler, der Brudenschaft hat, dass ein ÄRGERLICHER Spieler, den in (1) erwähnt wurde, sie attackieren wird.
 	3- Sendet wieder eine Briefe, die sie glaubt, falsch ist und von einem ÄRGERLICHEN Spieler geschrieben wurde, an einen Spieler, der MISSTRAUISCH gegenüber ihm ist.
 	4- Attackiert einen FEINDSELIGEN Spieler.
-	5- Erzählt einem BEFREUDETEN/VERTRAUTEN Spieler, der Brudenschaft hat, dass ein FEINDSELIGEN Spieler sie attackieren wird.
-	6- Teilt Information mit einem FEINDSELIGEN Spieler über einen eingehenden Angriff gegen den.
-	7- Forscht einen VERDÄCHTIGEN Spieler nach, den in (2) erwähnt wurde."""}
-	]]
+	5- Erzählt einem VERTRAUTEN/BEFREUDETEN Spieler, der Brudenschaft hat, dass ein FEINDSELIGEN Spieler sie attackieren wird.
+	6- Wenn sie der Erste in der Reihenfolge nicht ist, erhöht ihren Einfluss."""}
+	],
+	['text', {'title':'ABSTIMMUNGSPOLITIK',
+	'text':"""1- Nein, wenn es ein Angriff gegen sie oder einen BEFREUNDETEN Spieler.
+	2- Ja, wenn es ein Angriff gegen sie oder einen FEINDSELIGEN/ÄRGERLICHEN Spieler.
+	3- Ja, wenn der Führer VERTRAUTER/BEFREUNDETER ist.
+	4- Nein, wenn der Führer FEINDSELIGER/ÄRGERLICHER."""}
+	],
+	['text', {'title':'VORSCHLAGPRIORITAET',
+	'text':"""1- Angriff gegen einen ÄRGERLICHEN Spieler.
+	2- Angriff gegen einen FEINDSELIGEN Spieler.
+	3- Friede mit ihr selbst."""}
+	]],
+	
+	# Drakoth
+	[['text', {'title':'DRAKOTH', 'space':180,
+	'text':"""The brash heir to the Empire's throne is as good in battle as he is in court, using his dynastic powers to their full potential.
+	Race: Dragonborn"""}
+	],
+	['text', {'title':'INITIAL RELATIONS', 'space':260, 
+	'text':"""-SUSPICIOUS of Salem.
+	-HOSTILE to Grolk.
+	-HOSTILE to Zardri.
+	-HOSTILE to Kallysta.
+	-TRUSTFUL of Obrulena.
+	-TRUSTFUL of Horlin.
+	-TRUSTFUL of Thoren."""}
+	],
+	['text', {'title':'TRAITS - TL;DR', 'space':480, 
+	'text':("Drakoth is the ambitious heir to the empire's throne, and as such evaluates the player " +
+	"based on they way they vote and becomes Enraged if someone tries to take the Leader position away from him. " +
+	"As a fearsome and honorable warrior, Drakoth is very keen on protecting and consolidating his circle of allies, " +
+	"becoming Trustful of those who trust his allies but becoming Hostile against those who attack them. He also doesn't " +
+	"appreciate when someone allies with his most Enraging enemies. Aside from that, Drakoth reacts appropriately to " +
+	"incoming agression, attacking enemies who attack him and making peace with those that do the same." +
+	"He does, however, only believe on his allies, making manipulation a bit trickier to pull off.")}
+	],
+	['text', {'title':'STRATEGY', 'color':Color.brown,
+	'text':"""His Proposal Priority changes at the beginning of each round based on his Relation with the Player Character."""}
+	],
+	['text', {'title':'HEIR', 'color':Color.darkviolet,
+	'text':"""Becomes ENRAGED to players who steal his Leader position."""}
+	],
+	['text', {'title':'REACTIVE', 'space':250, 'color':Color.aqua,
+	'text':"""Becomes HOSTILE (unless already ENRAGED) to a player he discovers is planning to attack him or is HOSTILE/ENRAGED against him. Becomes SUSPICIOUS of an ENRAGING/HOSTILIZED player that he discovers is planning to ally with him."""}
+	],
+	['text', {'title':'JUSTICE', 'space':140, 'color':Color.darkslategray,
+	'text':"""Becomes ENRAGED to players that SLAUGHTER (Agressive vs Passive) him."""}
+	],
+	['text', {'title':'INSIGHT', 'space':340, 'color':Color.lightseagreen,
+	'text':"""Can deduce the Player Character's relation with other players based on how they vote on specific proposals with said players as target:
+	-Aye for War: ENRAGED
+	-Nay for Peace: HOSTILE
+	-Null: SUSPICIOUS
+	-Aye for Peace: TRUSTFUL
+	-Nay for War: FRIENDLY"""}
+	],
+	['text', {'title':'BROTHERHOOD', 'space':260, 'color':Color.darkblue,
+	'text':"""Becomes HOSTILE (unless already ENRAGED or FRIENDLY) to a player when he either discovers that this player will attack a TRUSTED/BEFRIENDED player, or that this player is HOSTILE/ENRAGED against a TRUSTED/BEFRIENDED player."""}
+	],
+	['text', {'title':'ALLIANCE', 'space':260, 'color':Color.blue,
+	'text':"""Becomes TRUSTFUL (unless already ENRAGED or FRIENDLY) of a player when he either discovers that this player will ally with a TRUSTED/BEFRIENDED player, or that a TRUSTED/BEFRIENDED player is TRUSTFUL/FRIENDLY towards this player."""}
+	],
+	['text', {'title':'ALLEGIANCES', 'space':220, 'color':Color.orange,
+	'text':"""Becomes HOSTILE (unless already ENRAGED) to a player when he discovers that this player will ally with an ENRAGING player or that this player finds an ENRAGING player to be TRUSTFUL/FRIENDLY."""}
+	],
+	['text', {'title':'SIMPLE-MINDED', 'color':Color.darkgreen,
+	'text':"""Always believes info from a TRUSTED/BEFRIENDED player. Never believes info from others, though he remembers of what they said."""}
+	],
+	['text', {'title':'DIPLOMATIC', 'color':Color.darkmagenta,
+	'text':"""His relation with other voters and the Leader improves/degrades when they agree/disagree with his Voting Policies."""}
+	],
+	['text', {'title':'ACTION PRIORITY',
+	'text':"""1- Attack an ENRAGING player.
+	2- Tell a TRUSTED/BEFRIENDED player with BROTHERHOOD that an ENRAGING player will attack him.
+	3- Attack a HOSTILIZED player.
+	4- If he's not the first in the Influence track, increase his Influence.
+	5- Tell a TRUSTED/BEFRIENDED player with BROTHERHOOD that a HOSTILIZED player will attack him.
+	6- Investigate a SUSPICIOUS player.
+	7a- If it's an even round, investigate a HOSTILIZED/ENRAGING player.
+	7b- If it's an odd round, investigate a TRUSTED/BEFRIENDED player."""}
+	],
+	['text', {'title':'VOTING POLICIES',
+	'text':"""1- Nay."""}
+	],
+	['text', {'title':'PROPOSAL PRIORITY (SUSPICIOUS/TRUSTFUL/FRIENDLY)',
+	'text':"""1- If the sum of all votes from TRUSTED/BEFRIENDED players is over 2, peace to himself.
+	2- If no TRUSTED/BEFRIENDED players with ALLEGIANCES are ENRAGED with a SUSPECTED player, peace to this SUSPECTED player.
+	3- If no TRUSTED/BEFRIENDED players are BEFRIENDED with a HOSTILIZED/ENRAGING player, attack on this HOSTILIZED/ENRAGING player.
+	4- Peace to himself."""}
+	],
+	['text', {'title':'PROPOSAL PRIORITY (HOSTILE/ENRAGED)',
+	'text':"""1- Attack on an ENRAGING player.
+	2- Attack on a HOSTILIZED player."""}
+	]],
 	]
 	
 	return de_pages

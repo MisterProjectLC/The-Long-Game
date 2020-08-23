@@ -16,10 +16,10 @@ func _ready():
 	character_name = 'Edraele'
 	memory_time = 4
 	traits_list = ["Agenda", "Treachery", "Justice", "Reactive", "Jealousy", "Deduction",
-					"Allegiances", "Queen", "Facade", "Intrigue"]
+					"Allegiances", "Queen", "Facade", "Intrigue", "Diplomatic",]
 	
 	relations = {'Grolk':0,'Zardri':0, 'Kallysta':0, 'Horlin':-1,'Obrulena':0,
-	'Thoren':-1,'Salem':0,'Edraele':-2}
+	'Thoren':-1,'Salem':0,'Edraele':-2, 'Drakoth':0}
 
 #-------------- REACTIONS AND SETUP --------------------
 
@@ -70,6 +70,11 @@ func receive_proposal(leader, action, object, vote = 0):
 	.receive_proposal(leader,action, object, vote)
 	trait_ignorant_diplomatic(leader)
 
+# Insight
+func receive_decree(action, object, voters, _vote_count):
+	for voter in voters.keys():
+		if voter != character_name:
+			trait_insight(action, object, voter, voters[voter])
 
 # Diplomatic
 func receive_vote(voter, vote):

@@ -135,7 +135,7 @@ func execute_action():
 
 func _investigate(_target):
 	if get_actions() <= 0 || _target == character_name:
-		return
+		return false
 		
 	spend_action()
 	set_info_til_round(_target, get_current_round())
@@ -308,7 +308,7 @@ func receive_decree(action, object, voters, vote_count):
 	if vote_count[0] >= vote_count[2]:
 		return
 	
-	if action == 1 and get_relation(object) < 1:
+	if action == 1 and get_relation(object) < 1 and object != character_name:
 		set_relations(object, 1)
 		
 	council_target = [object, action]
@@ -427,6 +427,13 @@ func trait_intuition(en_stances, op_stances, enemy_requested_name, opponent_requ
 			_relation = -1
 		receive_relation_info(_relation, enemy_requested_name, opponent_requested_name)
 
+
+func trait_insight(action, object, voter, vote):
+	var relation = (int(action == 0) * (int(vote == -1) - int(vote == 1)) +
+				2*int(action == 1) * (int(vote == 1) - int(vote == -1)) )
+	
+	#print_debug(relation, ' ', voter, ' ', object)
+	receive_relation(relation, voter, object)
 
 # -- TRAITS: INFORMATION REACTION -----------------------
 

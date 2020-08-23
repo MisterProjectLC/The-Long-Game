@@ -15,10 +15,10 @@ var popularity_list = {}
 func _ready():
 	character_name = 'Kallysta'
 	memory_time = 6
-	traits_list = ["Paranoid", "Justice", "Deduction", "Chain-Breaker", "Cynic", "Intrigue"]
+	traits_list = ["Paranoid", "Justice", "Deduction", "Chain-Breaker", "Cynic", "Intrigue", "Diplomatic"]
 	
 	relations = {'Grolk':0, 'Zardri':0,'Kallysta':-2, 'Horlin':0, 'Obrulena':0,
-	'Thoren':0,'Salem':0,'Edraele':0}
+	'Thoren':0,'Salem':0,'Edraele':0, 'Drakoth':0}
 	
 	for player_name in relations.keys():
 		popularity_list[player_name] = []
@@ -171,7 +171,7 @@ func execute_action():
 		
 		3: # make hostile look bad
 			for player_x in turn_order:
-				if relations[player_x] == 1:
+				if get_relation(player_x) == 1:
 					for player_y in turn_order:
 						if relation_list.has([player_y, 0, player_x]):
 							for letter in letter_list:

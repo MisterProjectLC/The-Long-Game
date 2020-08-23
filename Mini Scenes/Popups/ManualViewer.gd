@@ -15,7 +15,7 @@ var en_pages = []
 var br_pages = []
 var de_pages = []
 
-var player_pages = ['Grolk', 'Zardri','Kallysta','Horlin', 'Obrulena', 'Thoren','Edraele']
+var player_pages = ['Grolk', 'Zardri','Kallysta','Horlin', 'Obrulena', 'Thoren','Edraele', 'Drakoth']
 var pages = []
 export var images = []
 

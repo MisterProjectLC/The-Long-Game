@@ -4,16 +4,18 @@ extends "res://Mini Scenes/Intelligences/Competitor.gd"
 # lists all attacks someone made
 var violence_list = {}
 
+var pacifist_list = []
+
 var sent_letter = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	character_name = 'Obrulena'
 	memory_time = 2
-	traits_list = ["Serene", "Pacifist", "Alliance", "Intuition", "Simple-Minded", "Vassal"]
+	traits_list = ["Serene", "Pacifist", "Alliance", "Intuition", "Simple-Minded", "Diplomatic",]
 
 	relations = {'Grolk':0,'Zardri':0, 'Kallysta':-1, 'Horlin':-1, 'Obrulena':-2, 
-	'Thoren':-1, 'Salem':0, 'Edraele':0}
+	'Thoren':-1, 'Salem':0, 'Edraele':0, 'Drakoth':-1}
 
 # -------------- REACTIONS AND SETUP --------------------
 
@@ -101,8 +103,11 @@ func receive_message(sender, roun, message):
 		return
 	
 	# Info processing
-	# Alliance
 	trait_alliance(message, relations)
+	trait_reactive(message, relations)
+
+	if message[1] == 1 and !pacifist_list.has(message[0]):
+		pacifist_list.append(message[0])
 
 	receive_information(roun, message)
 
@@ -125,7 +130,7 @@ func trait_pacifist(roun, player1, stance1, player2, stance2):
 		return
 	
 	if !violence_list.has(agressor) or !violence_list[agressor].has([roun, victim]):
-		print("pacifism " + agressor + " " + str(roun))
+		print_debug("pacifism " + agressor + " " + str(roun))
 		worsen_relations(agressor)
 		worsen_relations(agressor)
 		violence_list[agressor] = [roun, victim]
@@ -140,6 +145,7 @@ func receive_relation(relation, enemy_name, opponent_name):
 	.receive_relation(relation, enemy_name, opponent_name)
 	
 	trait_alliance_relation(relation, enemy_name, opponent_name)
+	trait_reactive_relations(enemy_name, relation, opponent_name)
 
 # ----------------- ACTIONS -----------------
 
@@ -174,12 +180,12 @@ func execute_action():
 					!opponent_trait_list[sent_letter[1]].has("Allegiances")):
 					tell(sent_letter[4], 0, sent_letter[1])
 					emit_signal('improve_relations', sent_letter[1]) # Serene
-					print("Match made!!!!")
+					print_debug("Match made!!!!")
 					sent_letter = null
 				else:
 					warn(sent_letter[4], 0, sent_letter[1])
 					emit_signal('improve_relations', sent_letter[1]) # Serene
-					print("Match made!!!!")
+					print_debug("Match made!!!!")
 					sent_letter = null
 
 		3: # make friends with suspected/trusted
@@ -189,30 +195,30 @@ func execute_action():
 						emit_signal('improve_relations', player) # Serene
 						return
 
-		4: # attack furious
+		4: # investigate violence
+			for player in pacifist_list:
+				if _investigate(player):
+					pacifist_list.erase(player)
+
+		5: # attack furious
 			attack(2)
 
-		5: # attack hostile
+		6: # attack hostile
 			attack(1)
 
-		6: # warn hostilized
+		7: # warn hostilized
 			for player in turn_order:
 				if relations[player] == 1:
 					if warn(character_name, 1, player):
 						emit_signal('improve_relations', player) # Serene
 
-		7: # increase influence
-			if get_influence() > 1:
+		8: # increase influence
+			if get_influence() > 1 and !(get_relation(turn_order[0]) < 0 and opponent_trait_list[turn_order[0]].has("Heir")):
 				gain_influence()
 		
-		8: # investigate suspicious player
+		9: # investigate suspicious player
 			for enemy in players:
 				if relations[enemy[0]] == 0:
-					_investigate(enemy[0])
-		
-		9: # investigate non-suspicious player
-			for enemy in players:
-				if relations[enemy[0]] != 0:
 					_investigate(enemy[0])
 
 		10: # do nothing

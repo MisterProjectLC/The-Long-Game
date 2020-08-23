@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Mini Scenes/Scenes/Main.gd" type="Script" id=1]
 [ext_resource path="res://Mini Scenes/Popups/VictoryViewer.tscn" type="PackedScene" id=2]
@@ -19,12 +19,14 @@
 [ext_resource path="res://Art/Portraits/Obrulena Alpha.png" type="Texture" id=17]
 [ext_resource path="res://Mini Scenes/Intelligences/ZardriAI.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Art/Portraits/Zardri.png" type="Texture" id=19]
+[ext_resource path="res://Mini Scenes/Intelligences/DrakothAI.tscn" type="PackedScene" id=20]
+[ext_resource path="res://Art/Portraits/Drakoth.png" type="Texture" id=21]
 
 [node name="Main" type="Node"]
 script = ExtResource( 1 )
 victory_panel = ExtResource( 2 )
 address = "res://Mini Scenes/Scenes/Main.tscn"
-these_players = [ [ "Grolk", ExtResource( 11 ) ], [ "Zardri", ExtResource( 19 ) ], [ "Kallysta", ExtResource( 12 ) ], [ "Horlin", ExtResource( 16 ) ], [ "Obrulena", ExtResource( 17 ) ], [ "Thoren", ExtResource( 13 ) ], [ "Edraele", ExtResource( 10 ) ], [ "Salem", ExtResource( 14 ) ] ]
+these_players = [ [ "Grolk", ExtResource( 11 ) ], [ "Zardri", ExtResource( 19 ) ], [ "Kallysta", ExtResource( 12 ) ], [ "Horlin", ExtResource( 16 ) ], [ "Obrulena", ExtResource( 17 ) ], [ "Thoren", ExtResource( 13 ) ], [ "Edraele", ExtResource( 10 ) ], [ "Drakoth", ExtResource( 21 ) ], [ "Salem", ExtResource( 14 ) ] ]
 
 [node name="NinePatchRect" parent="." instance=ExtResource( 9 )]
 anchor_right = 1.0
@@ -48,6 +50,8 @@ margin_bottom = 0.0
 
 [node name="EdraeleAI" parent="." instance=ExtResource( 4 )]
 
+[node name="DrakothAI" parent="." instance=ExtResource( 20 )]
+
 [node name="Audio" type="AudioStreamPlayer" parent="."]
 [connection signal="improve_relations" from="SalemAI" to="SalemAI" method="improve_relations"]
 [connection signal="set_relations" from="SalemAI" to="SalemAI" method="set_relations"]
@@ -65,3 +69,9 @@ margin_bottom = 0.0
 [connection signal="improve_relations" from="EdraeleAI" to="EdraeleAI" method="improve_relations"]
 [connection signal="set_relations" from="EdraeleAI" to="EdraeleAI" method="set_relations"]
 [connection signal="worsen_relations" from="EdraeleAI" to="EdraeleAI" method="worsen_relations"]
+[connection signal="gain_rep" from="DrakothAI" to="DrakothAI" method="gain_rep"]
+[connection signal="improve_relations" from="DrakothAI" to="DrakothAI" method="improve_relations"]
+[connection signal="lose_rep" from="DrakothAI" to="DrakothAI" method="lose_rep"]
+[connection signal="set_relations" from="DrakothAI" to="DrakothAI" method="set_relations"]
+[connection signal="set_rep" from="DrakothAI" to="DrakothAI" method="set_rep"]
+[connection signal="worsen_relations" from="DrakothAI" to="DrakothAI" method="worsen_relations"]

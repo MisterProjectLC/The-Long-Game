@@ -344,11 +344,14 @@ func pages_setup(images):
 	Porém, na via contrária, qualquer descobrimento de Massacres causa grande ressentimento de sua parte. Ela sempre acredita em seus aliados e nunca acredita em jogadores os quais ainda não confia. Devido a suas tradições,
 	ela também tem maior respeito para o jogador com mais Influência."""}
 	],
-	['text', {'title':'SERENA', 'space':250, 'color':Color.aqua,
+	['text', {'title':'SERENA', 'color':Color.aqua,
 	'text':"""Sua Relação com um jogador melhora toda vez que ela mandar uma carta para ele. """}
 	],
-	['text', {'title':'PACIFISTA', 'space':250, 'color':Color.aqua,
+	['text', {'title':'PACIFISTA', 'color':Color.aqua,
 	'text':"""sua Relação com um jogador piora em 2 para cada Massacre (AGRESSIVA vs PASSIVA) ela descobrir que ele cometeu."""}
+	],
+	['text', {'title':'REATIVA', 'space':300, 'color':Color.aqua,
+	'text':"""Torna-se HOSTIL (exceto quando já REVOLTADA) a um jogador quando ela descobre que este está planejando atacá-lo ou é REVOLTADO/HOSTIL contra ela. Torna-se SUSPEITA de um jogador REVOLTANTE/HOSTILIZADO quando ela descobre que este está planejando se aliar com ela."""}
 	],
 	['text', {'title':'INTUICAO', 'space':350, 'color':Color.gold,
 	'text':"""ao investigar o PERSONAGEM DO JOGADOR, julga sua relação com outros jogadores baseado em sua última partida.
@@ -374,12 +377,12 @@ func pages_setup(images):
 	  2a- Se o Sujeito da carta tiver Aliança mas não Lealdades, conta para esse jogador que o remetente da carta irá se aliar com Obrulena.
 	  2b- Senão, conta para ele que o outro irá se aliar com ele.
 	3- Conta para um jogador SUSPEITADO/CONFIÁVEL sem Intriga que ela irá se aliar com ele.
-	4- Ataca um jogador REVOLTANTE.
-	5- Ataca um jogador HOSTILIZADO.
-	6- Conta para um jogador HOSTILIZADO que ela irá atacá-lo.
-	7- Se não for a primeira ou segunda na Ordem no Trono, aumenta sua Influência.
-	8- Investiga um jogador SUSPEITADO.
-	9- Investiga um jogador não-SUSPEITADO."""}
+	4- Investiga o Sujeito de uma mensagem na qual ela acredita e envolve um ataque.
+	5- Ataca um jogador REVOLTANTE.
+	6- Ataca um jogador HOSTILIZADO.
+	7- Conta para um jogador HOSTILIZADO que ela irá atacá-lo.
+	8- Se não for a primeira ou segunda na Ordem no Trono, aumenta sua Influência.
+	9- Investiga um jogador SUSPEITADO."""}
 	],
 	['text', {'title':'POLITICA DE VOTACAO',
 	'text':"""1- Sim se o Líder for AMIGO e for um ataque contra um jogador HOSTILIZADO/REVOLTANTE.
@@ -566,7 +569,89 @@ func pages_setup(images):
 	'text':"""1- Ataque contra um jogador REVOLTANTE.
 	2- Ataque contra um jogador HOSTILIZADO.
 	3- Paz para ela mesma."""}
-	]]
+	]],
+	
+	# Drakoth
+	[['text', {'title':'DRAKOTH', 'space':180,
+	'text':"""The brash heir to the Empire's throne is as good in battle as he is in court, using his dynastic powers to their full potential.
+	Race: Dragonborn"""}
+	],
+	['text', {'title':'INITIAL RELATIONS', 'space':260, 
+	'text':"""-SUSPICIOUS of Salem.
+	-HOSTILE to Grolk.
+	-HOSTILE to Zardri.
+	-HOSTILE to Kallysta.
+	-TRUSTFUL of Obrulena.
+	-TRUSTFUL of Horlin.
+	-TRUSTFUL of Thoren."""}
+	],
+	['text', {'title':'TRAITS - TL;DR', 'space':480, 
+	'text':("Drakoth is the ambitious heir to the empire's throne, and as such evaluates the player " +
+	"based on they way they vote and becomes Enraged if someone tries to take the Leader position away from him. " +
+	"As a fearsome and honorable warrior, Drakoth is very keen on protecting and consolidating his circle of allies, " +
+	"becoming Trustful of those who trust his allies but becoming Hostile against those who attack them. He also doesn't " +
+	"appreciate when someone allies with his most Enraging enemies. Aside from that, Drakoth reacts appropriately to " +
+	"incoming agression, attacking enemies who attack him and making peace with those that do the same." +
+	"He does, however, only believe on his allies, making manipulation a bit trickier to pull off.")}
+	],
+	['text', {'title':'STRATEGY', 'color':Color.brown,
+	'text':"""His Proposal Priority changes at the beginning of each round based on his Relation with the Player Character."""}
+	],
+	['text', {'title':'HEIR', 'color':Color.darkviolet,
+	'text':"""Becomes ENRAGED to players who steal his Leader position."""}
+	],
+	['text', {'title':'REACTIVE', 'space':250, 'color':Color.aqua,
+	'text':"""Becomes HOSTILE (unless already ENRAGED) to a player he discovers is planning to attack him or is HOSTILE/ENRAGED against him. Becomes SUSPICIOUS of an ENRAGING/HOSTILIZED player that he discovers is planning to ally with him."""}
+	],
+	['text', {'title':'JUSTICE', 'space':140, 'color':Color.darkslategray,
+	'text':"""Becomes ENRAGED to players that SLAUGHTER (Agressive vs Passive) him."""}
+	],
+	['text', {'title':'INSIGHT', 'space':340, 'color':Color.lightseagreen,
+	'text':"""Can deduce the Player Character's relation with other players based on how they vote on specific proposals with said players as target:
+	-Aye for War: ENRAGED
+	-Nay for Peace: HOSTILE
+	-Null: SUSPICIOUS
+	-Aye for Peace: TRUSTFUL
+	-Nay for War: FRIENDLY"""}
+	],
+	['text', {'title':'BROTHERHOOD', 'space':260, 'color':Color.darkblue,
+	'text':"""Becomes HOSTILE (unless already ENRAGED or FRIENDLY) to a player when he either discovers that this player will attack a TRUSTED/BEFRIENDED player, or that this player is HOSTILE/ENRAGED against a TRUSTED/BEFRIENDED player."""}
+	],
+	['text', {'title':'ALLIANCE', 'space':260, 'color':Color.blue,
+	'text':"""Becomes TRUSTFUL (unless already ENRAGED or FRIENDLY) of a player when he either discovers that this player will ally with a TRUSTED/BEFRIENDED player, or that a TRUSTED/BEFRIENDED player is TRUSTFUL/FRIENDLY towards this player."""}
+	],
+	['text', {'title':'ALLEGIANCES', 'space':220, 'color':Color.orange,
+	'text':"""Becomes HOSTILE (unless already ENRAGED) to a player when he discovers that this player will ally with an ENRAGING player or that this player finds an ENRAGING player to be TRUSTFUL/FRIENDLY."""}
+	],
+	['text', {'title':'SIMPLE-MINDED', 'color':Color.darkgreen,
+	'text':"""Always believes info from a TRUSTED/BEFRIENDED player. Never believes info from others, though he remembers of what they said."""}
+	],
+	['text', {'title':'DIPLOMATIC', 'color':Color.darkmagenta,
+	'text':"""His relation with other voters and the Leader improves/degrades when they agree/disagree with his Voting Policies."""}
+	],
+	['text', {'title':'ACTION PRIORITY',
+	'text':"""1- Attack an ENRAGING player.
+	2- Tell a TRUSTED/BEFRIENDED player with BROTHERHOOD that an ENRAGING player will attack him.
+	3- Attack a HOSTILIZED player.
+	4- If he's not the first in the Influence track, increase his Influence.
+	5- Tell a TRUSTED/BEFRIENDED player with BROTHERHOOD that a HOSTILIZED player will attack him.
+	6- Investigate a SUSPICIOUS player.
+	7a- If it's an even round, investigate a HOSTILIZED/ENRAGING player.
+	7b- If it's an odd round, investigate a TRUSTED/BEFRIENDED player."""}
+	],
+	['text', {'title':'VOTING POLICIES',
+	'text':"""1- Nay."""}
+	],
+	['text', {'title':'PROPOSAL PRIORITY (SUSP/TRUSTFUL/FRIENDLY)',
+	'text':"""1- If the sum of all votes from TRUSTED/BEFRIENDED players is over 2, peace to himself.
+	2- If no TRUSTED/BEFRIENDED players with ALLEGIANCES are ENRAGED with a SUSPECTED player, peace to this SUSPECTED player.
+	3- If no TRUSTED/BEFRIENDED players are BEFRIENDED with a HOSTILIZED/ENRAGING player, attack on this HOSTILIZED/ENRAGING player.
+	4- Peace to himself."""}
+	],
+	['text', {'title':'PROPOSAL PRIORITY (HOSTILE/ENRAGED)',
+	'text':"""1- Attack on an ENRAGING player.
+	2- Attack on a HOSTILIZED player."""}
+	]],
 	]
 	
 	return br_pages

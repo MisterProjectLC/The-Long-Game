@@ -9,10 +9,10 @@ func _ready():
 	character_name = 'Thoren'
 	memory_time = 2
 	traits_list = ["Reactive", "Justice","Brotherhood", "Alliance", "Allegiances",
-				"Intuition", "General", "Tactical", "Vassal"]
+				"Intuition", "General", "Tactical", "Diplomatic",]
 
 	relations = {'Grolk':2,'Zardri':0, 'Kallysta':0, 'Horlin':-1, 'Obrulena':-1, 
-	'Thoren':-2, 'Salem':1, 'Edraele':-1}
+	'Thoren':-2, 'Salem':1, 'Edraele':-1, 'Drakoth':-1}
 
 # -------------- REACTIONS AND SETUP --------------------
 
@@ -191,18 +191,18 @@ func execute_action():
 			say_to_list([-1, -2], 0, [-2, -1], 'tell')
 			
 		8: # investigate suspicious player
-			for enemy in players:
-				if relations[enemy[0]] == 0:
-					_investigate(enemy[0])
+			for enemy in turn_order:
+				if get_relation(enemy) == 0:
+					_investigate(enemy)
 		
 		9: # change turn order
-			if get_influence() > 1:
+			if get_influence() > 1 and !(get_relation(turn_order[0]) < 0 and opponent_trait_list[turn_order[0]].has("Heir")):
 				gain_influence()
 		
 		10: # investigate trusting player
-			for enemy in players:
-				if relations[enemy[0]] == -1:
-					_investigate(enemy[0])
+			for enemy in turn_order:
+				if get_relation(enemy) == -1:
+					_investigate(enemy)
 
 		11: # do nothing
 			spend_action()

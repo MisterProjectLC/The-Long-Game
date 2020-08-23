@@ -5,10 +5,10 @@ extends "res://Mini Scenes/Intelligences/Competitor.gd"
 func _ready():
 	character_name = 'Grolk'
 	memory_time = 1
-	traits_list = ["Warlord", "Hatred", "Brotherhood", "Alliance", "General", "Simple-Minded", "Bitter"]
+	traits_list = ["Warlord", "Hatred", "Brotherhood", "Alliance", "General", "Simple-Minded", "Bitter", "Ignorant"]
 	
 	relations = {'Grolk':-2, 'Zardri':-1, 'Kallysta':0, 'Horlin':0, 'Obrulena':0,
-	'Thoren':1, 'Salem':1, 'Edraele':0, 'Daint': 0}
+	'Thoren':1, 'Salem':1, 'Edraele':0, 'Drakoth':1, 'Daint': 0}
 
 # -------------- REACTIONS AND SETUP --------------------
 
@@ -108,7 +108,11 @@ func execute_action():
 		5: # attack suspicious
 			attack(0)
 		
-		6: # do nothing
+		6: # increase his influence
+			if get_influence() > 1:
+				gain_influence()
+		
+		7: # do nothing
 			spend_action()
 			return
 	priority_lister += 1

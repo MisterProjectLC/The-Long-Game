@@ -38,7 +38,7 @@ func _ready():
 	traits_list = ["Player Character", "Seer", "Charismatic"]
 	
 	relations = {'Grolk':0,'Zardri':0 ,'Kallysta':0,'Obrulena':0, 'Horlin':0,
-	'Thoren':0,'Edraele':0,'Salem':-2, 'Daint': 0}
+	'Thoren':0,'Edraele':0,'Salem':-2, 'Drakoth':0, 'Daint': 0}
 
 
 # other players-dependant setup
