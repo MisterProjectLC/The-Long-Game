@@ -11,6 +11,7 @@ var this_turn_order = ['Salem', 'Daint', 'Grolk']
 
 # setup
 func _ready():
+	Global.set_advanced_enabled(false)
 	game_setup(these_players, this_turn_order)
 	ai_node('Grolk').set_relations(player_character, -1)
 	

@@ -13,6 +13,7 @@ var checked = false
 
 # setup
 func _ready():
+	Global.set_advanced_enabled(false)
 	game_setup(these_players, this_turn_order)
 	ai_node('Obrulena').set_relations(player_character, 0)
 	ai_node('Kallysta').set_relations(player_character, -1)
@@ -30,11 +31,15 @@ func setup_texts():
 			texts = [[''],
 			[("In THE LONG GAME, Diplomacy doesn't only involve writing letters: players may also resend letters " +
 			"from others, too.")],
-			[('After the battles in the plains between Grolk and Thoren, the conflict quickly attracted the attention ' +
+			[('After the battles in the plains between Grolk and Thoren, the conflict quickly drew the attention ' +
 			'of other leaders near the region.')],
-			['OBRULENA, THE LOXODON came to try to bring peace and conciliation to the realm.'],
+			['OBRULENA, THE LOXODON came to try to bring peace and conciliation to the realm:'],
+			[("Obrulena: Greetings, my child. Such brutal conflicts happening in these regions recently, don't you agree? " +
+			"I hope to bring more understanding to the folk here...")],
 			[('Meanwhile, KALLYSTA, THE TIEFLING seems to be preparing herself for the arrival of someone else, ' + 
 			'though the specifics remain unknown.')],
+			[("Kallysta: Hey. I know your type: always scheming, always planning. Well, two can play that game. " +
+			"Don't even try to get close to me or the monk, or you'll get what you deserve.")],
 			["Despite their many differences, the two seem to trust each other. Let's change that."],
 			[('For now, simply advance your turn. In the next turn, Obrulena will send you a message declaring peace.'),
 			 'Advance your turn.'],
@@ -67,9 +72,13 @@ func setup_texts():
 			'as cartas de outros, também.')],
 			[('Depois das batalhas nas planícies entre Grolk e Thoren, a atenção de outros líderes foi atraída ' +
 			'para o local.')],
-			[('OBRULENA, A LOXODON veio para tentar trazer paz e conciliação à região.')],
+			[('OBRULENA, A LOXODON veio para tentar trazer paz e conciliação à região:')],
+			[("Obrulena: Saudações, minha criança. Conflitos tão brutais acontecendo recentemente, não concorda? " +
+			"Eu espero trazer mais harmonia para o povo daqui...")],
 			[('Enquanto isso, KALLYSTA, A TIEFLING parece estar se preparando para a chegada de outra pessoa, ' +
 			'porém não deu nenhuma indicação de quem esta pessoa seria.')],
+			[("Kallysta: Ei. Eu conheço seu tipo, cheio de planos e conspirações. Olha, eu também sei jogar esse jogo. " +
+			"Nem tente chegar perto de mim ou da monja, ou você vai se arrepender.")],
 			["Apesar de suas diferenças, as duas parecem confiar uma na outra. Vamos mudar isso."],
 			[('Por enquanto, apenas avance seu turno. No turno seguinte, Obrulena irá enviar uma mensagem para ' +
 			'você, declarando paz.'), 'Avance seu turno.'],
@@ -96,8 +105,8 @@ func setup_texts():
 			]
 		2:
 			texts = [[''],
-			[("In THE LONG GAME, Diplomacy doesn't only involve writing letters: players may also resend letters " +
-			"from others, too.")],
+			[("In THE LONG GAME, Diplomatie involviert nicht nur Briefe Schreiben - Spieler können auch Briefe von anderen " +
+			"Spieler wieder senden.")],
 			[('After the battles in the plains between Grolk and Thoren, the conflict quickly attracted the attention ' +
 			'of other leaders near the region.')],
 			['OBRULENA, THE LOXODON came to try to bring peace and conciliation to the realm.'],
@@ -145,54 +154,54 @@ func lose_influence(character_name):
 
 
 func _on_SalemAI_advance_turn(_character_name):
-	if current_text == 13:
+	if current_text == 15:
 		advance_popup(true)
-	elif current_text == 17:
+	elif current_text == 19:
 		get_tree().change_scene("res://Mini Scenes/Scenes/Tutorial4.tscn")
 
 
 func _on_Tutorial3_advanced_popup():
 	if current_text == 3:
 		$SalemAI.set_portrait_visibility("Obrulena", true)
-	elif current_text == 4:
+	elif current_text == 5:
 		$SalemAI.set_portrait_visibility("Kallysta", true)
 
 
 func _on_SalemAI_closed_report():
-	if current_text == 6:
+	if current_text == 8:
 		advance_popup(true)
 
 
 func _on_SalemAI_opened_forgery():
-	if current_text == 7:
+	if current_text == 9:
 		advance_popup(true)
 
 
 func _on_SalemAI_forged_letter(letter):
 	if (letter[1] == 'Obrulena' and letter[2] == 1 
-	and letter[3] == 'Kallysta' and current_text == 10):
+	and letter[3] == 'Kallysta' and current_text == 12):
 		advance_popup(true)
 
 
 func _on_SalemAI_pressed_letters(enemy_name):
-	if enemy_name == "Kallysta" and current_text == 11:
+	if enemy_name == "Kallysta" and current_text == 13:
 		advance_popup(true)
 
 
 func _on_SalemAI_send_message(sender, package, recipient):
-	if sender == "Obrulena" and current_text == 12:
+	if sender == "Obrulena" and current_text == 14:
 		advance_popup(true)
 
 
 func _on_SalemAI_pressed_info(_panel):
-	if current_text == 14:
+	if current_text == 16:
 		if !checked:
 			checked = true
 		else:
 			advance_popup(true)
 
 func _on_SalemAI_pressed_opponent():
-	if current_text == 14:
+	if current_text == 16:
 		if !checked:
 			checked = true
 		else:

@@ -12,6 +12,7 @@ var this_turn_order = ['Edraele','Salem', 'Obrulena', 'Kallysta',]
 
 # setup
 func _ready():
+	Global.set_advanced_enabled(false)
 	game_setup(these_players, this_turn_order)
 	ai_node('Obrulena').set_relations('Kallysta', 1)
 	ai_node('Kallysta').set_relations('Obrulena', 2)

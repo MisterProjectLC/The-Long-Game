@@ -8,7 +8,6 @@
 [ext_resource path="res://Art/LetterContainer.png" type="Texture" id=6]
 [ext_resource path="res://Mini Scenes/Popups/LetterList.gd" type="Script" id=8]
 
-
 [sub_resource type="DynamicFont" id=1]
 size = 60
 font_data = ExtResource( 4 )
@@ -49,6 +48,7 @@ __meta__ = {
 }
 
 [node name="LetterList" type="Control" parent="."]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -78,6 +78,7 @@ __meta__ = {
 }
 
 [node name="CloseButton" type="Button" parent="."]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -94,6 +95,7 @@ __meta__ = {
 }
 
 [node name="FinishButton" type="Button" parent="."]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -110,6 +112,7 @@ __meta__ = {
 }
 
 [node name="Subject" type="Label" parent="."]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -127,6 +130,7 @@ __meta__ = {
 }
 
 [node name="Mention1" type="OptionButton" parent="."]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -140,6 +144,7 @@ __meta__ = {
 }
 
 [node name="Action" type="Label" parent="."]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -157,6 +162,7 @@ __meta__ = {
 }
 
 [node name="Phrase" type="OptionButton" parent="."]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -167,6 +173,7 @@ margin_right = 287.136
 margin_bottom = -38.9443
 
 [node name="Object" type="Label" parent="."]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -184,6 +191,7 @@ __meta__ = {
 }
 
 [node name="Mention2" type="OptionButton" parent="."]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -194,6 +202,7 @@ margin_right = 287.344
 margin_bottom = 10.9717
 
 [node name="SubjectText" type="Label" parent="."]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -210,6 +219,7 @@ __meta__ = {
 }
 
 [node name="ActionText" type="Label" parent="."]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -226,6 +236,7 @@ __meta__ = {
 }
 
 [node name="ObjectText" type="Label" parent="."]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -242,6 +253,7 @@ __meta__ = {
 }
 
 [node name="Author" type="Label" parent="."]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -259,6 +271,7 @@ __meta__ = {
 }
 
 [node name="AuthorText" type="Label" parent="."]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5

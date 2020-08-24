@@ -107,6 +107,3 @@ script = ExtResource( 3 )
 [connection signal="improve_relations" from="GrolkAI" to="GrolkAI" method="improve_relations"]
 [connection signal="set_relations" from="GrolkAI" to="GrolkAI" method="set_relations"]
 [connection signal="worsen_relations" from="GrolkAI" to="GrolkAI" method="worsen_relations"]
-[connection signal="improve_relations" from="DaintAI" to="DaintAI" method="improve_relations"]
-[connection signal="set_relations" from="DaintAI" to="DaintAI" method="set_relations"]
-[connection signal="worsen_relations" from="DaintAI" to="DaintAI" method="worsen_relations"]

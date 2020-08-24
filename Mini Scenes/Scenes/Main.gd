@@ -19,6 +19,7 @@ var this_turn_order = ['Drakoth','Edraele', 'Obrulena', 'Horlin',
 # setup
 func _ready():
 	randomize()
+	Global.set_advanced_enabled(true)
 	
 	# Get one lesser-character
 	var i = (randi() % 2)

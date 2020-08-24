@@ -108,7 +108,12 @@ func get_debug_enabled():
 func set_debug_enabled(_new):
 	debug_enabled = _new
 
+func get_advanced_enabled():
+	return advanced_enabled
 	
+func set_advanced_enabled(_new):
+	advanced_enabled = _new
+
 func find_in_group(requester, group, target_name):
 	for node in requester.get_tree().get_nodes_in_group(group):
 		if target_name == node.name:
