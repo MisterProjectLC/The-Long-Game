@@ -15,6 +15,7 @@ var tactical_list = {}
 func _ready():
 	character_name = 'Edraele'
 	memory_time = 4
+	base_influence = 4
 	traits_list = ["Agenda", "Treachery", "Justice", "Reactive", "Jealousy", "Deduction",
 					"Allegiances", "Queen", "Facade", "Intrigue", "Diplomatic",]
 	
@@ -236,7 +237,7 @@ func trust_action():
 
 		8: # change turn order
 			if get_influence() > 1:
-				gain_influence()
+				change_influence(1)
 
 		9: # tell friends about enemies
 			say_to_list([2, 1], 1, [-2, -1], 'warn', false, 'Brotherhood')
@@ -318,7 +319,7 @@ func susp_action():
 
 		12: # change turn order
 			if get_influence() > 1:
-				gain_influence()
+				change_influence(1)
 
 		13:  # attack suspect
 			attack(0)
@@ -358,7 +359,7 @@ func host_action():
 
 		6: # change turn order
 			if get_influence() > 1:
-				gain_influence()
+				change_influence(1)
 
 		7: # do nothing
 			spend_action()

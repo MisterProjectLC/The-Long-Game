@@ -362,7 +362,7 @@ func pages_setup(images):
 	If there wasn't a match (Round 1): SUSPICIOUS"""}
 	],
 	['text', {'title':'ALLIANCE', 'space':260, 'color':Color.blue,
-	'text':"""Becomes TRUSTFUL (unless already ENRAGED or FRIENDLY) of a player when he either discovers that this player will ally with a TRUSTED/BEFRIENDED player, or that a TRUSTED/BEFRIENDED player is TRUSTFUL/FRIENDLY towards this player."""}
+	'text':"""Becomes TRUSTFUL (unless already ENRAGED or FRIENDLY) of a player when she either discovers that this player will ally with a TRUSTED/BEFRIENDED player, or that a TRUSTED/BEFRIENDED player is TRUSTFUL/FRIENDLY towards this player."""}
 	],
 	['text', {'title':'SIMPLE-MINDED', 'space':190, 'color':Color.darkgreen,
 	'text':"""Always believes info from a TRUSTED/BEFRIENDED player. Never believes info from others, though she remembers of what they said."""}

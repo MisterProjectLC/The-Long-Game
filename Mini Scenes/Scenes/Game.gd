@@ -11,7 +11,8 @@ export var address = ""
 var player_character = 'Salem'
 
 var turn_order = []
-var newer_turn_order = []
+var influences = {} # {player:[base, {enemy:1, enemy2:-2...}, total]}
+var influence_deltas = {} # {player:{enemy:1, enemy2:-2...}}
 var players
 
 var voters = {}
@@ -30,23 +31,27 @@ func language(language):
 # ------------------ MAIN STUFF, TURN ------------------------
 
 # setup
-func game_setup(_new_players, _newer_turn_order):
+func game_setup(_new_players, _turn_order):
 	# language
 	language(Global.get_language())
 	Audio.play_music(Audio.game_theme)
 	
 	# player setup
-	turn_order = _newer_turn_order.duplicate(true)
-	newer_turn_order = _newer_turn_order.duplicate(true)
+	turn_order = _turn_order
 	players = _new_players
 	
 	var opponent_trait_list = {}
 	for player in players:
+		var base_influence = ai_node(player[0]).get_base_influence()
+		influences[player[0]] = [base_influence, {}, base_influence]
+		influence_deltas[player[0]] = {}
 		opponent_trait_list[player[0]] = ai_node(player[0]).get_traits_list()
+		
 	opponent_trait_list = opponent_trait_list.duplicate(true)
 	
 	for player in players:
-		ai_node(player[0]).setup(player_character, players, turn_order, dip_phrases, opponent_trait_list)
+		ai_node(player[0]).setup(player_character, players, turn_order, 
+								dip_phrases, opponent_trait_list)
 	
 	# Charismatic
 	randomize()
@@ -82,6 +87,7 @@ func start_round():
 		ai_node(player[0]).set_current_round(roun)
 		if ai_node(player[0]).has_method('receive_turn_order_info'):
 			ai_node(player[0]).receive_turn_order_info(turn_message)
+			ai_node(player[0]).receive_influence_changes(influences, influence_deltas)
 		
 		# reset stances
 		for player2 in players:
@@ -118,7 +124,9 @@ func advance_round():
 	roun += 1
 	
 	# new turn order
-	turn_order = newer_turn_order.duplicate(true)
+	sort_turn_order()
+	for delta in influence_deltas.values():
+		delta.clear()
 	
 	# for each player... prisoner's dilemma
 	for player in players:
@@ -216,21 +224,20 @@ func send_message(sender, package, recipient):
 		ai_node(recipient).receive_message(sender, roun, package)
 
 
-func _gain_influence(character_name):
-	for i in range(1, newer_turn_order.size()):
-		if newer_turn_order[i] == character_name:
-			var helper = newer_turn_order[i]
-			newer_turn_order[i] = newer_turn_order[i-1]
-			newer_turn_order[i-1] = helper
-			break
-
-func _lose_influence(character_name):
-	for i in range(newer_turn_order.size()-1):
-		if newer_turn_order[i] == character_name:
-			var helper = newer_turn_order[i]
-			newer_turn_order[i] = newer_turn_order[i+1]
-			newer_turn_order[i+1] = helper
-			break
+func change_influence(change, character_name, target = ''):
+	if target == '':
+		target = character_name
+	
+	if influence_deltas[target].has(character_name):
+		influence_deltas[target][character_name] += change
+	else:
+		influence_deltas[target][character_name] = change
+	
+	influences[target][2] += change
+	if influences[target][1].has(character_name):
+		influences[target][1][character_name] += change
+	else:
+		influences[target][1][character_name] = change
 
 
 func receive_proposal(leader, action, object):
@@ -273,3 +280,20 @@ func ai_node(namer):
 
 func get_address():
 	return address
+
+
+func sort_turn_order():
+	var organizer = 1
+	var scout = 1
+	var size = len(turn_order)
+	
+	while scout < size:
+		while (organizer > 0 and 
+		influences[turn_order[organizer]][2] > influences[turn_order[organizer-1]][2]):
+			var helper = turn_order[organizer]
+			turn_order[organizer] = turn_order[organizer-1]
+			turn_order[organizer-1] = helper
+			organizer -= 1
+		
+		scout += 1
+		organizer = scout

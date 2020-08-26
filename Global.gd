@@ -28,7 +28,7 @@ var en_main = {'Turn Order':'Throne Order', 'Advance':'Advance', 'Points':'Point
 				'Round':'Round', 'Message':'Message from', 'Forgery':'Forgery'}
 var br_main = {'Turn Order':'Ordem do Trono', 'Advance':'Avancar', 'Points':'Pontos',
 				'Round':'Round', 'Message':'Mensagem de', 'Forgery':'Falsific.'}
-var de_main = {'Turn Order':'Reihenfolge', 'Advance':'Vordringen', 'Points':'Punktzahl',
+var de_main = {'Turn Order':'Reihenfolge', 'Advance':'Beenden', 'Points':'Punktzahl',
 				'Round':'Runde', 'Message':'Brief von', 'Forgery':'Faelschung'}
 var mains = [en_main, br_main, de_main]
 

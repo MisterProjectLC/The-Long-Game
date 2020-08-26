@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Mini Scenes/Intelligences/Player.gd" type="Script" id=1]
 [ext_resource path="res://Mini Scenes/Intelligences/GrolkAI.tscn" type="PackedScene" id=2]
@@ -19,6 +19,8 @@
 [ext_resource path="res://Mini Scenes/Popups/ForgeryPanel.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Mini Scenes/Popups/CouncilPanel.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Art/IconSeal.png" type="Texture" id=19]
+[ext_resource path="res://Art/Influence.png" type="Texture" id=20]
+[ext_resource path="res://Mini Scenes/Popups/InfluencePanel.tscn" type="PackedScene" id=21]
 
 [sub_resource type="DynamicFont" id=1]
 size = 50
@@ -41,6 +43,7 @@ manual = ExtResource( 6 )
 letters_panel = ExtResource( 16 )
 forgery_panel = ExtResource( 17 )
 council_panel = ExtResource( 18 )
+influence_panel = ExtResource( 21 )
 mail_viewer = ExtResource( 7 )
 report_viewer = ExtResource( 8 )
 
@@ -218,9 +221,9 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -139.776
+margin_left = -178.682
 margin_top = -196.094
-margin_right = 57.2241
+margin_right = 18.318
 margin_bottom = -144.094
 custom_fonts/font = SubResource( 1 )
 __meta__ = {
@@ -307,6 +310,32 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="Influence" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 50.761
+margin_top = -194.114
+margin_right = 1055.76
+margin_bottom = 806.005
+rect_scale = Vector2( 0.05, 0.05 )
+custom_fonts/font = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Influence"]
+margin_left = 84.9727
+margin_top = 83.2705
+margin_right = 384.973
+margin_bottom = 383.271
+rect_scale = Vector2( 2.8, 2.8 )
+texture = ExtResource( 20 )
+__meta__ = {
+"_edit_lock_": true
+}
+
 [node name="TurnSpace" type="ColorRect" parent="."]
 anchor_left = 0.5
 anchor_top = 1.0
@@ -382,3 +411,5 @@ __meta__ = {
 [connection signal="button_up" from="MoreInfluence" to="." method="_on_MoreInfluence_button_up"]
 [connection signal="button_down" from="LessInfluence" to="." method="button_down"]
 [connection signal="button_up" from="LessInfluence" to="." method="_on_LessInfluence_button_up"]
+[connection signal="button_down" from="Influence" to="." method="button_down"]
+[connection signal="button_up" from="Influence" to="." method="_on_Influence_button_up"]

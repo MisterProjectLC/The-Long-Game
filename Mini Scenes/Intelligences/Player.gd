@@ -17,6 +17,7 @@ export(PackedScene) var manual
 export(PackedScene) var letters_panel
 export(PackedScene) var forgery_panel
 export(PackedScene) var council_panel
+export(PackedScene) var influence_panel
 var current_panel
 
 export(PackedScene) var mail_viewer
@@ -29,12 +30,13 @@ var message_text = 'Message from'
 
 var _old_turn_order = []
 var has_voted = false
-var _delta_influence = 0
+var influence_list = []
 
 # ------------------ SETUP --------------------------
 
 func _ready():
 	character_name = 'Salem'
+	base_influence = 3
 	traits_list = ["Player Character", "Seer", "Charismatic"]
 	
 	relations = {'Grolk':0,'Zardri':0 ,'Kallysta':0,'Obrulena':0, 'Horlin':0,
@@ -167,6 +169,7 @@ func choose_proposal():
 	
 	return null
 
+
 func propose(_proposal):
 	emit_signal("send_proposal", character_name, _proposal[0], _proposal[1])
 
@@ -296,14 +299,6 @@ func _on_AdvanceTurn_button_up():
 		vote(0)
 	has_voted = false
 	
-	if _delta_influence < 0:
-		for _i in range(-_delta_influence):
-			emit_signal('gain_influence', character_name)
-	elif _delta_influence > 0:
-		for _i in range(_delta_influence):
-			emit_signal('lose_influence', character_name)
-	_delta_influence = 0
-	
 	_old_turn_order = turn_order.duplicate()
 	council_target[0] = ''
 	emit_signal('advance_turn', character_name)
@@ -327,14 +322,6 @@ func _on_Restart_button_up():
 func _on_Back_button_up():
 	get_tree().change_scene("res://Mini Scenes/Scenes/MainMenu.tscn")
 
-# pressed more influence button
-func _on_MoreInfluence_button_up():
-	gain_influence()
-
-# pressed less influence button
-func _on_LessInfluence_button_up():
-	lose_influence()
-
 # pressed any button
 func button_down():
 	Audio.play_sound(Audio.button_press, 1)
@@ -352,6 +339,20 @@ func _on_Council_button_up():
 		choose_proposal()
 	else:
 		receive_proposal('', proposal[0], proposal[1])
+
+
+# pressed influence button
+func _on_Influence_button_up():
+	var new = influence_panel.instance()
+	add_child(new)
+	move_child(new, get_child_count()-1)
+	
+	new.connect("change_influence", self, "change_influence")
+	new.setup_panel(turn_order, influence_list, players, character_name)
+
+
+func receive_influence_changes(_influence_list, _influence_changes):
+	influence_list = _influence_list.duplicate(true)
 
 # ----------------- ALTER TEXT -----------------------------
 
@@ -374,24 +375,6 @@ func _on_SalemAI_alter_round(_round):
 func forge_letter(letter, index, change_count):
 	.forge_letter(letter, index, change_count)
 	emit_signal('forged_letter', letter)
-
-
-func gain_influence():
-	if _delta_influence > 0:
-		gain_action()
-		_delta_influence -= 1
-	elif get_actions() > 0 and get_influence() + _delta_influence != 0:
-		spend_action()
-		_delta_influence -= 1
-
-
-func lose_influence():
-	if _delta_influence < 0:
-		gain_action()
-		_delta_influence += 1
-	elif get_actions() > 0 and get_influence() + _delta_influence != len(turn_order)-1:
-		spend_action()
-		_delta_influence += 1
 
 
 func set_portrait_visibility(_name, _visibility):

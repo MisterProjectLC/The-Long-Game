@@ -8,6 +8,7 @@ var tactical_list = {}
 func _ready():
 	character_name = 'Thoren'
 	memory_time = 2
+	base_influence = 3
 	traits_list = ["Reactive", "Justice","Brotherhood", "Alliance", "Allegiances",
 				"Intuition", "General", "Tactical", "Diplomatic",]
 
@@ -197,7 +198,7 @@ func execute_action():
 		
 		9: # change turn order
 			if get_influence() > 1 and !(get_relation(turn_order[0]) < 0 and opponent_trait_list[turn_order[0]].has("Heir")):
-				gain_influence()
+				change_influence(1)
 		
 		10: # investigate trusting player
 			for enemy in turn_order:

@@ -1,7 +1,5 @@
 extends "res://Mini Scenes/Intelligences/Competitor.gd"
 
-var priority_lister = 1
-
 # {[info]:[round, sender]}
 # lists all pieces of info (messages) competitor wants to investigate
 var tactical_list = {}

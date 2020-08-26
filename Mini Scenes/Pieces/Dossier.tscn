@@ -1,0 +1,240 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Mini Scenes/Pieces/Portrait.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Fonts/Kayambang.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Art/ManualArrow2.png" type="Texture" id=3]
+[ext_resource path="res://Mini Scenes/Pieces/Dossier.gd" type="Script" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 60
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 24
+font_data = ExtResource( 2 )
+
+[node name="Dossier" type="Label"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+custom_fonts/font = SubResource( 1 )
+text = "7"
+align = 2
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Portrait" parent="." instance=ExtResource( 1 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 28.4731
+margin_top = -37.8969
+margin_right = 576.473
+margin_bottom = 569.103
+rect_scale = Vector2( 0.125, 0.125 )
+
+[node name="MoreInfluence" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 104.5
+margin_top = -40.0437
+margin_right = 154.5
+margin_bottom = 8.95634
+rect_scale = Vector2( 0.75, 0.75 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="MoreInfluence"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -22.543
+margin_top = 23.4348
+margin_right = 577.457
+margin_bottom = 623.435
+rect_scale = Vector2( 0.075, -0.075 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="LessInfluence" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 104.5
+margin_top = 0.721649
+margin_right = 154.5
+margin_bottom = 49.7216
+rect_scale = Vector2( 0.75, 0.75 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="LessInfluence"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -22.8945
+margin_top = -22.5935
+margin_right = 577.105
+margin_bottom = 577.406
+rect_scale = Vector2( 0.075, 0.075 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Patron" type="Label" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 158.402
+margin_top = -13.8262
+margin_right = 173.402
+margin_bottom = 8.17375
+custom_fonts/font = SubResource( 2 )
+text = "+1"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Mini" parent="Patron" instance=ExtResource( 1 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 13.1819
+margin_top = -30.2314
+margin_right = 561.182
+margin_bottom = 576.769
+rect_scale = Vector2( 0.1, 0.1 )
+
+[node name="Patron2" type="Label" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 242.745
+margin_top = -13.8262
+margin_right = 257.745
+margin_bottom = 8.17375
+custom_fonts/font = SubResource( 2 )
+text = "+1"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Mini" parent="Patron2" instance=ExtResource( 1 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 13.1821
+margin_top = -30.2314
+margin_right = 561.182
+margin_bottom = 576.769
+rect_scale = Vector2( 0.1, 0.1 )
+
+[node name="Patron3" type="Label" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 327.5
+margin_top = -13.6677
+margin_right = 342.5
+margin_bottom = 8.33233
+custom_fonts/font = SubResource( 2 )
+text = "+1"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Mini" parent="Patron3" instance=ExtResource( 1 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 12.1421
+margin_top = -30.2315
+margin_right = 560.142
+margin_bottom = 576.769
+rect_scale = Vector2( 0.1, 0.1 )
+
+[node name="Patron4" type="Label" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 412.51
+margin_top = -13.6677
+margin_right = 427.51
+margin_bottom = 8.33232
+custom_fonts/font = SubResource( 2 )
+text = "+1"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Mini" parent="Patron4" instance=ExtResource( 1 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 12.1421
+margin_top = -30.2315
+margin_right = 560.142
+margin_bottom = 576.769
+rect_scale = Vector2( 0.1, 0.1 )
+
+[node name="Patron5" type="Label" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 498.693
+margin_top = -14.1344
+margin_right = 513.693
+margin_bottom = 7.86556
+custom_fonts/font = SubResource( 2 )
+text = "+1"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Mini" parent="Patron5" instance=ExtResource( 1 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 13.8149
+margin_top = -30.2314
+margin_right = 561.815
+margin_bottom = 576.769
+rect_scale = Vector2( 0.1, 0.1 )
+[connection signal="button_up" from="MoreInfluence" to="." method="_on_MoreInfluence_button_up"]
+[connection signal="button_up" from="LessInfluence" to="." method="_on_LessInfluence_button_up"]

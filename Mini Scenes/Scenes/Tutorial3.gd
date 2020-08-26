@@ -107,36 +107,36 @@ func setup_texts():
 			texts = [[''],
 			[("In THE LONG GAME, Diplomatie involviert nicht nur Briefe Schreiben - Spieler können auch Briefe von anderen " +
 			"Spieler wieder senden.")],
-			[('After the battles in the plains between Grolk and Thoren, the conflict quickly attracted the attention ' +
-			'of other leaders near the region.')],
-			['OBRULENA, THE LOXODON came to try to bring peace and conciliation to the realm.'],
-			[('Meanwhile, KALLYSTA, THE TIEFLING seems to be preparing herself for the arrival of someone else, ' + 
-			'though the specifics remain unknown.')],
-			["Despite their many differences, the two seem to trust each other. Let's change that."],
-			[('For now, simply advance your turn. In the next turn, Obrulena will send you a message declaring peace.'),
-			 'Advance your turn.'],
-			[('So, Obrulena has sent you a message. Once you are done reading it, click the Forgery button to get started ' +
-			'on our deception campaign.'), 'Click the Forgery button.'],
-			[('Our objective here is to create distrust between Obrulena and Kallysta. Kallysta has the PARANOID trait, ' +
-			'meaning that any sign of hostility against herself will enrage her.')],
-			[("As such, we'll modify this letter to make it look like a threat against Kallysta. Select Obrulena's letter on " +
-			'the left side of the screen and alter it on the right side of it.')],
-			[("Each alteration costs one Action. You'll have to make two alterations to this letter - one in the second part " +
-			'of the message, and one in the third part. Good luck.'), ("Modify Obrulena's letter to make it look like a " + 
-			"threat against Kallysta. You'll have to modify the second and third part of it.")],
-			[("Great! Now, we only need to send it. Open Kallysta's panel and click on the button to the right of Send."),
-			"Open Kallysta's panel and click on the button to the right of Send."],
-			[("Select Obrulena's letter on the left side of the screen and press the Send button to use your last Action " +
-			"and send the forged message to Kallysta."), ("Select Obrulena's letter and press the Send button  " +
-			"to send it to Kallysta.")],
-			[("And... done. Now, advance your turn to see the fruits of our deception."),
-			"Advance your turn."],
-			[("So far, so good. Investigate one of them and click the portrait on the right to see what transpired between " +
-			"the two former allies."), ("Investigate one of them and check what transpired between Obrulena and Kallysta.")],
-			[("As you can see, Kallysta has attacked Obrulena, thinking that she was going to attack first.")],
-			[("An advantage of forgery is that, as far as they know, you weren't even involved! If you had instead lied to " +
-			"Kallysta directly, she'd get Enraged at you for giving her false information.")],
-			[("Advance your turn one final time - the unknown person Kallysta was expecting will finally arrive. ")],
+			[('Nach den Kämpfen zwischen Grolk und Thoren zog der Konflikt schnell die Aufmerksamkeit anderer Führer in der ' +
+			'Nähe der Region.')],
+			['OBRULENA, DIE LOXODON ist gekommen, um zu versuchen, Frieden und Harmonie in das Reich zu bringen.'],
+			[('Hingegen scheint es, dass KALLYSTA, DIE TIEFLING sich für die Ankunft einer andere Person vorbereitet, ' + 
+			"jedoch bleiben die Details unbekannt.")],
+			["Trotz ihrer mehreren Unterschiede scheinen sie einander zu vertrauen. Lasst uns das ändern."],
+			[('Fürs Erste beende einfach deinen Zug. In der nächsten Runde wird Obrulena dir eine Nachricht senden, ' +
+			'die Frieden erklärt.'), 'Beende deinen Zug.'],
+			[('Also hat Obrulena dir eine Nachricht geschickt. Wenn du mit dem Lesen fertig bist, klicke den Fälschung-Button, ' +
+			'um unsere Täuschungen zu beginnen.'), 'Klicke den Fälschung-Button.'],
+			[('Unser Ziel ist, Misstrauen zwischen Obrulena und Kallysta zu erzeugen. Kallysta hat die PARANOIA-Eigenschaft, was ' +
+			'beudeutet, dass jedes Anzeichen von Feindseligkeit sie erzürnen wird.')],
+			[("Jetzt, da wir das wissen, werden wir diesen Brief ändern, um den so aussehen lassen, als wäre den eine Drohung " +
+			'gegen Kallysta. Wähle Obrulenas Brief auf der linken Seite und ändere ihn auf der rechten Seite.')],
+			[("Jede Änderung kostet eine Aktion. Du musst zwei Änderungen (in den zweiten und dritten Teil) an diesem Brief " +
+			'vornehmen. Viel Glück.'), ("Ändere Obrulenas Brief, um den so aussehen lassen, als wäre den eine Drohung " +
+			"gegen Kallysta. Du musst zwei Änderungen (in den zweiten und dritten Teil) an diesem Brief vornehmen.")],
+			[("Gut! Jetzt mussen wir nur ihn senden. Klicke auf Kallystas Porträt und dann auf den Button rechts von Senden. "),
+			"Klicke auf Kallystas Porträt und dann auf den Button rechts von Senden."],
+			[("Wähle Obrulenas Brief in der linken Seite des Bildschirms und klicke auf den Senden-Button, um deine letzte " +
+			"Aktion zu verbringen und die gefälschte Nachricht an Kallysta zu senden."), ("Wähle Obrulenas Brief und klicke auf " +
+			"den Senden-Button, um die gefälschte Nachricht an Kallysta zu senden.")],
+			[("Und... Fertig. Jetzt beende deinen Zug, um die Ergebnisse unseren Täuschungen zu sehen."),
+			"Beende deinen Zug."],
+			["So weit, so gut. Forsche eine von ihnen nach und prüfe, was zwischen die zwei ehemaligen Verbündeten passiert ist.", 
+			("Forsche eine von ihnen nach und prüfe, was zwischen Obrulena und Kallysta passiert ist.")],
+			[("Wie du sehen kannst, hat Kallysta Obrulena angegriffen, weil sie dachte, die Mönchin würde zuerst angreifen.")],
+			[("Ein Vorteil von Fälschung ist, dass, soweit sie wissen, du nicht einmal beteiligt warst! Wenn du stattdessen " +
+			"Kallysta angelogen hättest, wäre sie mit dir Wütend, weil du ihr falsche Informationen gegeben hattest.")],
+			[("Beende deinen Zug ein letztes Mal - die unbekannte Person, die Kallysta erwartet hat, wird endlich ankommen. ")],
 			]
 
 # ------------- SIGNAL STUFF -------------------------------

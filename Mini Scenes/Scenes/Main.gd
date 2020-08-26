@@ -46,12 +46,3 @@ func delete_char(i):
 
 func advance_turn(_char):
 	_advance_turn(_char)
-
-
-func gain_influence(character_name):
-	_gain_influence(character_name)
-
-
-func lose_influence(character_name):
-	_lose_influence(character_name)
-

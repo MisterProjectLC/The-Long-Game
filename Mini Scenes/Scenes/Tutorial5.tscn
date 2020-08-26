@@ -1,0 +1,101 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://Mini Scenes/Intelligences/DrakothAI.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Mini Scenes/Scenes/Tutorial5.gd" type="Script" id=3]
+[ext_resource path="res://Art/Portraits/Salem V1.png" type="Texture" id=4]
+[ext_resource path="res://Art/Portraits/Drakoth.png" type="Texture" id=5]
+[ext_resource path="res://Mini Scenes/Pieces/StoneBackground.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Mini Scenes/Pieces/PaperBackground.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Art/Portraits/Obrulena Alpha.png" type="Texture" id=9]
+[ext_resource path="res://Mini Scenes/Popups/VictoryViewer.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Mini Scenes/Intelligences/SalemAI.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Fonts/LiberationSerif-Bold.ttf" type="DynamicFontData" id=12]
+[ext_resource path="res://Fonts/Kayambang.ttf" type="DynamicFontData" id=13]
+[ext_resource path="res://Mini Scenes/Popups/TutorialPopup.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Mini Scenes/Intelligences/ObrulenaAI.tscn" type="PackedScene" id=15]
+
+[sub_resource type="DynamicFont" id=1]
+size = 30
+font_data = ExtResource( 12 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 45
+font_data = ExtResource( 13 )
+
+[node name="Tutorial5" type="Node"]
+script = ExtResource( 3 )
+victory_panel = ExtResource( 10 )
+address = "res://Mini Scenes/Scenes/Tutorial5.tscn"
+popupbox = ExtResource( 14 )
+these_players = [ [ "Obrulena", ExtResource( 9 ) ], [ "Drakoth", ExtResource( 5 ) ], [ "Salem", ExtResource( 4 ) ] ]
+
+[node name="NinePatchRect" parent="." instance=ExtResource( 7 )]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 0.0
+margin_bottom = 0.0
+
+[node name="ObjectiveArea" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Background" parent="ObjectiveArea" instance=ExtResource( 8 )]
+anchor_left = 0.75
+anchor_top = 0.4
+anchor_right = 0.75
+anchor_bottom = 0.4
+margin_left = -170.0
+margin_top = -150.0
+margin_right = 170.0
+margin_bottom = 150.0
+mouse_filter = 1
+
+[node name="Label" type="Label" parent="ObjectiveArea/Background"]
+margin_left = 10.0
+margin_top = 56.0
+margin_right = 329.0
+margin_bottom = 288.0
+mouse_filter = 1
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "T
+T
+T
+T"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Objective" type="Label" parent="ObjectiveArea/Background"]
+margin_left = 9.85419
+margin_top = 9.65834
+margin_right = 318.854
+margin_bottom = 50.6583
+mouse_filter = 1
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Objective"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SalemAI" parent="." instance=ExtResource( 11 )]
+
+[node name="ObrulenaAI" parent="." instance=ExtResource( 15 )]
+
+[node name="DrakothAI" parent="." instance=ExtResource( 2 )]
+
+[node name="Audio" type="AudioStreamPlayer" parent="."]
+[connection signal="improve_relations" from="SalemAI" to="SalemAI" method="improve_relations"]
+[connection signal="set_relations" from="SalemAI" to="SalemAI" method="set_relations"]
+[connection signal="worsen_relations" from="SalemAI" to="SalemAI" method="worsen_relations"]
+[connection signal="improve_relations" from="DrakothAI" to="DrakothAI" method="improve_relations"]
+[connection signal="set_relations" from="DrakothAI" to="DrakothAI" method="set_relations"]
+[connection signal="worsen_relations" from="DrakothAI" to="DrakothAI" method="worsen_relations"]

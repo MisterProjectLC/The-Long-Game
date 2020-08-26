@@ -12,6 +12,7 @@ var sent_letter = null
 func _ready():
 	character_name = 'Obrulena'
 	memory_time = 2
+	base_influence = 4
 	traits_list = ["Serene", "Pacifist", "Alliance", "Intuition", "Simple-Minded", "Diplomatic",]
 
 	relations = {'Grolk':0,'Zardri':0, 'Kallysta':-1, 'Horlin':-1, 'Obrulena':-2, 
@@ -214,7 +215,7 @@ func execute_action():
 
 		8: # increase influence
 			if get_influence() > 1 and !(get_relation(turn_order[0]) < 0 and opponent_trait_list[turn_order[0]].has("Heir")):
-				gain_influence()
+				change_influence(1)
 		
 		9: # investigate suspicious player
 			for enemy in players:

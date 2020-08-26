@@ -6,6 +6,7 @@ var war_list = {}
 func _ready():
 	character_name = 'Zardri'
 	memory_time = 1
+	base_influence = 1
 	traits_list = ["Ambusher", "Hatred", "Paranoid", "Treachery", "Intuition", "Dim-Witted", "Ignorant",]
 	
 	relations = {'Grolk':-1,'Zardri':-2, 'Kallysta':0, 'Horlin':0, 'Obrulena':0,

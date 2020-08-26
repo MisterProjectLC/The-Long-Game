@@ -15,6 +15,7 @@ var popularity_list = {}
 func _ready():
 	character_name = 'Kallysta'
 	memory_time = 6
+	base_influence = 2
 	traits_list = ["Paranoid", "Justice", "Deduction", "Chain-Breaker", "Cynic", "Intrigue", "Diplomatic"]
 	
 	relations = {'Grolk':0, 'Zardri':0,'Kallysta':-2, 'Horlin':0, 'Obrulena':0,

@@ -5,6 +5,7 @@ extends "res://Mini Scenes/Intelligences/Competitor.gd"
 func _ready():
 	character_name = 'Grolk'
 	memory_time = 1
+	base_influence = 1
 	traits_list = ["Warlord", "Hatred", "Brotherhood", "Alliance", "General", "Simple-Minded", "Bitter", "Ignorant"]
 	
 	relations = {'Grolk':-2, 'Zardri':-1, 'Kallysta':0, 'Horlin':0, 'Obrulena':0,
@@ -110,7 +111,7 @@ func execute_action():
 		
 		6: # increase his influence
 			if get_influence() > 1:
-				gain_influence()
+				change_influence(1)
 		
 		7: # do nothing
 			spend_action()

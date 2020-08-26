@@ -15,8 +15,7 @@ signal improve_relations
 signal worsen_relations
 signal set_relations
 
-signal gain_influence
-signal lose_influence
+signal change_influence
 
 signal gain_rep
 signal lose_rep
@@ -29,6 +28,7 @@ var character_name = ''
 var traits_list = []
 var _points = 0
 var _actions = 3
+var base_influence = 0
 var stances = [{}, {}, {}, {}, {}, {}]
 var relations = {}
 var _current_round = 1
@@ -79,8 +79,7 @@ func _ready():
 func signal_setup():
 	# signal setup
 	connect("advance_turn", get_parent(), "advance_turn")
-	connect("gain_influence", get_parent(), "gain_influence")
-	connect("lose_influence", get_parent(), "lose_influence")
+	connect("change_influence", get_parent(), "change_influence")
 	connect("point_info_request", get_parent(), "pass_point_info")
 	connect("matchtable_info_request", get_parent(), "pass_matchtable_info")
 	connect("relation_info_request", get_parent(), "pass_relation_info")
@@ -231,6 +230,10 @@ func send_letter(sender, name1, message, name2, recipient):
 	return true
 
 
+func send_message(name1, message, name2, recipient):
+	return send_letter(character_name, name1, message, name2, recipient)
+
+
 func manage_ann(_target, _order, _recipient):
 	if !ann_dict[[_target, _order]].has(_recipient):
 		# give info about ann to sally
@@ -241,15 +244,15 @@ func manage_ann(_target, _order, _recipient):
 	return false
 
 
-func gain_influence():
-	if get_actions() > 0 and turn_order.front() != character_name:
+func change_influence(change, target = ''):
+	if target == '':
+		target = character_name
+	
+	if get_actions() > 0:
 		spend_action()
-		emit_signal('gain_influence', character_name)
-
-func lose_influence():
-	if get_actions() > 0 and turn_order.back() != character_name:
-		spend_action()
-		emit_signal('lose_influence', character_name)
+		emit_signal("change_influence", change, character_name, target)
+		return true
+	return false
 
 
 func forge_letter(letter, index, change_count):
@@ -295,23 +298,6 @@ func receive_proposal(_leader, _action, _object, vote = 0):
 	_current_vote = vote
 	emit_signal("send_vote", character_name, vote)
 
-
-func receive_vote(_voter, _vote):
-	pass
-
-
-func receive_decree(action, object, voters, vote_count):
-	for voter in voters.keys():
-		if voter != character_name:
-			receive_vote(voter, voters[voter])
-	
-	if vote_count[0] >= vote_count[2]:
-		return
-	
-	if action == 1 and get_relation(object) < 1 and object != character_name:
-		set_relations(object, 1)
-		
-	council_target = [object, action]
 
 # ----------------------------- TRAITS -------------------------------------------------
 # --- TRAITS: DIRECT INTERACTION (REPORT) REACTIONS --------------------
@@ -497,7 +483,15 @@ func trait_ignorant_diplomatic(target, vote = 1):
 		worsen_relations(target)
 
 
-# ---------------- BASE FUNCTIONS ----------------------------
+# ---------------- RECEIVE FUNCTIONS ----------------------------
+
+func receive_turn_order_info(turn_message):
+	turn_order = turn_message.duplicate(true)
+
+
+func receive_influence_changes(_influence_list, _influence_changes):
+	pass
+
 
 func receive_message(sender, _roun, message):
 	print_mail(sender, message)
@@ -536,8 +530,22 @@ func receive_relation(relation, enemy_name, opponent_name):
 	relation_list.append([enemy_name, relation, opponent_name])
 
 
-func send_message(name1, message, name2, recipient):
-	return send_letter(character_name, name1, message, name2, recipient)
+func receive_vote(_voter, _vote):
+	pass
+
+
+func receive_decree(action, object, voters, vote_count):
+	for voter in voters.keys():
+		if voter != character_name:
+			receive_vote(voter, voters[voter])
+	
+	if vote_count[0] >= vote_count[2]:
+		return
+	
+	if action == 1 and get_relation(object) < 1 and object != character_name:
+		set_relations(object, 1)
+		
+	council_target = [object, action]
 
 
 # ----------------- HELPER FUNCTIONS -------------------
@@ -619,8 +627,8 @@ func add_points(_new):
 	_points += _new
 	emit_signal("alter_points", _points)
 
-func receive_turn_order_info(turn_message):
-	turn_order = turn_message.duplicate(true)
+func get_base_influence():
+	return base_influence
 
 func get_influence():
 	for i in range(turn_order.size()):

@@ -95,10 +95,10 @@ func setup_texts():
 			[('In jeder Runde wählt jeder Spieler eine Position (Passiv/Aggressiv) gegenüber einem anderen Spieler. ' +
 			'Um eine Position zu ändern, klicke auf den Button unter dem Porträt eines Spielers.'), ('Ändere deine Position, ' +
 			'indem den Button unter dem Porträt eines Spielers klicken.')],
-			[('Gut. Allgemein ist die passive Position diplomatischer und besser für die zwei Spieler, aber lässt den ' +
+			[('Gut. Allgemein ist die passive Position diplomatischer und besser für beide beteiligte Spieler, aber lässt den ' +
 			'Einzelne ungeschützt, wenn der andere Spieler ihn attackiert.')],
 			[('Auf der anderen Seite, ist die agressive Position besser für den Einzelne, jedoch kostet sie eine Aktion' +
-			'und erzeugt Abneigung zwischen den Spielern.')],
+			'und erzeugt Ressentiment zwischen den Spielern.')],
 			[('Das Spiel dauert 6 Runde und jeder Spieler hat 3 Aktionen pro Runde. Neben Angriff können Aktionen auch' +
 			'mit NACHFORSCHUNGEN und DIPLOMATIE verbracht werden.')],
 			[('Nachforschungen können entscheidende Information über andere Spieler enthüllen. Um jemand nachzuforschen, ' +
@@ -121,7 +121,7 @@ func setup_texts():
 			'Grolks Diplomatie-Bereich und klicke Senden.')],
 			[('Grolk:\nKümmerlicher verräterischer Zwerg! Bruder, mach dir keine Sorgen. Meine Männer werden jeden ' +
 			'Kleinen töten und abschlachten, den sie finden kann!')],
-			['Gut! Jetzt dringe bis nächste Runde vor.', 'Dringe bis nächste Runde vor.']]
+			['Gut! Jetzt beende deinen Zug.', 'Beende deinen Zug.']]
 
 
 # ------------- SIGNAL STUFF -------------------------------

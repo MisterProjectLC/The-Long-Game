@@ -10,6 +10,7 @@ var request_done = false
 func _ready():
 	character_name = 'Horlin'
 	memory_time = 2
+	base_influence = 3
 	traits_list = ["Vassal", "Reactive","Justice", "Deduction", "Writer", "Archivist", "Diplomatic",]
 
 	relations = {'Grolk':0,'Zardri':0, 'Kallysta':0, 'Horlin':-2, 'Obrulena':-2, 
@@ -184,7 +185,7 @@ func execute_action():
 
 		6: # increase influence
 			if get_influence() > 2:
-				gain_influence()
+				change_influence(1)
 
 		7: # attack hostile
 			attack(1)

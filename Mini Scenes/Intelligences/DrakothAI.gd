@@ -4,6 +4,7 @@ extends "res://Mini Scenes/Intelligences/Competitor.gd"
 func _ready():
 	character_name = 'Drakoth'
 	memory_time = 2
+	base_influence = 4
 	traits_list = ["Strategy", "Heir", "Reactive", "Justice","Brotherhood", "Alliance", "Allegiances",
 				"Insight", "Simple-Minded", "Diplomatic",]
 
@@ -169,7 +170,7 @@ func execute_action():
 
 		4: # change turn order
 			if get_influence() > 1:
-				gain_influence()
+				change_influence(1)
 
 		5: # tell friends about hostile
 			say_to_list([1], 1, [-2, -1], 'tell', false, 'Brotherhood')
