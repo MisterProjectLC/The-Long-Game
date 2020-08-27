@@ -64,6 +64,11 @@ func receive_proposal(leader, action, object, vote = 0):
 func receive_vote(voter, vote):
 	trait_ignorant_diplomatic(voter, vote)
 
+
+func receive_influence_changes(_influence_list, _influence_changes):
+	trait_attentive(_influence_changes)
+
+
 # process investigation -------------
 func receive_points_info(info):
 	# Jealousy
@@ -201,22 +206,26 @@ func execute_action():
 		5: # attack hostile
 			attack(1)
 		
-		6: # make allies
+		6: # reduce leader influence
+			if get_relation(turn_order[0]) > 0:
+				change_influence(-1, turn_order[0])
+		
+		7: # make allies
 			for player in turn_order:
 				if relations[player] == 0:
 					warn(character_name, 0, player)
 
-		7: # investigate hostile
+		8: # investigate hostile
 			for enemy_name in turn_order:
 				if relations[enemy_name] == 1:
 					_investigate(enemy_name)
 
-		8: # investigate trustable
+		9: # investigate trustable
 			for enemy_name in turn_order:
 				if relations[enemy_name] == -1:
 					_investigate(enemy_name)
 
-		12: # do nothing
+		10: # do nothing
 			spend_action()
 			return
 	priority_lister += 1

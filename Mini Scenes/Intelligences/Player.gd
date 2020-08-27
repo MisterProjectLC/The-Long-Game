@@ -8,6 +8,7 @@ signal closed_report
 signal opened_forgery
 signal forged_letter
 signal pressed_letters
+signal pressed_influence
 
 export var intelligences = []
 
@@ -177,6 +178,9 @@ func toggle_council(active):
 	$Council.visible = active
 
 
+func receive_influence_changes(_influence_list, _influence_changes):
+	influence_list = _influence_list
+
 # INVESTIGATION STUFF ------------
 # request points info
 func reveal_points():
@@ -317,7 +321,7 @@ func _on_Forgery_button_up():
 # pressed restart button
 func _on_Restart_button_up():
 	get_tree().change_scene(get_parent().get_address())
-	
+
 # pressed back button
 func _on_Back_button_up():
 	get_tree().change_scene("res://Mini Scenes/Scenes/MainMenu.tscn")
@@ -332,6 +336,7 @@ func _on_Info_button_up():
 	manual_panel.manual_setup(0)
 	add_child(manual_panel)
 	move_child(manual_panel, get_child_count()-1)
+
 
 # pressed council button
 func _on_Council_button_up():
@@ -349,10 +354,7 @@ func _on_Influence_button_up():
 	
 	new.connect("change_influence", self, "change_influence")
 	new.setup_panel(turn_order, influence_list, players, character_name)
-
-
-func receive_influence_changes(_influence_list, _influence_changes):
-	influence_list = _influence_list.duplicate(true)
+	emit_signal("pressed_influence")
 
 # ----------------- ALTER TEXT -----------------------------
 

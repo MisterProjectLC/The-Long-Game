@@ -478,10 +478,14 @@ __meta__ = {
 
 [node name="AyeNayButton" parent="." instance=ExtResource( 6 )]
 visible = false
-margin_left = 608.654
-margin_top = 410.99
-margin_right = -324.346
-margin_bottom = -100.01
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 86.988
+margin_top = 108.154
+margin_right = 86.988
+margin_bottom = 108.154
 
 [node name="Seal" type="TextureRect" parent="."]
 visible = false

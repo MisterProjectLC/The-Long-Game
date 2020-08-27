@@ -10,6 +10,7 @@ var index = 0
 var patron_count = 0
 var players
 
+
 signal change_influence
 
 func setup(_index, _base_influence):
@@ -33,13 +34,15 @@ func setup_player(player_name, _players):
 	$Portrait.readdy(get_player_sheet(player_name, _players))
 
 
-func setup_patron_list(_patron_list, _players):
+func setup_patron_list(_patron_list, _players, _player_character):
 #  {enemy:1, enemy2:-2...}
 	patron_list = _patron_list
 	players = _players
 	
-	for patron in patron_list.keys():
-		new_patron(patron)
+	for i in range(len(patron_list.keys())):
+		if patron_list.keys()[i] == _player_character:
+			player_index = i
+		new_patron(patron_list.keys()[i])
 
 
 func add_patron(patron, change):
@@ -48,6 +51,7 @@ func add_patron(patron, change):
 	if patron in patron_list.keys():
 		patron_list[patron] += change
 		var patron_object = patrons[player_index]
+		print_debug(player_index)
 		set_patron_text(patron, patron_object)
 	
 	else:
@@ -84,9 +88,9 @@ func _on_LessInfluence_button_up():
 	emit_signal("change_influence", this_player, -1, index)
 
 
-func get_player_sheet(player_name, players):
+func get_player_sheet(player_name, _players):
 	var player_sheet = []
-	for player in players:
+	for player in _players:
 		if player[0] == player_name:
 			player_sheet = player
 	return player_sheet

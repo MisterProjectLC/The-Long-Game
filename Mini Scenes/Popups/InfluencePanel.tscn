@@ -43,6 +43,7 @@ __meta__ = {
 }
 
 [node name="CloseButton" type="Button" parent="."]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -59,6 +60,7 @@ __meta__ = {
 }
 
 [node name="FinishButton" type="Button" parent="."]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -75,6 +77,7 @@ __meta__ = {
 }
 
 [node name="Title" type="Label" parent="."]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -92,30 +95,35 @@ __meta__ = {
 }
 
 [node name="Dossier" parent="." instance=ExtResource( 5 )]
+visible = false
 margin_left = -331.649
 margin_top = -171.081
 margin_right = -306.649
 margin_bottom = -117.081
 
 [node name="Dossier2" parent="." instance=ExtResource( 5 )]
+visible = false
 margin_left = -331.649
 margin_top = -79.3234
 margin_right = -306.649
 margin_bottom = -25.3234
 
 [node name="Dossier3" parent="." instance=ExtResource( 5 )]
+visible = false
 margin_left = -330.992
 margin_top = 12.4341
 margin_right = -305.992
 margin_bottom = 66.4341
 
 [node name="Dossier4" parent="." instance=ExtResource( 5 )]
+visible = false
 margin_left = -330.992
 margin_top = 101.607
 margin_right = -305.992
 margin_bottom = 155.607
 
 [node name="Dossier5" parent="." instance=ExtResource( 5 )]
+visible = false
 margin_left = -330.992
 margin_top = 191.995
 margin_right = -305.992

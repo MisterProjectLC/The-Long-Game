@@ -29,7 +29,7 @@ func setup_panel(_turn_order, _influence_list, _players, _player_character):
 	# {player:[2, {enemy:1, enemy2:-2...}, total]}
 	language(Global.get_language())
 	player_character = _player_character
-	influence_list = _influence_list
+	influence_list = _influence_list.duplicate(true)
 	players = _players
 	
 	# setup ordered by turn order
@@ -43,7 +43,7 @@ func setup_panel(_turn_order, _influence_list, _players, _player_character):
 		dossiers[i].setup(i, influence_list[player][0])
 		dossiers[i].set_influence(influence)
 		dossiers[i].setup_player(player, players)
-		dossiers[i].setup_patron_list(influence_list[player][1], players)
+		dossiers[i].setup_patron_list(influence_list[player][1], players, player_character)
 
 
 func change_influence(target, change, index):
@@ -63,7 +63,7 @@ func _on_CloseButton_button_up():
 
 func _on_FinishButton_button_up():
 	for target in influence_deltas.keys():
-		for i in range(abs(influence_deltas[target])):
+		for _i in range(abs(influence_deltas[target])):
 			emit_signal("change_influence", sign(influence_deltas[target]), target)
 	
 	close()

@@ -1,5 +1,7 @@
 extends "res://Mini Scenes/Intelligences/Competitor.gd"
 
+var influence_totals = {}
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	character_name = 'Drakoth'
@@ -21,10 +23,6 @@ func start_turn():
 
 # process turn order info
 func receive_turn_order_info(turn_message):
-	# Heir
-	if turn_message[0] != character_name:
-		set_relations(turn_message[0], 2)
-	
 	.receive_turn_order_info(turn_message)
 
 
@@ -103,11 +101,34 @@ func choose_proposal():
 				return [1, player]
 
 
+func receive_influence_changes(_influence_list, _influence_changes):
+	influence_totals = extract_influence_totals(_influence_list)
+	
+	for delta in _influence_changes:
+		print(delta, " ", _influence_changes[delta])
+	
+	# Heir
+	if turn_order[0] != character_name:
+		for i in range(len(turn_order)-1, 0, -1):
+			var checked_player = turn_order[i]
+			
+			if (
+				# reduce my influence
+				(_influence_changes[character_name].keys().has(checked_player) and 
+				_influence_changes[character_name][checked_player] < 0) or
+				# increase their influence
+				(_influence_changes[turn_order[0]].keys().has(checked_player) and 
+				_influence_changes[turn_order[0]][checked_player] > 0)
+				):
+					set_relations(checked_player, 2)
+					break
+	
+	trait_ambitious(_influence_changes)
+
 # process investigation -------------
 func receive_matchtable_info(en_stances, op_stances, enemy_requested_name, opponent_requested_name):
 	# Intuition
 	trait_intuition(en_stances, op_stances, enemy_requested_name, opponent_requested_name)
-		
 	.receive_matchtable_info(en_stances, op_stances, enemy_requested_name, opponent_requested_name)
 
 func receive_relation_info(relation, enemy_requested_name, opponent_requested_name):
@@ -169,7 +190,14 @@ func execute_action():
 			attack(1)
 
 		4: # change turn order
-			if get_influence() > 1:
+			var max_inf = 0
+			var max_p = ''
+			for total in influence_totals.keys():
+				if influence_totals[total] > max_inf or (influence_totals[total] == max_inf and max_p == character_name):
+					max_inf = influence_totals[total]
+					max_p = total
+			
+			if max_p != character_name:
 				change_influence(1)
 
 		5: # tell friends about hostile
@@ -180,19 +208,29 @@ func execute_action():
 				if get_relation(enemy) == 0:
 					_investigate(enemy)
 
-		7: # investigate enemies
+		7: # improve ally influence
+			var max_inf = 0
+			var max_p = ''
+			for i in range(2, len(turn_order)):
+				if get_relation(turn_order[i]) < 0:
+					change_influence(1, turn_order[i])
+			
+			if max_p != character_name:
+				change_influence(1)
+
+		8: # investigate enemies
 			if get_current_round() % 2 == 0:
 				for enemy in turn_order:
 					if get_relation(enemy) > 0:
 						_investigate(enemy)
 
-		8: # investigate friends
+		9: # investigate friends
 			if get_current_round() % 2 == 1:
-				for enemy in turn_order:
-					if get_relation(enemy) < 0:
-						_investigate(enemy)
+				for friend in turn_order:
+					if get_relation(friend) < 0:
+						_investigate(friend)
 
-		9: # do nothing
+		10: # do nothing
 			spend_action()
 			return
 	priority_lister += 1

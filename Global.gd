@@ -39,15 +39,15 @@ var de_relations = {-2:'Freundlich',-1:'Vertrauend', 0:'Msstrauisch', 1:'Feindli
 var en_panel = {'Close':'Close','Finish':'Finish', 'Info':'Info', 'Points':'Points', 'Relations':en_relations,
 	'R':'','Relation':'\'s relation\ntowards', 'Send':'Send', 'Diplomacy':'Diplomacy Area', 
 	'Unknown':'Unknown', 'Recipient':'Recipient', 
-	'Subject':'Subject', 'Action':'Action', 'Object':'Object', 'Author':'Author'}
+	'Subject':'Agent', 'Action':'Stance', 'Object':'Target', 'Author':'Author'}
 var br_panel = {'Close':'Fechar','Finish':'Finalizar', 'Info':'Info', 'Points':'Pontos', 'Relations':br_relations,
 	'R':'Relacao de \n','Relation':' com', 'Send':'Enviar', 'Diplomacy':'Area de Diplomacia', 
 	'Unknown':'???', 'Recipient':'Destinatario', 
-	'Subject':'Sujeito', 'Action':'Acao', 'Object':'Objeto', 'Author':'Autor'}
+	'Subject':'Agente', 'Action':'Postura', 'Object':'Target', 'Author':'Autor'}
 var de_panel = {'Close':'Schlss.','Finish':'Abschliessen', 'Info':'Info', 'Points':'Punktzahl', 'Relations':de_relations,
 	'R':'','Relation':'s Relation\nmit', 'Send':'Senden', 'Diplomacy':'Diplomatiebereich', 
 	'Unknown':'Unbekannt', 'Recipient':'Recipient', 
-	'Subject':'Subjekt', 'Action':'Aktion', 'Object':'Objekt', 'Author':'Autor'}
+	'Subject':'Agent', 'Action':'Position', 'Object':'Ziel', 'Author':'Autor'}
 var panels = [en_panel, br_panel, de_panel]
 
 var en_council = {'Current':'Current Decree','Approved':'Decree Approved',

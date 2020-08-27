@@ -17,10 +17,6 @@ signal set_relations
 
 signal change_influence
 
-signal gain_rep
-signal lose_rep
-signal set_rep
-
 signal send_proposal
 signal send_vote
 
@@ -482,6 +478,41 @@ func trait_ignorant_diplomatic(target, vote = 1):
 	else:
 		worsen_relations(target)
 
+# -- TRAITS: INFLUENCE -----------------------------
+
+func trait_attentive(_influence_changes):
+	for enemy in turn_order:
+		if get_relation(enemy) >= 2:
+			continue
+		
+		for player in turn_order:
+			if not _influence_changes[enemy].has(player):
+				continue
+			
+			var influence_delta = _influence_changes[enemy][player]
+			
+			if player != character_name and get_relation(player) < 2 and influence_delta > 0:
+				for _i in range(abs(influence_delta)):
+					improve_relations(player)
+			elif influence_delta < 0:
+				for _i in range(abs(influence_delta)):
+					worsen_relations(player)
+
+
+func trait_ambitious(_influence_changes):
+	for player in turn_order:
+		if not _influence_changes[character_name].has(player):
+			continue
+		
+		var influence_delta = _influence_changes[character_name][player]
+		
+		if player != character_name and get_relation(player) < 2 and influence_delta > 0:
+			for _i in range(abs(influence_delta)):
+				improve_relations(player)
+		elif influence_delta < 0:
+			for _i in range(abs(influence_delta)):
+				worsen_relations(player)
+
 
 # ---------------- RECEIVE FUNCTIONS ----------------------------
 
@@ -491,6 +522,14 @@ func receive_turn_order_info(turn_message):
 
 func receive_influence_changes(_influence_list, _influence_changes):
 	pass
+
+
+func extract_influence_totals(_influence_list):
+	var influence_totals = {}
+	for player in _influence_list.keys():
+		influence_totals[player] = _influence_list[player][2]
+	
+	return influence_totals
 
 
 func receive_message(sender, _roun, message):

@@ -169,7 +169,7 @@ func execute_action():
 		
 		9: # change turn order
 			if get_influence() > 1:
-				gain_influence()
+				change_influence(1)
 		
 		10: # investigate trusting player
 			for enemy in players:

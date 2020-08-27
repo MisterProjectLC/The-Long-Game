@@ -66,12 +66,9 @@ func pages_setup(images):
 	['text', {'title':'PERSONAGENS - ANTES DE LER', 'space':220,
 	'text':"""Não se intimide com o tamanho deste documento. Dê uma passada primeiro, experimente por algumas partidas e volte depois quando estiver mais familiarizado com o jogo."""}
 	],
-	['text', {'title':'ORDEM DE TURNO', 'space':120, 
-	'text':"""Edraele/Salem/Thoren/Grolk"""}
-	], 
 	['text', {'title':'TERMOS COMUNS', 'space':440, 
 	'text':"""INFORMAÇÃO/MENSAGENS
-	Feita de três partes, em ordem: Sujeito/Ação/Objeto
+	Feita de três partes, em ordem: Agente/Postura/Alvo
 
 	RELAÇÕES
 	Níveis de relação:

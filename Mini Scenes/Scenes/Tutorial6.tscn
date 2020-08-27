@@ -1,18 +1,22 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=20 format=2]
 
-[ext_resource path="res://Mini Scenes/Intelligences/ZardriAI.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Mini Scenes/Intelligences/DrakothAI.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Mini Scenes/Scenes/Tutorial5.gd" type="Script" id=3]
+[ext_resource path="res://Mini Scenes/Scenes/Tutorial6.gd" type="Script" id=1]
+[ext_resource path="res://Mini Scenes/Intelligences/ThorenAI.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Mini Scenes/Intelligences/HorlinAI.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Art/Portraits/Salem V1.png" type="Texture" id=4]
-[ext_resource path="res://Art/Portraits/Drakoth.png" type="Texture" id=5]
+[ext_resource path="res://Art/Portraits/Horlin.png" type="Texture" id=5]
 [ext_resource path="res://Art/Portraits/Zardri.png" type="Texture" id=6]
 [ext_resource path="res://Mini Scenes/Pieces/StoneBackground.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Mini Scenes/Pieces/PaperBackground.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Art/Portraits/Drakoth.png" type="Texture" id=9]
 [ext_resource path="res://Mini Scenes/Popups/VictoryViewer.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Mini Scenes/Intelligences/SalemAI.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Fonts/LiberationSerif-Bold.ttf" type="DynamicFontData" id=12]
 [ext_resource path="res://Fonts/Kayambang.ttf" type="DynamicFontData" id=13]
 [ext_resource path="res://Mini Scenes/Popups/TutorialPopup.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Mini Scenes/Intelligences/DrakothAI.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Art/Portraits/Thoren V1.png" type="Texture" id=16]
+[ext_resource path="res://Mini Scenes/Intelligences/ZardriAI.tscn" type="PackedScene" id=17]
 
 [sub_resource type="DynamicFont" id=1]
 size = 30
@@ -22,12 +26,12 @@ font_data = ExtResource( 12 )
 size = 45
 font_data = ExtResource( 13 )
 
-[node name="Tutorial5" type="Node"]
-script = ExtResource( 3 )
+[node name="Tutorial6" type="Node"]
+script = ExtResource( 1 )
 victory_panel = ExtResource( 10 )
-address = "res://Mini Scenes/Scenes/Tutorial5.tscn"
+address = "res://Mini Scenes/Scenes/Tutorial6.tscn"
 popupbox = ExtResource( 14 )
-these_players = [ [ "Zardri", ExtResource( 6 ) ], [ "Drakoth", ExtResource( 5 ) ], [ "Salem", ExtResource( 4 ) ] ]
+these_players = [ [ "Zardri", ExtResource( 6 ) ], [ "Thoren", ExtResource( 16 ) ], [ "Horlin", ExtResource( 5 ) ], [ "Drakoth", ExtResource( 9 ) ], [ "Salem", ExtResource( 4 ) ] ]
 
 [node name="NinePatchRect" parent="." instance=ExtResource( 7 )]
 anchor_right = 1.0
@@ -69,7 +73,6 @@ T
 T"
 autowrap = true
 __meta__ = {
-"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -84,27 +87,20 @@ custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Objective"
 autowrap = true
 __meta__ = {
-"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
 [node name="SalemAI" parent="." instance=ExtResource( 11 )]
 
-[node name="ZardriAI" parent="." instance=ExtResource( 1 )]
-
-[node name="DrakothAI" parent="." instance=ExtResource( 2 )]
-
 [node name="Audio" type="AudioStreamPlayer" parent="."]
-[connection signal="changed_influence" from="." to="." method="_on_Tutorial5_changed_influence"]
-[connection signal="received_vote" from="." to="." method="_on_Tutorial5_received_vote"]
-[connection signal="advance_turn" from="SalemAI" to="." method="_on_SalemAI_advance_turn"]
-[connection signal="changed_stance" from="SalemAI" to="." method="_on_SalemAI_changed_stance"]
+
+[node name="ThorenAI" parent="." instance=ExtResource( 2 )]
+
+[node name="HorlinAI" parent="." instance=ExtResource( 3 )]
+
+[node name="ZardriAI" parent="." instance=ExtResource( 17 )]
+
+[node name="DrakothAI" parent="." instance=ExtResource( 15 )]
 [connection signal="improve_relations" from="SalemAI" to="SalemAI" method="improve_relations"]
-[connection signal="pressed_influence" from="SalemAI" to="." method="_on_SalemAI_pressed_influence"]
-[connection signal="pressed_info" from="SalemAI" to="." method="_on_SalemAI_pressed_info"]
-[connection signal="pressed_opponent" from="SalemAI" to="." method="_on_SalemAI_pressed_opponent"]
 [connection signal="set_relations" from="SalemAI" to="SalemAI" method="set_relations"]
 [connection signal="worsen_relations" from="SalemAI" to="SalemAI" method="worsen_relations"]
-[connection signal="improve_relations" from="DrakothAI" to="DrakothAI" method="improve_relations"]
-[connection signal="set_relations" from="DrakothAI" to="DrakothAI" method="set_relations"]
-[connection signal="worsen_relations" from="DrakothAI" to="DrakothAI" method="worsen_relations"]

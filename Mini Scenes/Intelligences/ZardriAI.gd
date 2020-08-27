@@ -30,7 +30,6 @@ func receive_report_info(reports): #report = {'player':[stance1, stance2, points
 		var report = reports[player_name]
 		
 		info_list[[player_name, report[1], character_name]] = get_current_round()
-		
 		trait_hatred(report, player_name)
 		
 	forget_info()
@@ -92,6 +91,9 @@ func receive_relation(relation, enemy_name, opponent_name):
 			relations[opponent_name] = 1
 
 
+func receive_influence_changes(_influence_list, _influence_changes):
+	trait_attentive(_influence_changes)
+
 # ----------------- HELPER REACTIONS -----------------
 
 
@@ -102,19 +104,20 @@ func execute_action():
 	match (priority_lister):
 		1: # attack furious
 			attack(2)
+		
 		2: # attack hostile
 			attack(1)
-		3: # tell lies to hostiles
-			if get_current_round() % 2 == 0:
-				for enemy_name in turn_order:
-					if relations[enemy_name] == 1:
-						for memory in memory_list:
-							if memory_list[memory][1] != enemy_name:
-								denounce(memory[0], memory[1], memory[2], enemy_name)
+		
+		3: # reduce hostile influence
+			for player in turn_order:
+				if get_relation(player) >= 1:
+					change_influence(-1, player)
+		
 		4: # investigate suspect
 			for enemy_name in turn_order:
 				if relations[enemy_name] == 0:
 					_investigate(enemy_name)
+		
 		5: # do nothing
 			spend_action()
 			return

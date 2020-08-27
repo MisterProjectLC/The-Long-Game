@@ -63,6 +63,10 @@ func receive_vote(voter, vote):
 	trait_ignorant_diplomatic(voter, vote)
 
 
+func receive_influence_changes(_influence_list, _influence_changes):
+	trait_attentive(_influence_changes)
+
+
 # process investigation -------------
 func receive_matchtable_info(en_stances, op_stances, enemy_requested_name, opponent_requested_name):
 	.receive_matchtable_info(en_stances, op_stances, enemy_requested_name, opponent_requested_name)
@@ -175,20 +179,35 @@ func execute_action():
 				if relations[enemy[0]] == 0 or relations[enemy[0]] == 1:
 					_investigate(enemy[0])
 
-		4: # attack furious
+		4: # reduce enraging influence
+			for player in turn_order:
+				if get_relation(player) >= 2:
+					change_influence(-1, player)
+
+		5: # attack furious
 			attack(2)
 
-		5: # investigate trustful player
+		6: # investigate trustful player
 			for enemy in players:
 				if relations[enemy[0]] == -1:
 					_investigate(enemy[0])
 
-		6: # increase influence
+		7: # increase influence
 			if get_influence() > 2:
 				change_influence(1)
 
-		7: # attack hostile
+		8: # increase ally influence
+			for player in turn_order:
+				if get_relation(player) <= -1 and (turn_order[1] != player or 
+													not (opponent_trait_list[turn_order[0]].has("Heir") and
+													get_relation(turn_order[0] < 0))
+												):
+					change_influence(-1, player)
+
+		9: # attack hostile
 			attack(1)
+		
+		
 
 		8: # do nothing
 			spend_action()

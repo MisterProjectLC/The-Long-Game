@@ -64,12 +64,9 @@ func pages_setup(images):
 	[['text', {'title':'CHARACTERS - BEFORE READING',
 	'text':"""Don't be intimidated by the size of this document. Skim it over first, experiment for a few games and come back later once you become more familiarized with the game."""}
 	],
-	['text', {'title':'TURN ORDER', 
-	'text':"""Edraele/Obrulena/Horlin/Salem/Thoren/Kallysta/Grolk/Zardri"""}
-	], 
 	['text', {'title':'COMMON TERMS', 
 	'text':"""INFORMATION/MESSAGES
-	Made up of three parts, in order: Subject/Action/Object
+	Made up of three parts, in order: Agent/Stance/Target
 
 	RELATIONSHIPS
 	Relation track:
@@ -102,7 +99,8 @@ func pages_setup(images):
 	-SUSPICIOUS of Horlin.
 	-SUSPICIOUS of Obrulena.
 	-HOSTILE to Thoren.
-	-SUSPICIOUS to Edraele."""}
+	-SUSPICIOUS to Edraele.
+	-HOSTILE to Drakoth."""}
 	],
 	['text', {'title':'TRAITS - TL;DR',
 	'text':"""Grolk doesn't get angry with battles, but does get angry with players who betray him or get slaughtered by him.
@@ -162,12 +160,13 @@ func pages_setup(images):
 	-TRUSTFUL of Horlin.
 	-SUSPICIOUS of Obrulena.
 	-HOSTILE to Thoren.
-	-SUSPICIOUS to Edraele."""}
+	-SUSPICIOUS of Edraele.
+	-SUSPICIOUS of Drakoth."""}
 	],
 	['text', {'title':'TRAITS - TL;DR',
 	'text':"""Zardri's main strategy is betrayal. When someone is being overwhelmed by attacks, Zardri takes this opportunity to
 	backstab them in their most vulnerable state. He's also quite wary of getting backstabbed himself, and as such always disbelieves
-	information from others and becomes enraged at the first sign of danger.'"""}
+	information from others and becomes enraged at the first sign of danger."""}
 	],
 	['text', {'title':'AMBUSHER', 'color':Color.mediumvioletred,
 	'text':"""Becomes HOSTILE against Suspected players who are already HOSTILE/ENRAGED against two or more other players."""}
@@ -219,7 +218,8 @@ func pages_setup(images):
 	-SUSPICIOUS of Horlin.
 	-SUSPICIOUS of Obrulena.
 	-SUSPICIOUS of Thoren.
-	-SUSPICIOUS of Edraele."""}
+	-SUSPICIOUS of Edraele.
+	-SUSPICIOUS of Drakoth."""}
 	],
 	['text', {'title':'TRAITS - TL;DR', 'space':470, 
 	'text':"""Kallysta's individualistic nature makes her unable to become Friendly to someone. She is quite good at finding and interpreting information, and uses this skill to predict other players' behavior.
@@ -281,7 +281,8 @@ func pages_setup(images):
 	-SUSPICIOUS of Kallysta.
 	-FRIENDLY with Obrulena.
 	-TRUSTFUL of Thoren.
-	-TRUSTFUL of Edraele."""}
+	-TRUSTFUL of Edraele.
+	-TRUSTFUL of Drakoth."""}
 	],
 	['text', {'title':'TRAITS - TL;DR', 'space':480, 
 	'text':("Horlin is a terrible general, but a great writer. As such, he interprets messages received not as information, but as " +
@@ -338,7 +339,8 @@ func pages_setup(images):
 	-TRUSTFUL of Kallysta.
 	-TRUSTFUL of Horlin.
 	-TRUSTFUL of Thoren.
-	-SUSPICIOUS of Edraele."""}
+	-SUSPICIOUS of Edraele.
+	-TRUSTFUL of Drakoth."""}
 	],
 	['text', {'title':'TRAITS - TL;DR', 'space':380, 
 	'text':"""Obrulena, as a promoter of peace, quickly makes friends to those she corresponds with or is already a friend of a friend. 
@@ -409,7 +411,8 @@ func pages_setup(images):
 	-SUSPICIOUS of Kallysta.
 	-TRUSTFUL of Horlin.
 	-SUSPICIOUS of Obrulena.
-	-TRUSTFUL of Edraele."""}
+	-TRUSTFUL of Edraele.
+	-TRUSTFUL of Drakoth."""}
 	],
 	['text', {'title':'TRAITS - TL;DR', 'space':480, 
 	'text':"""Thoren believes in his friends and mostly disbelieves his enemies. He tries to investigate suspicious info, but ignores it if he can't.

@@ -93,6 +93,11 @@ func choose_proposal():
 	
 	return [0, character_name]
 
+
+func receive_influence_changes(_influence_list, _influence_changes):
+	trait_attentive(_influence_changes)
+	trait_ambitious(_influence_changes)
+
 # process investigation -------------
 
 func receive_points_info(info):
@@ -142,6 +147,7 @@ func receive_message(sender, roun, message):
 		snitch_list.append([message[2], message[1], message[0]])
 		
 	receive_information(roun, message)
+
 
 # process fact
 func receive_fact(roun, fact):
@@ -358,10 +364,15 @@ func host_action():
 			say_to_list([1], 1, [-2, -1], 'tell', false, 'Brotherhood')
 
 		6: # change turn order
+			for player in turn_order:
+				if get_relation(player) >= 2:
+					change_influence(-1, player)
+
+		7: # change turn order
 			if get_influence() > 1:
 				change_influence(1)
 
-		7: # do nothing
+		8: # do nothing
 			spend_action()
 			return
 			

@@ -145,14 +145,6 @@ func advance_turn(_char):
 	_advance_turn(_char)
 
 
-func gain_influence(character_name):
-	_gain_influence(character_name)
-
-
-func lose_influence(character_name):
-	_lose_influence(character_name)
-
-
 func _on_SalemAI_advance_turn(_character_name):
 	if current_text == 15:
 		advance_popup(true)

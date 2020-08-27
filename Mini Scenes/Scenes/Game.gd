@@ -22,6 +22,9 @@ var decree = []
 
 var dip_phrases
 
+signal received_vote
+signal changed_influence
+
 # ----------------- SETUP ---------------
 
 func language(language):
@@ -31,7 +34,7 @@ func language(language):
 # ------------------ MAIN STUFF, TURN ------------------------
 
 # setup
-func game_setup(_new_players, _turn_order):
+func game_setup(_new_players, _turn_order, toggle_charismatic = true):
 	# language
 	language(Global.get_language())
 	Audio.play_music(Audio.game_theme)
@@ -55,14 +58,15 @@ func game_setup(_new_players, _turn_order):
 	
 	# Charismatic
 	randomize()
-	var opponent_count = players.size()-1
-	var a = randi() % opponent_count
-	for i in range(players.size()):
-		if i != a:
-			continue
-	
-		if players[i][0] != player_character:
-			ai_node(players[i][0]).improve_relations(player_character)
+	if toggle_charismatic:
+		var opponent_count = players.size()-1
+		var a = randi() % opponent_count
+		for i in range(players.size()):
+			if i != a:
+				continue
+		
+			if players[i][0] != player_character:
+				ai_node(players[i][0]).improve_relations(player_character)
 	
 	# start game
 	start_round()
@@ -96,6 +100,9 @@ func start_round():
 				if player[0] == 'Salem':
 					find_node(player2[0], true, false).new_stance(0)
 	
+	for delta in influence_deltas.values():
+		delta.clear()
+	
 	# start turn
 	if ai_node(turn_order[0]).has_method('start_turn'):
 		ai_node(turn_order[0]).start_turn()
@@ -125,8 +132,6 @@ func advance_round():
 	
 	# new turn order
 	sort_turn_order()
-	for delta in influence_deltas.values():
-		delta.clear()
 	
 	# for each player... prisoner's dilemma
 	for player in players:
@@ -238,6 +243,8 @@ func change_influence(change, character_name, target = ''):
 		influences[target][1][character_name] += change
 	else:
 		influences[target][1][character_name] = change
+	
+	emit_signal("changed_influence", change, character_name, target)
 
 
 func receive_proposal(leader, action, object):
@@ -254,6 +261,8 @@ func receive_vote(voter, vote):
 	vote_count[vote+1] += 1
 	
 	voters[voter] = vote
+	
+	emit_signal("received_vote", voter, vote)
 
 
 func send_decree(player):

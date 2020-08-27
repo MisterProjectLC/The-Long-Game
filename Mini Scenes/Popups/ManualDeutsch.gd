@@ -65,12 +65,9 @@ func pages_setup(images):
 	['text', {'title':'CHARAKTER - VOR DEM LESEN', 'space':270,
 	'text':"""Lassen Sie sich nicht durch den Umfang dieses Dokuments einschüchtern. Überfliegen Sie es zuerst, experimenten Sie für ein paar Spielen und kommen Sie wieder, wenn Sie sich besser an das Spiel gewöhnt haben."""}
 	],
-	['text', {'title':'REIHENFOLGE', 'space':120, 
-	'text':"""Edraele/Salem/Obrulena/Thoren/Kallysta/Grolk"""}
-	], 
 	['text', {'title':'UEBLICHE BEGRIFFE', 'space':440, 
 	'text':"""INFORMATION/BRIEFE
-	Aus drei Teilen, der Reihe nach: Subjekt/Aktion/Objekt
+	Aus drei Teilen, der Reihe nach: Agent/Position/Ziel
 
 	RELATIONEN
 	Relation-Niveau:

@@ -16,7 +16,6 @@ func _ready():
 # start turn
 func start_turn():
 	print_turn()
-	
 	.start_turn()
 
 

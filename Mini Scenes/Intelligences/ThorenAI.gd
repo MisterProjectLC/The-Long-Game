@@ -38,7 +38,6 @@ func receive_report_info(reports): #report = {'player':[stance1, stance2, points
 		
 		# Justice
 		trait_justice(report, player_name)
-		
 		receive_fact(get_current_round(), [player_name, report[1], character_name])
 		
 	forget_info()
@@ -74,6 +73,11 @@ func choose_proposal():
 			return [1, player]
 	
 	return [0, character_name]
+
+
+func receive_influence_changes(_influence_list, _influence_changes):
+	trait_attentive(_influence_changes)
+	trait_ambitious(_influence_changes)
 
 
 # process investigation -------------

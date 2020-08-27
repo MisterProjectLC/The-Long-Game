@@ -4,6 +4,6 @@
 
 [node name="ZardriAI" type="Node"]
 script = ExtResource( 1 )
-[connection signal="gain_rep" from="." to="." method="gain_rep"]
-[connection signal="lose_rep" from="." to="." method="lose_rep"]
-[connection signal="set_rep" from="." to="." method="set_rep"]
+[connection signal="improve_relations" from="." to="." method="improve_relations"]
+[connection signal="set_relations" from="." to="." method="set_relations"]
+[connection signal="worsen_relations" from="." to="." method="worsen_relations"]

@@ -4,3 +4,6 @@
 
 [node name="DrakothAI" type="Node"]
 script = ExtResource( 1 )
+[connection signal="improve_relations" from="." to="." method="improve_relations"]
+[connection signal="set_relations" from="." to="." method="set_relations"]
+[connection signal="worsen_relations" from="." to="." method="worsen_relations"]

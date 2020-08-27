@@ -74,6 +74,10 @@ func choose_proposal():
 	return [0, character_name]
 
 
+func receive_influence_changes(_influence_list, _influence_changes):
+	trait_ambitious(_influence_changes)
+
+
 # process investigation -------------
 func receive_matchtable_info(en_stances, op_stances, enemy_requested_name, opponent_requested_name):
 	# Intuition
