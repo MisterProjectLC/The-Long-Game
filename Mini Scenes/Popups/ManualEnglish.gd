@@ -33,7 +33,7 @@ func pages_setup(images):
 	],
 	['text', {'title':'INFLUENCE',
 	'text':"""Influence is a measure of power and notoriety in the land. Players with greater Influence play ahead in the turn order and are more likely to receive messages and get attacked.
-	A player can change their placing in the Influence track using the buttons on the lower part of the screen. Be aware that the track only updates at the end of each round."""}
+	A player can change their placing (and the placing of others) in the Influence track using the Influence Screen. Be aware that the track only updates at the end of each round."""}
 	],
 	['text', {'title':'DIPLOMACY', 
 	'text':"""Finally, there's DIPLOMACY. Using the DIPLOMACY AREA menu shown above, the player can send messages to other characters. Likewise, other characters may send messages to the player from time to time.
@@ -196,14 +196,13 @@ func pages_setup(images):
 	['text', {'title':'ACTION PRIORITY',
 	'text':"""1- Attack an ENRAGING player.
 	2- Attack a HOSTILIZED player.
-	3- If it's an even round,  tell a lie to a HOSTILIZED player.
+	3- Reduce the Influence of a HOSTILIZED/ENRAGING player.
 	4- Investigate a SUSPECTED player."""}
 	],
 	['text', {'title':'VOTING POLICIES',
 	'text':"""1- Nay if it’s an attack against himself.
 	2a- Aye if it's an attack against someone else.
-	2b- Aye if it’s peace with himself.
-	"""}
+	2b- Aye if it’s peace with himself."""}
 	]],
 	
 	# Kallysta
@@ -225,6 +224,9 @@ func pages_setup(images):
 	'text':"""Kallysta's individualistic nature makes her unable to become Friendly to someone. She is quite good at finding and interpreting information, and uses this skill to predict other players' behavior.
 	Kallysta's signature trait, Chain-Breaker, makes her Hostile to players with multiple allies. Using diplomacy and investigation, the tiefling leader can easily dismantle friendships within one or two turns.
 	She also reacts to received information appropriately, defending herself from enemies."""}
+	],
+	['text', {'title':'ATTENTIVE', 'color':Color.navyblue,
+	'text':"""Degrades her relation with players who improve the Influence of ENRAGING players. The opposite happens with non-ENRAGING players who reduce it instead."""}
 	],
 	['text', {'title':'PARANOID', 'space':170, 'color':Color.darkgray,
 	'text':"""Becomes ENRAGED to a player she discovers is planning to attack her or is HOSTILE/ENRAGED against her."""}
@@ -257,16 +259,16 @@ func pages_setup(images):
 	  4a- If Y has Allegiances and is ENRAGED with Z, tell Y that X will ally with Z.
 	  4b- If Y has Alliance and is TRUSTFUL/FRIENDLY both to her and Z, tell Y that X will attack Z.
 	5- Attack a HOSTILIZED player.
-	6- Tell a SUSPECTED player she will co-op with them.
-	7- Investigate a HOSTILIZED player.
-	8- Investigate a TRUSTED player."""}
+	6- If the Leader is a HOSTILIZED/ENRAGING player, decrease their Influence.
+	7- Tell a SUSPECTED player she will co-op with them.
+	8- Investigate a HOSTILIZED player.
+	9- Investigate a TRUSTED player."""}
 	],
 	['text', {'title':'VOTING POLICIES',
 	'text':"""1- Nay if it’s an attack against herself.
 	2a- Aye if it's an attack against a HOSTILIZED/ENRAGING player.
 	2b- Aye if it’s peace with herself.
-	3- Nay if the leader is HOSTILIZED/ENRAGING.
-	"""}
+	3- Nay if the leader is HOSTILIZED/ENRAGING."""}
 	]],
 	
 	# Horlin
@@ -288,6 +290,9 @@ func pages_setup(images):
 	'text':("Horlin is a terrible general, but a great writer. As such, he interprets messages received not as information, but as " +
 	"requests. When someone sends him a request, he tries to falsify one of his letters and send them to the requester, which they can use " +
 	"as they see fit. Apart from that, Horlin has pretty average traits, reacting to other types of information appropriately.")}
+	],
+	['text', {'title':'ATTENTIVE', 'color':Color.navyblue,
+	'text':"""Degrades his relation with players who improve the Influence of ENRAGING players. The opposite happens with non-ENRAGING players who reduce it instead."""}
 	],
 	['text', {'title':'REACTIVE', 'space':250, 'color':Color.aqua,
 	'text':"""Becomes HOSTILE (unless already ENRAGED) to a player he discovers is planning to attack him or is HOSTILE/ENRAGED against him. Becomes SUSPICIOUS of an ENRAGING/HOSTILIZED player that he discovers is planning to ally with him."""}
@@ -313,10 +318,12 @@ func pages_setup(images):
 	'text':"""1- With his current request, modify a letter from X until it mirrors the request.
 	2- With his current request, resend the modified letter to the requester. Advance to next request.
 	3- Investigate a SUSPECTED/HOSTILIZED player.
-	4- Attack an ENRAGING player.
-	5- Investigate a TRUSTED player.
-	6- If he's not the second in the Influence Track, increase his Influence.
-	7- Attack a HOSTILIZED player."""}
+	4- If an ENRAGING player has equal or more Influence than him, decrease it.
+	5- Attack an ENRAGING player.
+	6- Investigate a TRUSTED player.
+	7- If he's not the second in the Influence Track, increase his Influence.
+	8- Attack a HOSTILIZED player.
+	9- Increase the Influence of a TRUSTED/BEFRIENDED player, unless they’re in second place and the leader has HEIR and is TRUSTED/BEFRIENDED."""}
 	],
 	['text', {'title':'VOTING POLICIES',
 	'text':"""1- Nay if it’s an attack against himself.
@@ -346,6 +353,9 @@ func pages_setup(images):
 	'text':"""Obrulena, as a promoter of peace, quickly makes friends to those she corresponds with or is already a friend of a friend. 
 	Conversely, any slaughter someone commits is a grave offense to her dogmas. She always believes her allies and never believes players whom she doesn't yet trust. Due to her traditional views, she also has 
 	greater respect to the player with the most Influence."""}
+	],
+	['text', {'title':'AMBITIOUS', 'color':Color.orangered,
+	'text':"""Degrades her relation with players who reduce her Influence. The opposite happens with non-ENRAGING players who improve it instead."""}
 	],
 	['text', {'title':'SERENE', 'space':140, 'color':Color.whitesmoke,
 	'text':"""Her Relation with a player improves every time she sends a letter to them."""}
@@ -381,11 +391,11 @@ func pages_setup(images):
 	  2b- Otherwise, tell them that they will co-op with them.
 	3- Tell a SUSPECTED/TRUSTED player without Intrigue that she will coop with them.
 	4- Investigate the Subject of a message she believes in that involves an attack.
-	4- Attack an ENRAGING player.
-	5- Attack a HOSTILIZED player.
-	6- Tell a HOSTILIZED player she will attack them.
-	7- If she's not the first in the Influence Track, increase her Influence, unless the leader has Heir and is TRUSTED/BEFRIENDED.
-	8- Investigate a SUSPECTED player."""}
+	5- Attack an ENRAGING player.
+	6- Attack a HOSTILIZED player.
+	7- Tell a HOSTILIZED player she will attack them.
+	8- If she's not the first in the Influence Track, increase her Influence, unless the leader has Heir and is TRUSTED/BEFRIENDED.
+	9- Investigate a SUSPECTED player."""}
 	],
 	['text', {'title':'VOTING POLICIES',
 	'text':"""1- Aye if the Leader is BEFRIENDED and it’s an attack against a HOSTILIZED/ENRAGING player.
@@ -418,6 +428,12 @@ func pages_setup(images):
 	'text':"""Thoren believes in his friends and mostly disbelieves his enemies. He tries to investigate suspicious info, but ignores it if he can't.
 	He also hates players that attack his friends, and befriends players that like his friends. However, if someone befriends his enraging enemies, he'll become hostile towards them.
 	Thoren reacts appropriately to information he believes, attacking enemies who attack him and making peace with those that do the same. He hates being betrayed."""}
+	],
+	['text', {'title':'ATTENTIVE', 'color':Color.navyblue,
+	'text':"""Degrades his relation with players who improve the Influence of ENRAGING players. The opposite happens with non-ENRAGING players who reduce it instead."""}
+	],
+	['text', {'title':'AMBITIOUS', 'color':Color.orangered,
+	'text':"""Degrades his relation with players who reduce his Influence. The opposite happens with non-ENRAGING players who improve it instead."""}
 	],
 	['text', {'title':'REACTIVE', 'space':250, 'color':Color.aqua,
 	'text':"""Becomes HOSTILE (unless already ENRAGED) to a player he discovers is planning to attack him or is HOSTILE/ENRAGED against him. Becomes SUSPICIOUS of an ENRAGING/HOSTILIZED player that he discovers is planning to ally with him."""}
@@ -499,7 +515,13 @@ func pages_setup(images):
 	['text', {'title':'AGENDA', 'color':Color.pink,
 	'text':"""Her Action Priority changes at the beginning of each round based on her Relation with the PLAYER CHARACTER."""}
 	],
-		['text', {'title':'TREACHERY', 'color':Color.darkred,
+	['text', {'title':'ATTENTIVE', 'color':Color.navyblue,
+	'text':"""Degrades her relation with players who improve the Influence of ENRAGING players. The opposite happens with non-ENRAGING players who reduce it instead."""}
+	],
+	['text', {'title':'AMBITIOUS', 'color':Color.orangered,
+	'text':"""Degrades her relation with players who reduce her Influence. The opposite happens with non-ENRAGING players who improve it instead."""}
+	],
+	['text', {'title':'TREACHERY', 'color':Color.darkred,
 	'text':"""Becomes HOSTILE (unless already ENRAGED) to to players that get SLAUGHTERED (Passive vs Agressive) by her."""}
 	],
 	['text', {'title':'JUSTICE', 'color':Color.darkslategray,
@@ -577,14 +599,12 @@ func pages_setup(images):
 	'text':"""1- Nay if it’s an attack against herself or a BEFRIENDED player.
 	2- Aye if it's an attack against a HOSTILIZED/ENRAGING player.
 	3- Aye if the Leader is TRUSTED/BEFRIENDED.
-	4- Nay if the leader is HOSTILIZED/ENRAGING.
-	"""}
+	4- Nay if the leader is HOSTILIZED/ENRAGING."""}
 	],
 	['text', {'title':'PROPOSAL PRIORITY',
 	'text':"""1- Attack on an ENRAGING player.
 	2- Attack on a HOSTILIZED player.
-	3- Peace to himself.
-	"""}
+	3- Peace to himself."""}
 	]],
 	
 	# Drakoth
@@ -614,7 +634,11 @@ func pages_setup(images):
 	'text':"""His Proposal Priority changes at the beginning of each round based on his Relation with the Player Character."""}
 	],
 	['text', {'title':'HEIR', 'color':Color.darkviolet,
-	'text':"""Becomes ENRAGED to players who steal his Leader position."""}
+	'text':("Becomes ENRAGED with players that, through reducing his Influence or increasing someone else’s, " +
+	"makes him lose position in the Influence Track.")}
+	],
+	['text', {'title':'AMBITIOUS', 'color':Color.orangered,
+	'text':"""Degrades his relation with players who reduce his Influence. The opposite happens with non-ENRAGING players who improve it instead."""}
 	],
 	['text', {'title':'REACTIVE', 'space':250, 'color':Color.aqua,
 	'text':"""Becomes HOSTILE (unless already ENRAGED) to a player he discovers is planning to attack him or is HOSTILE/ENRAGED against him. Becomes SUSPICIOUS of an ENRAGING/HOSTILIZED player that he discovers is planning to ally with him."""}
@@ -649,16 +673,17 @@ func pages_setup(images):
 	'text':"""1- Attack an ENRAGING player.
 	2- Tell a TRUSTED/BEFRIENDED player with BROTHERHOOD that an ENRAGING player will attack him.
 	3- Attack a HOSTILIZED player.
-	4- If he's not the first in the Influence track, increase his Influence.
+	4- If there’s someone with more or equal Influence than him, increase his Influence.
 	5- Tell a TRUSTED/BEFRIENDED player with BROTHERHOOD that a HOSTILIZED player will attack him.
 	6- Investigate a SUSPICIOUS player.
-	7a- If it's an even round, investigate a HOSTILIZED/ENRAGING player.
-	7b- If it's an odd round, investigate a TRUSTED/BEFRIENDED player."""}
+	7- Increase the Influence of a BEFRIENDED player who’s not the second in the Influence Track (unless there’s already a BEFRIENDED player in that position).
+	8a- If it's an even round, investigate a HOSTILIZED/ENRAGING player.
+	8b- If it's an odd round, investigate a TRUSTED/BEFRIENDED player."""}
 	],
 	['text', {'title':'VOTING POLICIES',
 	'text':"""1- Nay."""}
 	],
-	['text', {'title':'PROPOSAL PRIORITY (SUSPICIOUS/TRUSTFUL/FRIENDLY)',
+	['text', {'title':'PROPOSAL PRIORITY (SUSP/TRUSTFUL/FRIENDLY)',
 	'text':"""1- If the sum of all votes from TRUSTED/BEFRIENDED players is over 2, peace to himself.
 	2- If no TRUSTED/BEFRIENDED players with ALLEGIANCES are ENRAGED with a SUSPECTED player, peace to this SUSPECTED player.
 	3- If no TRUSTED/BEFRIENDED players are BEFRIENDED with a HOSTILIZED/ENRAGING player, attack on this HOSTILIZED/ENRAGING player.

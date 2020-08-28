@@ -105,6 +105,3 @@ __meta__ = {
 [connection signal="pressed_opponent" from="SalemAI" to="." method="_on_SalemAI_pressed_opponent"]
 [connection signal="set_relations" from="SalemAI" to="SalemAI" method="set_relations"]
 [connection signal="worsen_relations" from="SalemAI" to="SalemAI" method="worsen_relations"]
-[connection signal="improve_relations" from="DrakothAI" to="DrakothAI" method="improve_relations"]
-[connection signal="set_relations" from="DrakothAI" to="DrakothAI" method="set_relations"]
-[connection signal="worsen_relations" from="DrakothAI" to="DrakothAI" method="worsen_relations"]

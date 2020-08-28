@@ -123,40 +123,86 @@ func setup_texts():
 			"de Falsificação."), 
 			"Clique no botão de Influência, ao lado de Falsificação."],
 			#^ 18
-			[("Players are displayed by influence rank, and the Influence alterations to each are shown to the right of " +
-			"each profile.")],
-			[("So, Zardri has reduced Drakoth's Influence. While doing so will help us get the throne, it will " +
-			"also worsen our relations with Drakoth. We must wait for the right moment.")],
-			[("What we will do instead is increase our own Influence, and Zardri's, too - the explanation for this will " +
-			"come later. Increase our own Influence by 1 and Zardri's by 2 and press Finish."), 
-			"Increase our own Influence by 1 and Zardri's by 2 and press Finish."],
+			[("Jogadores são mostrados por nível de influência, e as alterações de Influência para cada estão ao lado " +
+			"direito de cada perfil.")],
+			[("Bom, Zardri reduziu a Influência de Drakoth. Fazer isso nos ajudaria a conseguir o trono, mas pioraria " +
+			"nossas relações com Drakoth. Esperaremos pelo momento certo.")],
+			[("O que faremos ao invés disso é aumentar a nossa Influência e a de Zardri - a explicação virá daqui a pouco. " +
+			"Aumente nossa Influência em 1, a de Zardri em 2 e pressione Finalizar."), 
+			"Aumente nossa Influência em 1, a de Zardri em 2 e pressione Finalizar."],
 			#^ 21
-			[("Now, advance your turn."), "Advance your turn."],
-			[("Again, vote Null on the proposal."), "Vote Null on the proposal."],
-			[("This is the time. Last turn, we setup Zardri to become our second-in-command. Now, use 2 Actions to reduce " +
-			"Drakoth's Influence, and one to attack Drakoth."), 
-			"Use 2 Actions to reduce Drakoth's Influence, and one to attack Drakoth."],
+			[("Agora, avance o turno."), "Avance o turno."],
+			[("Vote Nulo novamente."), "Vote Nulo novamente."],
+			[("Este é o momento. No último turno, preparamos Zardri para ser nosso mão direita. Agora, use 2 Ações para " +
+			"reduzir a Influência de Drakoth, e uma para atacá-lo."), 
+			"Use 2 Ações para reduzir a Influência de Drakoth, e uma para atacá-lo."],
 			#^ 24
-			[("Excellent. Let's advance the turn."), "Advance your turn."],
-			[("Done! You're in power, Zardri is second. You may choose any Decree you want, but we recommend " +
-			"attacking Drakoth. Anything else will get rejected by the others.")],
-			[("Info about their Voting Policies can be checked by clicking the button to the right of Info. When you're done, " +
-			"advance your turn."), "When you're done, advance your turn."],
+			[("Excelente. Vamos avançar o turno."), "Avance o turno."],
+			[("Feito! Você está em poder e Zardri está em segundo. Você pode escolher qualquer Decreto, mas " +
+			"recomendamos atacar Drakoth, ou a proposta pode ser rejeitada.")],
+			[("Info sobre suas Políticas de Votação pode ser checada clicando no botão a direita de Info. Quando estiver " +
+			"pronto, avance o turno."), "Quando estiver pronto, avance o turno."],
 			[("")]
 			#^ 27
 			]
 		2:
 			texts = [[''],
-			[("EDRAELE, THE ELVEN QUEEN has arrived with her armies, claiming to have come to support Thoren's " +
-			"campaign. You suspect, however, that she's here for power and influence.")],
-			[("Now, you'll have to play a match against these three. Here's a summary of each opponent:")],
-			[("Obrulena is a pacifist monk, and as such only enters combat when there's no other option. Additionally, " +
-			"she frequently tries to mediate hostilities, ending them via diplomacy.")],
-			[("Kallysta is suspicious of powerful figures and always tries to undermine strong alliances. If you have " +
-			"many allies, be wary of her.")],
-			[("Finally, Edraele is a cunning and intelligent leader, piting players against each other " +
-			"and adjusting her behavior according to her opinion of the player character.")],
-			[("Good luck.")],
+			[("Es gibt noch eine weitere Schicht in THE LONG GAME: die Thron-Reihenfolge und der Rat.")],
+			[("Die Thron-Reihenfolge misst den Betrag von diplomatischen Macht und Einfluss, den ein Spieler in dem Reich hat.")],
+			[("Je mehr Einfluss ein Spieler hat, desto früher agiert er in der Runde und häufiger erhalt er Angriffe " +
+			"und Briefe. Außerdem ist die Reihenfolge ein wichtiger Teil des Rates.")],
+			[("Der Rat funktioniert wue folgt: bei jeder Runde wählt der erste Spieler der Thron-Reihenfolge " +
+			"einen Dekret-Vorschlag. Dekrete bestehen aus einer HALTUNG und einem ZIEL.")],
+			[("Danach stimmen alle andere Spieler über den Vorschlag ab. Die Stimme des zweiten Spielers der Reihenfolge " +
+			"zählt zweimal. Wenn es mehr Ja als Nein gibt, wird das Dekret genehmigt.")],
+			[("Falls das eintritt, sind alle Spieler gezwungen, die ausgewählte Haltung gegen das ausgewählte Ziel " +
+			"nächste Runde zu nehmen.")],
+			[("Berücksichtigte aber, dass beide Einflüssen und der Rat diplomatische Relationen auswirken " +
+			"können, je nachdem, wie du stimmst und agierst.")],
+			[("Angesichts dessen, lassen uns mit dem Tutorial anfangen. Fürs Erste stimme Ja auf Drakoths Vorschlag ab. " +
+			"Bald werden wir weiter über ihn erklären."), "Stimme Ja auf Drakoths Vorschlag ab."],
+			#^ 8
+			[("Gut. Mit den kürzlichen Konflikten haben Führer von verschiedenen Schichten angefangen, auf der Suche nach " +
+			"Machtkonsolidierung den Bereich sorgfältiger zu überwachen.")],
+			[("ZARDRI, DER KOBOLD ist ein Häuptling seines Stammes, und scheint, auf eine Gelegenheit zum Schlagen zu warten.")],
+			[("Zardri: Ghk! Mensch! Ja, du, hör mal: dieser Drakoth-Typ, er scheint stark, oder? Ja, na ja, was ist, " +
+			"wenn wir ihm hart in der Rücken fallen, eh? Nee, doch, nicht jetzt, aber, weißt du, später.")],
+			[("Auf der anderen Seite hat DRAKOTH, DER DRACHENGEBORENE behauptet, dass er kommt, um der Macht des Reiches " +
+			"zu demonstrieren und alle diese Unruhen zu enden.")],
+			[("Drakoth: Grüße. Ich bin Drakoth, Hochgeneral des Reiches und unzweifelhafter Thronfolger. Bist du derjeniger, " +
+			"der hinter diesem Konflikt steht? Nein? Hm, wir werden sehen.")],
+			[("Drakoth: Fürs Erste werde ich die Friede erzwingen. Aber ich weiß, wir eines Tages in " +
+			"Kämpf treffen werden. Und dann, du und der Kobold... heh, nein, ich verrate es nicht.")],
+			[("Fürs Erste, forsche Drakoth nach und prüfe seine Relation mit Zardri."), 
+			"Forsche Drakoth nach und prüfe seine Relation mit Zardri."],
+			#^ 15
+			[("Also steht Drakoth feindselig gegenüber Zardri. Lass uns die Runde beenden und sehen, was passiert."), 
+			"Beende die Runde."],
+			[("Gut! Drakoth ist wieder an der Macht. Diesmal werden wir Null abstimmen. 'Ja' würde Zardri ärgern, " +
+			"während 'Nein' Drakoth ärgern würde. Wir sollten neutral bleiben."), "Stimme Nein auf Drakoths Vorschlag ab."],
+			[("Okay. Diese Runde werden wir Einfluss-Änderungen machen. Klicke auf dem Einfluss-Button neben 'Fälschung'."),
+			"Klicke auf dem Einfluss-Button neben 'Fälschung'."],
+			#^ 18
+			[("Die Spieler werden nach Einflussrang angezeigt, und ihre Einfluss-Änderungen werden rechts neben ihrem Portäts gezeit.")],
+			[("Also hat Zardri Drakoths Einfluss reduziert. Obwohl das uns helfen wird, den Thron zu erobern, wird es " +
+			"unsere Relation mit Drakoth verschlechtern. Wir müssen warten.")],
+			[("Was wir stattdessen tun werden, ist, unsere eigene und Zardris Einfluss zu erhöhen. " +
+			"Erhöhe unsere Einfluss um 1 und Zardris um 2 und drücke Abschließen."), 
+			"Erhöhe unsere Einfluss um 1 und Zardris um 2 und drücke Abschließen."],
+			#^ 21
+			[("Jetzt beende die Runde."), "Beende die Runde."],
+			[("Stimme wieder Null auf den Vorschlag ab."), "Stimme Null auf den Vorschlag ab."],
+			[("Letzte Runde haben wir Zardri vorbereitet, die zweite Position zu erreichen. Verbringe " +
+			"2 Aktionen, um Drakoths Einfluss zu reduzieren, und eine, um Drakoth anzugreifen."), 
+			"Verbringe 2 Aktionen, um Drakoths Einfluss zu reduzieren, und eine, um Drakoth anzugreifen."],
+			#^ 24
+			[("Größartig. Lassen uns die Runde beenden."), "Beende die Runde."],
+			[("Fertig. Du bist an der Macht, Zardri ist zweiter. Du kannst jedes Dekret wählen, aber wir " +
+			"empfehlen, Drakoth angreifen. Alles andere wird nicht abgelehnt.")],
+			[("Info über Abstimmungspolitik können geprüft werden, indem du den Button rechts neben von Info klickst. Wenn " +
+			"du fertig bist, beende die Runde."), "Wenn du fertig bist, beende die Runde."],
+			[("")]
+			#^ 27
 			]
 
 

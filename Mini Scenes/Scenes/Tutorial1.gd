@@ -92,12 +92,12 @@ func setup_texts():
 			texts = [[''],
 			[('The Long Game ist ein Spiel über Diplomatie und Intrigue. Seine Hauptmechanik dreht sich um den Gefangendilemma - ' +
 			 'ein Gedankenexperiment mit Bezug zur Spieltheorie.')],
-			[('In jeder Runde wählt jeder Spieler eine Position (Passiv/Aggressiv) gegenüber einem anderen Spieler. ' +
-			'Um eine Position zu ändern, klicke auf den Button unter dem Porträt eines Spielers.'), ('Ändere deine Position, ' +
+			[('In jeder Runde wählt jeder Spieler eine Haltung (Passiv/Aggressiv) gegenüber einem anderen Spieler. ' +
+			'Um eine Haltung zu ändern, klicke auf den Button unter dem Porträt eines Spielers.'), ('Ändere deine Haltung, ' +
 			'indem den Button unter dem Porträt eines Spielers klicken.')],
-			[('Gut. Allgemein ist die passive Position diplomatischer und besser für beide beteiligte Spieler, aber lässt den ' +
+			[('Gut. Allgemein ist die passive Haltung diplomatischer und besser für beide beteiligte Spieler, aber lässt den ' +
 			'Einzelne ungeschützt, wenn der andere Spieler ihn attackiert.')],
-			[('Auf der anderen Seite, ist die agressive Position besser für den Einzelne, jedoch kostet sie eine Aktion' +
+			[('Auf der anderen Seite, ist die agressive Haltung besser für den Einzelne, jedoch kostet sie eine Aktion' +
 			'und erzeugt Ressentiment zwischen den Spielern.')],
 			[('Das Spiel dauert 6 Runde und jeder Spieler hat 3 Aktionen pro Runde. Neben Angriff können Aktionen auch' +
 			'mit NACHFORSCHUNGEN und DIPLOMATIE verbracht werden.')],

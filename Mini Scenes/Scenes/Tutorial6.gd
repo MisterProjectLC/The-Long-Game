@@ -55,17 +55,17 @@ func setup_texts():
 			]
 		2:
 			texts = [[''],
-			[("'Der Sohn des Kaisers, nach Schande und Verlust, steht wieder auf, und dreht sich um.'\nThat was the song to which bards played " +
-			"when Drakoth's allies came to his side.")],
-			[("Horlin and Thoren, two imperial loyalists, arrived to help Drakoth in his toil. As nobles and warriors alike " +
-			"declared their support for Drakoth publicly, his Influence rose again.")],
-			[("While you already know Thoren, Horlin is still a stranger to you. He's the mayor of Glittergold, a medium-sized " +
-			"village of gnomes.")],
-			[("Although their military is small and weak, Horlin thrives in his falsification abilities and influence " +
-			"manipulation.")],
-			[("Horlin: Morning, kid. Yeah, sorry about the whole Drakoth-is-my-king thing, but it just goes with the times. Hey, " +
-			"if you need any, uh, writing services, call me anytime.")],
-			[("With four players on the board, this is your last test. Good luck.")],
+			[("'Der Sohn des Kaisers, nach Schande und Verlust, steht wieder auf, und dreht sich um.'\nDas war das Lied, " +
+			"das Barden gesungen haben, als Drakoths Verbundete angekommen sind.")],
+			[("Horlin und Thoren, zwei Loyalisten des Reich, sind angekommen, um Drakoth zu helfen. Als " +
+			"vielen ihre Unterstützung für Drakoth erklärt, hat sein Einfluss wieder zugenommen.")],
+			[("Obwohl du schon Thoren kennst, ist Horlin noch ein Fremder für dich. Er ist der Hochbürgermeister von Glitzergold, " +
+			"ein mittelgroßes Dorf von Gnomen.")],
+			[("Trotz seines kleinen und schwachen Armees, blüht Horlins Volk wegen seinen Fälschungsfähigkeiten und Manipulation " +
+			"von Einflüssen.")],
+			[("Horlin: Morgen, Kid. Ja, entschuldigung für das ganze 'Drakoth ist mein Kaiser'-Ding, aber ich hatte halt keine " +
+			"Wahl. Ay, wenn du meine, uh, Schreibdienste brauchst, rufe mich jederzeit an.")],
+			[("Mit vier Spielern auf dem Brett ist das dein letzter Test. Viel Glück.")],
 			]
 
 

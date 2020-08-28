@@ -1,6 +1,6 @@
 extends Node
 
-var language = 0
+var language = 2
 var music_volume = 1
 var sounds_volume = 1
 
@@ -25,11 +25,11 @@ var de_options = {'Options':'Optionen', 'Volume':'Lautstaerke', 'Music':'Musik',
 var options = [en_options, br_options, de_options]
 
 var en_main = {'Turn Order':'Throne Order', 'Advance':'Advance', 'Points':'Points',
-				'Round':'Round', 'Message':'Message from', 'Forgery':'Forgery'}
+				'Round':'Round', 'Message':'Message from', 'Forgery':'Forgery', 'Influence':'Influence'}
 var br_main = {'Turn Order':'Ordem do Trono', 'Advance':'Avancar', 'Points':'Pontos',
-				'Round':'Round', 'Message':'Mensagem de', 'Forgery':'Falsific.'}
+				'Round':'Round', 'Message':'Mensagem de', 'Forgery':'Falsific.', 'Influence':'Influencia'}
 var de_main = {'Turn Order':'Reihenfolge', 'Advance':'Beenden', 'Points':'Punktzahl',
-				'Round':'Runde', 'Message':'Brief von', 'Forgery':'Faelschung'}
+				'Round':'Runde', 'Message':'Brief von', 'Forgery':'Faelschung', 'Influence':'Einfluss'}
 var mains = [en_main, br_main, de_main]
 
 var en_relations = {-2:'Friendly',-1:'Trusting', 0:'Suspicious', 1:'Hostile', 2:'Rageful'}
@@ -47,7 +47,7 @@ var br_panel = {'Close':'Fechar','Finish':'Finalizar', 'Info':'Info', 'Points':'
 var de_panel = {'Close':'Schlss.','Finish':'Abschliessen', 'Info':'Info', 'Points':'Punktzahl', 'Relations':de_relations,
 	'R':'','Relation':'s Relation\nmit', 'Send':'Senden', 'Diplomacy':'Diplomatiebereich', 
 	'Unknown':'Unbekannt', 'Recipient':'Recipient', 
-	'Subject':'Agent', 'Action':'Position', 'Object':'Ziel', 'Author':'Autor'}
+	'Subject':'Agent', 'Action':'Haltung', 'Object':'Ziel', 'Author':'Autor'}
 var panels = [en_panel, br_panel, de_panel]
 
 var en_council = {'Current':'Current Decree','Approved':'Decree Approved',
@@ -74,9 +74,9 @@ var br_stances = {'Agressive':'Agressiva', 'Passive':'Passiva'}
 var de_stances = {'Agressive':'Agressiv', 'Passive':'Passiv'}
 var stances = [en_stances, br_stances, de_stances]
 
-var en_tutorials = {'Part1':"Part #1: An Orc's Axe", 'Part2':"Part #2: A Monk's Letter"}
-var br_tutorials = {'Part1':'Parte #1: O Machado', 'Part2':'Parte #2: A Carta'}
-var de_tutorials = {'Part1':'Teil 1: Die Axt des Orks', 'Part2':'Teil 2: Die Brief der Monchin'}
+var en_tutorials = {'Part1':"Part #1: An Orc's Axe", 'Part2':"Part #2: A Monk's Letter", 'Part3':"Part #3: A Dragon's Decree"}
+var br_tutorials = {'Part1':'Parte #1: O Machado', 'Part2':'Parte #2: A Carta', 'Part3':"Parte #3: O Decreto"}
+var de_tutorials = {'Part1':'Teil 1: Die Axt des Orks', 'Part2':'Teil 2: Die Brief der Monchin', 'Part3':"Teil 3: Das Dekret des Drachens"}
 var tutorials = [en_tutorials, br_tutorials, de_tutorials]
 
 var results = ['Results', 'Resultados', 'Ergebnis']

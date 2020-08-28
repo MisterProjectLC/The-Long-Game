@@ -31,8 +31,8 @@ func pages_setup(images):
 	['image', {'image':images[1], 'space':350}
 	],
 	['text', {'title':'INFLUENCIA',
-	'text':"""Influência mede o poder e notoriedade de um jogador no reino. Jogadores com maior Influência agem antes no turno e têm uma maior chance de receberem mensagens ou serem atacados.
-	Um jogador pode mudar sua posição na ordem de Influência usando os botões na parte inferior da tela. Tenha em mente que a ordem apenas se atualiza no fim de cada round."""}
+	'text':"""Influência mede o poder e notoriedade de um jogador no reino. Jogadores com maior Influência agem antes no round e têm uma maior chance de receberem mensagens ou serem atacados.
+	Um jogador pode mudar sua posição (e a de outros) na ordem de Influência usando a tela de Influência. Tenha em mente que a ordem apenas se atualiza no fim de cada round."""}
 	],
 	['text', {'title':'DIPLOMACIA',
 	'text':"""Por fim, existe a DIPLOMACIA. Usando a ÁREA DE DIPLOMACIA mostrada acima, o jogador pode enviar mensagens para outros jogadores. Da mesma forma, outros jogadores podem enviar mensagens para o jogador de tempos em tempos.
@@ -48,9 +48,9 @@ func pages_setup(images):
 	forjar cartas falsas usando mensagens de outros jogadores, alterando seu conteúdo para depois re-enviá-las. Cada alteração custa 1 AÇÃO."""}
 	],
 	['text', {'title':'CONSELHO',
-	'text':"""No início de cada turno, o líder da Ordem do Trono propõe um Decreto para o Conselho. Um Decreto se
+	'text':"""No início de cada round, o líder da Ordem do Trono propõe um Decreto para o Conselho. Um Decreto se
 	consiste de uma Postura e um Alvo e, caso aprovado, força todos os jogadores a tomar a Postura escolhida contra o Alvo
-	escolhido, no próximo turno.
+	escolhido, no próximo round.
 	Após a proposta ter sido feita, cada jogador vota no Decreto, com o segundo jogador da Ordem tendo seu voto valer duas
 	vezes. Se houver mais 'Sim' do que 'Não', o Decreto é aprovado."""}
 	],
@@ -101,7 +101,8 @@ func pages_setup(images):
 	-SUSPEITO de Horlin.
 	-SUSPEITO de Obrulena.
 	-HOSTIL para Thoren.
-	-SUSPEITO de Edraele."""}
+	-SUSPEITO de Edraele.
+	-HOSTIL para Drakoth."""}
 	],
 	['text', {'title':'CARACTERISTICAS - TL;DR', 'space':420, 
 	'text':"""Grolk não se irrita com batalhas, mas odeia jogadores que o traem ou são massacradas por ele.
@@ -137,7 +138,8 @@ func pages_setup(images):
 	2- Ataca um jogador HOSTILIZADO.
 	3- Conta para um jogador CONFIÁVEL/AMIGO sobre sua relação com outros.
 	4- Conta para um jogador AMIGO sobre informações que ele tem.
-	5- Ataca um jogador SUSPEITADO."""}
+	5- Ataca um jogador SUSPEITADO.
+	6- Se não for o primeiro na Ordem de Influência, aumenta sua Influência."""}
 	],
 	['text', {'title':'POLITICA DE VOTACAO',
 	'text':"""1- Sim se for um ataque contra um jogador HOSTILIZADO/REVOLTANTE.
@@ -160,7 +162,8 @@ func pages_setup(images):
 	-SUSPEITO de Horlin.
 	-SUSPEITO de Obrulena.
 	-HOSTIL para Thoren.
-	-SUSPEITO de Edraele."""}
+	-SUSPEITO de Edraele.
+	-SUSPEITO de Drakoth."""}
 	],
 	['text', {'title':'CARACTERISTICAS - TL;DR',
 	'text':("A estratégia principal de Zardri é traição. Quando alguém está sendo atacado por múltiplos jogadores, Zardri toma " +
@@ -185,7 +188,7 @@ func pages_setup(images):
 	Se houve Massacre em qualquer lado: REVOLTADO
 	Se houve uma Batalha: HOSTIL
 	Se houve Cooperação: CONFIANTE 
-	Se não houve partida (Turno 1): SUSPEITO """}
+	Se não houve partida (Round 1): SUSPEITO """}
 	],
 	['text', {'title':'ESTUPIDO', 'color':Color.palegreen ,
 	'text':"""Sempre acredita no oposto de mensagens recebidas. Sua relação com um jogador se degrade em 1 toda vez que esse jogador enviar uma mensagem para ele."""}
@@ -196,14 +199,13 @@ func pages_setup(images):
 	['text', {'title':'PRIORIDADE DE ACAO',
 	'text':"""1- Ataca um jogador REVOLTANTE.
 	2- Ataca um jogador HOSTILIZADO.
-	3- Se for um turno par, conta uma mentira para um jogador HOSTILIZADO.
+	3- Reduz a Influência de um jogador HOSTILIZADO/REVOLTANTE.
 	4- Investiga um jogador SUSPEITADO."""}
 	],
 	['text', {'title':'POLITICA DE VOTACAO',
 	'text':"""1- Não se for um ataque contra ele mesmo.
 	2a- Sim se for um ataque contra qualquer outro jogador.
-	2b- Sim se for paz com ele mesmo.
-	"""}
+	2b- Sim se for paz com ele mesmo."""}
 	]],
 	# Kallysta
 	[['text', {'title':'KALLYSTA', 'space':210,
@@ -216,12 +218,16 @@ func pages_setup(images):
 	-SUSPEITA de Horlin.
 	-SUSPEITA de Obrulena.
 	-SUSPEITA de Thoren.
-	-SUSPEITA de Edraele."""}
+	-SUSPEITA de Edraele.
+	-SUSPEITA de Drakoth."""}
 	],
 	['text', {'title':'CARACTERISTICAS - TL;DR', 'space':550, 
 	'text':"""A natureza individualista de Kallysta faz ela impossível de tornar-se Amigável com alguém. Ela é excelente em encontrar e interpretar informação, e usa essa habilidade para prever o comportamento de outros jogadores.
-	Com a habilidade exclusiva Quebra-Correntes, Kallysta torna-se Hostil contra jogadores com muitos aliados. Usando diplomacia e investigação, a líder tiefling consegue facilmente desmontar amizades em um ou dois turnos.
+	Com a habilidade exclusiva Quebra-Correntes, Kallysta torna-se Hostil contra jogadores com muitos aliados. Usando diplomacia e investigação, a líder tiefling consegue facilmente desmontar amizades em um ou dois rounds.
 	Ela também reage de forma apropriada a mensagens recebidas, defendendo-se de inimigos."""}
+	],
+	['text', {'title':'ATENTIVA', 'color':Color.navyblue,
+	'text':"""Reduz sua relação com jogadores que aumentam a Influência de jogadores REVOLTANTES. O oposto ocorre com jogadores não-REVOLTANTES que reduzem-a."""}
 	],
 	['text', {'title':'PARANOIA', 'space':170, 'color':Color.darkgray,
 	'text':"""Torna-se REVOLTADA a um jogador quando ele descobre que este está planejando atacá-lo ou é REVOLTADO/HOSTIL contra ela."""}
@@ -248,15 +254,16 @@ func pages_setup(images):
 	],
 	['text', {'title':'PRIORIDADE DE ACAO', 'space':400, 
 	'text':"""1- Ataca um jogador REVOLTANTE.
-	2- Se for um turno ímpar, investiga um jogador SUSPEITADO.
+	2- Se for um round ímpar, investiga um jogador SUSPEITADO.
 	3- Re-envia uma carta que ela acredita seja falsa e escrita por um jogador HOSTILIZADO para outro que está SUSPEITO desse jogador.
 	4- Primeiro, escolhe um jogador X HOSTILIZADO. Então, escolhe dois jogadores, Y e Z, que acham X CONFIÁVEL.
 	  4a- Se Y tiver Lealdades e estiver REVOLTADO com  Z, conta para Y que X vai cooperar com Z.
 	  4b Se Y tiver Irmandade e estiver CONFIANTE/AMIGÁVEL com ela e Z, conta para Y que X vai atacar Z.
 	5- Ataca um jogador HOSTILIZADO.
-	6- Conta para um jogador SUSPEITADO que ela irá se aliar com ele.
-	7- Investiga um jogador HOSTILIZADO.
-	8- Investiga um jogador CONFIÁVEL."""}
+	6- Se o Líder é um jogador HOSTILIZADO/REVOLTANTE, reduz sua Influência.
+	7- Conta para um jogador SUSPEITADO que ela irá se aliar com ele.
+	8- Investiga um jogador HOSTILIZADO.
+	9- Investiga um jogador CONFIÁVEL."""}
 	],
 	['text', {'title':'POLITICA DE VOTACAO',
 	'text':"""1- Não se for um ataque contra ele mesmo.
@@ -277,12 +284,16 @@ func pages_setup(images):
 	-SUSPEITO de Kallysta.
 	-AMIGÁVEL com Obrulena.
 	-CONFIANTE de Thoren.
-	-CONFIANTE de Edraele."""}
+	-CONFIANTE de Edraele.
+	-CONFIANTE de Drakoth."""}
 	],
 	['text', {'title':'CARACTERISTICAS - TL;DR', 'space':480, 
 	'text':("Horlin é um péssimo general, mas um grande escritor. Por isso, ele interpreta mensagens recebidas não como informação, " +
 	"mas como pedidos. Quando alguém envia um pedido, ele tenta falsificar uma de suas cartas e enviá-la para o pedinte, o qual ele pode " +
 	"usar como quiser. Tirando isso, Horlin tem características comuns, reagindo a outros tipos de informação de forma apropriada.")}
+	],
+	['text', {'title':'ATENTIVO', 'color':Color.navyblue,
+	'text':"""Reduz sua relação com jogadores que aumentam a Influência de jogadores REVOLTANTES. O oposto ocorre com jogadores não-REVOLTANTES que reduzem-a."""}
 	],
 	['text', {'title':'REATIVO', 'space':290, 'color':Color.aqua,
 	'text':"""Torna-se HOSTIL (exceto quando já REVOLTADO) a um jogador quando ele descobre que este está planejando atacá-lo ou é REVOLTADO/HOSTIL contra ele. Torna-se SUSPEITO de um jogador REVOLTANTE/HOSTILIZADO quando ele descobre que este está planejando se aliar com ele."""}
@@ -310,17 +321,17 @@ func pages_setup(images):
 	'text':"""1- Com o pedido atual, modifica uma carta de X até que ela espelhe o pedido.
 	2- Com o pedido atual, envia a carta modificada para o pedinte. Avança para o próximo pedido.
 	3- Investiga um jogador SUSPEITADO/HOSTILIZADO.
-	4- Ataca um jogador REVOLTANTE.
-	5- Investiga um jogador CONFIÁVEL.
-	6- Se não for o segundo na Ordem de Influência, aumenta sua Influência.
-	7- Ataca um jogador HOSTILIZADO."""}
+	4- Se um jogador REVOLTANTE tiver igual or maior Influência que ele, a reduz.
+	5- Ataca um jogador REVOLTANTE.
+	6- Investiga um jogador CONFIÁVEL.
+	7- Se não for o segundo na Ordem de Influência, aumenta sua Influência.
+	8- Ataca um jogador HOSTILIZADO."""}
 	],
 	['text', {'title':'POLITICA DE VOTACAO',
 	'text':"""1- Não se for um ataque contra ele mesmo.
 	2- Sim se o Líder for AMIGO.
 	3- Sim se for paz com ele mesmo.
-	4- Não se o Líder for HOSTILIZADO/REVOLTANTE.
-	"""}
+	4- Não se o Líder for HOSTILIZADO/REVOLTANTE."""}
 	]],
 	
 	# Obrulena
@@ -334,12 +345,16 @@ func pages_setup(images):
 	-CONFIANTE de Kallysta.
 	-CONFIANTE de Horlin.
 	-CONFIANTE de Thoren.
-	-SUSPEITA de Edraele."""}
+	-SUSPEITA de Edraele.
+	-CONFIANTE de Drakoth."""}
 	],
 	['text', {'title':'CARACTERISTICAS - TL;DR', 'space':480, 
 	'text':"""Obrulena, como uma ativista da paz, rapidamente faz amizade com jogadores com quem ela corresponde ou são amigos de algum amigo dela.
 	Porém, na via contrária, qualquer descobrimento de Massacres causa grande ressentimento de sua parte. Ela sempre acredita em seus aliados e nunca acredita em jogadores os quais ainda não confia. Devido a suas tradições,
 	ela também tem maior respeito para o jogador com mais Influência."""}
+	],
+	['text', {'title':'AMBICIOSA', 'color':Color.orangered,
+	'text':"""Reduz sua relação com jogadores que reduzem sua Influência. O oposto ocorre com jogadores não-REVOLTANTES que aumentam-a."""}
 	],
 	['text', {'title':'SERENA', 'color':Color.aqua,
 	'text':"""Sua Relação com um jogador melhora toda vez que ela mandar uma carta para ele. """}
@@ -355,7 +370,7 @@ func pages_setup(images):
 	Se houve Massacre em qualquer lado: REVOLTADO
 	Se houve uma Batalha: HOSTIL
 	Se houve Cooperação: CONFIANTE 
-	Se não houve partida (Turno 1): SUSPEITO """}
+	Se não houve partida (Round 1): SUSPEITO """}
 	],
 	['text', {'title':'ALIANCA', 'space':300, 'color':Color.blue,
 	'text':"""Torna-se CONFIANTE (exceto quando já REVOLTADA or AMIGÁVEL) de um jogador ou quando descobre que esse jogador vai se aliar a um jogador CONFIÁVEL/AMIGO dela, ou quando descobre que um jogador CONFIÁVEL/AMIGO dela considera esse jogador CONFIÁVEL/AMIGO."""}
@@ -374,11 +389,11 @@ func pages_setup(images):
 	  2a- Se o Sujeito da carta tiver Aliança mas não Lealdades, conta para esse jogador que o remetente da carta irá se aliar com Obrulena.
 	  2b- Senão, conta para ele que o outro irá se aliar com ele.
 	3- Conta para um jogador SUSPEITADO/CONFIÁVEL sem Intriga que ela irá se aliar com ele.
-	4- Investiga o Sujeito de uma mensagem na qual ela acredita e envolve um ataque.
+	4- Investiga o Agente de uma mensagem na qual ela acredita e envolve um ataque.
 	5- Ataca um jogador REVOLTANTE.
 	6- Ataca um jogador HOSTILIZADO.
 	7- Conta para um jogador HOSTILIZADO que ela irá atacá-lo.
-	8- Se não for a primeira ou segunda na Ordem no Trono, aumenta sua Influência.
+	8- Se não for a primeira ou segunda na Ordem no Trono, aumenta sua Influência, a não ser que o Líder tenha HERDEIRO e seja CONFIÁVEL/AMIGO.
 	9- Investiga um jogador SUSPEITADO."""}
 	],
 	['text', {'title':'POLITICA DE VOTACAO',
@@ -404,12 +419,19 @@ func pages_setup(images):
 	-SUSPEITO de Kallysta.
 	-CONFIANTE de Horlin.
 	-SUSPEITO de Obrulena.
-	-CONFIANTE de Edraele."""}
+	-CONFIANTE de Edraele.
+	-CONFIANTE de Drakoth."""}
 	],
 	['text', {'title':'CARACTERISTICAS - TL;DR', 'space':500, 
 	'text':"""Thoren acredita em seus amigos e, no geral, não acredita em seus inimigos. Ele tenta investigar info suspeita, mas ignora-a se não puder.
 	Ele também odeia jogadores que atacam seus amigos, e se alia a jogadores que se aliam a seus amigos. Porém, se alguém se aliar a um de seus inimigos revoltantes, ele fica hostil contra esta pessoa.
 	Thoren reage de forma apropriada a info que ele acredita, atacando inimigos que atacam ele e fazendo paz com aqueles que também o fazem. Ele odeia ser traído."""}
+	],
+	['text', {'title':'ATENTIVO', 'color':Color.navyblue,
+	'text':"""Reduz sua relação com jogadores que aumentam a Influência de jogadores REVOLTANTES. O oposto ocorre com jogadores não-REVOLTANTES que reduzem-a."""}
+	],
+	['text', {'title':'AMBICIOSO', 'color':Color.orangered,
+	'text':"""Reduz sua relação com jogadores que reduzem sua Influência. O oposto ocorre com jogadores não-REVOLTANTES que aumentam-a."""}
 	],
 	['text', {'title':'REATIVO', 'space':290, 'color':Color.aqua,
 	'text':"""Torna-se HOSTIL (exceto quando já REVOLTADO) a um jogador quando ele descobre que este está planejando atacá-lo ou é REVOLTADO/HOSTIL contra ele. Torna-se SUSPEITO de um jogador REVOLTANTE/HOSTILIZADO quando ele descobre que este está planejando se aliar com ele."""}
@@ -422,7 +444,7 @@ func pages_setup(images):
 	Se houve Massacre em qualquer lado: REVOLTADO
 	Se houve uma Batalha: HOSTIL
 	Se houve Cooperação: CONFIANTE 
-	Se não houve partida (Turno 1): SUSPEITO """}
+	Se não houve partida (Round 1): SUSPEITO """}
 	],
 	['text', {'title':'IRMANDADE', 'space':300, 'color':Color.darkblue,
 	'text':"""Torna-se HOSTIL (exceto quando já REVOLTADO ou AMIGÁVEL) a um jogador ou quando descobre que esse jogador vai atacar um jogador CONFIÁVEL/AMIGO dele, ou quando descobre que esse jogador é REVOLTADO/HOSTIL contra um jogador CONFIÁVEL/AMIGO dele."""}
@@ -449,10 +471,10 @@ func pages_setup(images):
 	3- Conta para um jogador CONFIÁVEL/AMIGO que um jogador REVOLTANTE irá atacá-lo.
 	4- Compartilha informação com um jogador CONFIÁVEL/AMIGO sobre um ataque vindo contra ele.
 	5- Conta para um jogador CONFIÁVEL/AMIGO que um jogador HOSTILIZADO irá atacá-lo.
-	6- Investiga o Sujeito de uma mensagem que ele recebeu de um jogador SUSPEITADO.
+	6- Investiga o Agente de uma mensagem que ele recebeu de um jogador SUSPEITADO.
 	7- Conta para um jogador CONFIÁVEL/AMIGO que outro jogador CONFIÁVEL/AMIGO irá se aliar com Thoren.
 	8- Investiga um jogador SUSPEITADO.
-	9- Se não for o primeiro na Ordem do Trono, aumenta sua influência.
+	9- Se não for o primeiro na Ordem do Trono, aumenta sua influência, a não ser que o Líder tenha HERDEIRO e seja CONFIÁVEL/AMIGO.
 	10- Investiga um jogador CONFIÁVEL."""}
 	],
 	['text', {'title':'POLITICA DE VOTACAO',
@@ -491,6 +513,12 @@ func pages_setup(images):
 	['text', {'title':'AGENDA', 'space':180, 'color':Color.pink,
 	'text':"""Sua Prioridade de Ação muda no começo de cada round baseado em sua relação com o PERSONAGEM DO JOGADOR."""}
 	],
+	['text', {'title':'ATENTIVA', 'color':Color.navyblue,
+	'text':"""Reduz sua relação com jogadores que aumentam a Influência de jogadores REVOLTANTES. O oposto ocorre com jogadores não-REVOLTANTES que reduzem-a."""}
+	],
+	['text', {'title':'AMBICIOSA', 'color':Color.orangered,
+	'text':"""Reduz sua relação com jogadores que reduzem sua Influência. O oposto ocorre com jogadores não-REVOLTANTES que aumentam-a."""}
+	],
 	['text', {'title':'PERFIDIA', 'space':140, 'color':Color.darkred,
 	'text':"""Torna-se HOSTIL a jogadores que são MASSACRADOS (Passiva vs Agressiva) por ela."""}
 	],
@@ -505,6 +533,14 @@ func pages_setup(images):
 	],
 	['text', {'title':'DEDUCAO', 'space':330, 'color':Color.yellow,
 	'text':"""Pode deduzir a relação do PERSONAGEM DO JOGADOR com outros jogadores baseado na relação de outros jogadores com ele. Por exemplo, se ela descobre que alguém está REVOLTADO com o PERSONAGEM DO JOGADOR, ela irá deduzir que o PERSONAGEM DO JOGADOR está REVOLTADO com ele."""}
+	],
+	['text', {'title':'DISCERNIMENTO', 'space':340, 'color':Color.lightseagreen,
+	'text':"""Pode deduzir a relação do Personagem do Jogador com outros jogadores baseado em como ele vota em propostas específicas com tais jogadores como alvos:
+	-Sim para Guerra: REVOLTADO
+	-Não para Paz: HOSTIL
+	-Nulo: SUSPEITO
+	-Sim para Paz: CONFIANTE
+	-Não para Guerra: AMIGÁVEL"""}
 	],
 	['text', {'title':'LEALDADES', 'space':250, 'color':Color.orange,
 	'text':"""Torna-se HOSTIL (exceto quando já REVOLTADA) a um jogador ou quando descobre que este irá se aliar com um jogador REVOLTANTE ou quando descobre que este considera um jogador REVOLTANTE como CONFIÁVEL/AMIGO."""}
@@ -527,12 +563,12 @@ func pages_setup(images):
 	4- Ataca um jogador HOSTILIZADO.
 	5- Ataca um jogador SUSPEITADO que tenha Guerreiro, mas apenas se ele for SUSPEITO de pelo menos mais um outro jogador.
 	6- Compartilha informação com um jogador HOSTILIZADO/SUSPEITADO que tenha Guerreiro sobre um ataque vindo contra ele.
-	7- Investiga o Sujeito de uma mensagem que ele recebeu de um jogador Suspeitado.
-	8- Compartilha informação com um jogador CONFIÁVEL/AMIGO sobre um ataque vindo contra ele.
-	9- Se não for a primeira na Ordem no Trono, aumenta sua Influência.
-	10- Conta para um jogador CONFIÁVEL/AMIGO que um jogador HOSTILIZADO/REVOLTANTE irá atacá-lo.
-	11- Conta para um jogador CONFIÁVEL/AMIGO que outro jogador SUSPEITADO irá atacá-lo. Apenas uma vez por rodada.
-	12- Investiga um jogador REVOLTANTE/HOSTILIZADO/SUSPEITADO que não tenha Guerreiro."""}
+	7- Investiga o Agente de uma mensagem que ele recebeu de um jogador SUSPEITADO.
+	8- Se não for a primeira na Ordem no Trono, aumenta sua Influência.
+	9- Conta para um jogador CONFIÁVEL/AMIGO que um jogador HOSTILIZADO/REVOLTANTE irá atacá-lo.
+	10- Escolhe qualquer jogador X de quem Edraele tem uma carta. Então, escolha um jogador Y que seja CONFIANTE/AMIGÁVEL com ele. Gasta Ações para modificar a carta de X para dizer 'X vai atacar Y'.
+	11- Re-envia a carta modificada de X para Y.
+	12- Investiga um jogador."""}
 	],
 	['text', {'title':'PRIORIDADE DE ACAO (SUSPEITA)', 'space': 670, 'color':Color.black,
 	'text':"""1- Se for a Rodada 6, ataca qualquer jogador.
@@ -540,21 +576,23 @@ func pages_setup(images):
 	3- Ataca um jogador REVOLTANTE.
 	4- Ataca um jogador HOSTILIZADO.
 	5- Ataca um jogador SUSPEITADO que tenha Guerreiro, mas apenas se ele for SUSPEITO de pelo menos mais um outro jogador.
-	5- Compartilha informação com um jogador HOSTILIZADO/SUSPEITADO que tenha Guerreiro sobre um ataque vindo contra ele.
-	6- Investiga o Sujeito de uma mensagem que ele recebeu de um jogador SUSPEITADO.
-	7- Investiga um jogador SUSPEITADO.
-	8- Conta para um jogador CONFIÁVEL/AMIGO que um jogador SUSPEITADO irá atacá-lo.
-	9- Se não for a primeira na Ordem no Trono, aumenta sua Influência.
-	10- Ataca um jogador SUSPEITADO."""}
+	6- Compartilha informação com um jogador HOSTILIZADO/SUSPEITADO que tenha Guerreiro sobre um ataque vindo contra ele.
+	7- Investiga o Sujeito de uma mensagem que ele recebeu de um jogador SUSPEITADO.
+	8- Investiga um jogador SUSPEITADO.
+	9- Escolhe qualquer jogador X de quem Edraele tem uma carta. Então, escolha um jogador Y que seja CONFIANTE/AMIGÁVEL com ele. Gasta Ações para modificar a carta de X para dizer 'X vai atacar Y'.
+	10- Re-envia a carta modificada de X para Y.
+	11- Conta para um jogador CONFIÁVEL/AMIGO que um jogador SUSPEITADO irá atacá-lo.
+	12- Se não for a primeira na Ordem no Trono, aumenta sua Influência.
+	13- Ataca um jogador SUSPEITADO."""}
 	],
 	['text', {'title':'PRIORIDADE DE ACAO (HOSTIL/REVOLTADA)', 'space':280, 'color':Color.black,
 	'text':"""1- Ataca um jogador REVOLTANTE.
-	2- Conta para um jogador CONFIÁVEL/AMIGO com Irmandade que um jogador REVOLTANTE mencionado em (1) irá atacá-la.
+	2- Conta para um jogador CONFIÁVEL/AMIGO com IRMANDADE que um jogador REVOLTANTE mencionado em (1) irá atacá-la.
 	3- Re-envia uma carta que ela acredita seja falsa e escrita por um jogador REVOLTANTE para outro que está SUSPEITO desse jogador.
 	4- Ataca um jogador HOSTILIZADO.
-	5- Conta para um jogador CONFIÁVEL/AMIGO com Irmandade que um jogador HOSTILIZADO irá atacá-la.
-	6- Compartilha informação com um jogador HOSTILIZADO/SUSPEITADO que tenha Guerreiro sobre um ataque vindo contra ele.
-	7- Investiga o jogador REVOLTANTE mencionado em (2)."""}
+	5- Conta para um jogador CONFIÁVEL/AMIGO com IRMANDADE que um jogador HOSTILIZADO irá atacá-la.
+	6- Reduz a Influência de um jogador REVOLTANTE.
+	7- Se não for a primeira na Ordem no Trono, aumenta sua Influência."""}
 	],
 	['text', {'title':'POLITICA DE VOTACAO',
 	'text':"""1- Não se for um ataque contra um jogador AMIGO ou ela mesma.
@@ -570,84 +608,90 @@ func pages_setup(images):
 	
 	# Drakoth
 	[['text', {'title':'DRAKOTH', 'space':180,
-	'text':"""The brash heir to the Empire's throne is as good in battle as he is in court, using his dynastic powers to their full potential.
-	Race: Dragonborn"""}
+	'text':("O herdeiro impulsivo ao trono do Império é tão bom em batalha quanto no conselho, usando seus " +
+	"poderes dinásitcos para todo seu potencial.\n" +
+	"Raca: Dragonborn")}
 	],
-	['text', {'title':'INITIAL RELATIONS', 'space':260, 
-	'text':"""-SUSPICIOUS of Salem.
-	-HOSTILE to Grolk.
-	-HOSTILE to Zardri.
-	-HOSTILE to Kallysta.
-	-TRUSTFUL of Obrulena.
-	-TRUSTFUL of Horlin.
-	-TRUSTFUL of Thoren."""}
+	['text', {'title':'RELACOES INICIAIS', 'space':260, 
+	'text':"""-SUSPEITO de Salem.
+	-HOSTIL para Grolk.
+	-HOSTIL para Zardri.
+	-HOSTIL para Kallysta.
+	-CONFIANTE de Obrulena.
+	-CONFIANTE de Horlin.
+	-CONFIANTE de Thoren."""}
 	],
-	['text', {'title':'TRAITS - TL;DR', 'space':480, 
-	'text':("Drakoth is the ambitious heir to the empire's throne, and as such evaluates the player " +
-	"based on they way they vote and becomes Enraged if someone tries to take the Leader position away from him. " +
-	"As a fearsome and honorable warrior, Drakoth is very keen on protecting and consolidating his circle of allies, " +
-	"becoming Trustful of those who trust his allies but becoming Hostile against those who attack them. He also doesn't " +
-	"appreciate when someone allies with his most Enraging enemies. Aside from that, Drakoth reacts appropriately to " +
-	"incoming agression, attacking enemies who attack him and making peace with those that do the same." +
-	"He does, however, only believe on his allies, making manipulation a bit trickier to pull off.")}
+	['text', {'title':'CARACTERISTICAS - TL;DR', 'space':480, 
+	'text':("Drakoth é o ambicioso herdeiro ao trono do império, e por isso avalia o jogador " +
+	"baseado na forma de como eles votam e torna-se Revoltado quando alguém tenta tirar sua posição de Líder dele. " +
+	"Como um feroz e honrado guerreiro, Drakoth protege e consolida seu círculo de aliados, ficando Confiante daqueles " +
+	"que confiam em seus aliados mas torna-se Hostil contra aqueles que os atacam. Ele também não aprecia quando alguém " +
+	"se alia com seus inimigos Revoltantes. Além disso, Drakoth reage apropriadamente à agressão, atacando inimigos que " +
+	"atacam ele e fazendo paz com os que também o fazem. Ele, porém, apenas acredita em seus aliados, o que dificulta " +
+	"tentativas de manipulação.")}
 	],
-	['text', {'title':'STRATEGY', 'color':Color.brown,
-	'text':"""His Proposal Priority changes at the beginning of each round based on his Relation with the Player Character."""}
+	['text', {'title':'ESTRATEGIA', 'color':Color.brown,
+	'text':"""Sua Prioridade de Propostas muda no começo de cada round baseado em sua Relação com o Personagem do Jogador."""}
 	],
-	['text', {'title':'HEIR', 'color':Color.darkviolet,
-	'text':"""Becomes ENRAGED to players who steal his Leader position."""}
+	['text', {'title':'HERDEIRO', 'color':Color.darkviolet,
+	'text':("Torna-se REVOLTADO com jogadores que, reduzindo sua Influência ou aumentando a de outra pessoa " +
+	"faz ele perder posição na Ordem do Trono.")}
 	],
-	['text', {'title':'REACTIVE', 'space':250, 'color':Color.aqua,
-	'text':"""Becomes HOSTILE (unless already ENRAGED) to a player he discovers is planning to attack him or is HOSTILE/ENRAGED against him. Becomes SUSPICIOUS of an ENRAGING/HOSTILIZED player that he discovers is planning to ally with him."""}
+	['text', {'title':'AMBICIOSO', 'color':Color.orangered,
+	'text':"""Reduz sua relação com jogadores que reduzem sua Influência. O oposto ocorre com jogadores não-REVOLTANTES que aumentam-a."""}
 	],
-	['text', {'title':'JUSTICE', 'space':140, 'color':Color.darkslategray,
-	'text':"""Becomes ENRAGED to players that SLAUGHTER (Agressive vs Passive) him."""}
+	['text', {'title':'REATIVO', 'space':290, 'color':Color.aqua,
+	'text':"""Torna-se HOSTIL (exceto quando já REVOLTADO) a um jogador quando ele descobre que este está planejando atacá-lo ou é REVOLTADO/HOSTIL contra ele. Torna-se SUSPEITO de um jogador REVOLTANTE/HOSTILIZADO quando ele descobre que este está planejando se aliar com ele."""}
 	],
-	['text', {'title':'INSIGHT', 'space':340, 'color':Color.lightseagreen,
-	'text':"""Can deduce the Player Character's relation with other players based on how they vote on specific proposals with said players as target:
-	-Aye for War: ENRAGED
-	-Nay for Peace: HOSTILE
-	-Null: SUSPICIOUS
-	-Aye for Peace: TRUSTFUL
-	-Nay for War: FRIENDLY"""}
+	['text', {'title':'JUSTICA', 'space':140, 'color':Color.darkslategray,
+	'text':"""Fica REVOLTADO com jogadores que MASSACRAM (Agressiva vs Passiva) ele."""}
 	],
-	['text', {'title':'BROTHERHOOD', 'space':260, 'color':Color.darkblue,
-	'text':"""Becomes HOSTILE (unless already ENRAGED or FRIENDLY) to a player when he either discovers that this player will attack a TRUSTED/BEFRIENDED player, or that this player is HOSTILE/ENRAGED against a TRUSTED/BEFRIENDED player."""}
+	['text', {'title':'DISCERNIMENTO', 'space':340, 'color':Color.lightseagreen,
+	'text':"""Pode deduzir a relação do Personagem do Jogador com outros jogadores baseado em como ele vota em propostas específicas com tais jogadores como alvos:
+	-Sim para Guerra: REVOLTADO
+	-Não para Paz: HOSTIL
+	-Nulo: SUSPEITO
+	-Sim para Paz: CONFIANTE
+	-Não para Guerra: AMIGÁVEL"""}
 	],
-	['text', {'title':'ALLIANCE', 'space':260, 'color':Color.blue,
-	'text':"""Becomes TRUSTFUL (unless already ENRAGED or FRIENDLY) of a player when he either discovers that this player will ally with a TRUSTED/BEFRIENDED player, or that a TRUSTED/BEFRIENDED player is TRUSTFUL/FRIENDLY towards this player."""}
+	['text', {'title':'IRMANDADE', 'space':300, 'color':Color.darkblue,
+	'text':"""Torna-se HOSTIL (exceto quando já REVOLTADO ou AMIGÁVEL) a um jogador ou quando descobre que esse jogador vai atacar um jogador CONFIÁVEL/AMIGO dele, ou quando descobre que esse jogador é REVOLTADO/HOSTIL contra um jogador CONFIÁVEL/AMIGO dele."""}
 	],
-	['text', {'title':'ALLEGIANCES', 'space':220, 'color':Color.orange,
-	'text':"""Becomes HOSTILE (unless already ENRAGED) to a player when he discovers that this player will ally with an ENRAGING player or that this player finds an ENRAGING player to be TRUSTFUL/FRIENDLY."""}
+	['text', {'title':'ALIANCA', 'space':300, 'color':Color.blue,
+	'text':"""Torna-se CONFIANTE (exceto quando já REVOLTADO or AMIGÁVEL) de um jogador ou quando descobre que esse jogador vai se aliar a um jogador CONFIÁVEL/AMIGO dele, ou quando descobre que um jogador CONFIÁVEL/AMIGO dele considera esse jogador CONFIÁVEL/AMIGO."""}
 	],
-	['text', {'title':'SIMPLE-MINDED', 'color':Color.darkgreen,
-	'text':"""Always believes info from a TRUSTED/BEFRIENDED player. Never believes info from others, though he remembers of what they said."""}
+	['text', {'title':'LEALDADES', 'space':260, 'color':Color.orange,
+	'text':"""Torna-se HOSTIL (exceto quando já REVOLTADO) a um jogador ou quando descobre que este irá se aliar com um jogador REVOLTANTE ou quando descobre que este considera um jogador REVOLTANTE como CONFIÁVEL/AMIGO."""}
 	],
-	['text', {'title':'DIPLOMATIC', 'color':Color.darkmagenta,
-	'text':"""His relation with other voters and the Leader improves/degrades when they agree/disagree with his Voting Policies."""}
+	['text', {'title':'SIMPLES', 'color':Color.darkgreen,
+	'text':"""Sempre acredita em jogadores CONFIÁVEIS/AMIGOS. Nunca acredita em outros, mas ainda lembra do que eles disseram (para ativar General)."""}
 	],
-	['text', {'title':'ACTION PRIORITY',
-	'text':"""1- Attack an ENRAGING player.
-	2- Tell a TRUSTED/BEFRIENDED player with BROTHERHOOD that an ENRAGING player will attack him.
-	3- Attack a HOSTILIZED player.
-	4- If he's not the first in the Influence track, increase his Influence.
-	5- Tell a TRUSTED/BEFRIENDED player with BROTHERHOOD that a HOSTILIZED player will attack him.
-	6- Investigate a SUSPICIOUS player.
-	7a- If it's an even round, investigate a HOSTILIZED/ENRAGING player.
-	7b- If it's an odd round, investigate a TRUSTED/BEFRIENDED player."""}
+	['text', {'title':'DIPLOMATICO', 'color':Color.darkmagenta,
+	'text':"""Sua relação com outros votantes e o Líder melhora/piora quando eles concordam/discordam de sua Política de Votação."""}
 	],
-	['text', {'title':'VOTING POLICIES',
-	'text':"""1- Nay."""}
+	['text', {'title':'PRIORIDADE DE ACAO',
+	'text':"""1- Ataca um jogador REVOLTANTE.
+	2- Conta para um jogador CONFIÁVEL/AMIGO com IRMANDADE que um jogador REVOLTANTE irá atacá-la.
+	3- Ataca um jogador HOSTILIZADO.
+	4- Se houver alguém com mais ou igual Influência que ele, aumenta sua Influência.
+	5-  Conta para um jogador CONFIÁVEL/AMIGO com IRMANDADE que um jogador HOSTILIZADO irá atacá-la.
+	6- Investiga um jogador SUSPEITO.
+	7- Aumenta a Influência de um jogador AMIGO que não é o segundo na Ordem do Trono (a não ser que já houver um jogador AMIGO naquela posição).
+	8a- Se for um round par, investiga um jogador HOSTILIZADO/REVOLTANTE.
+	8b- Se for um round ímpar, investiga um jogador CONFIÁVEL/AMIGO."""}
 	],
-	['text', {'title':'PROPOSAL PRIORITY (SUSP/TRUSTFUL/FRIENDLY)',
-	'text':"""1- If the sum of all votes from TRUSTED/BEFRIENDED players is over 2, peace to himself.
-	2- If no TRUSTED/BEFRIENDED players with ALLEGIANCES are ENRAGED with a SUSPECTED player, peace to this SUSPECTED player.
-	3- If no TRUSTED/BEFRIENDED players are BEFRIENDED with a HOSTILIZED/ENRAGING player, attack on this HOSTILIZED/ENRAGING player.
-	4- Peace to himself."""}
+	['text', {'title':'POLITICA DE VOTACAO',
+	'text':"""1- Não."""}
 	],
-	['text', {'title':'PROPOSAL PRIORITY (HOSTILE/ENRAGED)',
-	'text':"""1- Attack on an ENRAGING player.
-	2- Attack on a HOSTILIZED player."""}
+	['text', {'title':'PRIORIDADE DE PROPOSTAS (SUSP/CONFIAVEL/AMIGÁV)',
+	'text':"""1- Se a soma de todos os votos de jogadores CONFIÁVEIS/AMIGOS for maior que 2, paz para si.
+	2- Se nenhum jogador CONFIÁVEL/AMIGO com LEALDADES estiver REVOLTADO com um jogador SUSPEITO, paz para este jogador SUSPEITO.
+	3- Se nenhum jogador CONFIÁVEL/AMIGO for AMIGO com um jogador HOSTIL/REVOLTADO, guerra para este jogador HOSTIL/REVOLTADO.
+	4- Paz para si."""}
+	],
+	['text', {'title':'PRIORIDADE DE PROPOSTAS (HOSTIL/REVOLTADO)',
+	'text':"""1- Atacar um jogador REVOLTANTE.
+	2- Atacar um jogador HOSTILIZADO."""}
 	]],
 	]
 	

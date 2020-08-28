@@ -7,15 +7,15 @@ func pages_setup(images):
 	],
 	['text', {'title':'AKTIONEN', 'space':380, 
 	'text':"""Jeder Spieler hat 3 AKTIONEN pro Runde. Man kann sie damit verbringen:
-	-ANGRIFF: die Agressiv-Position gegen einen andere Spieler nehmen.
+	-ANGRIFF: die Agressiv-Haltung gegen einen andere Spieler nehmen.
 	-NACHFORSCHUNG: mehr Information über einen andere Spieler erhalten.
-	-EINFLUSS: deine Position in der Thron-Reihenfolge ändern.
+	-EINFLUSS: deine Haltung in der Thron-Reihenfolge ändern.
 	-DIPLOMATIE: Briefe an andere Spieler senden.
 	-FAELSCHUNG: Briefe von anderen Spielern ändern."""}
 	], 
 	['text', {'title':'KAMPF - DER GEFANGENENDILEMMA', 'space':470, 
 	'text':"""Der GEFANGENENDILEMMA ist ein Gedankenexperiment mit Bezug zur Spieltheorie.
-	Darin entscheidet jeder Spieler zwischen eine Passiv- oder Agressiv-Position.
+	Darin entscheidet jeder Spieler zwischen eine Passiv- oder Agressiv-Haltung.
 	PASSIV sein ist besser für beide involvierte Spieler, aber es setzt den Einzelne der Verrat aus. Außerdem ist diese Option diplomatisch besser.
 	AGRESSIV sein ist andererseits besser für den Einzelne, aber es verbringt eine Aktion und erzeugt Ressentiment zwischen den Spielern."""}
 	],
@@ -32,7 +32,7 @@ func pages_setup(images):
 	],
 	['text', {'title':'EINFLUSS', 'space':380,
 	'text':"""Einfluss darstellt Macht und Allbekanntheit eines Spielers in der Königreich. Spieler, die höhen Einfluss haben, agieren früher in der Runde und haben eine höher Wahrscheinlichkeit, eine Brief zu erhalten oder attackiert zu werden.
-	Ein Spieler kann seine Position in der Einfluss-Reihenfolge ändern, indem die Knöpfe im unteren Teil der Bildschirm drücken. Beachten Sie mal, dass die Reihenfolge nur am Ende jeder Runde sich aktualisiert."""}
+	Ein Spieler kann seine Position (und die Position von anderen) in der Einfluss-Reihenfolge mit dem Einfluss-Bildschirm ändern. Beachten Sie mal, dass die Reihenfolge nur am Ende jeder Runde sich aktualisiert."""}
 	],
 	['text', {'title':'DIPLOMATIE', 'space':1000,
 	'text':"""Schließlich gibt es DIPLOMATIE. Indem man den Diplomatiebereich verwendet, kann man an andere Spieler Briefe senden. Gleichfalls kann andere Charakter manchmal an den Spieler auch Briefe senden.
@@ -48,7 +48,7 @@ func pages_setup(images):
 	],
 	['text', {'title':'DER RAT',
 	'text':"""Am Anfang jeder Runde schlagt der Führer der Thron-Reihenfolge ein Dekret dem Rat vor. Ein Dekret besteht von
-	einer Position und einem Ziel, und, wenn genehmigt, zwingt alle Spieler, nächste Runde die entscheidene Position gegen 
+	einer Haltung und einem Ziel, und, wenn genehmigt, zwingt alle Spieler, nächste Runde die entscheidene Haltung gegen 
 	den entscheidene Ziel zu nehmen.
 	Nachdem ein Vorschlag gemacht wird, stimmt jeder Spieler über den Dekret ab. Der zweite Spieler der Reihenfolge stimmt
 	zweimal. Wenn es mehr 'Ja' als 'Nein' gibt, wird das Dekret genehmigt."""}
@@ -67,14 +67,14 @@ func pages_setup(images):
 	],
 	['text', {'title':'UEBLICHE BEGRIFFE', 'space':440, 
 	'text':"""INFORMATION/BRIEFE
-	Aus drei Teilen, der Reihe nach: Agent/Position/Ziel
+	Aus drei Teilen, der Reihe nach: Agent/Haltung/Ziel
 
 	RELATIONEN
 	Relation-Niveau:
 	Wütend/Feindlich/Misstrauisch/Vertrauend/Freundlich
 	Ärgerlich/Feindselig/Verdächtig/Vertraut/Befreundet
 
-	POSITIONEN
+	HALTUNGEN
 	Kooperation: Passiv vs Passiv
 	Massaker: Agressiv vs Passiv
 	massakriert werden: Passiv vs Agressiv
@@ -537,7 +537,8 @@ func pages_setup(images):
 	'text':"""His Proposal Priority changes at the beginning of each round based on his Relation with the Player Character."""}
 	],
 	['text', {'title':'HEIR', 'color':Color.darkviolet,
-	'text':"""Becomes ENRAGED to players who steal his Leader position."""}
+	'text':("Becomes ENRAGED with players that, through reducing his Influence or increasing someone else’s, " +
+	"makes him lose position in the Influence Track.")}
 	],
 	['text', {'title':'REACTIVE', 'space':250, 'color':Color.aqua,
 	'text':"""Becomes HOSTILE (unless already ENRAGED) to a player he discovers is planning to attack him or is HOSTILE/ENRAGED against him. Becomes SUSPICIOUS of an ENRAGING/HOSTILIZED player that he discovers is planning to ally with him."""}
