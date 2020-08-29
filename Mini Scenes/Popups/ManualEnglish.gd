@@ -148,6 +148,12 @@ func pages_setup(images):
 	4b- Nay if it's peace with a HOSTILIZED player.
 	5- Aye if the leader is TRUSTED.
 	6- Nay."""}
+	],
+	['text', {'title':'PROPOSAL PRIORITY',
+	'text':"""1- Attack on an ENRAGING player.
+	2- Attack on a HOSTILIZED player.
+	3- Attack on a SUSPECTED player.
+	4- Peace to himself."""}
 	]],
 	# Zardri
 	[['text', {'title':'ZARDRI',
@@ -203,6 +209,11 @@ func pages_setup(images):
 	'text':"""1- Nay if it’s an attack against himself.
 	2a- Aye if it's an attack against someone else.
 	2b- Aye if it’s peace with himself."""}
+	],
+	['text', {'title':'PROPOSAL PRIORITY',
+	'text':"""1- Attack on an ENRAGING player.
+	2- Attack on a HOSTILIZED player.
+	3- Peace to himself."""}
 	]],
 	
 	# Kallysta
@@ -269,6 +280,10 @@ func pages_setup(images):
 	2a- Aye if it's an attack against a HOSTILIZED/ENRAGING player.
 	2b- Aye if it’s peace with herself.
 	3- Nay if the leader is HOSTILIZED/ENRAGING."""}
+	],
+	['text', {'title':'PROPOSAL PRIORITY',
+	'text':"""1- Attack on an ENRAGING player.
+	2- Peace to herself."""}
 	]],
 	
 	# Horlin
@@ -331,6 +346,9 @@ func pages_setup(images):
 	3- Aye if it’s peace to himself.
 	4- Nay if the leader is HOSTILIZED/ENRAGING.
 	"""}
+	],
+	['text', {'title':'PROPOSAL PRIORITY',
+	'text':"""1- Peace to himself."""}
 	]],
 	
 	# Obrulena
@@ -355,7 +373,7 @@ func pages_setup(images):
 	greater respect to the player with the most Influence."""}
 	],
 	['text', {'title':'AMBITIOUS', 'color':Color.orangered,
-	'text':"""Degrades her relation with players who reduce her Influence. The opposite happens with non-ENRAGING players who improve it instead."""}
+	'text':"""Degrades her relation with players who reduce her Influence. The opposite happens with non-ENRAGING players who increase it instead."""}
 	],
 	['text', {'title':'SERENE', 'space':140, 'color':Color.whitesmoke,
 	'text':"""Her Relation with a player improves every time she sends a letter to them."""}
@@ -384,13 +402,13 @@ func pages_setup(images):
 	],
 	['text', {'title':'ACTION PRIORITY', 'space':400, 
 	'text':"""1- Only once per round. Find two TRUSTED/BEFRIENDED players that aren't both TRUSTFUL/FRIENDLY of each other:
-	  1a- If one of them has Alliance but not Allegiances, tell this player that the other will co-op with Obrulena. 
+	  1a- If one of them has ALLIANCE but not ALLEGIANCES, tell this player that the other will co-op with Obrulena. 
 	  1b- Otherwise, tell them that the other will co-op with them.
 	2- Only if she sent a letter in (1):
-	  2a- If the letter's subject has Alliance but not Allegiances, tell this player that the letter's recipient will co-op with Obrulena. 
+	  2a- If the letter's Agent has ALLIANCE but not ALLEGIANCES, tell this player that the letter's recipient will co-op with Obrulena. 
 	  2b- Otherwise, tell them that they will co-op with them.
 	3- Tell a SUSPECTED/TRUSTED player without Intrigue that she will coop with them.
-	4- Investigate the Subject of a message she believes in that involves an attack.
+	4- Investigate the Agent of a message she believes in that involves an attack.
 	5- Attack an ENRAGING player.
 	6- Attack a HOSTILIZED player.
 	7- Tell a HOSTILIZED player she will attack them.
@@ -401,8 +419,7 @@ func pages_setup(images):
 	'text':"""1- Aye if the Leader is BEFRIENDED and it’s an attack against a HOSTILIZED/ENRAGING player.
 	2- Nay if it’s peace and both Leader and target are HOSTILIZED/ENRAGING.
 	3- Nay if it’s an attack.
-	4- Aye if it’s peace.
-	"""}
+	4- Aye if it’s peace."""}
 	],
 	['text', {'title':'PROPOSAL PRIORITY',
 	'text':"""1- Peace to another TRUSTED/BEFRIENDED player.
@@ -433,7 +450,7 @@ func pages_setup(images):
 	'text':"""Degrades his relation with players who improve the Influence of ENRAGING players. The opposite happens with non-ENRAGING players who reduce it instead."""}
 	],
 	['text', {'title':'AMBITIOUS', 'color':Color.orangered,
-	'text':"""Degrades his relation with players who reduce his Influence. The opposite happens with non-ENRAGING players who improve it instead."""}
+	'text':"""Degrades his relation with players who reduce his Influence. The opposite happens with non-ENRAGING players who increase it instead."""}
 	],
 	['text', {'title':'REACTIVE', 'space':250, 'color':Color.aqua,
 	'text':"""Becomes HOSTILE (unless already ENRAGED) to a player he discovers is planning to attack him or is HOSTILE/ENRAGED against him. Becomes SUSPICIOUS of an ENRAGING/HOSTILIZED player that he discovers is planning to ally with him."""}
@@ -519,7 +536,7 @@ func pages_setup(images):
 	'text':"""Degrades her relation with players who improve the Influence of ENRAGING players. The opposite happens with non-ENRAGING players who reduce it instead."""}
 	],
 	['text', {'title':'AMBITIOUS', 'color':Color.orangered,
-	'text':"""Degrades her relation with players who reduce her Influence. The opposite happens with non-ENRAGING players who improve it instead."""}
+	'text':"""Degrades her relation with players who reduce her Influence. The opposite happens with non-ENRAGING players who increase it instead."""}
 	],
 	['text', {'title':'TREACHERY', 'color':Color.darkred,
 	'text':"""Becomes HOSTILE (unless already ENRAGED) to to players that get SLAUGHTERED (Passive vs Agressive) by her."""}
@@ -589,10 +606,10 @@ func pages_setup(images):
 	],
 	['text', {'title':'ACTION PRIORITY (HOSTILE/ENRAGED)', 'space':280, 'color':Color.black,
 	'text':"""1- Attack an ENRAGING player.
-	2- Tell a TRUSTED/BEFRIENDED player with Brotherhood that an ENRAGING player mentioned in (1) will attack her.
+	2- Tell a TRUSTED/BEFRIENDED player with BROTHERHOOD that an ENRAGING player mentioned in (1) will attack her.
 	3- Resend a letter she believes is false and written by an ENRAGING player mentioned in (1) to a player that is SUSPICIOUS of this player.
 	4- Attack a HOSTILIZED player.
-	5- Tell a TRUSTED/BEFRIENDED player with Brotherhood that a HOSTILIZED player will attack her.
+	5- Tell a TRUSTED/BEFRIENDED player with BROTHERHOOD that a HOSTILIZED player will attack her.
 	6- If she's not the first in the Influence track, increase her Influence."""}
 	],
 	['text', {'title':'VOTING POLICIES',
@@ -638,7 +655,7 @@ func pages_setup(images):
 	"makes him lose position in the Influence Track.")}
 	],
 	['text', {'title':'AMBITIOUS', 'color':Color.orangered,
-	'text':"""Degrades his relation with players who reduce his Influence. The opposite happens with non-ENRAGING players who improve it instead."""}
+	'text':"""Degrades his relation with players who reduce his Influence. The opposite happens with non-ENRAGING players who increase it instead."""}
 	],
 	['text', {'title':'REACTIVE', 'space':250, 'color':Color.aqua,
 	'text':"""Becomes HOSTILE (unless already ENRAGED) to a player he discovers is planning to attack him or is HOSTILE/ENRAGED against him. Becomes SUSPICIOUS of an ENRAGING/HOSTILIZED player that he discovers is planning to ally with him."""}

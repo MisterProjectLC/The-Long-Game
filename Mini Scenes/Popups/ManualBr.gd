@@ -44,15 +44,15 @@ func pages_setup(images):
 	Para poder controlar NPCs com eficácia, o jogador tem completo acesso ao comportamento e sistema de IA de cada jogador."""}
 	],
 	['text', {'title':'FALSIFICACAO',
-	'text':"""Falsificação abre ainda mais possibilidades para enganação. Com ela, jogadores podem 
-	forjar cartas falsas usando mensagens de outros jogadores, alterando seu conteúdo para depois re-enviá-las. Cada alteração custa 1 AÇÃO."""}
+	'text':("Falsificação abre ainda mais possibilidades para enganação. Com ela, jogadores podem " +
+	"forjar cartas falsas usando mensagens de outros jogadores, alterando seu conteúdo para depois re-enviá-las. Cada alteração custa 1 AÇÃO.")}
 	],
 	['text', {'title':'CONSELHO',
-	'text':"""No início de cada round, o líder da Ordem do Trono propõe um Decreto para o Conselho. Um Decreto se
-	consiste de uma Postura e um Alvo e, caso aprovado, força todos os jogadores a tomar a Postura escolhida contra o Alvo
-	escolhido, no próximo round.
-	Após a proposta ter sido feita, cada jogador vota no Decreto, com o segundo jogador da Ordem tendo seu voto valer duas
-	vezes. Se houver mais 'Sim' do que 'Não', o Decreto é aprovado."""}
+	'text':("No início de cada round, o líder da Ordem do Trono propõe um Decreto para o Conselho. Um Decreto se " +
+	"consiste de uma Postura e um Alvo e, caso aprovado, força todos os jogadores a tomar a Postura escolhida contra o Alvo " +
+	"escolhido, no próximo round.\n" +
+	"Após a proposta ter sido feita, cada jogador vota no Decreto, com o segundo jogador da Ordem tendo seu voto valer duas " +
+	"vezes. Se houver mais 'Sim' do que 'Não', o Decreto é aprovado.")}
 	],
 	['text', {'title':'CARACTERISTICAS E PERSONAGENS', 'space':350,
 	'text':"""Este jogo também vem com um documento detalhando o perfil de cada jogador. Eles estão divididos em três partes:
@@ -150,7 +150,14 @@ func pages_setup(images):
 	4b- Não se for paz com um jogador HOSTILIZADO.
 	5- Sim se o Líder for CONFIÁVEL.
 	6- Não."""}
+	],
+	['text', {'title':'PRIORIDADE DE PROPOSTAS',
+	'text':"""1- Ataque contra um jogador REVOLTANTE.
+	2- Ataque contra um jogador HOSTILIZADO.
+	3- Ataque contra um jogador SUSPEITADO.
+	4- Paz para ele mesmo."""}
 	]],
+	
 	# Zardri
 	[['text', {'title':'ZARDRI',
 	'text':"""Nascido na escura floresta de Ecnar, Zardri move-se discretamente procurando por emboscadas rápidas em inimigos enfraquecidos.
@@ -206,7 +213,13 @@ func pages_setup(images):
 	'text':"""1- Não se for um ataque contra ele mesmo.
 	2a- Sim se for um ataque contra qualquer outro jogador.
 	2b- Sim se for paz com ele mesmo."""}
+	],
+	['text', {'title':'PRIORIDADE DE PROPOSTAS',
+	'text':"""1- Ataque contra um jogador REVOLTANTE.
+	2- Ataque contra um jogador HOSTILIZADO.
+	3- Paz para ele mesmo."""}
 	]],
+	
 	# Kallysta
 	[['text', {'title':'KALLYSTA', 'space':210,
 	'text':"""Uma líder individualista e perspicaz. Kallysta se desconfia de quase todos e é excelente em quebrar alianças fortes.
@@ -270,6 +283,10 @@ func pages_setup(images):
 	2a- Sim se for um ataque contra um jogador HOSTILIZADO/REVOLTANTE.
 	2b- Sim se for paz com ela mesma.
 	3- Não se o Líder for HOSTILIZADO/REVOLTANTE."""}
+	],
+	['text', {'title':'PRIORIDADE DE PROPOSTAS',
+	'text':"""1- Ataque contra um jogador REVOLTANTE.
+	2- Paz para ela mesma."""}
 	]],
 	
 	# Horlin
@@ -332,6 +349,9 @@ func pages_setup(images):
 	2- Sim se o Líder for AMIGO.
 	3- Sim se for paz com ele mesmo.
 	4- Não se o Líder for HOSTILIZADO/REVOLTANTE."""}
+	],
+	['text', {'title':'PRIORIDADE DE PROPOSTAS',
+	'text':"""1- Paz para ele mesmo."""}
 	]],
 	
 	# Obrulena

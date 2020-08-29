@@ -77,6 +77,22 @@ func receive_proposal(leader, action, object, vote = 0):
 	.receive_proposal(leader,action, object, vote)
 	trait_ignorant_diplomatic(leader)
 
+
+func choose_proposal():
+	for player in turn_order:
+		if get_relation(player) == 2:
+			return [1, player]
+	
+	for player in turn_order:
+		if get_relation(player) == 1:
+			return [1, player]
+	
+	for player in turn_order:
+		if get_relation(player) == 0:
+			return [1, player]
+	
+	return [0, character_name]
+
 # ----------------- HELPER REACTIONS -----------------
 
 # Bitter

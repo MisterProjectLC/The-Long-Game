@@ -187,8 +187,8 @@ func setup_texts():
 			[("Also hat Zardri Drakoths Einfluss reduziert. Obwohl das uns helfen wird, den Thron zu erobern, wird es " +
 			"unsere Relation mit Drakoth verschlechtern. Wir müssen warten.")],
 			[("Was wir stattdessen tun werden, ist, unsere eigene und Zardris Einfluss zu erhöhen. " +
-			"Erhöhe unsere Einfluss um 1 und Zardris um 2 und drücke Abschließen."), 
-			"Erhöhe unsere Einfluss um 1 und Zardris um 2 und drücke Abschließen."],
+			"Erhöhe unseren Einfluss um 1 und Zardris um 2 und drücke Abschließen."), 
+			"Erhöhe unseren Einfluss um 1 und Zardris um 2 und drücke Abschließen."],
 			#^ 21
 			[("Jetzt beende die Runde."), "Beende die Runde."],
 			[("Stimme wieder Null auf den Vorschlag ab."), "Stimme Null auf den Vorschlag ab."],

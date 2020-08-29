@@ -91,8 +91,16 @@ func receive_relation(relation, enemy_name, opponent_name):
 			relations[opponent_name] = 1
 
 
-func receive_influence_changes(_influence_list, _influence_changes):
-	trait_attentive(_influence_changes)
+func choose_proposal():
+	for player in turn_order:
+		if get_relation(player) == 2:
+			return [1, player]
+	
+	for player in turn_order:
+		if get_relation(player) == 1:
+			return [1, player]
+	
+	return [0, character_name]
 
 # ----------------- HELPER REACTIONS -----------------
 

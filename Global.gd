@@ -76,7 +76,7 @@ var stances = [en_stances, br_stances, de_stances]
 
 var en_tutorials = {'Part1':"Part #1: An Orc's Axe", 'Part2':"Part #2: A Monk's Letter", 'Part3':"Part #3: A Dragon's Decree"}
 var br_tutorials = {'Part1':'Parte #1: O Machado', 'Part2':'Parte #2: A Carta', 'Part3':"Parte #3: O Decreto"}
-var de_tutorials = {'Part1':'Teil 1: Die Axt des Orks', 'Part2':'Teil 2: Die Brief der Monchin', 'Part3':"Teil 3: Das Dekret des Drachens"}
+var de_tutorials = {'Part1':'T1: Die Axt des Orks', 'Part2':'T2: Die Brief der Monchin', 'Part3':"T3: Das Dekret des Drachens"}
 var tutorials = [en_tutorials, br_tutorials, de_tutorials]
 
 var results = ['Results', 'Resultados', 'Ergebnis']

@@ -65,6 +65,14 @@ func receive_vote(voter, vote):
 	trait_ignorant_diplomatic(voter, vote)
 
 
+func choose_proposal():
+	for player in turn_order:
+		if get_relation(player) == 2:
+			return [1, player]
+	
+	return [0, character_name]
+
+
 func receive_influence_changes(_influence_list, _influence_changes):
 	trait_attentive(_influence_changes)
 

@@ -87,6 +87,7 @@ func language(language):
 	round_text = Global.mains[language]['Round']
 	message_text = Global.mains[language]['Message']
 	$Forgery/Forgery.text = Global.mains[language]['Forgery']
+	$Influence/Influence.text = Global.mains[language]['Influence']
 	
 	# Each Passive/Agressive Button
 	for profile in get_tree().get_nodes_in_group("Profiles"):
